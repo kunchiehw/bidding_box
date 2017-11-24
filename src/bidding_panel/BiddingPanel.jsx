@@ -7,11 +7,11 @@ import {SUITS, NON_SUITS} from '../util/Util.jsx';
 
 const propTypes = {
   curBid: PropTypes.shape({
-    level: PropTypes.number,
-    suit: PropTypes.oneOf(SUITS)
+    level: PropTypes.number.isRequired,
+    suit: PropTypes.oneOf(SUITS).isRequired
   }),
-  disabledDouble: PropTypes.bool,
-  disabledRedouble: PropTypes.bool,
+  disabledDouble: PropTypes.bool.isRequired,
+  disabledRedouble: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired
 };
 
