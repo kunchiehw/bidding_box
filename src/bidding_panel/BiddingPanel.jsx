@@ -2,28 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './BiddingPanel.css'
 import SuitBidButton from './SuitBidButton.jsx';
-import PassBidButton from './PassBidButton.jsx';
-import DoubleBidButton from './DoubleBidButton.jsx';
-import RedoubleBidButton from './RedoubleBidButton.jsx';
-import {SUITS, VALID_SUITS} from '../util/Util.jsx';
+import OtherBidButton from './OtherBidButton.jsx';
+import {SUITS, NON_SUITS} from '../util/Util.jsx';
 
 const propTypes = {
   curBid: PropTypes.shape({
     level: PropTypes.number,
-    suit: PropTypes.oneOf(VALID_SUITS),
-    disabledDouble: PropTypes.bool,
-    disabledRedouble: PropTypes.bool,
+    suit: PropTypes.oneOf(SUITS)
   }),
+  disabledDouble: PropTypes.bool,
+  disabledRedouble: PropTypes.bool,
   handleClick: PropTypes.func.isRequired
 };
 
 const defaultProps = {
-  curBid: {
-    level: 0,
-    suit: 'PASS',
-    disabledDouble: true,
-    disabledRedouble: true
-  }
+  curBid: null,
+  disabledDouble: true,
+  disabledRedouble: true
 };
 
 function BiddingPanel(props) {
@@ -41,13 +36,9 @@ function BiddingPanel(props) {
         level: level,
         suit: suit
       }
-      const curBid = {
-        level: props.curBid.level,
-        suit: props.curBid.suit
-      }
       const suitButtonProp = {
         bid: bid,
-        curBid: curBid,
+        curBid: props.curBid,
         handleClick: handleClick
       }
       suitButtons.push(
@@ -60,16 +51,20 @@ function BiddingPanel(props) {
   }
 
   const passButtonProp = {
+    suit: NON_SUITS[0],
+    isDisabled: false,
     handleClick: handleClick
   }
 
   const doubleButtonProp = {
-    disabledDouble: props.curBid.disabledDouble,
+    suit: NON_SUITS[1],
+    isDisabled: props.disabledDouble,
     handleClick: handleClick
   }
 
   const redoubleButtonProp = {
-    disabledRedouble: props.curBid.disabledRedouble,
+    suit: NON_SUITS[2],
+    isDisabled: props.disabledRedouble,
     handleClick: handleClick
   }
 
@@ -77,9 +72,9 @@ function BiddingPanel(props) {
     <div>
       {levelPanels}
       <div>
-        <PassBidButton {...passButtonProp} />
-        <DoubleBidButton {...doubleButtonProp} />
-        <RedoubleBidButton {...redoubleButtonProp} />
+        <OtherBidButton {...passButtonProp} />
+        <OtherBidButton {...doubleButtonProp} />
+        <OtherBidButton {...redoubleButtonProp} />
       </div>
     </div>
   );

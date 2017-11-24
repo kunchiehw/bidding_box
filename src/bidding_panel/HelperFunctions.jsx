@@ -50,11 +50,37 @@ export function suitBidCSS(bid) {
 }
 
 export function suitBidDisabled(curBid, bid) {
+  if (curBid === null || curBid.level < bid.level) {
+    return false;
+  }
   if (curBid.level > bid.level) {
     return true;
   }
-  if (curBid.level < bid.level) {
-    return false;
-  }
   return (suitToNumber(curBid.suit) >= suitToNumber(bid.suit));
+}
+
+export function otherBidToString(suit) {
+  switch (suit) {
+    case 'PASS':
+      return 'Pass';
+    case 'DOUBLE':
+      return 'X';
+    case 'REDOUBLE':
+      return 'XX';
+    default:
+      return '';
+  }
+}
+
+export function otherBidCSS(suit) {
+  switch (suit) {
+    case 'PASS':
+      return 'bidding-button pass-button';
+    case 'DOUBLE':
+      return 'bidding-button double-button';
+    case 'REDOUBLE':
+      return 'bidding-button redouble-button';
+    default:
+      return '';
+  }
 }
