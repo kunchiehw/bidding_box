@@ -1,9 +1,28 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
 import BiddingPanel from './bidding_panel/BiddingPanel.jsx';
+import {SEATS, VULS} from './util/Util.jsx';
+
+const propTypes = {
+  seat: PropTypes.oneOf(SEATS),
+  vul: PropTypes.oneOf(VULS)
+};
+
+const defaultProps = {
+
+};
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      bidSeq: []
+    };
+  }
+
   render() {
     const testHandleClick = (bid) => {
       console.log(bid);
@@ -19,13 +38,13 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
         <BiddingPanel {...testProp}/>
       </div>
     );
   }
 }
+
+App.propTypes = propTypes;
+App.defaultProps = defaultProps;
 
 export default App;

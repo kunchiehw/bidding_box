@@ -5,13 +5,12 @@ import SuitBidButton from './SuitBidButton.jsx';
 import PassBidButton from './PassBidButton.jsx';
 import DoubleBidButton from './DoubleBidButton.jsx';
 import RedoubleBidButton from './RedoubleBidButton.jsx';
-
-const suits = ['CLUBS', 'DIAMONDS', 'HEARTS', 'SPADES', 'NOTRUMPS'];
+import {SUITS, VALID_SUITS} from '../util/Util.jsx';
 
 const propTypes = {
   curBid: PropTypes.shape({
     level: PropTypes.number,
-    suit: PropTypes.string,
+    suit: PropTypes.oneOf(VALID_SUITS),
     disabledDouble: PropTypes.bool,
     disabledRedouble: PropTypes.bool,
   }),
@@ -25,7 +24,7 @@ const defaultProps = {
     disabledDouble: true,
     disabledRedouble: true
   }
-}
+};
 
 function BiddingPanel(props) {
   const handleClick = (bid) => {
@@ -36,8 +35,8 @@ function BiddingPanel(props) {
 
   for (var level = 1; level <= 7; level++) {
     const suitButtons = [];
-    for (var suitIndex = 0; suitIndex < suits.length; suitIndex++) {
-      const suit = suits[suitIndex];
+    for (var suitIndex = 0; suitIndex < SUITS.length; suitIndex++) {
+      const suit = SUITS[suitIndex];
       const bid = {
         level: level,
         suit: suit
@@ -61,27 +60,15 @@ function BiddingPanel(props) {
   }
 
   const passButtonProp = {
-    bid: {
-      level: 0,
-      suit: 'PASS'
-    },
     handleClick: handleClick
   }
 
   const doubleButtonProp = {
-    bid: {
-      level: 0,
-      suit: 'DOUBLE'
-    },
     disabledDouble: props.curBid.disabledDouble,
     handleClick: handleClick
   }
 
   const redoubleButtonProp = {
-    bid: {
-      level: 0,
-      suit: 'REDOUBLE'
-    },
     disabledRedouble: props.curBid.disabledRedouble,
     handleClick: handleClick
   }

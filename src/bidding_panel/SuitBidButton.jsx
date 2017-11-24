@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {suitBidToString, suitBidCSS, suitBidDisabled} from './HelperFunctions.jsx'
+import {suitBidToString, suitBidCSS, suitBidDisabled} from './HelperFunctions.jsx';
+import {SUITS, VALID_SUITS} from '../util/Util.jsx';
 
 const propTypes = {
   bid: PropTypes.shape({
     level: PropTypes.number.isRequired,
-    suit: PropTypes.string.isRequired
+    suit: PropTypes.oneOf(SUITS).isRequired
   }),
   curBid: PropTypes.shape({
     level: PropTypes.number.isRequired,
-    suit: PropTypes.string.isRequired,
+    suit: PropTypes.oneOf(VALID_SUITS).isRequired,
   }),
   handleClick: PropTypes.func.isRequired
 };

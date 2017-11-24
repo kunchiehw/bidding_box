@@ -2,16 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  bid: PropTypes.shape({
-    level: PropTypes.number.isRequired,
-    suit: PropTypes.string.isRequired
-  }),
   handleClick: PropTypes.func.isRequired
 };
 
 function PassBidButton(props) {
   const handleClick = () => {
-    props.handleClick(props.bid);
+    props.handleClick({
+      level: 0,
+      suit: 'PASS'
+    });
   }
 
   return (
