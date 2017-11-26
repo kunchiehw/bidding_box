@@ -65,28 +65,20 @@ class RoomPage extends Component {
   }
 
   findCurBid() {
-    const bidSeqLen = this.state.bidSeq.length;
-    if (isSuit(this.state.bidSeq[bidSeqLen - 1])) {
-      return this.state.bidSeq[bidSeqLen - 1];
-    }
-    if (isSuit(this.state.bidSeq[bidSeqLen - 2])) {
-      return this.state.bidSeq[bidSeqLen - 2];
-    }
-    if (isSuit(this.state.bidSeq[bidSeqLen - 3])) {
-      return this.state.bidSeq[bidSeqLen - 3];
+    for (let i = this.state.bidSeq.length - 1; i >= 0; i--){
+      if (isSuit(this.state.bidSeq[i])) {
+        return this.state.bidSeq[i];
+      }
     }
     return null;
   }
 
   shouldEndBidSeq() {
     const bidSeqLen = this.state.bidSeq.length;
-    if (bidSeqLen <= 3) {
-      return false;
-    }
     if (isPass(this.state.bidSeq[bidSeqLen - 3]) &&
         isPass(this.state.bidSeq[bidSeqLen - 2]) &&
         isPass(this.state.bidSeq[bidSeqLen - 1])) {
-      return (bidSeqLen > 4) || isPass(this.state.bidSeq[bidSeqLen - 4]);
+      return (bidSeqLen >= 4) || isPass(this.state.bidSeq[bidSeqLen - 4]);
     }
     return false;
   }
