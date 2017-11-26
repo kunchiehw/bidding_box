@@ -34,6 +34,7 @@ class RoomPage extends Component {
     this.state = {
       bidSeq: []
     };
+    this.resetBidSeq = this.resetBidSeq.bind(this);
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
   }
 
@@ -111,7 +112,7 @@ class RoomPage extends Component {
     if (this.shouldEndBidSeq()) {
       return (
         <div className="room-page">
-          <button onClick={this.resetBidSeq.bind(this)}>Reset</button>
+          <button onClick={this.resetBidSeq}>Reset</button>
         </div>
       );
     }
