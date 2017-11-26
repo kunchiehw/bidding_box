@@ -15,12 +15,6 @@ const propTypes = {
   handleClick: PropTypes.func.isRequired
 };
 
-const defaultProps = {
-  curBid: null,
-  disabledDouble: true,
-  disabledRedouble: true
-};
-
 function BiddingPanel(props) {
   const handleClick = (bid) => {
     props.handleClick(bid);
@@ -81,6 +75,5 @@ function BiddingPanel(props) {
 }
 
 BiddingPanel.propTypes = propTypes;
-BiddingPanel.defaultProps = defaultProps;
 
 export default BiddingPanel;
