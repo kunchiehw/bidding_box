@@ -1,0 +1,8 @@
+.display-block {
+  display: inline-block;
+  width: 100px;
+}
+
+.seat-block.vulnerable-seat-block {
+  background-color: #ff0000;
+}

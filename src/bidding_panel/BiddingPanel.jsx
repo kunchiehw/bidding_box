@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './BiddingPanel.css'
+import './BiddingPanel.css';
 import SuitBidButton from './SuitBidButton.jsx';
 import OtherBidButton from './OtherBidButton.jsx';
 import {SUITS, NON_SUITS} from '../util/Util.jsx';
