@@ -11,7 +11,6 @@ class Signin extends Component {
     this.state = {
       username: '',
       password: '',
-      loading: false,
       isLoggedIn: false
     }
   }
@@ -26,16 +25,14 @@ class Signin extends Component {
 
   handleSigninSubmit (e) {
     e.preventDefault()
-    this.setState({ loading: true })
     console.log('Entered:', this.state)
     authenticateUser(this.state.username, this.state.password, (err, result) => {
       if (err) {
         console.log(err)
-        this.setState({ loading: false })
         return
       }
       console.log(result)
-      this.setState({ loading: false, isLoggedIn: true })
+      this.setState({ isLoggedIn: true, username: result.accessToken.payload.username })
     })
   }
 
