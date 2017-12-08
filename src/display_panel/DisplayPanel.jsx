@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './DisplayPanel.css';
 import SeatRow from './SeatRow.jsx';
+import DisplayBidPanel from './DisplayBidPanel.jsx';
 import {SEATS, VULS, SUITS, NON_SUITS} from '../util/Util.jsx';
 
 const propTypes = {
@@ -15,7 +16,10 @@ const propTypes = {
 
 function DisplayPanel(props) {
   return (
-    <SeatRow vulnerability={props.vulnerability}/>
+    <div>
+      <SeatRow vulnerability={props.vulnerability}/>
+      <DisplayBidPanel dealer={props.dealer} bidSeq={props.bidSeq}/>
+    </div>
   );
 }
 

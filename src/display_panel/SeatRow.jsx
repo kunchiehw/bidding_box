@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {VULS} from '../util/Util.jsx';
+import {SEATS, VULS} from '../util/Util.jsx';
 
 const propTypes = {
   vulnerability: PropTypes.oneOf(VULS).isRequired
@@ -25,12 +25,11 @@ function SeatBlock(seat, vulnerability) {
 
 function SeatRow(props) {
   const SeatBlocks = [];
-  SeatBlocks.push(SeatBlock('WEST', props.vulnerability));
-  SeatBlocks.push(SeatBlock('NORTH', props.vulnerability));
-  SeatBlocks.push(SeatBlock('EAST', props.vulnerability));
-  SeatBlocks.push(SeatBlock('SOUTH', props.vulnerability));
+  for (var seatIndex = 0; seatIndex < SEATS.length; seatIndex++) {
+    SeatBlocks.push(SeatBlock(SEATS[seatIndex], props.vulnerability));
+  }
   return (
-    <div>
+    <div className='seat-row'>
       {SeatBlocks}
     </div>
   );
