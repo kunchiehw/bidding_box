@@ -1,0 +1,23 @@
+.hand-cards-display-block {
+  width: calc(100% - 100px);
+  margin: 20px 50px;
+}
+
+.hand-cards-display-block .hand-cards-display-cell {
+  width: 50%;
+  display: inline-block;
+  white-space: pre-line;
+  text-align: left;
+}
+
+.hand-cards-display-block .hidden-hand-cell{
+  visibility: hidden;
+}
+
+.hand-cards-display-block .west-hand-cell {
+
+}
+
+.hand-cards-display-block .east-hand-cell {
+
+}
