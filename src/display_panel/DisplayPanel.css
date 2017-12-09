@@ -1,0 +1,9 @@
+.display-block {
+  display: table-cell;
+
+  width: 100px;
+}
+
+.seat-row .seat-block.vulnerable-seat-block {
+  background-color: #ff0000;
+}

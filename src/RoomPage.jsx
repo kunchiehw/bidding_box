@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import BiddingPanel from './bidding_panel/BiddingPanel.jsx';
 import {SEATS, VULS, SUITS} from './util/Util.jsx';
+import DisplayPanel from './display_panel/DisplayPanel.jsx';
 
 const propTypes = {
   seat: PropTypes.oneOf(SEATS),
-  vul: PropTypes.oneOf(VULS),
+  vulnerability: PropTypes.oneOf(VULS),
   dealer: PropTypes.oneOf(SEATS)
 };
 
 const defaultProps = {
   seat: 'NORTH',
-  vul: 'NONE',
+  vulnerability: 'NS',
   dealer: 'NORTH'
 };
 
@@ -108,7 +109,14 @@ class RoomPage extends Component {
         </div>
       );
     }
-    const curProp = {
+
+    const displayPanelProp = {
+      dealer: this.props.dealer,
+      vulnerability: this.props.vulnerability,
+      bidSeq: this.state.bidSeq
+    };
+
+    const biddingPanelProp = {
       curBid: this.findCurBid(),
       disabledDouble: this.shouldDisabledDouble(),
       disabledRedouble: this.shouldDisabledRedouble(),
@@ -117,7 +125,8 @@ class RoomPage extends Component {
 
     return (
       <div className="room-page">
-        <BiddingPanel {...curProp}/>
+        <DisplayPanel {...displayPanelProp}/>
+        <BiddingPanel {...biddingPanelProp}/>
       </div>
     );
   }

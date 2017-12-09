@@ -2,6 +2,10 @@ export const SUITS = ['CLUBS', 'DIAMONDS', 'HEARTS', 'SPADES', 'NOTRUMPS'];
 
 export const NON_SUITS = ['PASS', 'DOUBLE', 'REDOUBLE'];
 
-export const SEATS = ['NORTH', 'EAST', 'SOUTH', 'WEST', 'OBSERVER'];
+export const SEATS = ['WEST', 'NORTH', 'EAST', 'SOUTH'];
+
+export const SEATS_NS = ['NORTH', 'SOUTH'];
+
+export const SEATS_EW = ['EAST', 'WEST'];
 
 export const VULS = ['NONE', 'NS', 'EW', 'BOTH'];
