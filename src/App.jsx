@@ -24,7 +24,7 @@ class App extends Component {
       console.log(bid);
     };
 
-    const updateLogin = (session) => {
+    const updateSession = (session) => {
       if (session) {
         this.setState({ isLoggedIn: true });
       } else {
@@ -38,7 +38,7 @@ class App extends Component {
 
     const authProp = {
       isLoggedIn: this.state.isLoggedIn,
-      updateLogin,
+      updateSession,
     };
 
 
