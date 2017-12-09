@@ -3,16 +3,19 @@ import {
   CognitoUser,
   AuthenticationDetails,
 } from 'amazon-cognito-identity-js';
+import AWS from 'aws-sdk';
 import config from './config';
 
 
 const userPool = new CognitoUserPool({
-  UserPoolId: config.cognito.USER_POOL_ID,
-  ClientId: config.cognito.APP_CLIENT_ID,
+  UserPoolId: config.aws.userPool.USER_POOL_ID,
+  ClientId: config.aws.userPool.APP_CLIENT_ID,
 });
+const LOGINS_URL = `cognito-idp.${config.aws.identityPool.REGION}.amazonaws.com/${config.aws.userPool.USER_POOL_ID}`;
+AWS.config.region = config.aws.identityPool.REGION;
 
 
-export const authenticateUser = (username, password, callback) => {
+export const authenticateUser = (username, password) => new Promise((resolve, reject) => {
   const authData = {
     Username: username,
     Password: password,
@@ -26,10 +29,50 @@ export const authenticateUser = (username, password, callback) => {
   cognitoUser.authenticateUser(authDetails, {
     onSuccess: (result) => {
       console.log(`access token + ${result.getAccessToken().getJwtToken()}`);
-      callback(null, result);
+
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: config.aws.identityPool.IDENTITY_POOL_ID,
+        Logins: { [LOGINS_URL]: result.getIdToken().getJwtToken() },
+      });
+
+      AWS.config.credentials.refresh((error) => {
+        if (error) {
+          console.error(error);
+        } else {
+          console.log('Successfully logged!');
+        }
+      });
+
+      resolve(result);
     },
     onFailure: (err) => {
-      callback(err);
+      reject(err);
     },
   });
+});
+
+
+export const getSession = () => {
+  const cognitoUser = userPool.getCurrentUser();
+  if (cognitoUser != null) {
+    cognitoUser.getSession((err, session) => {
+      if (err) {
+        return;
+      }
+      console.log(`session validity: ${session.isValid()}`);
+
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: config.aws.identityPool.IDENTITY_POOL_ID,
+        Logins: { [LOGINS_URL]: session.getIdToken().getJwtToken() },
+      });
+    });
+  }
+};
+
+
+export const signOut = () => {
+  const cognitoUser = userPool.getCurrentUser();
+  if (cognitoUser != null) {
+    cognitoUser.signOut();
+  }
 };

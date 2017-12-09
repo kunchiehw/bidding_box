@@ -26,14 +26,14 @@ class Signin extends Component {
   handleSigninSubmit(e) {
     e.preventDefault();
     console.log('Entered:', this.state);
-    authenticateUser(this.state.username, this.state.password, (err, result) => {
-      if (err) {
+    authenticateUser(this.state.username, this.state.password)
+      .then((result) => {
+        console.log(result);
+        this.setState({ isLoggedIn: true, username: result.accessToken.payload.username });
+      })
+      .catch((err) => {
         console.log(err);
-        return;
-      }
-      console.log(result);
-      this.setState({ isLoggedIn: true, username: result.accessToken.payload.username });
-    });
+      });
   }
 
   signin() {
