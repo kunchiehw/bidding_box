@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import BiddingPanel from './bid-button-block/BidButtonBlock';
-import { SEATS, VULS, SUITS } from '../util/util';
+import './RoomInterface.css';
+import BidButtonBlock from './bid-button-block/BidButtonBlock';
 import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
+import HandCardsDisplay from './hand-cards-display/HandCardsDisplay';
+import { SEATS, VULS, SUITS } from '../util/util';
 
 const propTypes = {
   seat: PropTypes.oneOf(SEATS),
@@ -11,7 +13,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  seat: 'NORTH',
+  seat: 'EAST',
   vulnerability: 'NS',
   dealer: 'NORTH',
 };
@@ -100,15 +102,16 @@ class RoomInterface extends Component {
   }
 
   render() {
-    if (this.shouldEndBidSeq()) {
-      return (
-        <div className="room-page">
-          <button onClick={this.resetBidSeq}>Reset</button>
-        </div>
-      );
-    }
+    const endBidSequence = this.shouldEndBidSeq();
 
-    const displayPanelProp = {
+    const handCardsDisplayProp = {
+      eastHand: ['AKQJT98765432', '', '', ''],
+      westHand: ['', 'AKQJT98765432', '', ''],
+      seat: this.props.seat,
+      endBidSequence,
+    };
+
+    const bidSequenceDisplayProp = {
       dealer: this.props.dealer,
       vulnerability: this.props.vulnerability,
       bidSeq: this.state.bidSeq,
@@ -122,9 +125,19 @@ class RoomInterface extends Component {
     };
 
     return (
-      <div className="room-page">
-        <BidSequenceDisplay {...displayPanelProp} />
-        <BiddingPanel {...biddingPanelProp} />
+      <div className="room-interface">
+        <div className="room-main-block">
+          <div className="main-upper-block">
+            <HandCardsDisplay {...handCardsDisplayProp} />
+          </div>
+          <div className="main-lower-block">
+            <BidButtonBlock {...biddingPanelProp} />
+            <BidSequenceDisplay {...bidSequenceDisplayProp} />
+          </div>
+        </div>
+        <div className="room-tools-block">
+          <button onClick={this.resetBidSeq}>Reset</button>
+        </div>
       </div>
     );
   }

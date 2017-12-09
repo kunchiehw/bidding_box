@@ -35,15 +35,15 @@ export function suitBidToString(bid) {
 export function suitBidCSS(bid) {
   switch (bid.suit) {
     case 'NOTRUMPS':
-      return 'bidding-button no-trumps-button';
+      return 'bid-button no-trumps-button';
     case 'SPADES':
-      return 'bidding-button spades-button';
+      return 'bid-button spades-button';
     case 'HEARTS':
-      return 'bidding-button hearts-button';
+      return 'bid-button hearts-button';
     case 'DIAMONDS':
-      return 'bidding-button diamonds-button';
+      return 'bid-button diamonds-button';
     case 'CLUBS':
-      return 'bidding-button clubs-button';
+      return 'bid-button clubs-button';
     default:
       return '';
   }
@@ -75,11 +75,11 @@ export function otherBidToString(suit) {
 export function otherBidCSS(suit) {
   switch (suit) {
     case 'PASS':
-      return 'bidding-button pass-button';
+      return 'bid-button pass-button';
     case 'DOUBLE':
-      return 'bidding-button double-button';
+      return 'bid-button double-button';
     case 'REDOUBLE':
-      return 'bidding-button redouble-button';
+      return 'bid-button redouble-button';
     default:
       return '';
   }

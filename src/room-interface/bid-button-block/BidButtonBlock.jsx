@@ -19,7 +19,7 @@ const defaultProps = {
   curBid: null,
 };
 
-function BiddingPanel(props) {
+function BidButtonBlock(props) {
   const handleClick = (bid) => {
     props.handleClick(bid);
   };
@@ -71,7 +71,7 @@ function BiddingPanel(props) {
   );
 }
 
-BiddingPanel.propTypes = propTypes;
-BiddingPanel.defaultProps = defaultProps;
+BidButtonBlock.propTypes = propTypes;
+BidButtonBlock.defaultProps = defaultProps;
 
-export default BiddingPanel;
+export default BidButtonBlock;

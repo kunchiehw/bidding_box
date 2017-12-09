@@ -1,8 +1,14 @@
-.bid-sequence-display-cell {
-  display: table-cell;
-  width: 100px;
+.bid-sequence-display {
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
 }
 
-.seat-row .seat-cell.vulnerable-seat-cell {
+.bid-sequence-display .bid-sequence-display-cell {
+  display: table-cell;
+  width: 75px;
+}
+
+.bid-sequence-display .seat-row .seat-cell.vulnerable-seat-cell {
   background-color: #ff0000;
 }
