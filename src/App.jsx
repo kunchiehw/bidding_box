@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import RoomInterface from './room-interface/RoomInterface';
 import Signin from './Signin';
 import './App.css';
+import { getSession } from './cognito';
 
 class App extends Component {
   constructor(props) {
@@ -10,6 +11,12 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
     };
+  }
+
+  componentDidMount() {
+    getSession().then(() => {
+      this.setState({ isLoggedIn: true });
+    });
   }
 
   render() {

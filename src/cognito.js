@@ -52,11 +52,12 @@ export const authenticateUser = (username, password) => new Promise((resolve, re
 });
 
 
-export const getSession = () => {
+export const getSession = () => new Promise((resolve, reject) => {
   const cognitoUser = userPool.getCurrentUser();
   if (cognitoUser != null) {
     cognitoUser.getSession((err, session) => {
       if (err) {
+        reject();
         return;
       }
       console.log(`session validity: ${session.isValid()}`);
@@ -65,14 +66,17 @@ export const getSession = () => {
         IdentityPoolId: config.aws.identityPool.IDENTITY_POOL_ID,
         Logins: { [LOGINS_URL]: session.getIdToken().getJwtToken() },
       });
+
+      resolve(session);
     });
   }
-};
+});
 
 
-export const signOut = () => {
+export const signOut = () => new Promise((resolve) => {
   const cognitoUser = userPool.getCurrentUser();
   if (cognitoUser != null) {
     cognitoUser.signOut();
+    resolve();
   }
-};
+});

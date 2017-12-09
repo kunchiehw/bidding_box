@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { authenticateUser } from './cognito';
+import { authenticateUser, signOut } from './cognito';
 
 
 const propTypes = {
@@ -14,6 +14,7 @@ class Signin extends Component {
     super(props);
     this.changeUsername = this.changeUsername.bind(this);
     this.changePassword = this.changePassword.bind(this);
+    this.handleSigninSubmit = this.handleSigninSubmit.bind(this);
     this.handleSigninSubmit = this.handleSigninSubmit.bind(this);
 
     this.state = {
@@ -41,6 +42,14 @@ class Signin extends Component {
       })
       .catch((err) => {
         console.log(err);
+        this.props.updateLogin(false);
+      });
+  }
+
+  handleSignoutSubmit(e) {
+    e.preventDefault();
+    signOut()
+      .then(() => {
         this.props.updateLogin(false);
       });
   }
@@ -79,6 +88,11 @@ class Signin extends Component {
     return (
       <div>
         <h2>Hi, {this.state.username}</h2>
+        <form onSubmit={this.handleSignoutSubmit}>
+          <div>
+            <button type="submit" disabled={this.state.loading}>Sign Out</button>
+          </div>
+        </form>
       </div>
     );
   }
