@@ -5,7 +5,7 @@ import { authenticateUser, signOut } from './util/aws-helper';
 
 const propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  updateSession: PropTypes.func.isRequired,
+  handleUpdateSession: PropTypes.func.isRequired,
 };
 
 
@@ -40,12 +40,12 @@ class Auth extends Component {
       .then((result) => {
         console.log(result);
         this.setState({ username: result.accessToken.payload.username, loading: false });
-        this.props.updateSession(result);
+        this.props.handleUpdateSession(result);
       })
       .catch((err) => {
         console.log(err);
         this.setState({ loading: false });
-        this.props.updateSession(null);
+        this.props.handleUpdateSession(null);
       });
   }
 
@@ -55,7 +55,7 @@ class Auth extends Component {
     signOut()
       .then(() => {
         this.setState({ loading: false });
-        this.props.updateSession(null);
+        this.props.handleUpdateSession(null);
       });
   }
 
