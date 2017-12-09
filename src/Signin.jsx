@@ -15,7 +15,7 @@ class Signin extends Component {
     this.changeUsername = this.changeUsername.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.handleSigninSubmit = this.handleSigninSubmit.bind(this);
-    this.handleSigninSubmit = this.handleSigninSubmit.bind(this);
+    this.handleSignoutSubmit = this.handleSignoutSubmit.bind(this);
 
     this.state = {
       username: '',
