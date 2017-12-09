@@ -4,7 +4,7 @@ import {
   AuthenticationDetails,
 } from 'amazon-cognito-identity-js';
 import AWS from 'aws-sdk';
-import config from './config';
+import config from '../config';
 
 
 const userPool = new CognitoUserPool({

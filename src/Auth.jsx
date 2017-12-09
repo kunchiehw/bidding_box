@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { authenticateUser, signOut } from './cognito';
+import { authenticateUser, signOut } from './util/aws-helper';
 
 
 const propTypes = {
@@ -9,7 +9,7 @@ const propTypes = {
 };
 
 
-class Signin extends Component {
+class Auth extends Component {
   constructor(props) {
     super(props);
     this.changeUsername = this.changeUsername.bind(this);
@@ -57,7 +57,6 @@ class Signin extends Component {
   signin() {
     return (
       <div className="Signin">
-        <h2>Sign In</h2>
         <form onSubmit={this.handleSigninSubmit}>
           <div>
             <input
@@ -87,7 +86,6 @@ class Signin extends Component {
   signout() {
     return (
       <div>
-        <h2>Hi, {this.state.username}</h2>
         <form onSubmit={this.handleSignoutSubmit}>
           <div>
             <button type="submit" disabled={this.state.loading}>Sign Out</button>
@@ -105,5 +103,5 @@ class Signin extends Component {
   }
 }
 
-Signin.propTypes = propTypes;
-export default Signin;
+Auth.propTypes = propTypes;
+export default Auth;

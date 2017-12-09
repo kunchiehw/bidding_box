@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import RoomInterface from './room-interface/RoomInterface';
-import Signin from './Signin';
+import Auth from './Auth';
 import './App.css';
-import { getSession } from './cognito';
+import { getSession } from './util/aws-helper';
 
 class App extends Component {
   constructor(props) {
@@ -45,7 +45,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <hr />
-        <Signin {...authProp} />
+        <Auth {...authProp} />
         <hr />
         <RoomInterface {...testProp} />
       </div>
