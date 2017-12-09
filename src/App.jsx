@@ -9,13 +9,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
+      session: null,
     };
   }
 
   componentDidMount() {
-    getSession().then(() => {
-      this.setState({ isLoggedIn: true });
+    getSession().then((session) => {
+      this.setState({ session });
     });
   }
 
@@ -25,11 +25,7 @@ class App extends Component {
     };
 
     const handleUpdateSession = (session) => {
-      if (session) {
-        this.setState({ isLoggedIn: true });
-      } else {
-        this.setState({ isLoggedIn: false });
-      }
+      this.setState({ session });
     };
 
     const testProp = {
@@ -37,7 +33,7 @@ class App extends Component {
     };
 
     const authProp = {
-      isLoggedIn: this.state.isLoggedIn,
+      isLoggedIn: this.state.session !== null,
       handleUpdateSession,
     };
 
