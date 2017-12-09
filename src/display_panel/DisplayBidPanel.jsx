@@ -25,8 +25,8 @@ function DisplayBidBlock(bid, bidIndex) {
 }
 
 function DisplayBidPanel(props) {
-  var bidRows = [];
-  var bidRow = [];
+  let bidRows = [];
+  let bidRow = [];
 
   switch (props.dealer) {
     case 'SOUTH':
@@ -45,7 +45,7 @@ function DisplayBidPanel(props) {
       break;
   }
 
-  for (var bidIndex = 0; bidIndex < props.bidSeq.length; bidIndex++) {
+  for (let bidIndex = 0; bidIndex < props.bidSeq.length; bidIndex++) {
     bidRow.push(DisplayBidBlock(props.bidSeq[bidIndex], bidIndex));
     if (bidRow.length === 4) {
       bidRows.push( <div key={bidIndex} className='display-bid-row'> {bidRow} </div> );

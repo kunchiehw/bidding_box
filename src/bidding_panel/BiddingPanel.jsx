@@ -22,9 +22,9 @@ function BiddingPanel(props) {
 
   const levelPanels = [];
 
-  for (var level = 1; level <= 7; level++) {
+  for (let level = 1; level <= 7; level++) {
     const suitButtons = [];
-    for (var suitIndex = 0; suitIndex < SUITS.length; suitIndex++) {
+    for (let suitIndex = 0; suitIndex < SUITS.length; suitIndex++) {
       const suit = SUITS[suitIndex];
       const bid = {
         level: level,
