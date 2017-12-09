@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import BiddingPanel from './bidding_panel/BiddingPanel.jsx';
-import {SEATS, VULS, SUITS} from './util/Util.jsx';
-import DisplayPanel from './display_panel/DisplayPanel.jsx';
+import BiddingPanel from './bid-button-block/BidButtonBlock';
+import { SEATS, VULS, SUITS } from '../util/util';
+import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
 
 const propTypes = {
   seat: PropTypes.oneOf(SEATS),
   vulnerability: PropTypes.oneOf(VULS),
-  dealer: PropTypes.oneOf(SEATS)
+  dealer: PropTypes.oneOf(SEATS),
 };
 
 const defaultProps = {
   seat: 'NORTH',
   vulnerability: 'NS',
-  dealer: 'NORTH'
+  dealer: 'NORTH',
 };
 
 function isPass(bid) {
@@ -28,12 +28,11 @@ function isSuit(bid) {
   return (bid && SUITS.indexOf(bid.suit) !== -1);
 }
 
-class RoomPage extends Component {
-
+class RoomInterface extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bidSeq: []
+      bidSeq: [],
     };
     this.resetBidSeq = this.resetBidSeq.bind(this);
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
@@ -66,7 +65,7 @@ class RoomPage extends Component {
   }
 
   findCurBid() {
-    for (let i = this.state.bidSeq.length - 1; i >= 0; i--){
+    for (let i = this.state.bidSeq.length - 1; i >= 0; i -= 1) {
       if (isSuit(this.state.bidSeq[i])) {
         return this.state.bidSeq[i];
       }
@@ -85,23 +84,22 @@ class RoomPage extends Component {
   }
 
   handleBidButtonClick(bid) {
-    let bidSeq = this.state.bidSeq.slice()
-    bidSeq.push(bid)
+    const bidSeq = this.state.bidSeq.slice();
+    bidSeq.push(bid);
     this.setState({
-      bidSeq: bidSeq
+      bidSeq,
     });
     console.log(bidSeq);
   }
 
   resetBidSeq() {
     this.setState({
-      bidSeq: []
+      bidSeq: [],
     });
-    console.log("RESET");
+    console.log('RESET');
   }
 
   render() {
-
     if (this.shouldEndBidSeq()) {
       return (
         <div className="room-page">
@@ -113,26 +111,26 @@ class RoomPage extends Component {
     const displayPanelProp = {
       dealer: this.props.dealer,
       vulnerability: this.props.vulnerability,
-      bidSeq: this.state.bidSeq
+      bidSeq: this.state.bidSeq,
     };
 
     const biddingPanelProp = {
       curBid: this.findCurBid(),
       disabledDouble: this.shouldDisabledDouble(),
       disabledRedouble: this.shouldDisabledRedouble(),
-      handleClick: this.handleBidButtonClick
+      handleClick: this.handleBidButtonClick,
     };
 
     return (
       <div className="room-page">
-        <DisplayPanel {...displayPanelProp}/>
-        <BiddingPanel {...biddingPanelProp}/>
+        <BidSequenceDisplay {...displayPanelProp} />
+        <BiddingPanel {...biddingPanelProp} />
       </div>
     );
   }
 }
 
-RoomPage.propTypes = propTypes;
-RoomPage.defaultProps = defaultProps;
+RoomInterface.propTypes = propTypes;
+RoomInterface.defaultProps = defaultProps;
 
-export default RoomPage;
+export default RoomInterface;

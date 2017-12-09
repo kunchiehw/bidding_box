@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {otherBidCSS, otherBidToString} from './HelperFunctions.jsx';
-import {NON_SUITS} from '../util/Util.jsx';
+import { otherBidCSS, otherBidToString } from '../helper';
+import { NON_SUITS } from '../../util/util';
 
 const propTypes = {
-  suit: PropTypes.oneOf(NON_SUITS),
+  suit: PropTypes.oneOf(NON_SUITS).isRequired,
   isDisabled: PropTypes.bool.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
 };
 
 function OtherBidButton(props) {
   const handleClick = () => {
     props.handleClick({
       level: null,
-      suit: props.suit
+      suit: props.suit,
     });
-  }
+  };
 
   return (
     <button className={otherBidCSS(props.suit)} onClick={handleClick} disabled={props.isDisabled}>
