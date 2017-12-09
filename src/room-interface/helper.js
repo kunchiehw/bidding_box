@@ -1,5 +1,5 @@
 const suitToNumber = (suit) => {
-  switch(suit) {
+  switch (suit) {
     case 'NOTRUMPS':
       return 5;
     case 'SPADES':
@@ -13,20 +13,20 @@ const suitToNumber = (suit) => {
     default:
       return 0;
   }
-}
+};
 
 export function suitBidToString(bid) {
   switch (bid.suit) {
     case 'NOTRUMPS':
-      return bid.level + 'N';
+      return `${bid.level}N`;
     case 'SPADES':
-      return bid.level + 'S';
+      return `${bid.level}S`;
     case 'HEARTS':
-      return bid.level + 'H';
+      return `${bid.level}H`;
     case 'DIAMONDS':
-      return bid.level + 'D';
+      return `${bid.level}D`;
     case 'CLUBS':
-      return bid.level + 'C';
+      return `${bid.level}C`;
     default:
       return '';
   }

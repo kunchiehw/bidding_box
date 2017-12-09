@@ -1,71 +1,68 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './BiddingPanel.css';
-import SuitBidButton from './SuitBidButton.jsx';
-import OtherBidButton from './OtherBidButton.jsx';
-import {SUITS, NON_SUITS} from '../util/Util.jsx';
+import './BidButtonBlock.css';
+import SuitBidButton from './SuitBidButton';
+import OtherBidButton from './OtherBidButton';
+import { SUITS, NON_SUITS } from '../../util/util';
 
 const propTypes = {
   curBid: PropTypes.shape({
     level: PropTypes.number.isRequired,
-    suit: PropTypes.oneOf(SUITS).isRequired
+    suit: PropTypes.oneOf(SUITS).isRequired,
   }),
   disabledDouble: PropTypes.bool.isRequired,
   disabledRedouble: PropTypes.bool.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  curBid: null,
 };
 
 function BiddingPanel(props) {
   const handleClick = (bid) => {
     props.handleClick(bid);
-  }
+  };
 
   const levelPanels = [];
 
-  for (let level = 1; level <= 7; level++) {
+  for (let level = 1; level <= 7; level += 1) {
     const suitButtons = [];
-    for (let suitIndex = 0; suitIndex < SUITS.length; suitIndex++) {
+    for (let suitIndex = 0; suitIndex < SUITS.length; suitIndex += 1) {
       const suit = SUITS[suitIndex];
-      const bid = {
-        level: level,
-        suit: suit
-      }
+      const bid = { level, suit };
       const suitButtonProp = {
-        bid: bid,
+        bid,
         curBid: props.curBid,
-        handleClick: handleClick
-      }
-      suitButtons.push(
-        <SuitBidButton key={suit} {...suitButtonProp}/>
-      );
+        handleClick,
+      };
+      suitButtons.push(<SuitBidButton key={suit} {...suitButtonProp} />);
     }
-    levelPanels.push(
-      <div key={level}>{suitButtons}</div>
-    );
+    levelPanels.push(<div key={level} className="bid-button-row suit-bid-button-row">{suitButtons}</div>);
   }
 
   const passButtonProp = {
     suit: NON_SUITS[0],
     isDisabled: false,
-    handleClick: handleClick
-  }
+    handleClick,
+  };
 
   const doubleButtonProp = {
     suit: NON_SUITS[1],
     isDisabled: props.disabledDouble,
-    handleClick: handleClick
-  }
+    handleClick,
+  };
 
   const redoubleButtonProp = {
     suit: NON_SUITS[2],
     isDisabled: props.disabledRedouble,
-    handleClick: handleClick
-  }
+    handleClick,
+  };
 
   return (
-    <div>
+    <div className="bid-button-block">
       {levelPanels}
-      <div>
+      <div className="bid-button-row other-bid-button-row">
         <OtherBidButton {...passButtonProp} />
         <OtherBidButton {...doubleButtonProp} />
         <OtherBidButton {...redoubleButtonProp} />
@@ -75,5 +72,6 @@ function BiddingPanel(props) {
 }
 
 BiddingPanel.propTypes = propTypes;
+BiddingPanel.defaultProps = defaultProps;
 
 export default BiddingPanel;

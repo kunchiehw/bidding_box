@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import RoomPage from './RoomPage.jsx';
-import Signin from './Signin'
+import RoomInterface from './room-interface/RoomInterface';
+import Signin from './Signin';
 import './App.css';
 
 class App extends Component {
-
   render() {
     const testHandleClick = (bid) => {
       console.log(bid);
     };
 
     const testProp = {
-      handleClick: testHandleClick
+      handleClick: testHandleClick,
     };
 
     return (
@@ -24,7 +23,7 @@ class App extends Component {
         <hr />
         <Signin />
         <hr />
-        <RoomPage {...testProp}/>
+        <RoomInterface {...testProp} />
       </div>
     );
   }
