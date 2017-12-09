@@ -20,6 +20,7 @@ class Auth extends Component {
     this.state = {
       username: '',
       password: '',
+      loading: false,
     };
   }
 
@@ -34,23 +35,27 @@ class Auth extends Component {
   handleSigninSubmit(e) {
     e.preventDefault();
     console.log('Entered:', this.state);
+    this.setState({ loading: true });
     authenticateUser(this.state.username, this.state.password)
       .then((result) => {
         console.log(result);
-        this.setState({ username: result.accessToken.payload.username });
-        this.props.updateLogin(true);
+        this.setState({ username: result.accessToken.payload.username, loading: false });
+        this.props.updateLogin(result);
       })
       .catch((err) => {
         console.log(err);
-        this.props.updateLogin(false);
+        this.setState({ loading: false });
+        this.props.updateLogin(null);
       });
   }
 
   handleSignoutSubmit(e) {
     e.preventDefault();
+    this.setState({ loading: true });
     signOut()
       .then(() => {
-        this.props.updateLogin(false);
+        this.setState({ loading: false });
+        this.props.updateLogin(null);
       });
   }
 

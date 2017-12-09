@@ -24,8 +24,12 @@ class App extends Component {
       console.log(bid);
     };
 
-    const updateLogin = (isLoggedIn) => {
-      this.setState({ isLoggedIn });
+    const updateLogin = (session) => {
+      if (session) {
+        this.setState({ isLoggedIn: true });
+      } else {
+        this.setState({ isLoggedIn: false });
+      }
     };
 
     const testProp = {
