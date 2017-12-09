@@ -1,18 +1,46 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import RoomInterface from './room-interface/RoomInterface';
-import Signin from './Signin';
+import Auth from './Auth';
 import './App.css';
+import { getSession } from './util/aws-helper';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+    };
+  }
+
+  componentDidMount() {
+    getSession().then(() => {
+      this.setState({ isLoggedIn: true });
+    });
+  }
+
   render() {
     const testHandleClick = (bid) => {
       console.log(bid);
     };
 
+    const handleUpdateSession = (session) => {
+      if (session) {
+        this.setState({ isLoggedIn: true });
+      } else {
+        this.setState({ isLoggedIn: false });
+      }
+    };
+
     const testProp = {
       handleClick: testHandleClick,
     };
+
+    const authProp = {
+      isLoggedIn: this.state.isLoggedIn,
+      handleUpdateSession,
+    };
+
 
     return (
       <div className="App">
@@ -21,7 +49,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <hr />
-        <Signin />
+        <Auth {...authProp} />
         <hr />
         <RoomInterface {...testProp} />
       </div>

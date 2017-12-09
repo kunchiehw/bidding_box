@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
-import { authenticateUser } from './cognito';
+import PropTypes from 'prop-types';
+import { authenticateUser, signOut } from './util/aws-helper';
 
-class Signin extends Component {
+
+const propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  handleUpdateSession: PropTypes.func.isRequired,
+};
+
+
+class Auth extends Component {
   constructor(props) {
     super(props);
     this.changeUsername = this.changeUsername.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.handleSigninSubmit = this.handleSigninSubmit.bind(this);
+    this.handleSignoutSubmit = this.handleSignoutSubmit.bind(this);
 
     this.state = {
       username: '',
       password: '',
-      isLoggedIn: false,
+      loading: false,
     };
   }
 
@@ -26,20 +35,33 @@ class Signin extends Component {
   handleSigninSubmit(e) {
     e.preventDefault();
     console.log('Entered:', this.state);
-    authenticateUser(this.state.username, this.state.password, (err, result) => {
-      if (err) {
+    this.setState({ loading: true });
+    authenticateUser(this.state.username, this.state.password)
+      .then((result) => {
+        console.log(result);
+        this.setState({ username: result.accessToken.payload.username, loading: false });
+        this.props.handleUpdateSession(result);
+      })
+      .catch((err) => {
         console.log(err);
-        return;
-      }
-      console.log(result);
-      this.setState({ isLoggedIn: true, username: result.accessToken.payload.username });
-    });
+        this.setState({ loading: false });
+        this.props.handleUpdateSession(null);
+      });
+  }
+
+  handleSignoutSubmit(e) {
+    e.preventDefault();
+    this.setState({ loading: true });
+    signOut()
+      .then(() => {
+        this.setState({ loading: false });
+        this.props.handleUpdateSession(null);
+      });
   }
 
   signin() {
     return (
       <div className="Signin">
-        <h2>Sign In</h2>
         <form onSubmit={this.handleSigninSubmit}>
           <div>
             <input
@@ -69,17 +91,22 @@ class Signin extends Component {
   signout() {
     return (
       <div>
-        <h2>Hi, {this.state.username}</h2>
+        <form onSubmit={this.handleSignoutSubmit}>
+          <div>
+            <button type="submit" disabled={this.state.loading}>Sign Out</button>
+          </div>
+        </form>
       </div>
     );
   }
 
   render() {
-    if (this.state.isLoggedIn) {
+    if (this.props.isLoggedIn) {
       return this.signout();
     }
     return this.signin();
   }
 }
 
-export default Signin;
+Auth.propTypes = propTypes;
+export default Auth;
