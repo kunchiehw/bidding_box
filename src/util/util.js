@@ -8,4 +8,6 @@ export const SEATS_NS = ['NORTH', 'SOUTH'];
 
 export const SEATS_EW = ['EAST', 'WEST'];
 
+export const PARTICIPANTS_ROLE = ['EAST', 'WEST', 'OBSERVER'];
+
 export const VULS = ['NONE', 'NS', 'EW', 'BOTH'];

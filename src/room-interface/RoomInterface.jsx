@@ -4,19 +4,7 @@ import './RoomInterface.css';
 import BidButtonBlock from './bid-button-block/BidButtonBlock';
 import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
 import HandCardsDisplay from './hand-cards-display/HandCardsDisplay';
-import { SEATS, VULS, SUITS } from '../util/util';
-
-const propTypes = {
-  seat: PropTypes.oneOf(SEATS),
-  vulnerability: PropTypes.oneOf(VULS),
-  dealer: PropTypes.oneOf(SEATS),
-};
-
-const defaultProps = {
-  seat: 'EAST',
-  vulnerability: 'NS',
-  dealer: 'NORTH',
-};
+import { SEATS, VULS, SUITS, PARTICIPANTS_ROLE } from '../util/util';
 
 function isPass(bid) {
   return (bid && bid.suit === 'PASS');
@@ -29,6 +17,17 @@ function isDouble(bid) {
 function isSuit(bid) {
   return (bid && SUITS.indexOf(bid.suit) !== -1);
 }
+
+const propTypes = {
+  role: PropTypes.oneOf(PARTICIPANTS_ROLE).isRequired,
+  vulnerability: PropTypes.oneOf(VULS).isRequired,
+  dealer: PropTypes.oneOf(SEATS).isRequired,
+  // TODO: Make more specific validator
+  eastHand: PropTypes.arrayOf(PropTypes.string).isRequired,
+  westHand: PropTypes.arrayOf(PropTypes.string).isRequired,
+  eastID: PropTypes.string.isRequired,
+  westID: PropTypes.string.isRequired,
+};
 
 class RoomInterface extends Component {
   constructor(props) {
@@ -91,7 +90,6 @@ class RoomInterface extends Component {
     this.setState({
       bidSeq,
     });
-    console.log(bidSeq);
   }
 
   resetBidSeq() {
@@ -105,9 +103,11 @@ class RoomInterface extends Component {
     const endBidSequence = this.shouldEndBidSeq();
 
     const handCardsDisplayProp = {
-      eastHand: ['AKQJT98765432', '', '', ''],
-      westHand: ['', 'AKQJT98765432', '', ''],
-      seat: this.props.seat,
+      role: this.props.role,
+      eastHand: this.props.eastHand,
+      westHand: this.props.westHand,
+      eastID: this.props.eastID,
+      westID: this.props.westID,
       endBidSequence,
     };
 
@@ -144,6 +144,5 @@ class RoomInterface extends Component {
 }
 
 RoomInterface.propTypes = propTypes;
-RoomInterface.defaultProps = defaultProps;
 
 export default RoomInterface;
