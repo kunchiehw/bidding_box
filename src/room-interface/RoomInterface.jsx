@@ -4,19 +4,7 @@ import './RoomInterface.css';
 import BidButtonBlock from './bid-button-block/BidButtonBlock';
 import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
 import HandCardsDisplay from './hand-cards-display/HandCardsDisplay';
-import { SEATS, VULS, SUITS } from '../util/util';
-
-const propTypes = {
-  seat: PropTypes.oneOf(SEATS),
-  vulnerability: PropTypes.oneOf(VULS),
-  dealer: PropTypes.oneOf(SEATS),
-};
-
-const defaultProps = {
-  seat: 'EAST',
-  vulnerability: 'NS',
-  dealer: 'NORTH',
-};
+import { SEATS, VULS, SUITS, PARTICIPANTS_ROLE } from '../util/util';
 
 function isPass(bid) {
   return (bid && bid.suit === 'PASS');
@@ -29,6 +17,17 @@ function isDouble(bid) {
 function isSuit(bid) {
   return (bid && SUITS.indexOf(bid.suit) !== -1);
 }
+
+const propTypes = {
+  role: PropTypes.oneOf(PARTICIPANTS_ROLE).isRequired,
+  vulnerability: PropTypes.oneOf(VULS).isRequired,
+  dealer: PropTypes.oneOf(SEATS).isRequired,
+  // TODO: Make more specific validator
+  eastHand: PropTypes.arrayOf(PropTypes.string).isRequired,
+  westHand: PropTypes.arrayOf(PropTypes.string).isRequired,
+  eastID: PropTypes.string.isRequired,
+  westID: PropTypes.string.isRequired,
+};
 
 class RoomInterface extends Component {
   constructor(props) {
@@ -85,43 +84,50 @@ class RoomInterface extends Component {
     return false;
   }
 
+  roleTurn() {
+    const roleIndex = SEATS.indexOf(this.props.role);
+    const dealerIndex = SEATS.indexOf(this.props.dealer);
+    return (dealerIndex + this.state.bidSeq.length) % 4 === roleIndex;
+  }
+
   handleBidButtonClick(bid) {
     const bidSeq = this.state.bidSeq.slice();
     bidSeq.push(bid);
     this.setState({
       bidSeq,
     });
-    console.log(bidSeq);
   }
 
   resetBidSeq() {
     this.setState({
       bidSeq: [],
     });
-    console.log('RESET');
   }
 
   render() {
     const endBidSequence = this.shouldEndBidSeq();
 
     const handCardsDisplayProp = {
-      eastHand: ['AKQJT98765432', '', '', ''],
-      westHand: ['', 'AKQJT98765432', '', ''],
-      seat: this.props.seat,
+      role: this.props.role,
+      eastHand: this.props.eastHand,
+      westHand: this.props.westHand,
+      eastID: this.props.eastID,
+      westID: this.props.westID,
       endBidSequence,
+    };
+
+    const bidButtonBlockProp = {
+      curBid: this.findCurBid(),
+      disabledDouble: this.shouldDisabledDouble(),
+      disabledRedouble: this.shouldDisabledRedouble(),
+      handleClick: this.handleBidButtonClick,
+      shouldHideBidButtonBlock: endBidSequence || !this.roleTurn(),
     };
 
     const bidSequenceDisplayProp = {
       dealer: this.props.dealer,
       vulnerability: this.props.vulnerability,
       bidSeq: this.state.bidSeq,
-    };
-
-    const biddingPanelProp = {
-      curBid: this.findCurBid(),
-      disabledDouble: this.shouldDisabledDouble(),
-      disabledRedouble: this.shouldDisabledRedouble(),
-      handleClick: this.handleBidButtonClick,
     };
 
     return (
@@ -131,7 +137,7 @@ class RoomInterface extends Component {
             <HandCardsDisplay {...handCardsDisplayProp} />
           </div>
           <div className="main-lower-block">
-            <BidButtonBlock {...biddingPanelProp} />
+            <BidButtonBlock {...bidButtonBlockProp} />
             <BidSequenceDisplay {...bidSequenceDisplayProp} />
           </div>
         </div>
@@ -144,6 +150,5 @@ class RoomInterface extends Component {
 }
 
 RoomInterface.propTypes = propTypes;
-RoomInterface.defaultProps = defaultProps;
 
 export default RoomInterface;

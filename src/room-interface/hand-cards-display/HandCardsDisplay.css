@@ -7,17 +7,33 @@
   width: 50%;
   display: inline-block;
   white-space: pre-line;
+  vertical-align: top;
+}
+
+.hand-cards-display-block .hand-cards-display-cell .id-cell {
+  border: 1px;
+  border-style: solid;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.hand-cards-display-block .hand-cards-display-cell .card-cell {
+  height: 98px;
+  border: 1px;
+  border-style: solid;
+  vertical-align: middle;
+}
+
+.hand-cards-display-block .hand-cards-display-cell .card-cell .card-cell-content {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
   text-align: left;
 }
 
-.hand-cards-display-block .hidden-hand-cell{
-  visibility: hidden;
-}
-
-.hand-cards-display-block .west-hand-cell {
-
-}
-
-.hand-cards-display-block .east-hand-cell {
-
+.hand-cards-display-block .hand-cards-display-cell .card-cell .waiting-cell-content {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  text-align: center;
 }

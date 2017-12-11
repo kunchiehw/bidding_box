@@ -20,16 +20,18 @@ class App extends Component {
   }
 
   render() {
-    const testHandleClick = (bid) => {
-      console.log(bid);
-    };
-
     const handleUpdateSession = (session) => {
       this.setState({ session });
     };
 
     const testProp = {
-      handleClick: testHandleClick,
+      role: 'WEST',
+      vulnerability: 'NS',
+      dealer: 'NORTH',
+      eastHand: ['AKQJT98765432', '', '', ''],
+      westHand: ['', 'AKQJT98765432', '', ''],
+      eastID: 'Jarron',
+      westID: 'wkc',
     };
 
     const authProp = {
