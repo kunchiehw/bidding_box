@@ -84,6 +84,12 @@ class RoomInterface extends Component {
     return false;
   }
 
+  roleTurn() {
+    const roleIndex = SEATS.indexOf(this.props.role);
+    const dealerIndex = SEATS.indexOf(this.props.dealer);
+    return (dealerIndex + this.state.bidSeq.length) % 4 === roleIndex;
+  }
+
   handleBidButtonClick(bid) {
     const bidSeq = this.state.bidSeq.slice();
     bidSeq.push(bid);
@@ -96,7 +102,6 @@ class RoomInterface extends Component {
     this.setState({
       bidSeq: [],
     });
-    console.log('RESET');
   }
 
   render() {
@@ -111,17 +116,18 @@ class RoomInterface extends Component {
       endBidSequence,
     };
 
-    const bidSequenceDisplayProp = {
-      dealer: this.props.dealer,
-      vulnerability: this.props.vulnerability,
-      bidSeq: this.state.bidSeq,
-    };
-
-    const biddingPanelProp = {
+    const bidButtonBlockProp = {
       curBid: this.findCurBid(),
       disabledDouble: this.shouldDisabledDouble(),
       disabledRedouble: this.shouldDisabledRedouble(),
       handleClick: this.handleBidButtonClick,
+      shouldHideBidButtonBlock: endBidSequence || !this.roleTurn(),
+    };
+
+    const bidSequenceDisplayProp = {
+      dealer: this.props.dealer,
+      vulnerability: this.props.vulnerability,
+      bidSeq: this.state.bidSeq,
     };
 
     return (
@@ -131,7 +137,7 @@ class RoomInterface extends Component {
             <HandCardsDisplay {...handCardsDisplayProp} />
           </div>
           <div className="main-lower-block">
-            <BidButtonBlock {...biddingPanelProp} />
+            <BidButtonBlock {...bidButtonBlockProp} />
             <BidSequenceDisplay {...bidSequenceDisplayProp} />
           </div>
         </div>

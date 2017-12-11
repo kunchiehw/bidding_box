@@ -13,6 +13,7 @@ const propTypes = {
   disabledDouble: PropTypes.bool.isRequired,
   disabledRedouble: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
+  shouldHideBidButtonBlock: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
@@ -60,7 +61,7 @@ function BidButtonBlock(props) {
   };
 
   return (
-    <div className="bid-button-block">
+    <div className={`bid-button-block ${(props.shouldHideBidButtonBlock) ? 'hidden-block' : ''}`}>
       {levelPanels}
       <div className="bid-button-row other-bid-button-row">
         <OtherBidButton {...passButtonProp} />
