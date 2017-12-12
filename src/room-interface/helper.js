@@ -65,7 +65,7 @@ export function bidColor(suit) {
 export function otherBidToString(suit) {
   switch (suit) {
     case 'PASS':
-      return 'Pa';
+      return 'Pass';
     case 'DOUBLE':
       return 'X';
     case 'REDOUBLE':
