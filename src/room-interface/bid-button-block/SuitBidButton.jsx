@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'semantic-ui-react';
 import { suitBidToString, suitBidCSS, suitBidDisabled } from '../helper';
 import { SUITS } from '../../util/util';
 
@@ -25,9 +26,9 @@ function SuitBidButton(props) {
   };
 
   return (
-    <button className={suitBidCSS(props.bid)} onClick={handleClick} disabled={suitBidDisabled(props.curBid, props.bid)}>
+    <Button className={suitBidCSS(props.bid)} onClick={handleClick} disabled={suitBidDisabled(props.curBid, props.bid)}>
       {suitBidToString(props.bid)}
-    </button>
+    </Button>
   );
 }
 
