@@ -105,6 +105,7 @@ class RoomInterface extends Component {
     const roleIndex = SEATS.indexOf(this.props.role);
     const dealerIndex = SEATS.indexOf(this.props.dealer);
 
+    bidSeq.pop();
     if (dealerIndex + bidSeq.length >= roleIndex) {
       while ((dealerIndex + bidSeq.length) % 4 !== roleIndex) {
         bidSeq.pop();
