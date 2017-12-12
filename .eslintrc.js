@@ -1,7 +1,7 @@
 module.exports = {
   "env": {
     "browser": true,
-    "mocha": true,
+    "jest": true,
   },
   "extends": "airbnb",
   "rules": {
