@@ -20,36 +20,19 @@ export function suitBidToString(bid) {
     case 'NOTRUMPS':
       return `${bid.level}N`;
     case 'SPADES':
-      return `${bid.level}S`;
+      return `${bid.level}\u2660`;
     case 'HEARTS':
-      return `${bid.level}H`;
+      return `${bid.level}\u2665`;
     case 'DIAMONDS':
-      return `${bid.level}D`;
+      return `${bid.level}\u2666`;
     case 'CLUBS':
-      return `${bid.level}C`;
+      return `${bid.level}\u2663`;
     default:
       return '';
   }
 }
 
-export function suitBidCSS(bid) {
-  switch (bid.suit) {
-    case 'NOTRUMPS':
-      return 'bid-button no-trumps-button';
-    case 'SPADES':
-      return 'bid-button spades-button';
-    case 'HEARTS':
-      return 'bid-button hearts-button';
-    case 'DIAMONDS':
-      return 'bid-button diamonds-button';
-    case 'CLUBS':
-      return 'bid-button clubs-button';
-    default:
-      return '';
-  }
-}
-
-export function suitBidDisabled(curBid, bid) {
+export function suitBidButtonDisabled(curBid, bid) {
   if (curBid === null || curBid.level < bid.level) {
     return false;
   }
@@ -59,27 +42,34 @@ export function suitBidDisabled(curBid, bid) {
   return (suitToNumber(curBid.suit) >= suitToNumber(bid.suit));
 }
 
-export function otherBidToString(suit) {
+export function bidColor(suit) {
   switch (suit) {
-    case 'PASS':
-      return 'Pass';
-    case 'DOUBLE':
-      return 'X';
+    case 'NOTRUMPS':
     case 'REDOUBLE':
-      return 'XX';
+      return 'blue';
+    case 'SPADES':
+      return 'black';
+    case 'HEARTS':
+    case 'DOUBLE':
+      return 'red';
+    case 'DIAMONDS':
+      return 'orange';
+    case 'CLUBS':
+    case 'PASS':
+      return 'green';
     default:
       return '';
   }
 }
 
-export function otherBidCSS(suit) {
+export function otherBidToString(suit) {
   switch (suit) {
     case 'PASS':
-      return 'bid-button pass-button';
+      return 'Pa';
     case 'DOUBLE':
-      return 'bid-button double-button';
+      return 'X';
     case 'REDOUBLE':
-      return 'bid-button redouble-button';
+      return 'XX';
     default:
       return '';
   }

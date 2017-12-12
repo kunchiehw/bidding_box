@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'semantic-ui-react';
 import './RoomInterface.css';
 import BidButtonBlock from './bid-button-block/BidButtonBlock';
 import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
@@ -35,6 +36,7 @@ class RoomInterface extends Component {
     this.state = {
       bidSeq: [],
     };
+    this.undoBidSeq = this.undoBidSeq.bind(this);
     this.resetBidSeq = this.resetBidSeq.bind(this);
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
   }
@@ -98,6 +100,21 @@ class RoomInterface extends Component {
     });
   }
 
+  undoBidSeq() {
+    const bidSeq = this.state.bidSeq.slice();
+    const roleIndex = SEATS.indexOf(this.props.role);
+    const dealerIndex = SEATS.indexOf(this.props.dealer);
+
+    if (dealerIndex + bidSeq.length >= roleIndex) {
+      while ((dealerIndex + bidSeq.length) % 4 !== roleIndex) {
+        bidSeq.pop();
+      }
+      this.setState({
+        bidSeq,
+      });
+    }
+  }
+
   resetBidSeq() {
     this.setState({
       bidSeq: [],
@@ -142,7 +159,8 @@ class RoomInterface extends Component {
           </div>
         </div>
         <div className="room-tools-block">
-          <button onClick={this.resetBidSeq}>Reset</button>
+          <Button onClick={this.undoBidSeq} size="small" color="grey">Undo</Button>
+          <Button onClick={this.resetBidSeq} size="small" color="grey">Reset</Button>
         </div>
       </div>
     );

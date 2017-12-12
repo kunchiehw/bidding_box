@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Segment } from 'semantic-ui-react';
 import { SEATS, SEATS_NS, SEATS_EW, VULS } from '../../util/util';
 
 const propTypes = {
@@ -13,12 +14,26 @@ function SeatCell(seat, vulnerability) {
 
   if (vulnerable) {
     return (
-      <div key={seat} className="bid-sequence-display-cell seat-cell vulnerable-seat-cell">{seat}</div>
+      <Segment
+        key={seat}
+        className="bid-sequence-display-cell seat-cell"
+        size="small"
+        color="red"
+        inverted
+      >
+        {seat}
+      </Segment>
     );
   }
 
   return (
-    <div key={seat} className="bid-sequence-display-cell seat-cell non-vulnerable-seat-cell">{seat}</div>
+    <Segment
+      key={seat}
+      className="bid-sequence-display-cell seat-cell"
+      size="small"
+    >
+      {seat}
+    </Segment>
   );
 }
 

@@ -1,8 +1,7 @@
 .room-interface .room-main-block {
-  width: 600px;
   margin: auto;
 }
 
 .room-interface .room-main-block .main-upper-block, .room-interface .room-main-block .main-lower-block {
-  width: 100%;
+  
 }

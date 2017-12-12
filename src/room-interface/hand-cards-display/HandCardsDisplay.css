@@ -18,7 +18,7 @@
 }
 
 .hand-cards-display-block .hand-cards-display-cell .card-cell {
-  height: 98px;
+  height: fit-content;
   border: 1px;
   border-style: solid;
   vertical-align: middle;

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { suitBidToString, otherBidToString } from '../helper';
+import { Segment } from 'semantic-ui-react';
+import { suitBidToString, otherBidToString, bidColor } from '../helper';
 import { SEATS, SUITS, NON_SUITS } from '../../util/util';
 
 const propTypes = {
@@ -12,13 +13,25 @@ const propTypes = {
 };
 
 function BidCell(bid, bidIndex) {
+  const cssString = 'bid-sequence-display-cell bid-cell';
+
   if (!bid) {
-    return (<div key={bidIndex} className="bid-sequence-display-cell bid-cell" />);
-  } else if (!bid.level) {
-    return (<div key={bidIndex} className="bid-sequence-display-cell bid-cell">{otherBidToString(bid.suit)}</div>);
+    return (<div key={bidIndex} className={`${cssString} empty-cell`} > Empty </div>);
   }
 
-  return (<div key={bidIndex} className="bid-sequence-display-cell bid-cell">{suitBidToString(bid)}</div>);
+  if (!bid.level) {
+    return (
+      <Segment key={bidIndex} className={cssString} size="small" color={bidColor(bid.suit)} inverted>
+        {otherBidToString(bid.suit)}
+      </Segment>
+    );
+  }
+
+  return (
+    <Segment key={bidIndex} className={cssString} size="small" color={bidColor(bid.suit)} inverted>
+      {suitBidToString(bid)}
+    </Segment>
+  );
 }
 
 function BidBlock(props) {

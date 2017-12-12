@@ -1,14 +1,26 @@
 .bid-sequence-display {
   display: inline-block;
-  width: 50%;
   vertical-align: top;
+  text-align: left;
+}
+
+.bid-sequence-display .seat-row, .bid-sequence-display .display-bid-row {
+  height: 52px
 }
 
 .bid-sequence-display .bid-sequence-display-cell {
-  display: table-cell;
+  display: inline-block;
+  text-align: center;
   width: 75px;
+  min-width: 75px;
+  margin: 1px 2px !important;
 }
 
-.bid-sequence-display .seat-row .seat-cell.vulnerable-seat-cell {
-  background-color: #ff0000;
+.bid-sequence-display .seat-row .seat-cell {
+  border: 1px;
+  border-style: solid;
+}
+
+.bid-sequence-display .bid-cell.empty-cell {
+  visibility: hidden;
 }
