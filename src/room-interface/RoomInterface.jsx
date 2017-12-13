@@ -87,7 +87,8 @@ class RoomInterface extends Component {
   }
 
   roleTurn() {
-    if (this.props.role === 'ALL_SEATS') {
+    // TESTER could control all four players' bid.
+    if (this.props.role === 'TESTER') {
       return true;
     }
 
@@ -105,8 +106,12 @@ class RoomInterface extends Component {
   }
 
   undoBidSeq() {
+    // Regard TESTER as EAST when press undo button.
+    const role = (this.props.role === 'TESTER') ? 'EAST' : this.props.role;
+    if (role === 'OBSERVER') return;
+
     const bidSeq = this.state.bidSeq.slice();
-    const roleIndex = SEATS.indexOf(this.props.role);
+    const roleIndex = SEATS.indexOf(role);
     const dealerIndex = SEATS.indexOf(this.props.dealer);
 
     bidSeq.pop();
@@ -130,7 +135,8 @@ class RoomInterface extends Component {
     const endBidSequence = this.shouldEndBidSeq();
 
     const handCardsDisplayProp = {
-      role: this.props.role,
+      // Regard TESTER as EAST in handCardsBlock.
+      role: (this.props.role === 'TESTER') ? 'EAST' : this.props.role,
       eastHand: this.props.eastHand,
       westHand: this.props.westHand,
       eastID: this.props.eastID,
@@ -152,6 +158,34 @@ class RoomInterface extends Component {
       bidSeq: this.state.bidSeq,
     };
 
+    if (endBidSequence) {
+      return (
+        <div className="room-interface">
+          <div className="room-main-block">
+            <div className="main-upper-block">
+              <HandCardsDisplay {...handCardsDisplayProp} />
+            </div>
+            <div className="main-lower-block">
+              <BidSequenceDisplay {...bidSequenceDisplayProp} />
+              <div className="score-block"> Display Score </div>
+            </div>
+          </div>
+          <Divider />
+          <div className="room-tools-block">
+            <Button
+              className={(this.props.role === 'OBSERVER') ? 'display-none' : ''}
+              onClick={this.undoBidSeq}
+              size="small"
+              color="grey"
+            >
+              Undo
+            </Button>
+            <Button onClick={this.resetBidSeq} size="small" color="grey">Reset</Button>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="room-interface">
         <div className="room-main-block">
@@ -159,13 +193,20 @@ class RoomInterface extends Component {
             <HandCardsDisplay {...handCardsDisplayProp} />
           </div>
           <div className="main-lower-block">
-            <BidButtonBlock {...bidButtonBlockProp} />
             <BidSequenceDisplay {...bidSequenceDisplayProp} />
+            <BidButtonBlock {...bidButtonBlockProp} />
           </div>
         </div>
         <Divider />
         <div className="room-tools-block">
-          <Button onClick={this.undoBidSeq} size="small" color="grey" disabled={endBidSequence}>Undo</Button>
+          <Button
+            className={(this.props.role === 'OBSERVER') ? 'display-none' : ''}
+            onClick={this.undoBidSeq}
+            size="small"
+            color="grey"
+          >
+            Undo
+          </Button>
           <Button onClick={this.resetBidSeq} size="small" color="grey">Reset</Button>
         </div>
       </div>
