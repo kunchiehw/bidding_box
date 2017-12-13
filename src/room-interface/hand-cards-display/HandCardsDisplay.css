@@ -18,10 +18,10 @@
 }
 
 .hand-cards-display-block .hand-cards-display-cell .card-cell {
-  height: fit-content;
+  height: 80px;
+  margin: auto;
   border: 1px;
   border-style: solid;
-  vertical-align: middle;
 }
 
 .hand-cards-display-block .hand-cards-display-cell .card-cell .card-cell-content {

@@ -15,21 +15,25 @@ const suitToNumber = (suit) => {
   }
 };
 
-export function suitBidToString(bid) {
-  switch (bid.suit) {
+export function suitChar(suit) {
+  switch (suit) {
     case 'NOTRUMPS':
-      return `${bid.level}N`;
+      return 'N';
     case 'SPADES':
-      return `${bid.level}\u2660`;
+      return '\u2660';
     case 'HEARTS':
-      return `${bid.level}\u2665`;
+      return '\u2665';
     case 'DIAMONDS':
-      return `${bid.level}\u2666`;
+      return '\u2666';
     case 'CLUBS':
-      return `${bid.level}\u2663`;
+      return '\u2663';
     default:
       return '';
   }
+}
+
+export function suitBidToString(bid) {
+  return `${bid.level}${suitChar(bid.suit)}`;
 }
 
 export function suitBidButtonDisabled(curBid, bid) {
