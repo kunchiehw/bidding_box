@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { otherBidCSS, otherBidToString } from '../helper';
+import { Button } from 'semantic-ui-react';
+import { otherBidToString, bidColor } from '../helper';
 import { NON_SUITS } from '../../util/util';
 
 const propTypes = {
@@ -18,9 +19,15 @@ function OtherBidButton(props) {
   };
 
   return (
-    <button className={otherBidCSS(props.suit)} onClick={handleClick} disabled={props.isDisabled}>
+    <Button
+      className="bid-button"
+      onClick={handleClick}
+      disabled={props.isDisabled}
+      size="small"
+      color={bidColor(props.suit)}
+    >
       {otherBidToString(props.suit)}
-    </button>
+    </Button>
   );
 }
 

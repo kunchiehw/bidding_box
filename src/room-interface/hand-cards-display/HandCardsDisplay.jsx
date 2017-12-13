@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './HandCardsDisplay.css';
+import { suitChar, bidColor } from '../helper';
 import { PARTICIPANTS_ROLE } from '../../util/util';
 
 function generateIDCell(role, partipantsID) {
@@ -10,16 +11,25 @@ function generateIDCell(role, partipantsID) {
   );
 }
 
+function generateSuitCell(suit, handCard) {
+  return (
+    <div>
+      <span style={{ color: bidColor(suit) }}> {suitChar(suit)} </span>
+      <span> {handCard} </span>
+    </div>
+  );
+}
+
 function generateCardsCell(handCards, shouldDisplay) {
   if (shouldDisplay) {
-    const cardString =
-      `\u2660: ${handCards[0]}\n` +
-      `\u2665: ${handCards[1]}\n` +
-      `\u2666: ${handCards[2]}\n` +
-      `\u2663: ${handCards[3]}\n`;
     return (
       <div className="card-cell">
-        <div className="card-cell-content">{cardString}</div>
+        <div className="card-cell-content">
+          {generateSuitCell('SPADES', handCards[0])}
+          {generateSuitCell('HEARTS', handCards[1])}
+          {generateSuitCell('DIAMONDS', handCards[2])}
+          {generateSuitCell('CLUBS', handCards[3])}
+        </div>
       </div>
     );
   }

@@ -25,7 +25,7 @@ class App extends Component {
     };
 
     const testProp = {
-      role: 'WEST',
+      role: 'EAST',
       vulnerability: 'NS',
       dealer: 'NORTH',
       eastHand: ['AKQJT98765432', '', '', ''],

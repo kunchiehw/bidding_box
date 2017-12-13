@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button, Divider } from 'semantic-ui-react';
 import './RoomInterface.css';
 import BidButtonBlock from './bid-button-block/BidButtonBlock';
 import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
@@ -35,6 +36,7 @@ class RoomInterface extends Component {
     this.state = {
       bidSeq: [],
     };
+    this.undoBidSeq = this.undoBidSeq.bind(this);
     this.resetBidSeq = this.resetBidSeq.bind(this);
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
   }
@@ -79,7 +81,7 @@ class RoomInterface extends Component {
     if (isPass(this.state.bidSeq[bidSeqLen - 3]) &&
         isPass(this.state.bidSeq[bidSeqLen - 2]) &&
         isPass(this.state.bidSeq[bidSeqLen - 1])) {
-      return (bidSeqLen >= 4) || isPass(this.state.bidSeq[bidSeqLen - 4]);
+      return (bidSeqLen >= 4);
     }
     return false;
   }
@@ -98,6 +100,22 @@ class RoomInterface extends Component {
     });
   }
 
+  undoBidSeq() {
+    const bidSeq = this.state.bidSeq.slice();
+    const roleIndex = SEATS.indexOf(this.props.role);
+    const dealerIndex = SEATS.indexOf(this.props.dealer);
+
+    bidSeq.pop();
+    if (dealerIndex + bidSeq.length >= roleIndex) {
+      while ((dealerIndex + bidSeq.length) % 4 !== roleIndex) {
+        bidSeq.pop();
+      }
+      this.setState({
+        bidSeq,
+      });
+    }
+  }
+
   resetBidSeq() {
     this.setState({
       bidSeq: [],
@@ -105,15 +123,13 @@ class RoomInterface extends Component {
   }
 
   render() {
-    const endBidSequence = this.shouldEndBidSeq();
-
     const handCardsDisplayProp = {
       role: this.props.role,
       eastHand: this.props.eastHand,
       westHand: this.props.westHand,
       eastID: this.props.eastID,
       westID: this.props.westID,
-      endBidSequence,
+      endBidSequence: this.shouldEndBidSeq(),
     };
 
     const bidButtonBlockProp = {
@@ -121,7 +137,7 @@ class RoomInterface extends Component {
       disabledDouble: this.shouldDisabledDouble(),
       disabledRedouble: this.shouldDisabledRedouble(),
       handleClick: this.handleBidButtonClick,
-      shouldHideBidButtonBlock: endBidSequence || !this.roleTurn(),
+      shouldHideBidButtonBlock: this.shouldEndBidSeq() || !this.roleTurn(),
     };
 
     const bidSequenceDisplayProp = {
@@ -141,8 +157,10 @@ class RoomInterface extends Component {
             <BidSequenceDisplay {...bidSequenceDisplayProp} />
           </div>
         </div>
+        <Divider />
         <div className="room-tools-block">
-          <button onClick={this.resetBidSeq}>Reset</button>
+          <Button onClick={this.undoBidSeq} size="small" color="grey">Undo</Button>
+          <Button onClick={this.resetBidSeq} size="small" color="grey">Reset</Button>
         </div>
       </div>
     );
