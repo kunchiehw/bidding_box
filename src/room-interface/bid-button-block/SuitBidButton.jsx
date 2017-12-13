@@ -14,6 +14,7 @@ const propTypes = {
     suit: PropTypes.oneOf(SUITS).isRequired,
   }),
   handleClick: PropTypes.func.isRequired,
+  shouldDisabled: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
@@ -29,7 +30,7 @@ function SuitBidButton(props) {
     <Button
       className="bid-button"
       onClick={handleClick}
-      disabled={suitBidButtonDisabled(props.curBid, props.bid)}
+      disabled={suitBidButtonDisabled(props.curBid, props.bid) || props.shouldDisabled}
       size="small"
       color={bidColor(props.bid.suit)}
     >

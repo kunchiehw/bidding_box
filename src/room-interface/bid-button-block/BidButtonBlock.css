@@ -4,10 +4,6 @@
   vertical-align: top;
 }
 
-.bid-button-block.hidden-block {
-  /* visibility: hidden; */
-}
-
 .bid-button-block .bid-button {
   margin-top: 2px;
   margin-bottom: 2px;
