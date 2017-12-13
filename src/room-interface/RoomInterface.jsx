@@ -87,6 +87,10 @@ class RoomInterface extends Component {
   }
 
   roleTurn() {
+    if (this.props.role === 'ALL_SEATS') {
+      return true;
+    }
+
     const roleIndex = SEATS.indexOf(this.props.role);
     const dealerIndex = SEATS.indexOf(this.props.dealer);
     return (dealerIndex + this.state.bidSeq.length) % 4 === roleIndex;
@@ -139,8 +143,7 @@ class RoomInterface extends Component {
       disabledDouble: this.shouldDisabledDouble(),
       disabledRedouble: this.shouldDisabledRedouble(),
       handleClick: this.handleBidButtonClick,
-      // shouldDisabledBidButtonBlock: endBidSequence || !this.roleTurn(),
-      shouldDisabledBidButtonBlock: false,
+      shouldDisabledBidButtonBlock: endBidSequence || !this.roleTurn(),
     };
 
     const bidSequenceDisplayProp = {
