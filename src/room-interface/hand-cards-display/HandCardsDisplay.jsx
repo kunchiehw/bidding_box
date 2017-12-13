@@ -62,7 +62,8 @@ const propTypes = {
 
 function HandCardsDisplay(props) {
   const shouldDisplayWest = (props.role === 'WEST' || props.role === 'OBSERVER' || props.endBidSequence);
-  const shouldDisplayEast = (props.role === 'EAST' || props.role === 'OBSERVER' || props.endBidSequence);
+  const shouldDisplayEast = (props.role === 'EAST' || props.role === 'OBSERVER' ||
+    props.role === 'ALL_SEATS' || props.endBidSequence);
 
   return (
     <div className="hand-cards-display-block">

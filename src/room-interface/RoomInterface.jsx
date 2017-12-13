@@ -87,6 +87,10 @@ class RoomInterface extends Component {
   }
 
   roleTurn() {
+    if (this.props.role === 'ALL_SEATS') {
+      return true;
+    }
+
     const roleIndex = SEATS.indexOf(this.props.role);
     const dealerIndex = SEATS.indexOf(this.props.dealer);
     return (dealerIndex + this.state.bidSeq.length) % 4 === roleIndex;
@@ -123,13 +127,15 @@ class RoomInterface extends Component {
   }
 
   render() {
+    const endBidSequence = this.shouldEndBidSeq();
+
     const handCardsDisplayProp = {
       role: this.props.role,
       eastHand: this.props.eastHand,
       westHand: this.props.westHand,
       eastID: this.props.eastID,
       westID: this.props.westID,
-      endBidSequence: this.shouldEndBidSeq(),
+      endBidSequence,
     };
 
     const bidButtonBlockProp = {
@@ -137,7 +143,7 @@ class RoomInterface extends Component {
       disabledDouble: this.shouldDisabledDouble(),
       disabledRedouble: this.shouldDisabledRedouble(),
       handleClick: this.handleBidButtonClick,
-      shouldHideBidButtonBlock: this.shouldEndBidSeq() || !this.roleTurn(),
+      shouldDisabledBidButtonBlock: endBidSequence || !this.roleTurn(),
     };
 
     const bidSequenceDisplayProp = {
@@ -159,7 +165,7 @@ class RoomInterface extends Component {
         </div>
         <Divider />
         <div className="room-tools-block">
-          <Button onClick={this.undoBidSeq} size="small" color="grey">Undo</Button>
+          <Button onClick={this.undoBidSeq} size="small" color="grey" disabled={endBidSequence}>Undo</Button>
           <Button onClick={this.resetBidSeq} size="small" color="grey">Reset</Button>
         </div>
       </div>

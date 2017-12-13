@@ -13,7 +13,7 @@ const propTypes = {
   disabledDouble: PropTypes.bool.isRequired,
   disabledRedouble: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
-  shouldHideBidButtonBlock: PropTypes.bool.isRequired,
+  shouldDisabledBidButtonBlock: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
@@ -36,6 +36,7 @@ function BidButtonBlock(props) {
         bid,
         curBid: props.curBid,
         handleClick,
+        shouldDisabled: props.shouldDisabledBidButtonBlock,
       };
       suitButtons.push(<SuitBidButton key={suit} {...suitButtonProp} />);
     }
@@ -44,24 +45,24 @@ function BidButtonBlock(props) {
 
   const passButtonProp = {
     suit: NON_SUITS[0],
-    isDisabled: false,
+    isDisabled: props.shouldDisabledBidButtonBlock,
     handleClick,
   };
 
   const doubleButtonProp = {
     suit: NON_SUITS[1],
-    isDisabled: props.disabledDouble,
+    isDisabled: props.disabledDouble || props.shouldDisabledBidButtonBlock,
     handleClick,
   };
 
   const redoubleButtonProp = {
     suit: NON_SUITS[2],
-    isDisabled: props.disabledRedouble,
+    isDisabled: props.disabledRedouble || props.shouldDisabledBidButtonBlock,
     handleClick,
   };
 
   return (
-    <div className={`bid-button-block ${(props.shouldHideBidButtonBlock) ? 'hidden-block' : ''}`}>
+    <div className="bid-button-block">
       {levelPanels}
       <div className="bid-button-row other-bid-button-row">
         <OtherBidButton {...passButtonProp} />
