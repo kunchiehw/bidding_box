@@ -2,17 +2,39 @@ const express = require('express');
 const http = require('http');
 const url = require('url');
 const websocket = require('ws');
+const jwt = require('jsonwebtoken');
 
+const secret = 'shhhhhhared-secret';
 const app = express();
-
-app.use((req, res) => {
-  res.send({ msg: 'hello' });
+const server = http.createServer(app);
+const wss = new websocket.Server({
+  server,
+  verifyClient(info, cb) {
+    const { token } = info.req.headers;
+    if (!token) { cb(false, 401, 'Unauthorized'); } else {
+      jwt.verify(token, secret, (err, decoded) => {
+        if (err) {
+          cb(false, 401, 'Unauthorized');
+        } else {
+          info.req.user = decoded; // [1]
+          cb(true);
+        }
+      });
+    }
+  },
 });
 
-const server = http.createServer(app);
-const wss = new websocket.Server({ server });
 
+// API
+app.get(
+  '/token',
+  (req, res) => {
+    const token = jwt.sign({ user: 'wkc' }, secret, { expiresIn: '1h' });
+    res.send(token);
+  },
+);
 
+// WebSocket
 wss.on('connection', (ws, req) => {
   // You might use location.query.access_token to authenticate or share sessions
   // or req.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
