@@ -1,20 +1,3 @@
-const suitToNumber = (suit) => {
-  switch (suit) {
-    case 'NOTRUMPS':
-      return 5;
-    case 'SPADES':
-      return 4;
-    case 'HEARTS':
-      return 3;
-    case 'DIAMONDS':
-      return 2;
-    case 'CLUBS':
-      return 1;
-    default:
-      return 0;
-  }
-};
-
 export function suitChar(suit) {
   switch (suit) {
     case 'NOTRUMPS':
@@ -34,16 +17,6 @@ export function suitChar(suit) {
 
 export function suitBidToString(bid) {
   return `${bid.level} ${suitChar(bid.suit)}`;
-}
-
-export function suitBidButtonDisabled(curBid, bid) {
-  if (curBid === null || curBid.level < bid.level) {
-    return false;
-  }
-  if (curBid.level > bid.level) {
-    return true;
-  }
-  return (suitToNumber(curBid.suit) >= suitToNumber(bid.suit));
 }
 
 export function bidColor(suit) {
