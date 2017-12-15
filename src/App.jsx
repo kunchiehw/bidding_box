@@ -32,6 +32,21 @@ class App extends Component {
       westHand: ['', 'KQJT9', 'KQJT', 'KQJT'],
       eastID: 'Jarron',
       westID: 'wkc',
+      scoreList: [{
+        bid: {
+          level: 7,
+          suit: 'SPADES',
+        },
+        declarer: 'EW',
+        score: 100,
+      }, {
+        bid: {
+          level: 7,
+          suit: 'NOTRUMPS',
+        },
+        declarer: 'EAST',
+        score: 0,
+      }],
     };
 
     const authProp = {
