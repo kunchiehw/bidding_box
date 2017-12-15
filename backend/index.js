@@ -24,10 +24,10 @@ wss.on('connection', (ws, req) => {
   ws.room = room;
 
   ws.on('message', (message) => {
-    console.log('received: %s', message);
+    // console.log('received: %s', message);
     wss.clients.forEach((client) => {
       if (client.room === room) {
-        client.send(room);
+        client.send(message);
       }
     });
   });
