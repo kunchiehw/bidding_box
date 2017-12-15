@@ -5,6 +5,7 @@
 }
 
 .bid-button-block .bid-button {
-  margin-top: 2px;
-  margin-bottom: 2px;
+  width: 64px;
+  min-width: 64px;
+  margin: 2px 3px;
 }

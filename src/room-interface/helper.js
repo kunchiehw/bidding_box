@@ -33,7 +33,7 @@ export function suitChar(suit) {
 }
 
 export function suitBidToString(bid) {
-  return `${bid.level}${suitChar(bid.suit)}`;
+  return `${bid.level} ${suitChar(bid.suit)}`;
 }
 
 export function suitBidButtonDisabled(curBid, bid) {
@@ -49,10 +49,10 @@ export function suitBidButtonDisabled(curBid, bid) {
 export function bidColor(suit) {
   switch (suit) {
     case 'NOTRUMPS':
+      return 'black';
+    case 'SPADES':
     case 'REDOUBLE':
       return 'blue';
-    case 'SPADES':
-      return 'black';
     case 'HEARTS':
     case 'DOUBLE':
       return 'red';
