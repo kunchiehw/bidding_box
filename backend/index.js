@@ -4,6 +4,7 @@ const url = require('url');
 const websocket = require('ws');
 
 const app = express();
+const db = {};
 
 app.use((req, res) => {
   res.send({ msg: 'hello' });
@@ -22,8 +23,16 @@ wss.on('connection', (ws, req) => {
   }
   const room = location.path;
   ws.room = room;
+  console.log(`get in the room: ${room}`);
+
+  if (room in db) {
+    ws.send(db[room]);
+  } else {
+    db[room] = '[]';
+  }
 
   ws.on('message', (message) => {
+    db[room] = message;
     console.log('received: %s', message);
     wss.clients.forEach((client) => {
       if (client.room === room) {
@@ -31,8 +40,6 @@ wss.on('connection', (ws, req) => {
       }
     });
   });
-
-  console.log(`get in the room: ${room}`);
 });
 
 server.listen(8080, () => {
