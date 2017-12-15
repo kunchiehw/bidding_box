@@ -17,18 +17,19 @@ const server = http.createServer(app);
 const wss = new websocket.Server({
   server,
   verifyClient(info, cb) {
-    const { token } = info.req.headers;
-    if (!token) { cb(false, 401, 'Unauthorized'); }
+    const location = url.parse(info.req.url, true);
+    const jwtToken = location.query.jwt;
+    if (!jwtToken) { cb(false, 401, 'Unauthorized'); }
 
-    jwt.verify(token, secret, (err, decoded) => {
-      if (err) {
+    jwt.verify(jwtToken, secret, (err, decoded) => {
+      if (err || !decoded) {
         cb(false, 401, 'Unauthorized');
       }
+      console.log(decoded);
 
-      if (!decoded.username || !(decoded.username in db.users)) {
+      if (!('username' in decoded) || !(decoded.username in db.users)) {
         cb(false, 401, 'Unauthorized');
       }
-
       info.req.user = decoded;
       cb(true);
     });
@@ -40,10 +41,11 @@ const wss = new websocket.Server({
 app.get(
   '/token',
   (req, res) => {
-    const token = jwt.sign({ user: 'wkc' }, secret, { expiresIn: '1h' });
+    const token = jwt.sign({ username: 'wkc' }, secret, { expiresIn: '1h' });
     res.send(token);
   },
 );
+
 
 // WebSocket
 wss.on('connection', (ws, req) => {

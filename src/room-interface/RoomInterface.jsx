@@ -37,6 +37,8 @@ const propTypes = {
     declarer: PropTypes.oneOf(DECLARERS).isRequired,
     score: PropTypes.number.isRequired,
   })).isRequired,
+  jwtToken: PropTypes.string.isRequired,
+  roomName: PropTypes.string.isRequired,
 };
 
 class RoomInterface extends Component {
@@ -54,7 +56,7 @@ class RoomInterface extends Component {
   }
 
   componentDidMount() {
-    this.socket = new WebSocket('ws://localhost:8080/room/123');
+    this.socket = new WebSocket(`ws://localhost:8080/room/${this.props.roomName}?jwt=${this.props.jwtToken}`);
     this.socket.addEventListener('message', (event) => {
       // update Room info
       console.log('Message from server ', event.data);

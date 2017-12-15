@@ -47,6 +47,8 @@ class App extends Component {
         declarer: 'EAST',
         score: 0,
       }],
+      roomName: '123',
+      jwtToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IndrYyIsImlhdCI6MTUxMzM3OTkxNiwiZXhwIjoxNTEzMzgzNTE2fQ.dxBfgh_zxq4GznHEqqNLPULCwvfLQZJUodUqni_BvT8',
     };
 
     const authProp = {
