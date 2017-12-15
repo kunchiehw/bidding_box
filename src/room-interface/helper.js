@@ -78,3 +78,22 @@ export function otherBidToString(suit) {
       return '';
   }
 }
+
+export function declarerToString(declarer) {
+  switch (declarer) {
+    case 'WEST':
+      return 'W';
+    case 'NORTH':
+      return 'N';
+    case 'EAST':
+      return 'E';
+    case 'SOUTH':
+      return 'S';
+    case 'NS':
+      return 'NS';
+    case 'EW':
+      return 'EW';
+    default:
+      return '';
+  }
+}

@@ -1,0 +1,27 @@
+.score-block {
+
+}
+
+.score-block .score-cell {
+
+}
+
+.score-block span {
+  display: inline-block;
+  min-width: 40px;
+  height: 25px;
+  vertical-align: center;
+}
+
+.score-block .score-cell .score-bid {
+
+}
+
+.score-block .score-cell .score-declarer {
+
+}
+
+.score-block .score-cell .score-score {
+
+  text-align: right;
+}
