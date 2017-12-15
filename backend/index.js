@@ -5,22 +5,33 @@ const websocket = require('ws');
 const jwt = require('jsonwebtoken');
 
 const secret = 'shhhhhhared-secret';
+const db = {
+  users: {
+    wkc: 'password',
+    jarron: 'password',
+  },
+  rooms: {},
+};
 const app = express();
 const server = http.createServer(app);
 const wss = new websocket.Server({
   server,
   verifyClient(info, cb) {
     const { token } = info.req.headers;
-    if (!token) { cb(false, 401, 'Unauthorized'); } else {
-      jwt.verify(token, secret, (err, decoded) => {
-        if (err) {
-          cb(false, 401, 'Unauthorized');
-        } else {
-          info.req.user = decoded; // [1]
-          cb(true);
-        }
-      });
-    }
+    if (!token) { cb(false, 401, 'Unauthorized'); }
+
+    jwt.verify(token, secret, (err, decoded) => {
+      if (err) {
+        cb(false, 401, 'Unauthorized');
+      }
+
+      if (!decoded.username || !(decoded.username in db.users)) {
+        cb(false, 401, 'Unauthorized');
+      }
+
+      info.req.user = decoded;
+      cb(true);
+    });
   },
 });
 
@@ -44,8 +55,16 @@ wss.on('connection', (ws, req) => {
   }
   const room = location.path;
   ws.room = room;
+  console.log(`get in the room: ${room}`);
+
+  if (room in db) {
+    ws.send(db[room]);
+  } else {
+    db[room] = '[]';
+  }
 
   ws.on('message', (message) => {
+    db[room] = message;
     console.log('received: %s', message);
     wss.clients.forEach((client) => {
       if (client.room === room) {
@@ -53,8 +72,6 @@ wss.on('connection', (ws, req) => {
       }
     });
   });
-
-  console.log(`get in the room: ${room}`);
 });
 
 server.listen(8080, () => {
