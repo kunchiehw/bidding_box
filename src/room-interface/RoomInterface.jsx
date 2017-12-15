@@ -57,7 +57,10 @@ class RoomInterface extends Component {
     this.socket = new WebSocket('ws://localhost:8080/room/123');
     this.socket.addEventListener('message', (event) => {
       // update Room info
-      console.log('Message from server ', event.data);
+      // console.log('Message from server ', JSON.parse(event.data));
+      this.setState({
+        bidSeq: JSON.parse(event.data),
+      });
     });
   }
 
@@ -121,9 +124,6 @@ class RoomInterface extends Component {
   handleBidButtonClick(bid) {
     const bidSeq = this.state.bidSeq.slice();
     bidSeq.push(bid);
-    this.setState({
-      bidSeq,
-    });
     this.socket.send(JSON.stringify(bidSeq));
   }
 
@@ -141,19 +141,12 @@ class RoomInterface extends Component {
       while ((dealerIndex + bidSeq.length) % 4 !== roleIndex) {
         bidSeq.pop();
       }
-      this.setState({
-        bidSeq,
-      });
     }
     this.socket.send(JSON.stringify(bidSeq));
   }
 
   resetBidSeq() {
     if (this.props.role === 'OBSERVER') return;
-
-    this.setState({
-      bidSeq: [],
-    });
     this.socket.send('[]');
   }
 
