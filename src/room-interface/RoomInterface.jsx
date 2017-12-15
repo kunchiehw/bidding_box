@@ -39,23 +39,23 @@ const propTypes = {
   })).isRequired,
 };
 
-let socket = null;
-
-
 class RoomInterface extends Component {
   constructor(props) {
     super(props);
     this.state = {
       bidSeq: [],
     };
+
+    this.socket = null;
+
     this.undoBidSeq = this.undoBidSeq.bind(this);
     this.resetBidSeq = this.resetBidSeq.bind(this);
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
   }
 
   componentDidMount() {
-    socket = new WebSocket('ws://localhost:8080/room/123');
-    socket.addEventListener('message', (event) => {
+    this.socket = new WebSocket('ws://localhost:8080/room/123');
+    this.socket.addEventListener('message', (event) => {
       // update Room info
       console.log('Message from server ', event.data);
     });
@@ -124,7 +124,7 @@ class RoomInterface extends Component {
     this.setState({
       bidSeq,
     });
-    socket.send(JSON.stringify(bidSeq));
+    this.socket.send(JSON.stringify(bidSeq));
   }
 
   undoBidSeq() {
@@ -145,7 +145,7 @@ class RoomInterface extends Component {
         bidSeq,
       });
     }
-    socket.send(JSON.stringify(bidSeq));
+    this.socket.send(JSON.stringify(bidSeq));
   }
 
   resetBidSeq() {
@@ -154,7 +154,7 @@ class RoomInterface extends Component {
     this.setState({
       bidSeq: [],
     });
-    socket.send('[]');
+    this.socket.send('[]');
   }
 
   render() {
