@@ -1,7 +1,17 @@
+.room-interface .display-none {
+  visibility: hidden;
+}
+
 .room-interface .room-main-block {
 
 }
 
 .room-interface .room-main-block .main-upper-block, .room-interface .room-main-block .main-lower-block {
 
+}
+
+.room-interface .score-block {
+  display: inline-block;
+  width: 350px;
+  margin: 0px 15px;
 }

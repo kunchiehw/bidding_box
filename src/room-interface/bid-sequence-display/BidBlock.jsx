@@ -21,7 +21,7 @@ function BidCell(bid, bidIndex) {
 
   if (!bid.level) {
     return (
-      <Segment key={bidIndex} className={cssString} size="small" color={bidColor(bid.suit)} inverted>
+      <Segment key={bidIndex} className={`${cssString} ${bid.suit}-cell`} size="small">
         {otherBidToString(bid.suit)}
       </Segment>
     );

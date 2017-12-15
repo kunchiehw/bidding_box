@@ -25,6 +25,7 @@ function OtherBidButton(props) {
       disabled={props.isDisabled}
       size="small"
       color={bidColor(props.suit)}
+      basic
     >
       {otherBidToString(props.suit)}
     </Button>
