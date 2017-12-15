@@ -39,6 +39,9 @@ const propTypes = {
   })).isRequired,
 };
 
+let socket = null;
+
+
 class RoomInterface extends Component {
   constructor(props) {
     super(props);
@@ -49,6 +52,15 @@ class RoomInterface extends Component {
     this.resetBidSeq = this.resetBidSeq.bind(this);
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
   }
+
+  componentDidMount() {
+    socket = new WebSocket('ws://localhost:8080/room/123');
+    socket.addEventListener('message', (event) => {
+      // update Room info
+      console.log('Message from server ', event.data);
+    });
+  }
+
 
   shouldDisabledDouble() {
     const bidSeqLen = this.state.bidSeq.length;
@@ -112,6 +124,7 @@ class RoomInterface extends Component {
     this.setState({
       bidSeq,
     });
+    socket.send(JSON.stringify(bidSeq));
   }
 
   undoBidSeq() {
@@ -132,6 +145,7 @@ class RoomInterface extends Component {
         bidSeq,
       });
     }
+    socket.send(JSON.stringify(bidSeq));
   }
 
   resetBidSeq() {
@@ -140,6 +154,7 @@ class RoomInterface extends Component {
     this.setState({
       bidSeq: [],
     });
+    socket.send('[]');
   }
 
   render() {

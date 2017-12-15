@@ -24,7 +24,7 @@ wss.on('connection', (ws, req) => {
   ws.room = room;
 
   ws.on('message', (message) => {
-    // console.log('received: %s', message);
+    console.log('received: %s', message);
     wss.clients.forEach((client) => {
       if (client.room === room) {
         client.send(message);
@@ -32,7 +32,7 @@ wss.on('connection', (ws, req) => {
     });
   });
 
-  ws.send('get in the room: ');
+  console.log(`get in the room: ${room}`);
 });
 
 server.listen(8080, () => {
