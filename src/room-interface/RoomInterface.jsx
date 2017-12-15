@@ -58,8 +58,7 @@ class RoomInterface extends Component {
   componentDidMount() {
     this.socket = new WebSocket(`ws://localhost:8080/room/${this.props.roomName}?jwt=${this.props.jwtToken}`);
     this.socket.addEventListener('message', (event) => {
-      // update Room info
-      console.log('Message from server ', event.data);
+      this.setState({ bidSeq: JSON.parse(event.data) });
     });
   }
 
