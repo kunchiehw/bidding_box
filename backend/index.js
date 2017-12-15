@@ -25,7 +25,6 @@ const wss = new websocket.Server({
       if (err || !decoded) {
         cb(false, 401, 'Unauthorized');
       }
-      console.log(decoded);
 
       if (!('username' in decoded) || !(decoded.username in db.users)) {
         cb(false, 401, 'Unauthorized');
@@ -53,11 +52,11 @@ wss.on('connection', (ws, req) => {
   // or req.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
   const location = url.parse(req.url, true);
   if (!location.path.startsWith('/room/')) {
-    return ws.terminate();
+    return ws.close();
   }
-  const room = location.path;
+  const room = location.pathname.substring(6);
   ws.room = room;
-  console.log(`get in the room: ${room}`);
+  console.log(`${req.user.username} get in the room: ${room}`);
 
   if (room in db) {
     ws.send(db[room]);
@@ -67,7 +66,7 @@ wss.on('connection', (ws, req) => {
 
   ws.on('message', (message) => {
     db[room] = message;
-    console.log('received: %s', message);
+    console.log(`${room} received: ${message}`);
     wss.clients.forEach((client) => {
       if (client.room === room) {
         client.send(message);
