@@ -1,8 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react';
-import { suitBidToString, suitBidButtonDisabled, bidColor } from '../helper';
+import { suitBidToString, bidColor } from '../helper';
 import { SUITS } from '../../util/util';
+
+function suitToNumber(suit) {
+  switch (suit) {
+    case 'NOTRUMPS':
+      return 5;
+    case 'SPADES':
+      return 4;
+    case 'HEARTS':
+      return 3;
+    case 'DIAMONDS':
+      return 2;
+    case 'CLUBS':
+      return 1;
+    default:
+      return 0;
+  }
+}
+
+function suitBidButtonDisabled(curBid, bid) {
+  if (curBid === null || curBid.level < bid.level) {
+    return false;
+  }
+  if (curBid.level > bid.level) {
+    return true;
+  }
+  return (suitToNumber(curBid.suit) >= suitToNumber(bid.suit));
+}
 
 const propTypes = {
   bid: PropTypes.shape({

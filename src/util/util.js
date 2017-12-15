@@ -10,4 +10,6 @@ export const SEATS_EW = ['EAST', 'WEST'];
 
 export const PARTICIPANTS_ROLE = ['EAST', 'WEST', 'OBSERVER', 'TESTER'];
 
+export const DECLARERS = ['WEST', 'NORTH', 'EAST', 'SOUTH', 'NS', 'EW'];
+
 export const VULS = ['NONE', 'NS', 'EW', 'BOTH'];

@@ -5,7 +5,8 @@ import './RoomInterface.css';
 import BidButtonBlock from './bid-button-block/BidButtonBlock';
 import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
 import HandCardsDisplay from './hand-cards-display/HandCardsDisplay';
-import { SEATS, VULS, SUITS, PARTICIPANTS_ROLE } from '../util/util';
+import ScoreBlock from './score-block/ScoreBlock';
+import { SEATS, VULS, SUITS, PARTICIPANTS_ROLE, DECLARERS } from '../util/util';
 
 function isPass(bid) {
   return (bid && bid.suit === 'PASS');
@@ -28,6 +29,14 @@ const propTypes = {
   westHand: PropTypes.arrayOf(PropTypes.string).isRequired,
   eastID: PropTypes.string.isRequired,
   westID: PropTypes.string.isRequired,
+  scoreList: PropTypes.arrayOf(PropTypes.shape({
+    bid: PropTypes.shape({
+      level: PropTypes.number,
+      suit: PropTypes.oneOf(SUITS).isRequired,
+    }),
+    declarer: PropTypes.oneOf(DECLARERS).isRequired,
+    score: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 class RoomInterface extends Component {
@@ -126,6 +135,8 @@ class RoomInterface extends Component {
   }
 
   resetBidSeq() {
+    if (this.props.role === 'OBSERVER') return;
+
     this.setState({
       bidSeq: [],
     });
@@ -158,34 +169,6 @@ class RoomInterface extends Component {
       bidSeq: this.state.bidSeq,
     };
 
-    if (endBidSequence) {
-      return (
-        <div className="room-interface">
-          <div className="room-main-block">
-            <div className="main-upper-block">
-              <HandCardsDisplay {...handCardsDisplayProp} />
-            </div>
-            <div className="main-lower-block">
-              <BidSequenceDisplay {...bidSequenceDisplayProp} />
-              <div className="score-block"> Display Score </div>
-            </div>
-          </div>
-          <Divider />
-          <div className="room-tools-block">
-            <Button
-              className={(this.props.role === 'OBSERVER') ? 'display-none' : ''}
-              onClick={this.undoBidSeq}
-              size="small"
-              color="grey"
-            >
-              Undo
-            </Button>
-            <Button onClick={this.resetBidSeq} size="small" color="grey">Reset</Button>
-          </div>
-        </div>
-      );
-    }
-
     return (
       <div className="room-interface">
         <div className="room-main-block">
@@ -194,7 +177,9 @@ class RoomInterface extends Component {
           </div>
           <div className="main-lower-block">
             <BidSequenceDisplay {...bidSequenceDisplayProp} />
-            <BidButtonBlock {...bidButtonBlockProp} />
+            {(endBidSequence) ?
+              <ScoreBlock scoreList={this.props.scoreList} />
+            : <BidButtonBlock {...bidButtonBlockProp} /> }
           </div>
         </div>
         <Divider />
