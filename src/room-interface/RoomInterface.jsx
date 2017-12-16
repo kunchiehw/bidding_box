@@ -70,10 +70,10 @@ class RoomInterface extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (this.props.jwtToken !== nextProps.jwtToken) {
       if (this.socket) {
-        // disconnect socket
+        this.socket.close();
+        this.socket = null;
       }
 
       if (nextProps.jwtToken) {
@@ -148,7 +148,7 @@ class RoomInterface extends Component {
     this.setState({
       bidSeq,
     });
-    this.socket.send(JSON.stringify(bidSeq));
+    if (this.socket) this.socket.send(JSON.stringify(bidSeq));
   }
 
   undoBidSeq() {
@@ -168,8 +168,8 @@ class RoomInterface extends Component {
       this.setState({
         bidSeq,
       });
+      if (this.socket) this.socket.send(JSON.stringify(bidSeq));
     }
-    this.socket.send(JSON.stringify(bidSeq));
   }
 
   resetBidSeq() {
@@ -178,7 +178,7 @@ class RoomInterface extends Component {
     this.setState({
       bidSeq: [],
     });
-    this.socket.send('[]');
+    if (this.socket) this.socket.send(JSON.stringify([]));
   }
 
   render() {
