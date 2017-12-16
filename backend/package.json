@@ -9,7 +9,9 @@
   "author": "Jarron Shih <jarronshih@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
     "ws": "^3.3.2"
   }
 }

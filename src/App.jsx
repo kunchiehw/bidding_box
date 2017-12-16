@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import RoomInterface from './room-interface/RoomInterface';
 import Auth from './Auth';
 import './App.css';
-import { getSession } from './util/aws-helper';
+
 
 class App extends Component {
   constructor(props) {
@@ -11,12 +11,6 @@ class App extends Component {
     this.state = {
       session: null,
     };
-  }
-
-  componentDidMount() {
-    getSession().then((session) => {
-      this.setState({ session });
-    });
   }
 
   render() {
@@ -47,6 +41,8 @@ class App extends Component {
         declarer: 'EAST',
         score: 0,
       }],
+      roomName: '123',
+      jwtToken: this.state.session,
     };
 
     const authProp = {

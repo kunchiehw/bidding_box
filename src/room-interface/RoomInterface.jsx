@@ -37,7 +37,14 @@ const propTypes = {
     declarer: PropTypes.oneOf(DECLARERS).isRequired,
     score: PropTypes.number.isRequired,
   })).isRequired,
+  jwtToken: PropTypes.string,
+  roomName: PropTypes.string.isRequired,
 };
+
+const defaultProps = {
+  jwtToken: null,
+};
+
 
 class RoomInterface extends Component {
   constructor(props) {
@@ -54,11 +61,28 @@ class RoomInterface extends Component {
   }
 
   componentDidMount() {
-    this.socket = new WebSocket('ws://localhost:8080/room/123');
-    this.socket.addEventListener('message', (event) => {
-      // update Room info
-      console.log('Message from server ', event.data);
-    });
+    if (this.props.jwtToken) {
+      this.socket = new WebSocket(`ws://localhost:8080/room/${this.props.roomName}?jwt=${this.props.jwtToken}`);
+      this.socket.addEventListener('message', (event) => {
+        this.setState({ bidSeq: JSON.parse(event.data) });
+      });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.jwtToken !== nextProps.jwtToken) {
+      if (this.socket) {
+        this.socket.close();
+        this.socket = null;
+      }
+
+      if (nextProps.jwtToken) {
+        this.socket = new WebSocket(`ws://localhost:8080/room/${this.props.roomName}?jwt=${nextProps.jwtToken}`);
+        this.socket.addEventListener('message', (event) => {
+          this.setState({ bidSeq: JSON.parse(event.data) });
+        });
+      }
+    }
   }
 
 
@@ -124,7 +148,7 @@ class RoomInterface extends Component {
     this.setState({
       bidSeq,
     });
-    this.socket.send(JSON.stringify(bidSeq));
+    if (this.socket) this.socket.send(JSON.stringify(bidSeq));
   }
 
   undoBidSeq() {
@@ -144,8 +168,8 @@ class RoomInterface extends Component {
       this.setState({
         bidSeq,
       });
+      if (this.socket) this.socket.send(JSON.stringify(bidSeq));
     }
-    this.socket.send(JSON.stringify(bidSeq));
   }
 
   resetBidSeq() {
@@ -154,7 +178,7 @@ class RoomInterface extends Component {
     this.setState({
       bidSeq: [],
     });
-    this.socket.send('[]');
+    if (this.socket) this.socket.send(JSON.stringify([]));
   }
 
   render() {
@@ -214,6 +238,8 @@ class RoomInterface extends Component {
   }
 }
 
+
 RoomInterface.propTypes = propTypes;
+RoomInterface.defaultProps = defaultProps;
 
 export default RoomInterface;
