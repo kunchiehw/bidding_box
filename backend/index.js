@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const http = require('http');
 const url = require('url');
 const websocket = require('ws');
@@ -12,6 +13,7 @@ const db = {
   },
   rooms: {},
 };
+
 const app = express();
 const server = http.createServer(app);
 const wss = new websocket.Server({
@@ -23,11 +25,11 @@ const wss = new websocket.Server({
 
     jwt.verify(jwtToken, secret, (err, decoded) => {
       if (err || !decoded) {
-        cb(false, 401, 'Unauthorized');
+        return cb(false, 401, 'Unauthorized');
       }
 
       if (!('username' in decoded) || !(decoded.username in db.users)) {
-        cb(false, 401, 'Unauthorized');
+        return cb(false, 401, 'Unauthorized');
       }
       info.req.user = decoded;
       cb(true);
@@ -37,10 +39,27 @@ const wss = new websocket.Server({
 
 
 // API
-app.get(
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+
+app.post(
   '/token',
+  bodyParser.json(),
   (req, res) => {
-    const token = jwt.sign({ username: 'wkc' }, secret, { expiresIn: '1h' });
+    if (!req.body) {
+      return res.sendStatus(400);
+    }
+    const { username, password } = req.body;
+    console.log(req.body);
+    if (!username || !password || !(username in db.users)) {
+      return res.sendStatus(403);
+    }
+
+    const token = jwt.sign({ username }, secret, { expiresIn: '1h' });
     res.send(token);
   },
 );

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { authenticateUser, signOut } from './util/aws-helper';
 
 
 const propTypes = {
@@ -34,16 +33,28 @@ class Auth extends Component {
 
   handleSigninSubmit(e) {
     e.preventDefault();
-    console.log('Entered:', this.state);
     this.setState({ loading: true });
-    authenticateUser(this.state.username, this.state.password)
-      .then((result) => {
-        console.log(result);
-        this.setState({ username: result.accessToken.payload.username, loading: false });
-        this.props.handleUpdateSession(result);
+    fetch('http://localhost:8080/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+      }),
+    })
+      .then((res) => {
+        this.setState({ loading: false });
+        if (!res.ok) {
+          throw Error(res.statusText);
+        }
+        return res.text();
       })
-      .catch((err) => {
-        console.log(err);
+      .then((data) => {
+        this.props.handleUpdateSession(data);
+      })
+      .catch(() => {
         this.setState({ loading: false });
         this.props.handleUpdateSession(null);
       });
@@ -52,11 +63,8 @@ class Auth extends Component {
   handleSignoutSubmit(e) {
     e.preventDefault();
     this.setState({ loading: true });
-    signOut()
-      .then(() => {
-        this.setState({ loading: false });
-        this.props.handleUpdateSession(null);
-      });
+    this.props.handleUpdateSession(null);
+    this.setState({ loading: false });
   }
 
   signin() {
@@ -109,4 +117,5 @@ class Auth extends Component {
 }
 
 Auth.propTypes = propTypes;
+
 export default Auth;
