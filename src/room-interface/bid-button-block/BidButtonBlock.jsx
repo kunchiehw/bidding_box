@@ -13,7 +13,7 @@ const propTypes = {
   disabledDouble: PropTypes.bool.isRequired,
   disabledRedouble: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
-  shouldDisabledBidButtonBlock: PropTypes.bool.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
@@ -36,7 +36,7 @@ function BidButtonBlock(props) {
         bid,
         curBid: props.curBid,
         handleClick,
-        shouldDisabled: props.shouldDisabledBidButtonBlock,
+        isDisabled: props.isDisabled,
       };
       suitButtons.push(<SuitBidButton key={suit} {...suitButtonProp} />);
     }
@@ -45,19 +45,19 @@ function BidButtonBlock(props) {
 
   const passButtonProp = {
     suit: NON_SUITS[0],
-    isDisabled: props.shouldDisabledBidButtonBlock,
+    isDisabled: props.isDisabled,
     handleClick,
   };
 
   const doubleButtonProp = {
     suit: NON_SUITS[1],
-    isDisabled: props.disabledDouble || props.shouldDisabledBidButtonBlock,
+    isDisabled: props.disabledDouble || props.isDisabled,
     handleClick,
   };
 
   const redoubleButtonProp = {
     suit: NON_SUITS[2],
-    isDisabled: props.disabledRedouble || props.shouldDisabledBidButtonBlock,
+    isDisabled: props.disabledRedouble || props.isDisabled,
     handleClick,
   };
 

@@ -199,7 +199,7 @@ class RoomInterface extends Component {
       disabledDouble: this.shouldDisabledDouble(),
       disabledRedouble: this.shouldDisabledRedouble(),
       handleClick: this.handleBidButtonClick,
-      shouldDisabledBidButtonBlock: endBidSequence || !this.roleTurn(),
+      isDisabled: endBidSequence || !this.roleTurn(),
     };
 
     const bidSequenceDisplayProp = {
