@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import RoomInterface from './room-interface/RoomInterface';
+import LobbyInterface from './lobby-interface/LobbyInterface';
 import Auth from './Auth';
 import './App.css';
 
@@ -18,49 +17,16 @@ class App extends Component {
       this.setState({ session });
     };
 
-    const testProp = {
-      role: 'TESTER',
-      vulnerability: 'NS',
-      dealer: 'NORTH',
-      eastHand: ['AKQJT98765432', '', '', ''],
-      westHand: ['', 'KQJT9', 'KQJT', 'KQJT'],
-      eastID: 'Jarron',
-      westID: 'wkc',
-      scoreList: [{
-        bid: {
-          level: 7,
-          suit: 'SPADES',
-        },
-        declarer: 'EW',
-        score: 100,
-      }, {
-        bid: {
-          level: 7,
-          suit: 'NOTRUMPS',
-        },
-        declarer: 'EAST',
-        score: 0,
-      }],
-      roomName: '123',
-      jwtToken: this.state.session,
-    };
-
     const authProp = {
       isLoggedIn: this.state.session !== null,
       handleUpdateSession,
     };
 
-
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <hr />
         <Auth {...authProp} />
         <hr />
-        <RoomInterface {...testProp} />
+        <LobbyInterface jwtToken={this.state.session} />
       </div>
     );
   }
