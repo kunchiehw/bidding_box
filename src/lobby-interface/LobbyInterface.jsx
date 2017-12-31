@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'semantic-ui-react';
+import LobbyRoomList from './LobbyRoomList';
 import RoomInterface from '../room-interface/RoomInterface';
 
 const propTypes = {
@@ -14,46 +16,80 @@ class LobbyInterface extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      finalTableID: null,
-      finalRole: null,
-      enteredTableID: '',
-      chosenRole: 'TESTER',
-      loading: false,
+      roomName: null,
+      role: null,
+      // loading: false,
     };
-    this.handleTableIDChange = this.handleTableIDChange.bind(this);
-    this.handleRoleChange = this.handleRoleChange.bind(this);
-    this.handleTableAndRoleSubmit = this.handleTableAndRoleSubmit.bind(this);
+    this.handleCreateTable = this.handleCreateTable.bind(this);
     this.handleLeaveTable = this.handleLeaveTable.bind(this);
+    this.handleRoomListClick = this.handleRoomListClick.bind(this);
   }
 
-  handleTableIDChange(e) {
-    this.setState({ enteredTableID: e.target.value });
-  }
+  handleCreateTable() {
+    // TODO: Inform server
 
-  handleRoleChange(e) {
-    this.setState({ chosenRole: e.target.value });
-  }
-
-  handleTableAndRoleSubmit(e) {
-    e.preventDefault();
-    // TODO: Fetch table state from server
     this.setState({
-      finalTableID: this.state.enteredTableID,
-      finalRole: this.state.chosenRole,
+      roomName: 'shouldBeId',
+
+      // TODO: decide what the proper role is
+      role: 'TESTER',
     });
   }
 
   handleLeaveTable() {
-    // TODO: inform server.
+    // TODO: Inform server
+
     this.setState({
-      finalTableID: null,
-      finalRole: null,
+      roomName: null,
+      role: null,
+    });
+  }
+
+  handleRoomListClick(roomName, role) {
+    // TODO: Inform server
+
+    this.setState({
+      roomName,
+      role,
     });
   }
 
   render() {
-    const testProp = {
-      role: this.state.finalRole,
+    const lobbyHeaderDiv = (
+      <div className="lobby-header">
+        { 'Welcome to the lobby. ' }
+        <Button
+          className="create-table-button"
+          onClick={this.handleCreateTable}
+          disabled={this.state.roomName !== null}
+          size="small"
+        >
+            Create table
+        </Button>
+        <Button
+          className="leave-table-button"
+          onClick={this.handleLeaveTable}
+          disabled={this.state.roomName === null}
+          size="small"
+        >
+            Leave table
+        </Button>
+      </div>
+    );
+
+    const roomListTestProps = {
+      roomList: [
+        {
+          roomName: 'TEST',
+          eastOccupied: true,
+          westOccupied: false,
+        },
+      ],
+      handleClick: this.handleRoomListClick,
+    };
+
+    const roomTestProps = {
+      role: this.state.role,
       vulnerability: 'NS',
       dealer: 'NORTH',
       eastHand: ['AKQJT98765432', '', '', ''],
@@ -75,81 +111,26 @@ class LobbyInterface extends Component {
         declarer: 'EAST',
         score: 0,
       }],
-      roomName: this.state.finalTableID,
+      roomName: this.state.roomName,
       jwtToken: this.props.jwtToken,
     };
 
-    if (this.props.jwtToken) {
-      if (this.state.finalTableID && this.state.finalRole) {
-        return (
-          <div>
-            <div>
-              { `Welcome to table ${this.state.finalTableID}. Your role is ${this.state.finalRole}. ` }
-              <button disabled={this.state.loading} onClick={this.handleLeaveTable}> Leave Table </button>
-            </div>
-            <hr />
-            <RoomInterface {...testProp} />
-          </div>
-        );
-      }
+    if (this.props.jwtToken === null) {
       return (
         <div>
-          <div> Welcome to lobby. Please enter your table ID and select your role. </div>
-          <form onSubmit={this.handleTableAndRoleSubmit}>
-            <div>
-              <input
-                value={this.state.enteredTableID}
-                placeholder="Table ID"
-                type="text"
-                onChange={this.handleTableIDChange}
-              />
-            </div>
-            <label htmlFor="EAST">
-              <input
-                type="radio"
-                value="EAST"
-                checked={this.state.chosenRole === 'EAST'}
-                onChange={this.handleRoleChange}
-              />
-              {' EAST '}
-            </label>
-            <label htmlFor="WEST">
-              <input
-                type="radio"
-                value="WEST"
-                checked={this.state.chosenRole === 'WEST'}
-                onChange={this.handleRoleChange}
-              />
-              {' WEST '}
-            </label>
-            <label htmlFor="OBSERVER">
-              <input
-                type="radio"
-                value="OBSERVER"
-                checked={this.state.chosenRole === 'OBSERVER'}
-                onChange={this.handleRoleChange}
-              />
-              {' OBSERVER '}
-            </label>
-            <label htmlFor="TESTER">
-              <input
-                type="radio"
-                value="TESTER"
-                checked={this.state.chosenRole === 'TESTER'}
-                onChange={this.handleRoleChange}
-              />
-              {' TESTER '}
-            </label>
-            <div>
-              <button type="submit" disabled={this.state.loading}>Select</button>
-            </div>
-          </form>
+          Please log in.
         </div>
       );
     }
 
     return (
-      <div> You have to log in. </div>
+      <div>
+        {lobbyHeaderDiv}
+        {(this.state.roomName === null) ?
+          <LobbyRoomList {...roomListTestProps} />
+          : <RoomInterface {...roomTestProps} />
+        }
+      </div>
     );
   }
 }
