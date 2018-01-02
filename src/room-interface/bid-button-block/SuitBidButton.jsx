@@ -21,7 +21,7 @@ function suitToNumber(suit) {
   }
 }
 
-function suitBidButtonDisabled(curBid, bid) {
+export function suitBidButtonDisabled(curBid, bid) {
   if (curBid === null || curBid.level < bid.level) {
     return false;
   }
@@ -41,7 +41,7 @@ const propTypes = {
     suit: PropTypes.oneOf(SUITS).isRequired,
   }),
   handleClick: PropTypes.func.isRequired,
-  shouldDisabled: PropTypes.bool.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
@@ -57,7 +57,7 @@ function SuitBidButton(props) {
     <Button
       className="bid-button"
       onClick={handleClick}
-      disabled={suitBidButtonDisabled(props.curBid, props.bid) || props.shouldDisabled}
+      disabled={suitBidButtonDisabled(props.curBid, props.bid) || props.isDisabled}
       size="small"
       color={bidColor(props.bid.suit)}
     >
