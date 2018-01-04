@@ -26,7 +26,3 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
-.App .Signin .ui.form .field {
-  margin: 1em auto;
-}

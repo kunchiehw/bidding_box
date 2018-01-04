@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Button, Form } from 'semantic-ui-react';
+import './LoginInterface.css';
 
 const propTypes = {
   handleUpdateSession: PropTypes.func.isRequired,
 };
 
 
-class Auth extends Component {
+class LoginInterface extends Component {
   constructor(props) {
     super(props);
     this.changeUsername = this.changeUsername.bind(this);
@@ -62,7 +63,7 @@ class Auth extends Component {
 
   render() {
     return (
-      <div className="Signin">
+      <div className="login-interface">
         <Form onSubmit={this.handleSigninSubmit}>
           <Form.Input
             label="Username"
@@ -85,6 +86,6 @@ class Auth extends Component {
   }
 }
 
-Auth.propTypes = propTypes;
+LoginInterface.propTypes = propTypes;
 
-export default withRouter(Auth);
+export default withRouter(LoginInterface);
