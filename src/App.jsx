@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import RoomInterface from './room-interface/RoomInterface';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import MainPageInterface from './main-page-interface/MainPageInterface';
+import LobbyInterface from './lobby-interface/LobbyInterface';
 import Auth from './Auth';
 import './App.css';
-
 
 class App extends Component {
   constructor(props) {
@@ -11,57 +11,46 @@ class App extends Component {
     this.state = {
       session: null,
     };
+    this.handleUpdateSession = this.handleUpdateSession.bind(this);
+  }
+
+  handleUpdateSession(session) {
+    this.setState({ session });
   }
 
   render() {
-    const handleUpdateSession = (session) => {
-      this.setState({ session });
-    };
-
-    const testProp = {
-      role: 'TESTER',
-      vulnerability: 'NS',
-      dealer: 'NORTH',
-      eastHand: ['AKQJT98765432', '', '', ''],
-      westHand: ['', 'KQJT9', 'KQJT', 'KQJT'],
-      eastID: 'Jarron',
-      westID: 'wkc',
-      scoreList: [{
-        bid: {
-          level: 7,
-          suit: 'SPADES',
-        },
-        declarer: 'EW',
-        score: 100,
-      }, {
-        bid: {
-          level: 7,
-          suit: 'NOTRUMPS',
-        },
-        declarer: 'EAST',
-        score: 0,
-      }],
-      roomName: '123',
-      jwtToken: this.state.session,
-    };
-
     const authProp = {
       isLoggedIn: this.state.session !== null,
-      handleUpdateSession,
+      handleUpdateSession: this.handleUpdateSession,
     };
-
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <hr />
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={MainPageInterface} />
+            <Route
+              path="/login"
+              render={() => (
+                <Auth {...authProp} />
+                )}
+            />
+            <Route
+              path="/lobby"
+              render={props => ((this.state.session === null) ?
+                <Redirect to={{ pathname: '/login', state: { from: props.location } }} /> :
+                <LobbyInterface jwtToken={this.state.session} handleUpdateSession={this.handleUpdateSession} />)}
+            />
+          </Switch>
+        </BrowserRouter>
+      </div>
+      /*
+      <div className="App">
         <Auth {...authProp} />
         <hr />
-        <RoomInterface {...testProp} />
+        <LobbyInterface jwtToken={this.state.session} />
       </div>
+      */
     );
   }
 }

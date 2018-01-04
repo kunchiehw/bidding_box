@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import { withRouter } from 'react-router-dom';
 
 const propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
@@ -14,7 +14,6 @@ class Auth extends Component {
     this.changeUsername = this.changeUsername.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.handleSigninSubmit = this.handleSigninSubmit.bind(this);
-    this.handleSignoutSubmit = this.handleSignoutSubmit.bind(this);
 
     this.state = {
       username: '',
@@ -53,6 +52,7 @@ class Auth extends Component {
       })
       .then((data) => {
         this.props.handleUpdateSession(data);
+        this.props.history.push('/lobby');
       })
       .catch(() => {
         this.setState({ loading: false });
@@ -60,14 +60,7 @@ class Auth extends Component {
       });
   }
 
-  handleSignoutSubmit(e) {
-    e.preventDefault();
-    this.setState({ loading: true });
-    this.props.handleUpdateSession(null);
-    this.setState({ loading: false });
-  }
-
-  signin() {
+  render() {
     return (
       <div className="Signin">
         <form onSubmit={this.handleSigninSubmit}>
@@ -95,27 +88,8 @@ class Auth extends Component {
       </div>
     );
   }
-
-  signout() {
-    return (
-      <div>
-        <form onSubmit={this.handleSignoutSubmit}>
-          <div>
-            <button type="submit" disabled={this.state.loading}>Sign Out</button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-
-  render() {
-    if (this.props.isLoggedIn) {
-      return this.signout();
-    }
-    return this.signin();
-  }
 }
 
 Auth.propTypes = propTypes;
 
-export default Auth;
+export default withRouter(Auth);
