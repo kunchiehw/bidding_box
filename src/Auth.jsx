@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { Button, Form } from 'semantic-ui-react';
 
 const propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
   handleUpdateSession: PropTypes.func.isRequired,
 };
 
@@ -63,28 +63,23 @@ class Auth extends Component {
   render() {
     return (
       <div className="Signin">
-        <form onSubmit={this.handleSigninSubmit}>
-          <div>
-            <input
-              value={this.state.username}
-              placeholder="username"
-              type="text"
-              onChange={this.changeUsername}
-            />
-          </div>
-          <div>
-            <input
-              value={this.state.password}
-              placeholder="Password"
-              type="password"
-              minLength={6}
-              onChange={this.changePassword}
-            />
-          </div>
-          <div>
-            <button type="submit" disabled={this.state.loading}>Sign In</button>
-          </div>
-        </form>
+        <Form onSubmit={this.handleSigninSubmit}>
+          <Form.Input
+            label="Username"
+            placeholder="Please enter your username"
+            width="3"
+            type="text"
+            onChange={this.changeUsername}
+          />
+          <Form.Input
+            label="Password"
+            placeholder="Please enter your password"
+            width="3"
+            type="password"
+            onChange={this.changePassword}
+          />
+          <Button type="submit" disabled={this.state.loading}>Submit</Button>
+        </Form>
       </div>
     );
   }
