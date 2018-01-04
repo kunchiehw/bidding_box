@@ -1,0 +1,19 @@
+.main-page-logo {
+  animation: main-page-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.main-page-header {
+  background-color: #222;
+  padding: 20px;
+  color: white;
+}
+
+.main-page-title {
+  font-size: 1.5em;
+}
+
+@keyframes main-page-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
