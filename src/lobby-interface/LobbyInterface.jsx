@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import LobbyRoomList from './LobbyRoomList';
 import RoomInterface from '../room-interface/RoomInterface';
 
 const propTypes = {
   jwtToken: PropTypes.string,
+  handleUpdateSession: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -18,11 +20,12 @@ class LobbyInterface extends Component {
     this.state = {
       roomName: null,
       role: null,
-      // loading: false,
+      loading: false,
     };
     this.handleCreateTable = this.handleCreateTable.bind(this);
     this.handleLeaveTable = this.handleLeaveTable.bind(this);
     this.handleRoomListClick = this.handleRoomListClick.bind(this);
+    this.handleSignoutSubmit = this.handleSignoutSubmit.bind(this);
   }
 
   handleCreateTable() {
@@ -54,10 +57,25 @@ class LobbyInterface extends Component {
     });
   }
 
+  handleSignoutSubmit(e) {
+    e.preventDefault();
+    this.setState({ loading: true });
+    this.props.handleUpdateSession(null);
+    this.props.history.push('/');
+    this.setState({ loading: false });
+  }
+
   render() {
     const lobbyHeaderDiv = (
       <div className="lobby-header">
-        { 'Welcome to the lobby. ' }
+        <div>
+          { 'Welcome to the lobby. ' }
+          <form onSubmit={this.handleSignoutSubmit}>
+            <div>
+              <button type="submit" disabled={this.state.loading}>Sign Out</button>
+            </div>
+          </form>
+        </div>
         <Button
           className="create-table-button"
           onClick={this.handleCreateTable}
@@ -138,4 +156,4 @@ class LobbyInterface extends Component {
 LobbyInterface.propTypes = propTypes;
 LobbyInterface.defaultProps = defaultProps;
 
-export default LobbyInterface;
+export default withRouter(LobbyInterface);

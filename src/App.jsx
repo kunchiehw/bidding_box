@@ -11,16 +11,17 @@ class App extends Component {
     this.state = {
       session: null,
     };
+    this.handleUpdateSession = this.handleUpdateSession.bind(this);
+  }
+
+  handleUpdateSession(session) {
+    this.setState({ session });
   }
 
   render() {
-    const handleUpdateSession = (session) => {
-      this.setState({ session });
-    };
-
     const authProp = {
       isLoggedIn: this.state.session !== null,
-      handleUpdateSession,
+      handleUpdateSession: this.handleUpdateSession,
     };
 
     return (
@@ -38,7 +39,7 @@ class App extends Component {
               path="/lobby"
               render={props => ((this.state.session === null) ?
                 <Redirect to={{ pathname: '/login', state: { from: props.location } }} /> :
-                <LobbyInterface jwtToken="this is test token" />)}
+                <LobbyInterface jwtToken={this.state.session} handleUpdateSession={this.handleUpdateSession} />)}
             />
           </Switch>
         </BrowserRouter>
