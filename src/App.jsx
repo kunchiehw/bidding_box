@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import MainPageInterface from './main-page-interface/MainPageInterface';
 import LobbyInterface from './lobby-interface/LobbyInterface';
 import LoginInterface from './login-interface/LoginInterface';
+import RoomInterface from './room-interface/RoomInterface';
 import './App.css';
 
 class App extends Component {
@@ -35,6 +36,12 @@ class App extends Component {
               render={props => ((this.state.session === null) ?
                 <Redirect to={{ pathname: '/login', state: { from: props.location } }} /> :
                 <LobbyInterface jwtToken={this.state.session} handleUpdateSession={this.handleUpdateSession} />)}
+            />
+            <Route
+              path="/room/:roomName"
+              render={props => ((this.state.session === null) ?
+                <Redirect to={{ pathname: '/login', state: { from: props.location } }} /> :
+                <RoomInterface jwtToken={this.state.session} handleUpdateSession={this.handleUpdateSession} />)}
             />
           </Switch>
         </BrowserRouter>
