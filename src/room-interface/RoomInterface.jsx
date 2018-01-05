@@ -62,7 +62,7 @@ class RoomInterface extends Component {
 
   componentDidMount() {
     if (this.props.jwtToken) {
-      this.socket = new WebSocket(`ws://localhost:8080/room/${this.props.roomName}?jwt=${this.props.jwtToken}`);
+      this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_URL}/room/${this.props.roomName}?jwt=${this.props.jwtToken}`);
       this.socket.addEventListener('message', (event) => {
         this.setState({ bidSeq: JSON.parse(event.data) });
       });
@@ -77,7 +77,7 @@ class RoomInterface extends Component {
       }
 
       if (nextProps.jwtToken) {
-        this.socket = new WebSocket(`ws://localhost:8080/room/${this.props.roomName}?jwt=${nextProps.jwtToken}`);
+        this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_URL}/room/${this.props.roomName}?jwt=${nextProps.jwtToken}`);
         this.socket.addEventListener('message', (event) => {
           this.setState({ bidSeq: JSON.parse(event.data) });
         });
