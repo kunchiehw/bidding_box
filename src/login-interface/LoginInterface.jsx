@@ -34,7 +34,7 @@ class LoginInterface extends Component {
   handleSigninSubmit(e) {
     e.preventDefault();
     this.setState({ loading: true });
-    fetch('http://localhost:8080/token', {
+    fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
