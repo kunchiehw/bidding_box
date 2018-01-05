@@ -63,7 +63,7 @@ class LobbyInterface extends Component {
           onClick={this.handleCreateTable}
           size="small"
         >
-            Create table
+            Create My Table
         </Button>
       </div>
     );

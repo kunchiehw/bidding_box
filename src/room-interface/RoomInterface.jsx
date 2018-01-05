@@ -36,46 +36,40 @@ class RoomInterface extends Component {
     super(props);
     this.state = {
       bidSeq: [],
+      roomInfo: {
+        eastID: 'Jarron',
+        westID: 'wkc',
+      },
+      boardInfo: {
+        vulnerability: 'NS',
+        dealer: 'NORTH',
+        eastHand: ['AKQJT98765432', '', '', ''],
+        westHand: ['', 'KQJT9', 'KQJT', 'KQJT'],
+        scoreList: [{
+          bid: {
+            level: 7,
+            suit: 'SPADES',
+          },
+          declarer: 'EW',
+          score: 100,
+        }, {
+          bid: {
+            level: 7,
+            suit: 'NOTRUMPS',
+          },
+          declarer: 'EAST',
+          score: 0,
+        }],
+      },
     };
 
     this.socket = null;
     this.username = decode(this.props.jwtToken).username;
     this.roomName = this.props.match.params.roomName;
 
-    /*
-    this.roomInfo = null;
-    this.boardInfo = null;
-    */
-
-    this.roomInfo = {
-      eastID: 'Jarron',
-      westID: 'wkc',
-    };
-
-    this.boardInfo = {
-      vulnerability: 'NS',
-      dealer: 'NORTH',
-      eastHand: ['AKQJT98765432', '', '', ''],
-      westHand: ['', 'KQJT9', 'KQJT', 'KQJT'],
-      scoreList: [{
-        bid: {
-          level: 7,
-          suit: 'SPADES',
-        },
-        declarer: 'EW',
-        score: 100,
-      }, {
-        bid: {
-          level: 7,
-          suit: 'NOTRUMPS',
-        },
-        declarer: 'EAST',
-        score: 0,
-      }],
-    };
-
     this.role = 'TESTER';
 
+    this.updateWebSocket = this.updateWebSocket.bind(this);
     this.undoBidSeq = this.undoBidSeq.bind(this);
     this.resetBidSeq = this.resetBidSeq.bind(this);
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
@@ -83,12 +77,7 @@ class RoomInterface extends Component {
   }
 
   componentDidMount() {
-    if (this.props.jwtToken) {
-      this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}?jwt=${this.props.jwtToken}`);
-      this.socket.addEventListener('message', (event) => {
-        this.setState({ bidSeq: JSON.parse(event.data) });
-      });
-    }
+    this.updateWebSocket(this.props.jwtToken);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -97,16 +86,18 @@ class RoomInterface extends Component {
         this.socket.close();
         this.socket = null;
       }
-
-      if (nextProps.jwtToken) {
-        this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}?jwt=${nextProps.jwtToken}`);
-        this.socket.addEventListener('message', (event) => {
-          this.setState({ bidSeq: JSON.parse(event.data) });
-        });
-      }
+      this.updateWebSocket(nextProps.jwtToken);
     }
   }
 
+  updateWebSocket(jwtToken) {
+    if (jwtToken) {
+      this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}?jwt=${jwtToken}`);
+      this.socket.addEventListener('message', (event) => {
+        this.setState({ bidSeq: JSON.parse(event.data) });
+      });
+    }
+  }
 
   shouldDisabledDouble() {
     const bidSeqLen = this.state.bidSeq.length;
@@ -160,16 +151,14 @@ class RoomInterface extends Component {
     }
 
     const roleIndex = SEATS.indexOf(this.role);
-    const dealerIndex = SEATS.indexOf(this.boardInfo.dealer);
+    const dealerIndex = SEATS.indexOf(this.state.boardInfo.dealer);
     return (dealerIndex + this.state.bidSeq.length) % 4 === roleIndex;
   }
 
   handleBidButtonClick(bid) {
     const bidSeq = this.state.bidSeq.slice();
     bidSeq.push(bid);
-    this.setState({
-      bidSeq,
-    });
+    this.setState({ bidSeq });
     if (this.socket) this.socket.send(JSON.stringify(bidSeq));
   }
 
@@ -180,7 +169,7 @@ class RoomInterface extends Component {
 
     const bidSeq = this.state.bidSeq.slice();
     const roleIndex = SEATS.indexOf(role);
-    const dealerIndex = SEATS.indexOf(this.boardInfo.dealer);
+    const dealerIndex = SEATS.indexOf(this.state.boardInfo.dealer);
 
     bidSeq.pop();
     if (dealerIndex + bidSeq.length >= roleIndex) {
@@ -213,10 +202,10 @@ class RoomInterface extends Component {
     const handCardsDisplayProp = {
       // Regard TESTER as EAST in handCardsBlock.
       role: (this.role === 'TESTER') ? 'EAST' : this.role,
-      eastHand: this.boardInfo.eastHand,
-      westHand: this.boardInfo.westHand,
-      eastID: this.roomInfo.eastID,
-      westID: this.roomInfo.westID,
+      eastHand: this.state.boardInfo.eastHand,
+      westHand: this.state.boardInfo.westHand,
+      eastID: this.state.roomInfo.eastID,
+      westID: this.state.roomInfo.westID,
       endBidSequence,
     };
 
@@ -229,8 +218,8 @@ class RoomInterface extends Component {
     };
 
     const bidSequenceDisplayProp = {
-      dealer: this.boardInfo.dealer,
-      vulnerability: this.boardInfo.vulnerability,
+      dealer: this.state.boardInfo.dealer,
+      vulnerability: this.state.boardInfo.vulnerability,
       bidSeq: this.state.bidSeq,
     };
 
@@ -243,7 +232,7 @@ class RoomInterface extends Component {
           <div className="main-lower-block">
             <BidSequenceDisplay {...bidSequenceDisplayProp} />
             {(endBidSequence) ?
-              <ScoreBlock scoreList={this.boardInfo.scoreList} />
+              <ScoreBlock scoreList={this.state.boardInfo.scoreList} />
             : <BidButtonBlock {...bidButtonBlockProp} /> }
           </div>
         </div>
