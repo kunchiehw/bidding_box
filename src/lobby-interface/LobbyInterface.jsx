@@ -70,11 +70,14 @@ class LobbyInterface extends Component {
       <div className="lobby-header">
         <div>
           { 'Welcome to the lobby. ' }
-          <form onSubmit={this.handleSignoutSubmit}>
-            <div>
-              <button type="submit" disabled={this.state.loading}>Sign Out</button>
-            </div>
-          </form>
+          <Button
+            className="sign-out-button"
+            onClick={this.handleSignoutSubmit}
+            disabled={this.state.loading}
+            size="small"
+          >
+              Sign out
+          </Button>
         </div>
         <Button
           className="create-table-button"
@@ -132,14 +135,6 @@ class LobbyInterface extends Component {
       roomName: this.state.roomName,
       jwtToken: this.props.jwtToken,
     };
-
-    if (this.props.jwtToken === null) {
-      return (
-        <div>
-          Please log in.
-        </div>
-      );
-    }
 
     return (
       <div>

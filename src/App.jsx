@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import MainPageInterface from './main-page-interface/MainPageInterface';
 import LobbyInterface from './lobby-interface/LobbyInterface';
-import Auth from './Auth';
+import LoginInterface from './login-interface/LoginInterface';
 import './App.css';
 
 class App extends Component {
@@ -19,11 +19,6 @@ class App extends Component {
   }
 
   render() {
-    const authProp = {
-      isLoggedIn: this.state.session !== null,
-      handleUpdateSession: this.handleUpdateSession,
-    };
-
     return (
       <div className="App">
         <BrowserRouter>
@@ -32,7 +27,7 @@ class App extends Component {
             <Route
               path="/login"
               render={() => (
-                <Auth {...authProp} />
+                <LoginInterface handleUpdateSession={this.handleUpdateSession} />
                 )}
             />
             <Route
@@ -44,13 +39,6 @@ class App extends Component {
           </Switch>
         </BrowserRouter>
       </div>
-      /*
-      <div className="App">
-        <Auth {...authProp} />
-        <hr />
-        <LobbyInterface jwtToken={this.state.session} />
-      </div>
-      */
     );
   }
 }
