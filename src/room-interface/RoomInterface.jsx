@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { decode } from 'jsonwebtoken';
 import { Button, Divider } from 'semantic-ui-react';
 import './RoomInterface.css';
 import BidButtonBlock from './bid-button-block/BidButtonBlock';
@@ -38,6 +39,7 @@ class RoomInterface extends Component {
     };
 
     this.socket = null;
+    this.username = decode(this.props.jwtToken).username;
     this.roomName = this.props.match.params.roomName;
 
     /*
