@@ -8,4 +8,4 @@ Create APIkey with DynamoDB permission.
 Create a table `Room` with `id` as primary key
 
 ### Setup config file
-Put APIkey in config file.
+Put APIkey under `backend/.env`

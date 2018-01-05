@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
@@ -93,6 +94,7 @@ wss.on('connection', (ws, req) => {
     });
   });
 });
+
 
 server.listen(8080, () => {
   console.log('Listening on %d', server.address().port);
