@@ -5,8 +5,10 @@ const http = require('http');
 const url = require('url');
 const websocket = require('ws');
 const jwt = require('jsonwebtoken');
+const aws = require('aws-sdk');
 
-const secret = 'shhhhhhared-secret';
+
+const secret = process.env.SHARE_SECRET;
 const db = {
   users: {
     wkc: 'password',
@@ -14,7 +16,7 @@ const db = {
   },
   rooms: {},
 };
-
+const docClient = new aws.DynamoDB.DocumentClient();
 const app = express();
 const server = http.createServer(app);
 const wss = new websocket.Server({
@@ -78,15 +80,50 @@ wss.on('connection', (ws, req) => {
   ws.room = room;
   console.log(`${req.user.username} get in the room: ${room}`);
 
-  if (room in db) {
-    ws.send(db[room]);
-  } else {
-    db[room] = '[]';
-  }
+  docClient.get({
+    TableName: 'Room',
+    Key: {
+      id: room,
+    },
+  }).promise()
+    .then((data) => {
+      console.log(data);
+      if (data.Item) {
+        ws.send(data.Item.bidSeq);
+      } else {
+        docClient.put({
+          TableName: 'Room',
+          Item: {
+            id: room,
+            bidSeq: '[]',
+          },
+        }, () => {
+          ws.send('[]');
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
 
   ws.on('message', (message) => {
-    db[room] = message;
     console.log(`${room} received: ${message}`);
+    docClient.update({
+      TableName: 'Room',
+      Key: {
+        id: room,
+      },
+      UpdateExpression: 'set bidSeq = :b',
+      ExpressionAttributeValues: {
+        ':b': message,
+      },
+      ReturnValues: 'UPDATED_NEW',
+    }, (err, data) => {
+      console.log(err);
+      console.log(data);
+    });
+
     wss.clients.forEach((client) => {
       if (client.room === room) {
         client.send(message);

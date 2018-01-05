@@ -9,6 +9,7 @@
   "author": "Jarron Shih <jarronshih@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.176.0",
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
