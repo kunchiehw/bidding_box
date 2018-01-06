@@ -128,7 +128,6 @@ wss.on('connection', (ws, req) => {
     },
   }).promise()
     .then((data) => {
-      console.log(data);
       if (data.Item) {
         ws.send(data.Item.bidSeq);
       } else {
@@ -148,11 +147,7 @@ wss.on('connection', (ws, req) => {
           ws.send('[]');
         });
       }
-    })
-    .catch((err) => {
-      console.log(err);
     });
-
 
   ws.on('message', (message) => {
     console.log(`${room} received: ${message}`);
@@ -166,9 +161,6 @@ wss.on('connection', (ws, req) => {
         ':b': message,
       },
       ReturnValues: 'UPDATED_NEW',
-    }, (err, data) => {
-      console.log(err);
-      console.log(data);
     });
 
     wss.clients.forEach((client) => {
