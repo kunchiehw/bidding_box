@@ -16,6 +16,8 @@ const db = {
   },
   rooms: {},
 };
+
+
 const docClient = new aws.DynamoDB.DocumentClient();
 const app = express();
 const server = http.createServer(app);
@@ -57,20 +59,40 @@ app.post(
       return res.sendStatus(400);
     }
     const { username, password } = req.body;
-    console.log(req.body);
     if (!username || !password || !(username in db.users)) {
       return res.sendStatus(403);
     }
 
     const token = jwt.sign({ username }, secret, { expiresIn: '1h' });
+
+    console.log(`${username} get jwt`);
     res.send(token);
+  },
+);
+
+
+app.get(
+  '/room',
+  (req, res, next) => {
+    docClient.scan({
+      TableName: 'Room',
+      ProjectionExpression: 'id, roomInfo',
+    }).promise()
+      .then((data) => {
+        if (data.Count > 0) {
+          res.send(data.Items);
+        } else {
+          res.send([]);
+        }
+      })
+      .catch(err => next(err));
   },
 );
 
 
 // WebSocket
 wss.on('connection', (ws, req) => {
-  // You might use location.query.access_token to authenticate or share sessions
+  // TODO: You might use location.query.access_token to authenticate or share sessions
   // or req.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
   const location = url.parse(req.url, true);
   if (!location.path.startsWith('/room/')) {
@@ -87,7 +109,6 @@ wss.on('connection', (ws, req) => {
     },
   }).promise()
     .then((data) => {
-      console.log(data);
       if (data.Item) {
         ws.send(data.Item.bidSeq);
       } else {
@@ -96,16 +117,14 @@ wss.on('connection', (ws, req) => {
           Item: {
             id: room,
             bidSeq: '[]',
+            ttl: Math.floor(Date.now() / 1000) + (4 * 60 * 60), // ttl for 4 hour
+            roomInfo: {},
           },
         }, () => {
           ws.send('[]');
         });
       }
-    })
-    .catch((err) => {
-      console.log(err);
     });
-
 
   ws.on('message', (message) => {
     console.log(`${room} received: ${message}`);
@@ -119,9 +138,6 @@ wss.on('connection', (ws, req) => {
         ':b': message,
       },
       ReturnValues: 'UPDATED_NEW',
-    }, (err, data) => {
-      console.log(err);
-      console.log(data);
     });
 
     wss.clients.forEach((client) => {
