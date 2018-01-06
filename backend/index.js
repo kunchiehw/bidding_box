@@ -16,6 +16,28 @@ const db = {
   },
   rooms: {},
 };
+const boardInfo = {
+  vulnerability: 'NS',
+  dealer: 'NORTH',
+  eastHand: ['AKQJT98765432', '', '', ''],
+  westHand: ['', 'KQJT9', 'KQJT', 'KQJT'],
+  scoreList: [{
+    bid: {
+      level: 7,
+      suit: 'SPADES',
+    },
+    declarer: 'EW',
+    score: 100,
+  }, {
+    bid: {
+      level: 7,
+      suit: 'NOTRUMPS',
+    },
+    declarer: 'EAST',
+    score: 0,
+  }],
+};
+
 const docClient = new aws.DynamoDB.DocumentClient();
 const app = express();
 const server = http.createServer(app);
@@ -116,6 +138,11 @@ wss.on('connection', (ws, req) => {
             id: room,
             bidSeq: '[]',
             ttl: Math.floor(Date.now() / 1000) + (4 * 60 * 60), // ttl for 4 hour
+            roomInfo: {
+              eastID: null,
+              westID: null,
+            },
+            boardInfo,
           },
         }, () => {
           ws.send('[]');
