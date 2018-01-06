@@ -76,7 +76,7 @@ app.get(
   (req, res, next) => {
     docClient.scan({
       TableName: 'Room',
-      ProjectionExpression: 'id',
+      ProjectionExpression: 'id, roomInfo',
     }).promise()
       .then((data) => {
         if (data.Count > 0) {
