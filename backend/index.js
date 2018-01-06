@@ -16,27 +16,7 @@ const db = {
   },
   rooms: {},
 };
-const boardInfo = {
-  vulnerability: 'NS',
-  dealer: 'NORTH',
-  eastHand: ['AKQJT98765432', '', '', ''],
-  westHand: ['', 'KQJT9', 'KQJT', 'KQJT'],
-  scoreList: [{
-    bid: {
-      level: 7,
-      suit: 'SPADES',
-    },
-    declarer: 'EW',
-    score: 100,
-  }, {
-    bid: {
-      level: 7,
-      suit: 'NOTRUMPS',
-    },
-    declarer: 'EAST',
-    score: 0,
-  }],
-};
+
 
 const docClient = new aws.DynamoDB.DocumentClient();
 const app = express();
@@ -79,12 +59,13 @@ app.post(
       return res.sendStatus(400);
     }
     const { username, password } = req.body;
-    console.log(req.body);
     if (!username || !password || !(username in db.users)) {
       return res.sendStatus(403);
     }
 
     const token = jwt.sign({ username }, secret, { expiresIn: '1h' });
+
+    console.log(`${username} get jwt`);
     res.send(token);
   },
 );
@@ -137,11 +118,7 @@ wss.on('connection', (ws, req) => {
             id: room,
             bidSeq: '[]',
             ttl: Math.floor(Date.now() / 1000) + (4 * 60 * 60), // ttl for 4 hour
-            roomInfo: {
-              eastID: null,
-              westID: null,
-            },
-            boardInfo,
+            roomInfo: {},
           },
         }, () => {
           ws.send('[]');
