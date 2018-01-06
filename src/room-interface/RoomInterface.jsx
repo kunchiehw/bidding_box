@@ -43,8 +43,18 @@ class RoomInterface extends Component {
       boardInfo: {
         vulnerability: 'NS',
         dealer: 'NORTH',
-        eastHand: ['AKQJT98765432', '', '', ''],
-        westHand: ['', 'KQJT9', 'KQJT', 'KQJT'],
+        eastHand: {
+          SPADES: 'AKQJT98765432',
+          HEARTS: '',
+          DIAMONDS: '',
+          CLUBS: '',
+        },
+        westHand: {
+          SPADES: '',
+          HEARTS: 'KQJT9',
+          DIAMONDS: 'KQJT',
+          CLUBS: 'KQJT',
+        },
         scoreList: [{
           bid: {
             level: 7,
