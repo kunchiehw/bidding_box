@@ -25,10 +25,10 @@ function generateCardsCell(handCards, shouldDisplay) {
     return (
       <div className="card-cell">
         <div className="card-cell-content">
-          {generateSuitCell('SPADES', handCards[0])}
-          {generateSuitCell('HEARTS', handCards[1])}
-          {generateSuitCell('DIAMONDS', handCards[2])}
-          {generateSuitCell('CLUBS', handCards[3])}
+          {generateSuitCell('SPADES', handCards.SPADES)}
+          {generateSuitCell('HEARTS', handCards.HEARTS)}
+          {generateSuitCell('DIAMONDS', handCards.DIAMONDS)}
+          {generateSuitCell('CLUBS', handCards.CLUBS)}
         </div>
       </div>
     );
@@ -53,8 +53,18 @@ function generateCardsAndIDCell(role, partipantsID, handCards, shouldDisplay) {
 const propTypes = {
   role: PropTypes.oneOf(PARTICIPANTS_ROLE).isRequired,
   // TODO: Make more specific validator
-  eastHand: PropTypes.arrayOf(PropTypes.string).isRequired,
-  westHand: PropTypes.arrayOf(PropTypes.string).isRequired,
+  eastHand: PropTypes.shape({
+    SPADES: PropTypes.string.isRequired,
+    HEARTS: PropTypes.string.isRequired,
+    DIAMONDS: PropTypes.string.isRequired,
+    CLUBS: PropTypes.string.isRequired,
+  }).isRequired,
+  westHand: PropTypes.shape({
+    SPADES: PropTypes.string.isRequired,
+    HEARTS: PropTypes.string.isRequired,
+    DIAMONDS: PropTypes.string.isRequired,
+    CLUBS: PropTypes.string.isRequired,
+  }).isRequired,
   eastID: PropTypes.string.isRequired,
   westID: PropTypes.string.isRequired,
   endBidSequence: PropTypes.bool.isRequired,
