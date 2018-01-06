@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 import { Button } from 'semantic-ui-react';
+import './LobbyInterface.css';
 import LobbyRoomList from './LobbyRoomList';
 
 const propTypes = {
@@ -18,6 +19,24 @@ class LobbyInterface extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      roomList: [
+        {
+          roomName: 'Temporary',
+          eastID: 'Temporary',
+        },
+        {
+          roomName: 'Whatever',
+          westID: 'What',
+          eastID: 'Ever',
+        },
+        {
+          roomName: 'LOL',
+          westID: 'LMS',
+        },
+        {
+          roomName: 'Bridge',
+        },
+      ],
       loading: false,
     };
     this.username = decode(this.props.jwtToken).username;
@@ -48,7 +67,9 @@ class LobbyInterface extends Component {
     const lobbyHeaderDiv = (
       <div className="lobby-header">
         <div>
-          { 'Welcome to the lobby. ' }
+          <div className="lobby-welcome-banner">
+            { `Welcome to the lobby, ${this.username}! ` }
+          </div>
           <Button
             className="sign-out-button"
             onClick={this.handleSignoutSubmit}
@@ -69,18 +90,12 @@ class LobbyInterface extends Component {
     );
 
     const roomListTestProps = {
-      roomList: [
-        {
-          roomName: 'TEST',
-          eastOccupied: true,
-          westOccupied: false,
-        },
-      ],
+      roomList: this.state.roomList,
       handleClick: this.handleRoomListClick,
     };
 
     return (
-      <div>
+      <div className="lobby-interface">
         {lobbyHeaderDiv}
         <LobbyRoomList {...roomListTestProps} />
       </div>
