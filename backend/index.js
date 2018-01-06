@@ -68,9 +68,28 @@ app.post(
 );
 
 
+app.get(
+  '/room',
+  (req, res, next) => {
+    docClient.scan({
+      TableName: 'Room',
+      ProjectionExpression: 'id',
+    }).promise()
+      .then((data) => {
+        if (data.Count > 0) {
+          res.send(data.Items);
+        } else {
+          res.send([]);
+        }
+      })
+      .catch(err => next(err));
+  },
+);
+
+
 // WebSocket
 wss.on('connection', (ws, req) => {
-  // You might use location.query.access_token to authenticate or share sessions
+  // TODO: You might use location.query.access_token to authenticate or share sessions
   // or req.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
   const location = url.parse(req.url, true);
   if (!location.path.startsWith('/room/')) {
@@ -96,6 +115,7 @@ wss.on('connection', (ws, req) => {
           Item: {
             id: room,
             bidSeq: '[]',
+            ttl: Math.floor(Date.now() / 1000) + (4 * 60 * 60), // ttl for 4 hour
           },
         }, () => {
           ws.send('[]');
