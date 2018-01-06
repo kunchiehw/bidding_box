@@ -6,6 +6,11 @@ import './LoginInterface.css';
 
 const propTypes = {
   handleUpdateSession: PropTypes.func.isRequired,
+
+  // props from HOC withRouter
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 
