@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "Jarron Shih <jarronshih@gmail.com>",
   "license": "ISC",
@@ -15,5 +15,8 @@
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.0",
     "ws": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.8"
   }
 }
