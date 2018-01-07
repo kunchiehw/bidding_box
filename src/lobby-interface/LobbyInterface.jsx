@@ -24,30 +24,39 @@ class LobbyInterface extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomList: [
-        {
-          roomName: 'Temporary',
-          eastID: 'Temporary',
-        },
-        {
-          roomName: 'Whatever',
-          westID: 'What',
-          eastID: 'Ever',
-        },
-        {
-          roomName: 'LOL',
-          westID: 'LMS',
-        },
-        {
-          roomName: 'Bridge',
-        },
-      ],
+      roomList: [],
       loading: false,
     };
     this.username = decode(this.props.jwtToken).username;
     this.handleCreateTable = this.handleCreateTable.bind(this);
     this.handleRoomListClick = this.handleRoomListClick.bind(this);
     this.handleSignoutSubmit = this.handleSignoutSubmit.bind(this);
+    this.handleRefreshRoomList = this.handleRefreshRoomList.bind(this);
+  }
+
+  componentDidMount() {
+    this.handleRefreshRoomList();
+  }
+
+  handleRefreshRoomList(e) {
+    if (e) e.preventDefault();
+    this.setState({ loading: true });
+    fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room`, {
+      method: 'GET',
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error(res.statusText);
+        }
+        return res.text();
+      })
+      .then((data) => {
+        this.setState({ roomList: JSON.parse(data) });
+        this.setState({ loading: false });
+      })
+      .catch(() => {
+        this.setState({ loading: false });
+      });
   }
 
   handleCreateTable(role) {
@@ -87,27 +96,32 @@ class LobbyInterface extends Component {
             <Icon name="sign out" /> Sign out
           </Button>
         </div>
-        <Modal trigger={
-          <Button className="create-table-button" size="medium" color="green">
-            <Icon name="heart" /> Create My Table
-          </Button>}
-        >
-          <Header icon="heart" content="Create My Table" />
-          <Modal.Content>
+        <div>
+          <Modal trigger={
+            <Button className="create-table-button" size="medium" color="green">
+              <Icon name="heart" /> Create My Table
+            </Button>}
+          >
+            <Header icon="heart" content="Create My Table" />
+            <Modal.Content>
             Please select your role.
-          </Modal.Content>
-          <Modal.Actions>
-            <Button onClick={() => this.handleCreateTable('WEST')} color="teal">
-              <Icon name="plus" /> Sit West
-            </Button>
-            <Button onClick={() => this.handleCreateTable('EAST')} color="teal">
-              <Icon name="plus" /> Sit East
-            </Button>
-            <Button onClick={() => this.handleCreateTable('OBSERVER')} color="blue">
-              <Icon name="plus" /> Watch
-            </Button>
-          </Modal.Actions>
-        </Modal>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button onClick={() => this.handleCreateTable('WEST')} color="teal">
+                <Icon name="plus" /> Sit West
+              </Button>
+              <Button onClick={() => this.handleCreateTable('EAST')} color="teal">
+                <Icon name="plus" /> Sit East
+              </Button>
+              <Button onClick={() => this.handleCreateTable('OBSERVER')} color="blue">
+                <Icon name="plus" /> Watch
+              </Button>
+            </Modal.Actions>
+          </Modal>
+          <Button className="refresh-room-list-button" onClick={this.handleRefreshRoomList} size="medium" color="blue">
+            <Icon name="refresh" /> Refresh
+          </Button>
+        </div>
       </div>
     );
 
