@@ -59,7 +59,7 @@ app.post(
       return res.sendStatus(400);
     }
     const { username, password } = req.body;
-    if (!username || !password || !(username in db.users)) {
+    if (!username || !password || !(username in db.users) || db.users[username] !== password) {
       return res.sendStatus(403);
     }
 
