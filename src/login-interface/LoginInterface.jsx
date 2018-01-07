@@ -85,7 +85,7 @@ class LoginInterface extends Component {
             onChange={this.changePassword}
           />
           <Button type="submit" disabled={this.state.loading} color="green">
-            <Icon name="sign in" />Log in
+            <Icon name="sign in" />Submit
           </Button>
         </Form>
       </div>
