@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Icon } from 'semantic-ui-react';
 import './LoginInterface.css';
 
 const propTypes = {
@@ -84,7 +84,9 @@ class LoginInterface extends Component {
             type="password"
             onChange={this.changePassword}
           />
-          <Button type="submit" disabled={this.state.loading}>Submit</Button>
+          <Button type="submit" disabled={this.state.loading} color="green">
+            <Icon name="sign in" />Log in
+          </Button>
         </Form>
       </div>
     );

@@ -1,3 +1,12 @@
+.login-interface {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  padding: 0.5rem 0;
+}
+
 .login-interface .ui.form .field {
   margin: 1em auto;
+}
+
+.login-interface .ui.form .field>label {
+  font-size: 1.2rem;
 }

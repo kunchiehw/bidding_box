@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
-import { Button } from 'semantic-ui-react';
+import { Button, Modal, Header, Icon } from 'semantic-ui-react';
 import './LobbyInterface.css';
 import LobbyRoomList from './LobbyRoomList';
 
@@ -50,12 +50,14 @@ class LobbyInterface extends Component {
     this.handleSignoutSubmit = this.handleSignoutSubmit.bind(this);
   }
 
-  handleCreateTable() {
+  handleCreateTable(role) {
+    console.log(role);
     // TODO: Inform server
     this.props.history.push(`/room/${this.username}`);
   }
 
-  handleRoomListClick(roomName) {
+  handleRoomListClick(roomName, role) {
+    console.log(role);
     // TODO: Inform server
     this.props.history.push(`/room/${roomName}`);
   }
@@ -79,18 +81,33 @@ class LobbyInterface extends Component {
             className="sign-out-button"
             onClick={this.handleSignoutSubmit}
             disabled={this.state.loading}
-            size="small"
+            size="tiny"
+            color="red"
           >
-              Sign out
+            <Icon name="sign out" /> Sign out
           </Button>
         </div>
-        <Button
-          className="create-table-button"
-          onClick={this.handleCreateTable}
-          size="small"
+        <Modal trigger={
+          <Button className="create-table-button" size="medium" color="green">
+            <Icon name="heart" /> Create My Table
+          </Button>}
         >
-            Create My Table
-        </Button>
+          <Header icon="heart" content="Create My Table" />
+          <Modal.Content>
+            Please select your role.
+          </Modal.Content>
+          <Modal.Actions>
+            <Button onClick={() => this.handleCreateTable('WEST')} color="teal">
+              <Icon name="plus" /> Sit West
+            </Button>
+            <Button onClick={() => this.handleCreateTable('EAST')} color="teal">
+              <Icon name="plus" /> Sit East
+            </Button>
+            <Button onClick={() => this.handleCreateTable('OBSERVER')} color="blue">
+              <Icon name="plus" /> Watch
+            </Button>
+          </Modal.Actions>
+        </Modal>
       </div>
     );
 
