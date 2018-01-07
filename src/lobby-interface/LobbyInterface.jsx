@@ -9,6 +9,11 @@ import LobbyRoomList from './LobbyRoomList';
 const propTypes = {
   jwtToken: PropTypes.string,
   handleUpdateSession: PropTypes.func.isRequired,
+
+  // props from HOC withRouter
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const defaultProps = {

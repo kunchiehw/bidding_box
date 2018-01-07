@@ -24,6 +24,16 @@ function isSuit(bid) {
 
 const propTypes = {
   jwtToken: PropTypes.string,
+
+  // props from HOC withRouter
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      roomName: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 const defaultProps = {
