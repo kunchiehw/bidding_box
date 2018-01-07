@@ -5,7 +5,7 @@ import { Button, Form, Icon } from 'semantic-ui-react';
 import './LoginInterface.css';
 
 const propTypes = {
-  handleUpdateSession: PropTypes.func.isRequired,
+  handleUpdateJWTToken: PropTypes.func.isRequired,
 
   // props from HOC withRouter
   history: PropTypes.shape({
@@ -57,12 +57,12 @@ class LoginInterface extends Component {
         return res.text();
       })
       .then((data) => {
-        this.props.handleUpdateSession(data);
+        this.props.handleUpdateJWTToken(data);
         this.props.history.push('/lobby');
       })
       .catch(() => {
         this.setState({ loading: false });
-        this.props.handleUpdateSession(null);
+        this.props.handleUpdateJWTToken(null);
       });
   }
 

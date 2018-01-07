@@ -12,10 +12,10 @@ class App extends Component {
     this.state = {
       jwtToken: null,
     };
-    this.handleUpdateSession = this.handleUpdateSession.bind(this);
+    this.handleUpdateJWTToken = this.handleUpdateJWTToken.bind(this);
   }
 
-  handleUpdateSession(jwtToken) {
+  handleUpdateJWTToken(jwtToken) {
     this.setState({ jwtToken });
   }
 
@@ -28,20 +28,20 @@ class App extends Component {
             <Route
               path="/login"
               render={() => (
-                <LoginInterface handleUpdateSession={this.handleUpdateSession} />
+                <LoginInterface handleUpdateJWTToken={this.handleUpdateJWTToken} />
                 )}
             />
             <Route
               path="/lobby"
               render={props => ((this.state.jwtToken === null) ?
                 <Redirect to={{ pathname: '/login', state: { from: props.location } }} /> :
-                <LobbyInterface jwtToken={this.state.jwtToken} handleUpdateSession={this.handleUpdateSession} />)}
+                <LobbyInterface jwtToken={this.state.jwtToken} handleUpdateJWTToken={this.handleUpdateJWTToken} />)}
             />
             <Route
               path="/room/:roomName"
               render={props => ((this.state.jwtToken === null) ?
                 <Redirect to={{ pathname: '/login', state: { from: props.location } }} /> :
-                <RoomInterface jwtToken={this.state.jwtToken} handleUpdateSession={this.handleUpdateSession} />)}
+                <RoomInterface jwtToken={this.state.jwtToken} />)}
             />
           </Switch>
         </BrowserRouter>

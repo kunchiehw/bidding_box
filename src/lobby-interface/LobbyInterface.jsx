@@ -8,7 +8,7 @@ import LobbyRoomList from './LobbyRoomList';
 
 const propTypes = {
   jwtToken: PropTypes.string,
-  handleUpdateSession: PropTypes.func.isRequired,
+  handleUpdateJWTToken: PropTypes.func.isRequired,
 
   // props from HOC withRouter
   history: PropTypes.shape({
@@ -65,7 +65,7 @@ class LobbyInterface extends Component {
   handleSignoutSubmit(e) {
     e.preventDefault();
     this.setState({ loading: true });
-    this.props.handleUpdateSession(null);
+    this.props.handleUpdateJWTToken(null);
     this.props.history.push('/');
     this.setState({ loading: false });
   }
