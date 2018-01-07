@@ -24,7 +24,7 @@ function MainPageInterface(props) {
         <h1 className="main-page-title">Welcome to React</h1>
       </header>
       <Button className="to-login-button" size="small" onClick={handleToLoginButtonClick} color="green">
-        <Icon name="sign in" />Log in
+        <Icon name="sign in" />Log In
       </Button>
     </div>
   );

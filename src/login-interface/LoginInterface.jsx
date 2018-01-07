@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Icon } from 'semantic-ui-react';
 import './LoginInterface.css';
 
 const propTypes = {
-  handleUpdateSession: PropTypes.func.isRequired,
+  handleUpdateJWTToken: PropTypes.func.isRequired,
 
   // props from HOC withRouter
   history: PropTypes.shape({
@@ -57,12 +57,12 @@ class LoginInterface extends Component {
         return res.text();
       })
       .then((data) => {
-        this.props.handleUpdateSession(data);
+        this.props.handleUpdateJWTToken(data);
         this.props.history.push('/lobby');
       })
       .catch(() => {
         this.setState({ loading: false });
-        this.props.handleUpdateSession(null);
+        this.props.handleUpdateJWTToken(null);
       });
   }
 
@@ -84,7 +84,9 @@ class LoginInterface extends Component {
             type="password"
             onChange={this.changePassword}
           />
-          <Button type="submit" disabled={this.state.loading}>Submit</Button>
+          <Button type="submit" disabled={this.state.loading} color="green">
+            <Icon name="sign in" />Submit
+          </Button>
         </Form>
       </div>
     );

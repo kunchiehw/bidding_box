@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Segment } from 'semantic-ui-react';
+import { Button, Segment, Icon } from 'semantic-ui-react';
 
 const propTypes = {
   roomList: PropTypes.arrayOf(PropTypes.shape({
@@ -21,12 +21,16 @@ function generateTableCell(roomName, eastID, westID, handleClick) {
   const handleClickObserver = () => { handleClick(roomName, 'OBSERVER'); };
 
   const westCell = ((westID && westID.length !== 0) ?
-    <Segment size="small"> {westID} </Segment> :
-    <Button onClick={handleClickWest} size="small" color="teal"> Sit West </Button>);
+    <Segment size="small"> {westID} </Segment> : (
+      <Button onClick={handleClickWest} size="small" color="teal">
+        <Icon name="plus" /> Sit West
+      </Button>));
 
   const eastCell = ((eastID && eastID.length !== 0) ?
-    <Segment size="small"> {eastID} </Segment> :
-    <Button onClick={handleClickEast} size="small" color="teal"> Sit East </Button>);
+    <Segment size="small"> {eastID} </Segment> : (
+      <Button onClick={handleClickEast} size="small" color="teal">
+        <Icon name="plus" /> Sit East
+      </Button>));
 
   return (
     <Segment key={roomName} className="lobby-room-cell">
@@ -35,7 +39,9 @@ function generateTableCell(roomName, eastID, westID, handleClick) {
         {westCell}
         {eastCell}
       </div>
-      <Button className="watch-button" onClick={handleClickObserver} size="small" color="blue"> Watch </Button>
+      <Button className="watch-button" onClick={handleClickObserver} size="small" color="blue">
+        <Icon name="plus" /> Watch
+      </Button>
     </Segment>
   );
 }
