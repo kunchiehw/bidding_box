@@ -50,7 +50,6 @@ class LoginInterface extends Component {
       }),
     })
       .then((res) => {
-        this.setState({ loading: false });
         if (!res.ok) {
           throw Error(res.statusText);
         }
@@ -58,11 +57,12 @@ class LoginInterface extends Component {
       })
       .then((data) => {
         this.props.handleUpdateJWTToken(data);
+        this.setState({ loading: false });
         this.props.history.push('/lobby');
       })
       .catch(() => {
-        this.setState({ loading: false });
         this.props.handleUpdateJWTToken(null);
+        this.setState({ loading: false });
       });
   }
 

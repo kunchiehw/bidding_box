@@ -4,21 +4,19 @@ import { Button, Segment, Icon } from 'semantic-ui-react';
 
 const propTypes = {
   roomList: PropTypes.arrayOf(PropTypes.shape({
-    roomName: PropTypes.string.isRequired,
-    eastID: PropTypes.string,
-    westID: PropTypes.string,
-  })),
+    id: PropTypes.string.isRequired,
+    roomInfo: PropTypes.shape({
+      eastID: PropTypes.string,
+      westID: PropTypes.string,
+    }),
+  })).isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 
-const defaultProps = {
-  roomList: null,
-};
-
-function generateTableCell(roomName, eastID, westID, handleClick) {
-  const handleClickEast = () => { handleClick(roomName, 'EAST'); };
-  const handleClickWest = () => { handleClick(roomName, 'WEST'); };
-  const handleClickObserver = () => { handleClick(roomName, 'OBSERVER'); };
+function generateTableCell(id, eastID, westID, handleClick) {
+  const handleClickEast = () => { handleClick(id, 'EAST'); };
+  const handleClickWest = () => { handleClick(id, 'WEST'); };
+  const handleClickObserver = () => { handleClick(id, 'OBSERVER'); };
 
   const westCell = ((westID && westID.length !== 0) ?
     <Segment size="small"> {westID} </Segment> : (
@@ -33,8 +31,8 @@ function generateTableCell(roomName, eastID, westID, handleClick) {
       </Button>));
 
   return (
-    <Segment key={roomName} className="lobby-room-cell">
-      <Segment className="room-name" size="small"> {`${roomName}'s Table`} </Segment>
+    <Segment key={id} className="lobby-room-cell">
+      <Segment className="room-name" size="small"> {`${id}'s Table`} </Segment>
       <div className="room-seat-button">
         {westCell}
         {eastCell}
@@ -51,9 +49,9 @@ function LobbyRoomList(props) {
 
   for (let roomIndex = 0; roomIndex < props.roomList.length; roomIndex += 1) {
     roomCells.push(generateTableCell(
-      props.roomList[roomIndex].roomName,
-      props.roomList[roomIndex].eastID,
-      props.roomList[roomIndex].westID,
+      props.roomList[roomIndex].id,
+      (props.roomList[roomIndex].roomInfo) ? props.roomList[roomIndex].roomInfo.eastID : null,
+      (props.roomList[roomIndex].roomInfo) ? props.roomList[roomIndex].roomInfo.westID : null,
       props.handleClick,
     ));
   }
@@ -66,6 +64,5 @@ function LobbyRoomList(props) {
 }
 
 LobbyRoomList.propTypes = propTypes;
-LobbyRoomList.defaultProps = defaultProps;
 
 export default LobbyRoomList;
