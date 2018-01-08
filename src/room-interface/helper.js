@@ -1,3 +1,5 @@
+import { SEATS, SUITS } from '../util/util';
+
 export function suitChar(suit) {
   switch (suit) {
     case 'NOTRUMPS':
@@ -69,4 +71,79 @@ export function declarerToString(declarer) {
     default:
       return '';
   }
+}
+
+export function isPass(bid) {
+  return (bid && bid.suit === 'PASS');
+}
+
+export function isDouble(bid) {
+  return (bid && bid.suit === 'DOUBLE');
+}
+
+export function isSuit(bid) {
+  return (bid && SUITS.indexOf(bid.suit) !== -1);
+}
+
+export function shouldDisabledDouble(bidSeq) {
+  const bidSeqLen = bidSeq.length;
+  if (isSuit(bidSeq[bidSeqLen - 1])) {
+    return false;
+  }
+  if (isSuit(bidSeq[bidSeqLen - 3]) &&
+      isPass(bidSeq[bidSeqLen - 2]) &&
+      isPass(bidSeq[bidSeqLen - 1])) {
+    return false;
+  }
+  return true;
+}
+
+export function shouldDisabledRedouble(bidSeq) {
+  const bidSeqLen = bidSeq.length;
+  if (isDouble(bidSeq[bidSeqLen - 1])) {
+    return false;
+  }
+  if (isDouble(bidSeq[bidSeqLen - 3]) &&
+      isPass(bidSeq[bidSeqLen - 2]) &&
+      isPass(bidSeq[bidSeqLen - 1])) {
+    return false;
+  }
+  return true;
+}
+
+export function findCurBid(bidSeq) {
+  for (let i = bidSeq.length - 1; i >= 0; i -= 1) {
+    if (isSuit(bidSeq[i])) {
+      return bidSeq[i];
+    }
+  }
+  return null;
+}
+
+export function shouldEndBidSeq(bidSeq) {
+  const bidSeqLen = bidSeq.length;
+  if (isPass(bidSeq[bidSeqLen - 3]) &&
+      isPass(bidSeq[bidSeqLen - 2]) &&
+      isPass(bidSeq[bidSeqLen - 1])) {
+    return (bidSeqLen >= 4);
+  }
+  return false;
+}
+
+export function roleTurn(role, dealer, bidSeq) {
+  // TESTER could control all four players' bid.
+  if (role === 'TESTER') {
+    return true;
+  }
+
+  const roleIndex = SEATS.indexOf(role);
+  const dealerIndex = SEATS.indexOf(dealer);
+  return (dealerIndex + bidSeq.length) % 4 === roleIndex;
+}
+
+export function getRole(roomInfo, username) {
+  if (roomInfo && roomInfo.westID === username) return 'WEST';
+  if (roomInfo && roomInfo.eastID === username) return 'EAST';
+  return 'TESTER';
+  // return 'OBSERVER';
 }

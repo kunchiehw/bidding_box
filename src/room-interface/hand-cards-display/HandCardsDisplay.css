@@ -1,39 +1,36 @@
 .hand-cards-display-block {
-  width: calc(100% - 100px);
-  margin: 20px 50px;
+
+}
+
+.hand-cards-display-block.ui.grid {
+  margin: 0.5em 0.5em;
 }
 
 .hand-cards-display-block .hand-cards-display-cell {
-  width: 50%;
-  display: inline-block;
-  white-space: pre-line;
-  vertical-align: top;
+
 }
 
 .hand-cards-display-block .hand-cards-display-cell .id-cell {
-  border: 1px;
-  border-style: solid;
-  text-align: center;
-  vertical-align: middle;
+  font-size: 1.2rem;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .hand-cards-display-block .hand-cards-display-cell .card-cell {
   height: 80px;
-  margin: auto;
-  border: 1px;
-  border-style: solid;
+  vertical-align: middle;
 }
 
 .hand-cards-display-block .hand-cards-display-cell .card-cell .card-cell-content {
-  width: fit-content;
-  height: fit-content;
-  margin: auto;
+  font-size: 1.2rem;
+  font-family: "Lucida Console", Monaco, monospace;
   text-align: left;
+  width: fit-content;
+  margin: auto;
 }
 
 .hand-cards-display-block .hand-cards-display-cell .card-cell .waiting-cell-content {
-  width: fit-content;
+  font-size: 1.2rem;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   height: fit-content;
   margin: auto;
-  text-align: center;
 }
