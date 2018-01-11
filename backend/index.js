@@ -13,6 +13,7 @@ const db = {
   users: {
     wkc: 'password',
     jarron: 'password',
+    test: 'password',
   },
   rooms: {},
 };

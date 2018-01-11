@@ -9,7 +9,8 @@ import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
 import HandCardsDisplay from './hand-cards-display/HandCardsDisplay';
 import ScoreBlock from './score-block/ScoreBlock';
 import { SEATS } from '../util/util';
-import { shouldDisabledDouble, shouldDisabledRedouble, findCurBid, shouldEndBidSeq, roleTurn, getRole } from './helper';
+import { getPlayerRole, getBidSeqIsEnded, getWhoseTurn, getCurrentBid,
+  getShouldDisabledDouble, getShouldDisabledRedouble } from './helper-RoomInterface';
 
 const propTypes = {
   jwtToken: PropTypes.string,
@@ -36,7 +37,7 @@ class RoomInterface extends Component {
     this.state = {
       bidSeq: [],
       roomInfo: {
-        eastID: 'Jarron',
+        eastID: 'test',
       },
       boardInfo: {
         vulnerability: 'NS',
@@ -78,9 +79,9 @@ class RoomInterface extends Component {
     this.updateWebSocket = this.updateWebSocket.bind(this);
 
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
-    this.handleUndoBidSeq = this.handleUndoBidSeq.bind(this);
-    this.handleResetBidSeq = this.handleResetBidSeq.bind(this);
-    this.handleBackToLobby = this.handleBackToLobby.bind(this);
+    this.handleUndoButton = this.handleUndoButton.bind(this);
+    this.handleResetButton = this.handleResetButton.bind(this);
+    this.handleBackToLobbyButton = this.handleBackToLobbyButton.bind(this);
   }
 
   componentDidMount() {
@@ -106,18 +107,17 @@ class RoomInterface extends Component {
     }
   }
 
-  handleBidButtonClick(bid) {
+  handleBidButtonClick(level, suit) {
     const bidSeq = this.state.bidSeq.slice();
-    bidSeq.push(bid);
+    bidSeq.push({ level, suit });
     this.setState({ bidSeq });
     if (this.socket) this.socket.send(JSON.stringify(bidSeq));
   }
 
-  handleUndoBidSeq() {
+  handleUndoButton() {
     // Regard TESTER as EAST when press undo button.
-    const userRole = getRole(this.state.roomInfo, this.username);
+    const userRole = getPlayerRole(this.state.roomInfo, this.username);
     const role = (userRole === 'TESTER') ? 'EAST' : userRole;
-    if (role === 'OBSERVER') return;
 
     const bidSeq = this.state.bidSeq.slice();
     const roleIndex = SEATS.indexOf(role);
@@ -135,75 +135,88 @@ class RoomInterface extends Component {
     }
   }
 
-  handleResetBidSeq() {
-    const role = getRole(this.state.roomInfo, this.username);
-    if (role === 'OBSERVER') return;
-
-    this.setState({
-      bidSeq: [],
-    });
+  handleResetButton() {
+    this.setState({ bidSeq: [] });
     if (this.socket) this.socket.send(JSON.stringify([]));
   }
 
-  handleBackToLobby() {
+  handleBackToLobbyButton() {
     // TODO: inform server
     this.props.history.push('/lobby');
   }
 
   render() {
-    const endBidSequence = shouldEndBidSeq(this.state.bidSeq);
-    const role = getRole(this.state.roomInfo, this.username);
+    const playerRole = getPlayerRole(this.state.roomInfo, this.username);
+    const whoseTurn = (this.state.boardInfo) ?
+      getWhoseTurn(playerRole, this.state.boardInfo.dealer, this.state.bidSeq) : null;
+    const bidSeqIsEnded = getBidSeqIsEnded(this.state.bidSeq);
 
     const handCardsDisplayProp = {
       // Regard TESTER as EAST in handCardsBlock.
-      role: (role === 'TESTER') ? 'EAST' : this.role,
-      eastHand: this.state.boardInfo.eastHand,
-      westHand: this.state.boardInfo.westHand,
-      eastID: (this.state.roomInfo) ? this.state.roomInfo.eastID : null,
-      westID: (this.state.roomInfo) ? this.state.roomInfo.westID : null,
-      endBidSequence,
+      playerRole: (playerRole === 'TESTER') ? 'EAST' : playerRole,
+      eastHand: (this.state.boardInfo) ? this.state.boardInfo.eastHand : null,
+      westHand: (this.state.boardInfo) ? this.state.boardInfo.westHand : null,
+      eastID: (this.state.roomInfo && this.state.roomInfo.eastID) ? this.state.roomInfo.eastID : '',
+      westID: (this.state.roomInfo && this.state.roomInfo.westID) ? this.state.roomInfo.westID : '',
+      whoseTurn,
+      bidSeqIsEnded,
     };
 
-    const bidButtonBlockProp = {
-      curBid: findCurBid(this.state.bidSeq),
-      disabledDouble: shouldDisabledDouble(this.state.bidSeq),
-      disabledRedouble: shouldDisabledRedouble(this.state.bidSeq),
-      handleClick: this.handleBidButtonClick,
-      isDisabled: endBidSequence || !roleTurn(role, this.state.boardInfo.dealer, this.state.bidSeq),
-    };
+    const mainUpperBlock = (
+      <div className="main-upper-block">
+        <HandCardsDisplay {...handCardsDisplayProp} />
+      </div>
+    );
 
-    const bidSequenceDisplayProp = {
-      dealer: this.state.boardInfo.dealer,
-      vulnerability: this.state.boardInfo.vulnerability,
-      bidSeq: this.state.bidSeq,
-    };
+    let mainLowerBlock = null;
+
+    if (this.state.boardInfo) {
+      const currentBid = getCurrentBid(this.state.bidSeq);
+      const bidButtonBlockProp = {
+        currentLevel: currentBid.level,
+        currentSuit: currentBid.suit,
+        shouldDisabledDouble: getShouldDisabledDouble(this.state.bidSeq),
+        shouldDisabledRedouble: getShouldDisabledRedouble(this.state.bidSeq),
+        handleBidButtonClick: this.handleBidButtonClick,
+      };
+      const bidSequenceDisplayProp = {
+        dealer: this.state.boardInfo.dealer,
+        vulnerability: this.state.boardInfo.vulnerability,
+        bidSeq: this.state.bidSeq,
+      };
+
+      mainLowerBlock = (
+        <div className="main-lower-block">
+          <BidSequenceDisplay {...bidSequenceDisplayProp} />
+          {(bidSeqIsEnded) && <ScoreBlock scoreList={this.state.boardInfo.scoreList} />}
+          {((!bidSeqIsEnded && whoseTurn === playerRole) || this.username === 'test') &&
+            <BidButtonBlock {...bidButtonBlockProp} />}
+          {((!bidSeqIsEnded && whoseTurn !== playerRole) && this.username !== 'test') &&
+            <div className="empty-div" > Something Here </div>}
+        </div>
+      );
+    }
+
+    const roomToolsBlock = (
+      <div className="room-tools-block">
+        {(playerRole !== 'OBSERVER' || this.username === 'test') &&
+          <Button onClick={this.handleUndoButton} size="small" color="grey">Undo</Button>}
+        {(playerRole !== 'OBSERVER' || this.username === 'test') &&
+          <Button onClick={this.handleResetButton} size="small" color="grey">Reset</Button>}
+        {(this.roomName === this.username) &&
+          <Button size="small" color="grey">Host Setting</Button>}
+        {<Button onClick={this.handleBackToLobbyButton} size="small" color="grey">Back to Lobby</Button>}
+      </div>
+    );
 
     return (
       <div className="room-interface">
         <div className="room-main-block">
-          <div className="main-upper-block">
-            <HandCardsDisplay {...handCardsDisplayProp} />
-          </div>
-          <div className="main-lower-block">
-            <BidSequenceDisplay {...bidSequenceDisplayProp} />
-            {(endBidSequence) ?
-              <ScoreBlock scoreList={this.state.boardInfo.scoreList} />
-            : <BidButtonBlock {...bidButtonBlockProp} /> }
-          </div>
+          {mainUpperBlock}
+          {mainLowerBlock}
         </div>
         <Divider />
-        <div className="room-tools-block">
-          <Button
-            className={(role === 'OBSERVER') ? 'display-none' : ''}
-            onClick={this.handleUndoBidSeq}
-            size="small"
-            color="grey"
-          >
-            Undo
-          </Button>
-          <Button onClick={this.handleResetBidSeq} size="small" color="grey">Reset</Button>
-          <Button onClick={this.handleBackToLobby} size="small" color="grey">Back to Lobby</Button>
-        </div>
+        {roomToolsBlock}
       </div>
     );
   }

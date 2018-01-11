@@ -1,6 +1,8 @@
-export const SUITS = ['CLUBS', 'DIAMONDS', 'HEARTS', 'SPADES', 'NOTRUMPS'];
+export const STANDARD_SUITS = ['CLUBS', 'DIAMONDS', 'HEARTS', 'SPADES', 'NOTRUMPS'];
 
-export const NON_SUITS = ['PASS', 'DOUBLE', 'REDOUBLE'];
+export const SPECIAL_SUITS = ['PASS', 'DOUBLE', 'REDOUBLE'];
+
+export const ALL_SUITS = ['CLUBS', 'DIAMONDS', 'HEARTS', 'SPADES', 'NOTRUMPS', 'PASS', 'DOUBLE', 'REDOUBLE'];
 
 export const SEATS = ['WEST', 'NORTH', 'EAST', 'SOUTH'];
 
