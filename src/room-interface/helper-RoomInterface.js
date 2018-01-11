@@ -1,3 +1,5 @@
+import { SEATS, STANDARD_SUITS } from '../util/util';
+
 export function suitCharacter(suit) {
   switch (suit) {
     case 'NOTRUMPS':
@@ -46,4 +48,80 @@ export function suitColor(suit) {
     default:
       return '';
   }
+}
+
+export function getPlayerRole(roomInfo, username) {
+  if (roomInfo && roomInfo.westID === username) return 'WEST';
+  if (roomInfo && roomInfo.eastID === username) return 'EAST';
+  return 'TESTER';
+  // return 'OBSERVER';
+}
+
+export function getWhoseTurn(playerRole, dealer, bidSeq) {
+  if (playerRole === 'WEST') {
+    return ((SEATS.indexOf(dealer) + bidSeq.length) % 4 === SEATS.indexOf('WEST')) ? 'WEST' : 'EAST';
+  }
+
+  if (playerRole === 'EAST') {
+    return ((SEATS.indexOf(dealer) + bidSeq.length) % 4 === SEATS.indexOf('EAST')) ? 'EAST' : 'WEST';
+  }
+
+  return playerRole;
+}
+
+export function isPass(bid) {
+  return (bid && bid.suit === 'PASS');
+}
+
+export function isDouble(bid) {
+  return (bid && bid.suit === 'DOUBLE');
+}
+
+export function isSuit(bid) {
+  return (bid && STANDARD_SUITS.indexOf(bid.suit) !== -1);
+}
+
+export function getBidSeqIsEnded(bidSeq) {
+  const bidSeqLen = bidSeq.length;
+  if (isPass(bidSeq[bidSeqLen - 3]) &&
+      isPass(bidSeq[bidSeqLen - 2]) &&
+      isPass(bidSeq[bidSeqLen - 1])) {
+    return (bidSeqLen >= 4);
+  }
+  return false;
+}
+
+export function getCurrentBid(bidSeq) {
+  for (let i = bidSeq.length - 1; i >= 0; i -= 1) {
+    if (isSuit(bidSeq[i])) {
+      return bidSeq[i];
+    }
+  }
+  return { level: 0, suit: 'PASS' };
+}
+
+export function getShouldDisabledDouble(bidSeq) {
+  const bidSeqLen = bidSeq.length;
+  if (isSuit(bidSeq[bidSeqLen - 1])) {
+    return false;
+  }
+  if (isSuit(bidSeq[bidSeqLen - 3]) &&
+      isPass(bidSeq[bidSeqLen - 2]) &&
+      isPass(bidSeq[bidSeqLen - 1])) {
+    return false;
+  }
+  return true;
+}
+
+export function getShouldDisabledRedouble(bidSeq) {
+  const bidSeqLen = bidSeq.length;
+  if (isDouble(bidSeq[bidSeqLen - 1])) {
+    return false;
+  }
+  if (isDouble(bidSeq[bidSeqLen - 3]) &&
+      isPass(bidSeq[bidSeqLen - 2]) &&
+      isPass(bidSeq[bidSeqLen - 1])) {
+    return false;
+  }
+  return true;
 }

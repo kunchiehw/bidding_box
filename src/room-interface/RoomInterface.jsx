@@ -9,7 +9,8 @@ import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
 import HandCardsDisplay from './hand-cards-display/HandCardsDisplay';
 import ScoreBlock from './score-block/ScoreBlock';
 import { SEATS } from '../util/util';
-import { shouldDisabledDouble, shouldDisabledRedouble, findCurBid, shouldEndBidSeq, getRole } from './helper';
+import { getPlayerRole, getBidSeqIsEnded, getWhoseTurn, getCurrentBid,
+  getShouldDisabledDouble, getShouldDisabledRedouble } from './helper-RoomInterface';
 
 const propTypes = {
   jwtToken: PropTypes.string,
@@ -116,7 +117,7 @@ class RoomInterface extends Component {
 
   handleUndoBidSeq() {
     // Regard TESTER as EAST when press undo button.
-    const userRole = getRole(this.state.roomInfo, this.username);
+    const userRole = getPlayerRole(this.state.roomInfo, this.username);
     const role = (userRole === 'TESTER') ? 'EAST' : userRole;
     if (role === 'OBSERVER') return;
 
@@ -137,7 +138,7 @@ class RoomInterface extends Component {
   }
 
   handleResetBidSeq() {
-    const role = getRole(this.state.roomInfo, this.username);
+    const role = getPlayerRole(this.state.roomInfo, this.username);
     if (role === 'OBSERVER') return;
 
     this.setState({
@@ -152,26 +153,28 @@ class RoomInterface extends Component {
   }
 
   render() {
-    const endBidSequence = shouldEndBidSeq(this.state.bidSeq);
-    const role = getRole(this.state.roomInfo, this.username);
-    const currentBid = findCurBid(this.state.bidSeq);
+    const playerRole = getPlayerRole(this.state.roomInfo, this.username);
+    const whoseTurn = getWhoseTurn(playerRole, this.state.boardInfo.dealer, this.state.bidSeq);
+    const bidSeqIsEnded = getBidSeqIsEnded(this.state.bidSeq);
+    const currentBid = getCurrentBid(this.state.bidSeq);
 
     const handCardsDisplayProp = {
       // Regard TESTER as EAST in handCardsBlock.
-      role: (role === 'TESTER') ? 'EAST' : this.role,
+      playerRole: (playerRole === 'TESTER') ? 'EAST' : playerRole,
       eastHand: this.state.boardInfo.eastHand,
       westHand: this.state.boardInfo.westHand,
-      eastID: (this.state.roomInfo) ? this.state.roomInfo.eastID : null,
-      westID: (this.state.roomInfo) ? this.state.roomInfo.westID : null,
-      endBidSequence,
+      eastID: (this.state.roomInfo) ? this.state.roomInfo.eastID : '',
+      westID: (this.state.roomInfo) ? this.state.roomInfo.westID : '',
+      whoseTurn,
+      bidSeqIsEnded,
     };
 
     const bidButtonBlockProp = {
       currentLevel: currentBid.level,
       currentSuit: currentBid.suit,
-      disabledDouble: shouldDisabledDouble(this.state.bidSeq),
-      disabledRedouble: shouldDisabledRedouble(this.state.bidSeq),
-      handleClick: this.handleBidButtonClick,
+      shouldDisabledDouble: getShouldDisabledDouble(this.state.bidSeq),
+      shouldDisabledRedouble: getShouldDisabledRedouble(this.state.bidSeq),
+      handleBidButtonClick: this.handleBidButtonClick,
     };
 
     const bidSequenceDisplayProp = {
@@ -188,7 +191,7 @@ class RoomInterface extends Component {
           </div>
           <div className="main-lower-block">
             <BidSequenceDisplay {...bidSequenceDisplayProp} />
-            {(endBidSequence) ?
+            {(bidSeqIsEnded) ?
               <ScoreBlock scoreList={this.state.boardInfo.scoreList} />
             : <BidButtonBlock {...bidButtonBlockProp} /> }
           </div>
@@ -196,7 +199,7 @@ class RoomInterface extends Component {
         <Divider />
         <div className="room-tools-block">
           <Button
-            className={(role === 'OBSERVER') ? 'display-none' : ''}
+            className={(playerRole === 'OBSERVER') ? 'display-none' : ''}
             onClick={this.handleUndoBidSeq}
             size="small"
             color="grey"

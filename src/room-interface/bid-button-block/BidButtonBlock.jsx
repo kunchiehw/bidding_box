@@ -10,9 +10,9 @@ const POSSIBLE_LEVELS = [1, 2, 3, 4, 5, 6, 7];
 const propTypes = {
   currentLevel: PropTypes.number.isRequired,
   currentSuit: PropTypes.oneOf(STANDARD_SUITS.concat(['PASS'])).isRequired,
-  disabledDouble: PropTypes.bool.isRequired,
-  disabledRedouble: PropTypes.bool.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  shouldDisabledDouble: PropTypes.bool.isRequired,
+  shouldDisabledRedouble: PropTypes.bool.isRequired,
+  handleBidButtonClick: PropTypes.func.isRequired,
 };
 
 class BidButtonBlock extends PureComponent {
@@ -24,7 +24,7 @@ class BidButtonBlock extends PureComponent {
           level={level}
           suit={suit}
           isDisabled={shouldStandardBidButtonDisabled(this.props.currentLevel, this.props.currentSuit, level, suit)}
-          handleClick={this.props.handleClick}
+          handleBidButtonClick={this.props.handleBidButtonClick}
         />
       ));
       return (
@@ -40,19 +40,19 @@ class BidButtonBlock extends PureComponent {
             level={0}
             suit={SPECIAL_SUITS[0]}
             isDisabled={false}
-            handleClick={this.props.handleClick}
+            handleBidButtonClick={this.props.handleBidButtonClick}
           />
           <BidButton
             level={0}
             suit={SPECIAL_SUITS[1]}
-            isDisabled={this.props.disabledDouble}
-            handleClick={this.props.handleClick}
+            isDisabled={this.props.shouldDisabledDouble}
+            handleBidButtonClick={this.props.handleBidButtonClick}
           />
           <BidButton
             level={0}
             suit={SPECIAL_SUITS[2]}
-            isDisabled={this.props.disabledRedouble}
-            handleClick={this.props.handleClick}
+            isDisabled={this.props.shouldDisabledRedouble}
+            handleBidButtonClick={this.props.handleBidButtonClick}
           />
         </div>
       </div>

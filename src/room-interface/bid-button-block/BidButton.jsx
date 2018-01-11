@@ -9,7 +9,7 @@ const propTypes = {
   level: PropTypes.number.isRequired,
   suit: PropTypes.oneOf(ALL_SUITS).isRequired,
   isDisabled: PropTypes.bool.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  handleBidButtonClick: PropTypes.func.isRequired,
 };
 
 class BidButton extends PureComponent {
@@ -17,7 +17,7 @@ class BidButton extends PureComponent {
     return (
       <Button
         className="bid-button"
-        onClick={() => { this.props.handleClick(this.props.level, this.props.suit); }}
+        onClick={() => { this.props.handleBidButtonClick(this.props.level, this.props.suit); }}
         disabled={this.props.isDisabled}
         color={suitColor(this.props.suit)}
         size="small"
