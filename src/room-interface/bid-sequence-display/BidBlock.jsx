@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Segment } from 'semantic-ui-react';
 import { suitBidToString, otherBidToString, bidColor } from '../helper';
-import { SEATS, SUITS, NON_SUITS } from '../../util/util';
+import { SEATS, ALL_SUITS } from '../../util/util';
 
 const propTypes = {
   dealer: PropTypes.oneOf(SEATS).isRequired,
   bidSeq: PropTypes.arrayOf(PropTypes.shape({
     level: PropTypes.number,
-    suit: PropTypes.oneOf(SUITS.concat(NON_SUITS)).isRequired,
+    suit: PropTypes.oneOf(ALL_SUITS).isRequired,
   })).isRequired,
 };
 

@@ -4,14 +4,14 @@ import { Divider } from 'semantic-ui-react';
 import './BidSequenceDisplay.css';
 import SeatRow from './SeatRow';
 import BidBlock from './BidBlock';
-import { SEATS, VULS, SUITS, NON_SUITS } from '../../util/util';
+import { SEATS, VULS, ALL_SUITS } from '../../util/util';
 
 const propTypes = {
   dealer: PropTypes.oneOf(SEATS).isRequired,
   vulnerability: PropTypes.oneOf(VULS).isRequired,
   bidSeq: PropTypes.arrayOf(PropTypes.shape({
     level: PropTypes.number,
-    suit: PropTypes.oneOf(SUITS.concat(NON_SUITS)).isRequired,
+    suit: PropTypes.oneOf(ALL_SUITS).isRequired,
   })).isRequired,
 };
 

@@ -1,4 +1,4 @@
-import { SEATS, SUITS } from '../util/util';
+import { SEATS, STANDARD_SUITS } from '../util/util';
 
 export function suitChar(suit) {
   switch (suit) {
@@ -82,7 +82,7 @@ export function isDouble(bid) {
 }
 
 export function isSuit(bid) {
-  return (bid && SUITS.indexOf(bid.suit) !== -1);
+  return (bid && STANDARD_SUITS.indexOf(bid.suit) !== -1);
 }
 
 export function shouldDisabledDouble(bidSeq) {
@@ -117,7 +117,7 @@ export function findCurBid(bidSeq) {
       return bidSeq[i];
     }
   }
-  return null;
+  return { level: 0, suit: 'PASS' };
 }
 
 export function shouldEndBidSeq(bidSeq) {

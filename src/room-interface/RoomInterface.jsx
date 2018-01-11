@@ -9,7 +9,7 @@ import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
 import HandCardsDisplay from './hand-cards-display/HandCardsDisplay';
 import ScoreBlock from './score-block/ScoreBlock';
 import { SEATS } from '../util/util';
-import { shouldDisabledDouble, shouldDisabledRedouble, findCurBid, shouldEndBidSeq, roleTurn, getRole } from './helper';
+import { shouldDisabledDouble, shouldDisabledRedouble, findCurBid, shouldEndBidSeq, getRole } from './helper';
 
 const propTypes = {
   jwtToken: PropTypes.string,
@@ -37,6 +37,7 @@ class RoomInterface extends Component {
       bidSeq: [],
       roomInfo: {
         eastID: 'Jarron',
+        westID: 'JXP',
       },
       boardInfo: {
         vulnerability: 'NS',
@@ -106,9 +107,9 @@ class RoomInterface extends Component {
     }
   }
 
-  handleBidButtonClick(bid) {
+  handleBidButtonClick(level, suit) {
     const bidSeq = this.state.bidSeq.slice();
-    bidSeq.push(bid);
+    bidSeq.push({ level, suit });
     this.setState({ bidSeq });
     if (this.socket) this.socket.send(JSON.stringify(bidSeq));
   }
@@ -153,6 +154,7 @@ class RoomInterface extends Component {
   render() {
     const endBidSequence = shouldEndBidSeq(this.state.bidSeq);
     const role = getRole(this.state.roomInfo, this.username);
+    const currentBid = findCurBid(this.state.bidSeq);
 
     const handCardsDisplayProp = {
       // Regard TESTER as EAST in handCardsBlock.
@@ -165,11 +167,11 @@ class RoomInterface extends Component {
     };
 
     const bidButtonBlockProp = {
-      curBid: findCurBid(this.state.bidSeq),
+      currentLevel: currentBid.level,
+      currentSuit: currentBid.suit,
       disabledDouble: shouldDisabledDouble(this.state.bidSeq),
       disabledRedouble: shouldDisabledRedouble(this.state.bidSeq),
       handleClick: this.handleBidButtonClick,
-      isDisabled: endBidSequence || !roleTurn(role, this.state.boardInfo.dealer, this.state.bidSeq),
     };
 
     const bidSequenceDisplayProp = {

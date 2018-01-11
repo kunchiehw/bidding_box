@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './ScoreBlock.css';
 import { suitBidToString, bidColor, declarerToString } from '../helper';
-import { DECLARERS, SUITS } from '../../util/util';
+import { DECLARERS, STANDARD_SUITS } from '../../util/util';
 
 const propTypes = {
   scoreList: PropTypes.arrayOf(PropTypes.shape({
     bid: PropTypes.shape({
       level: PropTypes.number,
-      suit: PropTypes.oneOf(SUITS).isRequired,
+      suit: PropTypes.oneOf(STANDARD_SUITS).isRequired,
     }),
     declarer: PropTypes.oneOf(DECLARERS).isRequired,
     score: PropTypes.number.isRequired,
