@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './ScoreBlock.css';
-import { suitBidToString, bidColor, declarerToString } from '../helper';
+import { bidToString, suitColor, declarerToString } from '../helper-RoomInterface';
 import { DECLARERS, STANDARD_SUITS } from '../../util/util';
 
 const propTypes = {
@@ -31,7 +31,9 @@ class ScoreBlock extends PureComponent {
     const scoreCells = this.props.scoreList.map(score => (
       // TODO: find a better key
       <div key={score.score} className="score-cell">
-        <span className="score-bid" style={{ color: bidColor(score.bid.suit) }} > {suitBidToString(score.bid)} </span>
+        <span className="score-bid" style={{ color: suitColor(score.bid.suit) }} >
+          {bidToString(score.bid.level, score.bid.suit)}
+        </span>
         <span className="score-declarer"> {declarerToString(score.declarer)} </span>
         <span className="score-score"> {score.score} </span>
       </div>

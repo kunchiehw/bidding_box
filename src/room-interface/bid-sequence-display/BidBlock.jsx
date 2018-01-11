@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Segment } from 'semantic-ui-react';
-import { suitBidToString, otherBidToString, bidColor } from '../helper';
+import { bidToString, suitColor } from '../helper-RoomInterface';
 import { SEATS, ALL_SUITS } from '../../util/util';
 
 const propTypes = {
@@ -19,17 +19,17 @@ function BidCell(bid, bidIndex) {
     return (<div key={bidIndex} className={`${cssString} empty-cell`} > Empty </div>);
   }
 
-  if (!bid.level) {
+  if (bid.level === 0) {
     return (
       <Segment key={bidIndex} className={`${cssString} ${bid.suit}-cell`} size="small">
-        {otherBidToString(bid.suit)}
+        {bidToString(bid.level, bid.suit)}
       </Segment>
     );
   }
 
   return (
-    <Segment key={bidIndex} className={cssString} size="small" color={bidColor(bid.suit)} inverted>
-      {suitBidToString(bid)}
+    <Segment key={bidIndex} className={cssString} size="small" color={suitColor(bid.suit)} inverted>
+      {bidToString(bid.level, bid.suit)}
     </Segment>
   );
 }
