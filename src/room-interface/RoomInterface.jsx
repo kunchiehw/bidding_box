@@ -37,7 +37,7 @@ class RoomInterface extends Component {
     this.state = {
       bidSeq: [],
       roomInfo: {
-        eastID: 'Jarron',
+        eastID: 'test',
       },
       boardInfo: {
         vulnerability: 'NS',
@@ -79,9 +79,9 @@ class RoomInterface extends Component {
     this.updateWebSocket = this.updateWebSocket.bind(this);
 
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
-    this.handleUndoBidSeq = this.handleUndoBidSeq.bind(this);
-    this.handleResetBidSeq = this.handleResetBidSeq.bind(this);
-    this.handleBackToLobby = this.handleBackToLobby.bind(this);
+    this.handleUndoButton = this.handleUndoButton.bind(this);
+    this.handleResetButton = this.handleResetButton.bind(this);
+    this.handleBackToLobbyButton = this.handleBackToLobbyButton.bind(this);
   }
 
   componentDidMount() {
@@ -114,11 +114,10 @@ class RoomInterface extends Component {
     if (this.socket) this.socket.send(JSON.stringify(bidSeq));
   }
 
-  handleUndoBidSeq() {
+  handleUndoButton() {
     // Regard TESTER as EAST when press undo button.
     const userRole = getPlayerRole(this.state.roomInfo, this.username);
     const role = (userRole === 'TESTER') ? 'EAST' : userRole;
-    if (role === 'OBSERVER') return;
 
     const bidSeq = this.state.bidSeq.slice();
     const roleIndex = SEATS.indexOf(role);
@@ -136,24 +135,20 @@ class RoomInterface extends Component {
     }
   }
 
-  handleResetBidSeq() {
-    const role = getPlayerRole(this.state.roomInfo, this.username);
-    if (role === 'OBSERVER') return;
-
-    this.setState({
-      bidSeq: [],
-    });
+  handleResetButton() {
+    this.setState({ bidSeq: [] });
     if (this.socket) this.socket.send(JSON.stringify([]));
   }
 
-  handleBackToLobby() {
+  handleBackToLobbyButton() {
     // TODO: inform server
     this.props.history.push('/lobby');
   }
 
   render() {
     const playerRole = getPlayerRole(this.state.roomInfo, this.username);
-    const whoseTurn = getWhoseTurn(playerRole, this.state.boardInfo.dealer, this.state.bidSeq);
+    const whoseTurn = (this.state.boardInfo) ?
+      getWhoseTurn(playerRole, this.state.boardInfo.dealer, this.state.bidSeq) : null;
     const bidSeqIsEnded = getBidSeqIsEnded(this.state.bidSeq);
 
     const handCardsDisplayProp = {
@@ -194,12 +189,25 @@ class RoomInterface extends Component {
         <div className="main-lower-block">
           <BidSequenceDisplay {...bidSequenceDisplayProp} />
           {(bidSeqIsEnded) && <ScoreBlock scoreList={this.state.boardInfo.scoreList} />}
-          {(!bidSeqIsEnded && whoseTurn === playerRole) && <BidButtonBlock {...bidButtonBlockProp} />}
-          {(!bidSeqIsEnded && whoseTurn === playerRole) && <div className="empty-div" />}
+          {((!bidSeqIsEnded && whoseTurn === playerRole) || this.username === 'test') &&
+            <BidButtonBlock {...bidButtonBlockProp} />}
+          {((!bidSeqIsEnded && whoseTurn !== playerRole) && this.username !== 'test') &&
+            <div className="empty-div" > Something Here </div>}
         </div>
       );
     }
 
+    const roomToolsBlock = (
+      <div className="room-tools-block">
+        {(playerRole !== 'OBSERVER' || this.username === 'test') &&
+          <Button onClick={this.handleUndoButton} size="small" color="grey">Undo</Button>}
+        {(playerRole !== 'OBSERVER' || this.username === 'test') &&
+          <Button onClick={this.handleResetButton} size="small" color="grey">Reset</Button>}
+        {(this.roomName === this.username) &&
+          <Button size="small" color="grey">Host Setting</Button>}
+        {<Button onClick={this.handleBackToLobbyButton} size="small" color="grey">Back to Lobby</Button>}
+      </div>
+    );
 
     return (
       <div className="room-interface">
@@ -208,18 +216,7 @@ class RoomInterface extends Component {
           {mainLowerBlock}
         </div>
         <Divider />
-        <div className="room-tools-block">
-          <Button
-            className={(playerRole === 'OBSERVER') ? 'display-none' : ''}
-            onClick={this.handleUndoBidSeq}
-            size="small"
-            color="grey"
-          >
-            Undo
-          </Button>
-          <Button onClick={this.handleResetBidSeq} size="small" color="grey">Reset</Button>
-          <Button onClick={this.handleBackToLobby} size="small" color="grey">Back to Lobby</Button>
-        </div>
+        {roomToolsBlock}
       </div>
     );
   }

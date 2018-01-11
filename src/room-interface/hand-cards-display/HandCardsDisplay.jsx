@@ -22,13 +22,14 @@ const propTypes = {
   }),
   eastID: PropTypes.string.isRequired,
   westID: PropTypes.string.isRequired,
-  whoseTurn: PropTypes.oneOf(PARTICIPANTS_ROLE).isRequired,
+  whoseTurn: PropTypes.oneOf(PARTICIPANTS_ROLE),
   bidSeqIsEnded: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
   eastHand: null,
   westHand: null,
+  whoseTurn: null,
 };
 
 class HandCardsDisplay extends PureComponent {

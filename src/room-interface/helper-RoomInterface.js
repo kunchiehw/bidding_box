@@ -53,8 +53,8 @@ export function suitColor(suit) {
 export function getPlayerRole(roomInfo, username) {
   if (roomInfo && roomInfo.westID === username) return 'WEST';
   if (roomInfo && roomInfo.eastID === username) return 'EAST';
-  return 'TESTER';
-  // return 'OBSERVER';
+  if (username === 'test') return 'TESTER';
+  return 'OBSERVER';
 }
 
 export function getWhoseTurn(playerRole, dealer, bidSeq) {
@@ -66,7 +66,7 @@ export function getWhoseTurn(playerRole, dealer, bidSeq) {
     return ((SEATS.indexOf(dealer) + bidSeq.length) % 4 === SEATS.indexOf('EAST')) ? 'EAST' : 'WEST';
   }
 
-  return playerRole;
+  return null;
 }
 
 export function isPass(bid) {
