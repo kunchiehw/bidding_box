@@ -1,5 +1,7 @@
 .score-block {
-
+  display: inline-block;
+  width: 350px;
+  margin: 0px 15px;
 }
 
 .score-block .score-cell {

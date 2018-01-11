@@ -38,7 +38,6 @@ class RoomInterface extends Component {
       bidSeq: [],
       roomInfo: {
         eastID: 'Jarron',
-        westID: 'JXP',
       },
       boardInfo: {
         vulnerability: 'NS',
@@ -156,45 +155,57 @@ class RoomInterface extends Component {
     const playerRole = getPlayerRole(this.state.roomInfo, this.username);
     const whoseTurn = getWhoseTurn(playerRole, this.state.boardInfo.dealer, this.state.bidSeq);
     const bidSeqIsEnded = getBidSeqIsEnded(this.state.bidSeq);
-    const currentBid = getCurrentBid(this.state.bidSeq);
 
     const handCardsDisplayProp = {
       // Regard TESTER as EAST in handCardsBlock.
       playerRole: (playerRole === 'TESTER') ? 'EAST' : playerRole,
-      eastHand: this.state.boardInfo.eastHand,
-      westHand: this.state.boardInfo.westHand,
-      eastID: (this.state.roomInfo) ? this.state.roomInfo.eastID : '',
-      westID: (this.state.roomInfo) ? this.state.roomInfo.westID : '',
+      eastHand: (this.state.boardInfo) ? this.state.boardInfo.eastHand : null,
+      westHand: (this.state.boardInfo) ? this.state.boardInfo.westHand : null,
+      eastID: (this.state.roomInfo && this.state.roomInfo.eastID) ? this.state.roomInfo.eastID : '',
+      westID: (this.state.roomInfo && this.state.roomInfo.westID) ? this.state.roomInfo.westID : '',
       whoseTurn,
       bidSeqIsEnded,
     };
 
-    const bidButtonBlockProp = {
-      currentLevel: currentBid.level,
-      currentSuit: currentBid.suit,
-      shouldDisabledDouble: getShouldDisabledDouble(this.state.bidSeq),
-      shouldDisabledRedouble: getShouldDisabledRedouble(this.state.bidSeq),
-      handleBidButtonClick: this.handleBidButtonClick,
-    };
+    const mainUpperBlock = (
+      <div className="main-upper-block">
+        <HandCardsDisplay {...handCardsDisplayProp} />
+      </div>
+    );
 
-    const bidSequenceDisplayProp = {
-      dealer: this.state.boardInfo.dealer,
-      vulnerability: this.state.boardInfo.vulnerability,
-      bidSeq: this.state.bidSeq,
-    };
+    let mainLowerBlock = null;
+
+    if (this.state.boardInfo) {
+      const currentBid = getCurrentBid(this.state.bidSeq);
+      const bidButtonBlockProp = {
+        currentLevel: currentBid.level,
+        currentSuit: currentBid.suit,
+        shouldDisabledDouble: getShouldDisabledDouble(this.state.bidSeq),
+        shouldDisabledRedouble: getShouldDisabledRedouble(this.state.bidSeq),
+        handleBidButtonClick: this.handleBidButtonClick,
+      };
+      const bidSequenceDisplayProp = {
+        dealer: this.state.boardInfo.dealer,
+        vulnerability: this.state.boardInfo.vulnerability,
+        bidSeq: this.state.bidSeq,
+      };
+
+      mainLowerBlock = (
+        <div className="main-lower-block">
+          <BidSequenceDisplay {...bidSequenceDisplayProp} />
+          {(bidSeqIsEnded) && <ScoreBlock scoreList={this.state.boardInfo.scoreList} />}
+          {(!bidSeqIsEnded && whoseTurn === playerRole) && <BidButtonBlock {...bidButtonBlockProp} />}
+          {(!bidSeqIsEnded && whoseTurn === playerRole) && <div className="empty-div" />}
+        </div>
+      );
+    }
+
 
     return (
       <div className="room-interface">
         <div className="room-main-block">
-          <div className="main-upper-block">
-            <HandCardsDisplay {...handCardsDisplayProp} />
-          </div>
-          <div className="main-lower-block">
-            <BidSequenceDisplay {...bidSequenceDisplayProp} />
-            {(bidSeqIsEnded) ?
-              <ScoreBlock scoreList={this.state.boardInfo.scoreList} />
-            : <BidButtonBlock {...bidButtonBlockProp} /> }
-          </div>
+          {mainUpperBlock}
+          {mainLowerBlock}
         </div>
         <Divider />
         <div className="room-tools-block">
