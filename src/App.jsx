@@ -48,7 +48,7 @@ class App extends Component {
               exact
               path="/"
               render={() => (
-                this.state.jwtToken ? (<Redirect to="/lobby" />) : (<MainPageInterface />)
+                this.state.jwtToken ? (<Redirect to="/lobby" />) : (<Redirect to="/login" />)
               )}
             />
             <Route
