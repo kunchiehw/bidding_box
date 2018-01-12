@@ -44,7 +44,13 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={MainPageInterface} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                this.state.jwtToken ? (<Redirect to="/lobby" />) : (<MainPageInterface />)
+              )}
+            />
             <Route
               path="/login"
               render={() => (
