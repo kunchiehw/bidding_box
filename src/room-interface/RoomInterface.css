@@ -6,7 +6,13 @@
 
 }
 
-.room-interface .room-main-block .main-upper-block, .room-interface .room-main-block .main-lower-block {
+.room-interface .room-main-block .main-upper-block {
+  max-width: 900px;
+  min-width: 450px;
+  margin: auto;
+}
+
+.room-interface .room-main-block .main-lower-block {
 
 }
 

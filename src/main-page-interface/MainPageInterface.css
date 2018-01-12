@@ -1,16 +1,20 @@
-.main-page-logo {
+.main-page-interface .main-page-logo {
   animation: main-page-logo-spin infinite 20s linear;
   height: 80px;
 }
 
-.main-page-header {
+.main-page-interface .main-page-header {
   background-color: #222;
   padding: 20px;
   color: white;
 }
 
-.main-page-title {
+.main-page-interface .main-page-title {
   font-size: 1.5em;
+}
+
+.main-page-interface .to-login-button {
+  margin: 1em auto;
 }
 
 @keyframes main-page-logo-spin {
