@@ -64,7 +64,7 @@ app.post(
       return res.sendStatus(403);
     }
 
-    const token = jwt.sign({ username }, secret, { expiresIn: '1h' });
+    const token = jwt.sign({ username }, secret, { expiresIn: '30d' });
 
     console.log(`${username} get jwt`);
     res.send(token);

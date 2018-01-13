@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
+import { decode } from 'jsonwebtoken';
 import MainPageInterface from './main-page-interface/MainPageInterface';
 import LobbyInterface from './lobby-interface/LobbyInterface';
 import LoginInterface from './login-interface/LoginInterface';
@@ -13,9 +15,27 @@ class App extends Component {
       jwtToken: null,
     };
     this.handleUpdateJWTToken = this.handleUpdateJWTToken.bind(this);
+    this.cookies = new Cookies();
+  }
+
+  componentWillMount() {
+    const jwtToken = this.cookies.get('jwtToken');
+    if (jwtToken) {
+      if (decode(jwtToken).exp > Math.floor(Date.now() / 1000)) {
+        this.setState({ jwtToken });
+      } else {
+        this.cookies.remove('jwtToken');
+      }
+    }
   }
 
   handleUpdateJWTToken(jwtToken) {
+    if (jwtToken) {
+      this.cookies.set('jwtToken', jwtToken);
+    } else {
+      this.cookies.remove('jwtToken');
+    }
+
     this.setState({ jwtToken });
   }
 
@@ -24,7 +44,13 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={MainPageInterface} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                this.state.jwtToken ? (<Redirect to="/lobby" />) : (<Redirect to="/login" />)
+              )}
+            />
             <Route
               path="/login"
               render={() => (
