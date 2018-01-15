@@ -38,6 +38,7 @@ class RoomInterface extends Component {
       bidSeq: [],
       roomInfo: {
         eastID: 'jarron',
+        westID: 'wkc',
       },
       boardInfo: {
         vulnerability: 'NS',
@@ -116,10 +117,11 @@ class RoomInterface extends Component {
 
   handleUndoButton() {
     const userRole = getPlayerRole(this.state.roomInfo, this.username);
-
     const bidSeq = this.state.bidSeq.slice();
     const roleIndex = SEATS.indexOf(userRole);
     const dealerIndex = SEATS.indexOf(this.state.boardInfo.dealer);
+
+    if (bidSeq.length === 0) return;
 
     bidSeq.pop();
     if (dealerIndex + bidSeq.length >= roleIndex) {
