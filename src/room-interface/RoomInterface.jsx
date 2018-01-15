@@ -10,7 +10,7 @@ import HandCardsDisplay from './hand-cards-display/HandCardsDisplay';
 import ScoreBlock from './score-block/ScoreBlock';
 import { SEATS } from '../util/util';
 import { getPlayerRole, getBidSeqIsEnded, getWhoseTurn, getCurrentBid,
-  getShouldDisabledDouble, getShouldDisabledRedouble } from './helper-RoomInterface';
+  shouldDoubleButtonDisabled, shouldRedoubleButtonDisabled } from './helper-RoomInterface';
 
 const propTypes = {
   jwtToken: PropTypes.string,
@@ -42,7 +42,7 @@ class RoomInterface extends Component {
       },
       boardInfo: {
         vulnerability: 'NS',
-        dealer: 'NORTH',
+        dealer: 'WEST',
         eastHand: {
           SPADES: 'AKQJT98765432',
           HEARTS: '',
@@ -174,8 +174,8 @@ class RoomInterface extends Component {
       const bidButtonBlockProp = {
         currentLevel: currentBid.level,
         currentSuit: currentBid.suit,
-        shouldDisabledDouble: getShouldDisabledDouble(this.state.bidSeq),
-        shouldDisabledRedouble: getShouldDisabledRedouble(this.state.bidSeq),
+        shouldDoubleButtonDisabled: shouldDoubleButtonDisabled(this.state.bidSeq),
+        shouldRedoubleButtonDisabled: shouldRedoubleButtonDisabled(this.state.bidSeq),
         handleBidButtonClick: this.handleBidButtonClick,
       };
       const bidSequenceDisplayProp = {

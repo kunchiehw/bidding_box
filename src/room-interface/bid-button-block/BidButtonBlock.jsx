@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import './BidButtonBlock.css';
 import BidButton from './BidButton';
 import { shouldStandardBidButtonDisabled } from './helper-BidButtonBlock';
-import { STANDARD_SUITS, SPECIAL_SUITS } from '../../util/util';
+import { STANDARD_SUITS } from '../../util/util';
 
 const POSSIBLE_LEVELS = [1, 2, 3, 4, 5, 6, 7];
 
 const propTypes = {
   currentLevel: PropTypes.number.isRequired,
   currentSuit: PropTypes.oneOf(STANDARD_SUITS.concat(['PASS'])).isRequired,
-  shouldDisabledDouble: PropTypes.bool.isRequired,
-  shouldDisabledRedouble: PropTypes.bool.isRequired,
+  shouldDoubleButtonDisabled: PropTypes.bool.isRequired,
+  shouldRedoubleButtonDisabled: PropTypes.bool.isRequired,
   handleBidButtonClick: PropTypes.func.isRequired,
 };
 
@@ -38,20 +38,20 @@ class BidButtonBlock extends PureComponent {
         <div className="bid-button-row special-bid-button-row">
           <BidButton
             level={0}
-            suit={SPECIAL_SUITS[0]}
+            suit="PASS"
             isDisabled={false}
             handleBidButtonClick={this.props.handleBidButtonClick}
           />
           <BidButton
             level={0}
-            suit={SPECIAL_SUITS[1]}
-            isDisabled={this.props.shouldDisabledDouble}
+            suit="DOUBLE"
+            isDisabled={this.props.shouldDoubleButtonDisabled}
             handleBidButtonClick={this.props.handleBidButtonClick}
           />
           <BidButton
             level={0}
-            suit={SPECIAL_SUITS[2]}
-            isDisabled={this.props.shouldDisabledRedouble}
+            suit="REDOUBLE"
+            isDisabled={this.props.shouldRedoubleButtonDisabled}
             handleBidButtonClick={this.props.handleBidButtonClick}
           />
         </div>

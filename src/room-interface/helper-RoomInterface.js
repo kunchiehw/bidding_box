@@ -99,7 +99,7 @@ export function getCurrentBid(bidSeq) {
   return { level: 0, suit: 'PASS' };
 }
 
-export function getShouldDisabledDouble(bidSeq) {
+export function shouldDoubleButtonDisabled(bidSeq) {
   const bidSeqLen = bidSeq.length;
   if (isSuit(bidSeq[bidSeqLen - 1])) {
     return false;
@@ -112,7 +112,7 @@ export function getShouldDisabledDouble(bidSeq) {
   return true;
 }
 
-export function getShouldDisabledRedouble(bidSeq) {
+export function shouldRedoubleButtonDisabled(bidSeq) {
   const bidSeqLen = bidSeq.length;
   if (isDouble(bidSeq[bidSeqLen - 1])) {
     return false;

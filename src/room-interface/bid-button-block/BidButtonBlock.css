@@ -4,7 +4,7 @@
   vertical-align: top;
 }
 
-.bid-button-block .bid-button {
+.bid-button-block .bid-button-row .bid-button {
   width: 64px;
   min-width: 64px;
   margin: 2px 3px;
