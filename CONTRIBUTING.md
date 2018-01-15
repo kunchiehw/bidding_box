@@ -22,4 +22,4 @@ This section describes the rule of all front-end UI files. That is, all the file
 
 ### HTML Elements
 
-* For each HTML elements, assign it a class name `className` (in lisp-case), which briefly describes the purpose of the element. The `className` attribute should be in the front of all other attributes of the elements. 
+* For each HTML elements, assign it a class name `className` (in lisp-case), which briefly describes the purpose of the element. The `className` attribute should be in the front of all other attributes (except `key`) of the elements. 
