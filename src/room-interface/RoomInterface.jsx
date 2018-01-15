@@ -37,7 +37,8 @@ class RoomInterface extends Component {
     this.state = {
       bidSeq: [],
       roomInfo: {
-        eastID: 'test',
+        eastID: 'jarron',
+        westID: 'wkc',
       },
       boardInfo: {
         vulnerability: 'NS',
@@ -115,13 +116,12 @@ class RoomInterface extends Component {
   }
 
   handleUndoButton() {
-    // Regard TESTER as EAST when press undo button.
     const userRole = getPlayerRole(this.state.roomInfo, this.username);
-    const role = (userRole === 'TESTER') ? 'EAST' : userRole;
-
     const bidSeq = this.state.bidSeq.slice();
-    const roleIndex = SEATS.indexOf(role);
+    const roleIndex = SEATS.indexOf(userRole);
     const dealerIndex = SEATS.indexOf(this.state.boardInfo.dealer);
+
+    if (bidSeq.length === 0) return;
 
     bidSeq.pop();
     if (dealerIndex + bidSeq.length >= roleIndex) {
@@ -152,8 +152,7 @@ class RoomInterface extends Component {
     const bidSeqIsEnded = getBidSeqIsEnded(this.state.bidSeq);
 
     const handCardsDisplayProp = {
-      // Regard TESTER as EAST in handCardsBlock.
-      playerRole: (playerRole === 'TESTER') ? 'EAST' : playerRole,
+      playerRole,
       eastHand: (this.state.boardInfo) ? this.state.boardInfo.eastHand : null,
       westHand: (this.state.boardInfo) ? this.state.boardInfo.westHand : null,
       eastID: (this.state.roomInfo && this.state.roomInfo.eastID) ? this.state.roomInfo.eastID : '',
@@ -189,9 +188,9 @@ class RoomInterface extends Component {
         <div className="main-lower-block">
           <BidSequenceDisplay {...bidSequenceDisplayProp} />
           {(bidSeqIsEnded) && <ScoreBlock scoreList={this.state.boardInfo.scoreList} />}
-          {((!bidSeqIsEnded && whoseTurn === playerRole) || this.username === 'test') &&
+          {(!bidSeqIsEnded && whoseTurn === playerRole) &&
             <BidButtonBlock {...bidButtonBlockProp} />}
-          {((!bidSeqIsEnded && whoseTurn !== playerRole) && this.username !== 'test') &&
+          {(!bidSeqIsEnded && whoseTurn !== playerRole) &&
             <div className="empty-div" > Something Here </div>}
         </div>
       );
@@ -199,9 +198,9 @@ class RoomInterface extends Component {
 
     const roomToolsBlock = (
       <div className="room-tools-block">
-        {(playerRole !== 'OBSERVER' || this.username === 'test') &&
+        {(playerRole !== 'OBSERVER') &&
           <Button onClick={this.handleUndoButton} size="small" color="grey">Undo</Button>}
-        {(playerRole !== 'OBSERVER' || this.username === 'test') &&
+        {(playerRole !== 'OBSERVER') &&
           <Button onClick={this.handleResetButton} size="small" color="grey">Reset</Button>}
         {(this.roomName === this.username) &&
           <Button size="small" color="grey">Host Setting</Button>}

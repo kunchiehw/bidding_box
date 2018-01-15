@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import { decode } from 'jsonwebtoken';
-import MainPageInterface from './main-page-interface/MainPageInterface';
 import LobbyInterface from './lobby-interface/LobbyInterface';
 import LoginInterface from './login-interface/LoginInterface';
 import RoomInterface from './room-interface/RoomInterface';
