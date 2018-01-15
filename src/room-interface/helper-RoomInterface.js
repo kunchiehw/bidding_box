@@ -53,7 +53,6 @@ export function suitColor(suit) {
 export function getPlayerRole(roomInfo, username) {
   if (roomInfo && roomInfo.westID === username) return 'WEST';
   if (roomInfo && roomInfo.eastID === username) return 'EAST';
-  if (username === 'test') return 'TESTER';
   return 'OBSERVER';
 }
 
