@@ -96,7 +96,7 @@ app.post(
   bodyParser.json(),
   (req, res, next) => {
     const { roomId } = req.params;
-    const { bidSeq } = req.body;
+    const bidSeq = JSON.stringify(req.body.bidSeq);
     docClient.update({
       TableName: 'Room',
       Key: {
@@ -115,7 +115,7 @@ app.post(
           }
         });
 
-        res.send(200);
+        res.sendStatus(200);
       })
       .catch(err => next(err));
   },

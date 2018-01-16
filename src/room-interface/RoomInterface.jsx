@@ -78,6 +78,7 @@ class RoomInterface extends Component {
     this.roomName = this.props.match.params.roomName;
 
     this.updateWebSocket = this.updateWebSocket.bind(this);
+    this.updateRoom = this.updateRoom.bind(this);
 
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
     this.handleUndoButton = this.handleUndoButton.bind(this);
@@ -108,11 +109,20 @@ class RoomInterface extends Component {
     }
   }
 
+  updateRoom(bidSeq) {
+    fetch(`http://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ bidSeq }),
+    });
+  }
+
   handleBidButtonClick(level, suit) {
     const bidSeq = this.state.bidSeq.slice();
     bidSeq.push({ level, suit });
-    this.setState({ bidSeq });
-    if (this.socket) this.socket.send(JSON.stringify(bidSeq));
+    this.updateRoom(bidSeq);
   }
 
   handleUndoButton() {
@@ -128,16 +138,12 @@ class RoomInterface extends Component {
       while ((dealerIndex + bidSeq.length) % 4 !== roleIndex) {
         bidSeq.pop();
       }
-      this.setState({
-        bidSeq,
-      });
-      if (this.socket) this.socket.send(JSON.stringify(bidSeq));
+      this.updateRoom(bidSeq);
     }
   }
 
   handleResetButton() {
-    this.setState({ bidSeq: [] });
-    if (this.socket) this.socket.send(JSON.stringify([]));
+    this.updateRoom([]);
   }
 
   handleBackToLobbyButton() {
