@@ -78,6 +78,7 @@ class RoomInterface extends Component {
     this.roomName = this.props.match.params.roomName;
 
     this.updateWebSocket = this.updateWebSocket.bind(this);
+    this.updateRoomBidSeq = this.updateRoomBidSeq.bind(this);
 
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
     this.handleUndoButton = this.handleUndoButton.bind(this);
@@ -103,16 +104,26 @@ class RoomInterface extends Component {
     if (jwtToken) {
       this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}?jwt=${jwtToken}`);
       this.socket.addEventListener('message', (event) => {
-        this.setState({ bidSeq: JSON.parse(event.data) });
+        const { bidSeq } = JSON.parse(event.data);
+        this.setState({ bidSeq: JSON.parse(bidSeq) });
       });
     }
+  }
+
+  updateRoomBidSeq(bidSeq) {
+    fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ bidSeq }),
+    });
   }
 
   handleBidButtonClick(level, suit) {
     const bidSeq = this.state.bidSeq.slice();
     bidSeq.push({ level, suit });
-    this.setState({ bidSeq });
-    if (this.socket) this.socket.send(JSON.stringify(bidSeq));
+    this.updateRoomBidSeq(bidSeq);
   }
 
   handleUndoButton() {
@@ -128,16 +139,12 @@ class RoomInterface extends Component {
       while ((dealerIndex + bidSeq.length) % 4 !== roleIndex) {
         bidSeq.pop();
       }
-      this.setState({
-        bidSeq,
-      });
-      if (this.socket) this.socket.send(JSON.stringify(bidSeq));
+      this.updateRoomBidSeq(bidSeq);
     }
   }
 
   handleResetButton() {
-    this.setState({ bidSeq: [] });
-    if (this.socket) this.socket.send(JSON.stringify([]));
+    this.updateRoomBidSeq([]);
   }
 
   handleBackToLobbyButton() {

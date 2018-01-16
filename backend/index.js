@@ -90,6 +90,38 @@ app.get(
 );
 
 
+app.post(
+  '/room/:roomId',
+  // TODO: check jwt
+  bodyParser.json(),
+  (req, res, next) => {
+    const { roomId } = req.params;
+    const bidSeq = JSON.stringify(req.body.bidSeq);
+    docClient.update({
+      TableName: 'Room',
+      Key: {
+        id: roomId,
+      },
+      UpdateExpression: 'set bidSeq = :b',
+      ExpressionAttributeValues: {
+        ':b': bidSeq,
+      },
+      ReturnValues: 'UPDATED_NEW',
+    }).promise()
+      .then(() => {
+        wss.clients.forEach((client) => {
+          if (client.roomId === roomId) {
+            client.send(JSON.stringify({ bidSeq }));
+          }
+        });
+
+        res.sendStatus(200);
+      })
+      .catch(err => next(err));
+  },
+);
+
+
 // WebSocket
 wss.on('connection', (ws, req) => {
   // TODO: You might use location.query.access_token to authenticate or share sessions
@@ -99,7 +131,7 @@ wss.on('connection', (ws, req) => {
     return ws.close();
   }
   const room = location.pathname.substring(6);
-  ws.room = room;
+  ws.roomId = room;
   console.log(`${req.user.username} get in the room: ${room}`);
 
   docClient.get({
@@ -110,7 +142,7 @@ wss.on('connection', (ws, req) => {
   }).promise()
     .then((data) => {
       if (data.Item) {
-        ws.send(data.Item.bidSeq);
+        ws.send(JSON.stringify(data.Item));
       } else {
         docClient.put({
           TableName: 'Room',
@@ -121,31 +153,10 @@ wss.on('connection', (ws, req) => {
             roomInfo: {},
           },
         }, () => {
-          ws.send('[]');
+          ws.send('{"bidSeq": "[]"}');
         });
       }
     });
-
-  ws.on('message', (message) => {
-    console.log(`${room} received: ${message}`);
-    docClient.update({
-      TableName: 'Room',
-      Key: {
-        id: room,
-      },
-      UpdateExpression: 'set bidSeq = :b',
-      ExpressionAttributeValues: {
-        ':b': message,
-      },
-      ReturnValues: 'UPDATED_NEW',
-    });
-
-    wss.clients.forEach((client) => {
-      if (client.room === room) {
-        client.send(message);
-      }
-    });
-  });
 });
 
 
