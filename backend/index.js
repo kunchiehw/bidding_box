@@ -111,7 +111,7 @@ app.post(
       .then(() => {
         wss.clients.forEach((client) => {
           if (client.roomId === roomId) {
-            client.send(bidSeq);
+            client.send(JSON.stringify({ bidSeq }));
           }
         });
 
@@ -142,7 +142,7 @@ wss.on('connection', (ws, req) => {
   }).promise()
     .then((data) => {
       if (data.Item) {
-        ws.send(data.Item.bidSeq);
+        ws.send(JSON.stringify(data.Item));
       } else {
         docClient.put({
           TableName: 'Room',
@@ -153,7 +153,7 @@ wss.on('connection', (ws, req) => {
             roomInfo: {},
           },
         }, () => {
-          ws.send('[]');
+          ws.send('{"bidSeq": "[]"}');
         });
       }
     });

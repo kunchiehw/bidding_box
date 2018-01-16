@@ -104,7 +104,8 @@ class RoomInterface extends Component {
     if (jwtToken) {
       this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}?jwt=${jwtToken}`);
       this.socket.addEventListener('message', (event) => {
-        this.setState({ bidSeq: JSON.parse(event.data) });
+        const { bidSeq } = JSON.parse(event.data);
+        this.setState({ bidSeq: JSON.parse(bidSeq) });
       });
     }
   }
