@@ -111,7 +111,7 @@ class RoomInterface extends Component {
   }
 
   updateRoomBidSeq(bidSeq) {
-    fetch(`http://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
