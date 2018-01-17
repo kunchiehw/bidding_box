@@ -5,7 +5,7 @@
   margin: 0px 15px;
 }
 
-.bid-sequence-display .bid-sequence-display-cell {
+.bid-sequence-display .seat-cell, .bid-sequence-display .bid-sequence-cell {
   display: inline-block;
   text-align: center;
   width: 75px;
@@ -14,26 +14,26 @@
   padding: .5em 1em;
 }
 
-.bid-sequence-display .seat-row .seat-cell {
+.bid-sequence-display .seat-cell {
   border: 1px;
   border-style: solid;
 }
 
-.bid-sequence-display .bid-cell.empty-cell {
+.bid-sequence-display .bid-sequence-cell.empty-cell {
   visibility: hidden;
 }
 
-.bid-sequence-display .bid-cell.PASS-cell {
+.bid-sequence-display .bid-sequence-cell.PASS-cell {
   border: 2px solid #21ba45;
   color: #21ba45;
 }
 
-.bid-sequence-display .bid-cell.DOUBLE-cell {
+.bid-sequence-display .bid-sequence-cell.DOUBLE-cell {
   border: 2px solid #db2828;
   color: #db2828;
 }
 
-.bid-sequence-display .bid-cell.REDOUBLE-cell {
+.bid-sequence-display .bid-sequence-cell.REDOUBLE-cell {
   border: 2px solid #2185d0;
   color: #2185d0;
 }

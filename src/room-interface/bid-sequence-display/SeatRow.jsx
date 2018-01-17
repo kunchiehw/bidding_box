@@ -20,25 +20,10 @@ class SeatRow extends PureComponent {
       <div className="seat-row">
         {SEATS.map((seat) => {
           const seatIsVulnerable = isVulnerable(seat, this.props.vulnerability);
-          return ((seatIsVulnerable) ? (
-            <Segment
-              key={seat}
-              className="bid-sequence-display-cell seat-cell"
-              size="small"
-              color="red"
-              inverted
-            >
-              {seat}
-            </Segment>
-          ) : (
-            <Segment
-              key={seat}
-              className="bid-sequence-display-cell seat-cell"
-              size="small"
-            >
-              {seat}
-            </Segment>
-          ));
+          return ((seatIsVulnerable) ?
+            <Segment key={seat} className="seat-cell" color="red" inverted> {seat} </Segment>
+          : <Segment key={seat} className="seat-cell"> {seat} </Segment>
+          );
         })}
       </div>
     );

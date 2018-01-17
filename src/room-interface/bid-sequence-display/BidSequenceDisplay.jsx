@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Divider } from 'semantic-ui-react';
 import './BidSequenceDisplay.css';
 import SeatRow from './SeatRow';
-import BidBlock from './BidBlock';
+import BidSequenceBlock from './BidSequenceBlock';
 import { SEATS, VULS, ALL_SUITS } from '../../util/util';
 
 const propTypes = {
@@ -20,7 +20,7 @@ function BidSequenceDisplay(props) {
     <div className="bid-sequence-display">
       <SeatRow vulnerability={props.vulnerability} />
       <Divider />
-      <BidBlock dealer={props.dealer} bidSeq={props.bidSeq} />
+      <BidSequenceBlock dealer={props.dealer} bidSeq={props.bidSeq} />
     </div>
   );
 }
