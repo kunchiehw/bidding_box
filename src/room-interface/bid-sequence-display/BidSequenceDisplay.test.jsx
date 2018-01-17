@@ -1,54 +1,63 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import SeatRow from './SeatRow';
-import BidBlock from './BidBlock';
+import BidSequenceBlock from './BidSequenceBlock';
 import BidSequenceDisplay from './BidSequenceDisplay';
 
 it('SeatRow render', () => {
-  const prop1 = {
-    vulnerability: 'NONE',
-  };
-  shallow(<SeatRow {...prop1} />);
+  const seatRow1 = shallow(<SeatRow
+    vulnerability="NONE"
+  />);
+  expect(toJson(seatRow1)).toMatchSnapshot();
 
-  const prop2 = {
-    vulnerability: 'NS',
-  };
-  shallow(<SeatRow {...prop2} />);
+  const seatRow2 = shallow(<SeatRow
+    vulnerability="NS"
+  />);
+  expect(toJson(seatRow2)).toMatchSnapshot();
 
-  const prop3 = {
-    vulnerability: 'BOTH',
-  };
-  shallow(<SeatRow {...prop3} />);
+  const seatRow3 = shallow(<SeatRow
+    vulnerability="BOTH"
+  />);
+  expect(toJson(seatRow3)).toMatchSnapshot();
 });
 
-it('BidBlock render', () => {
-  const prop1 = {
-    dealer: 'NORTH',
-    bidSeq: [],
-  };
-  shallow(<BidBlock {...prop1} />);
+it('BidSequenceBlock render', () => {
+  const bidSequenceBlock1 = shallow(<BidSequenceBlock
+    dealer="SOUTH"
+    bidSeq={[]}
+  />);
+  expect(toJson(bidSequenceBlock1)).toMatchSnapshot();
 
-  const prop2 = {
-    dealer: 'EAST',
-    bidSeq: [{ level: 1, suit: 'CLUBS' }, { level: 2, suit: 'DIAMONDS' }, { level: 3, suit: 'HEARTS' },
-      { level: 4, suit: 'SPADES' }, { level: 5, suit: 'NOTRUMPS' }],
-  };
-  shallow(<BidBlock {...prop2} />);
+  const bidSequenceBlock2 = shallow(<BidSequenceBlock
+    dealer="EAST"
+    bidSeq={[
+      { level: 1, suit: 'CLUBS' },
+      { level: 2, suit: 'DIAMONDS' },
+      { level: 3, suit: 'HEARTS' },
+      { level: 4, suit: 'SPADES' },
+      { level: 5, suit: 'NOTRUMPS' }]}
+  />);
+  expect(toJson(bidSequenceBlock2)).toMatchSnapshot();
 
-  const prop3 = {
-    dealer: 'EAST',
-    bidSeq: [{ level: 6, suit: 'CLUBS' }, { level: null, suit: 'DOUBLE' }, { level: null, suit: 'REDOUBLE' },
-      { level: null, suit: 'PASS' }, { level: null, suit: 'PASS' }, { level: null, suit: 'PASS' }],
-  };
-
-  shallow(<BidBlock {...prop3} />);
+  const bidSequenceBlock3 = shallow(<BidSequenceBlock
+    dealer="WEST"
+    bidSeq={[
+      { level: 6, suit: 'CLUBS' },
+      { level: null, suit: 'DOUBLE' },
+      { level: null, suit: 'REDOUBLE' },
+      { level: null, suit: 'PASS' },
+      { level: null, suit: 'PASS' },
+      { level: null, suit: 'PASS' }]}
+  />);
+  expect(toJson(bidSequenceBlock3)).toMatchSnapshot();
 });
 
 it('BidSequenceDisplay render', () => {
-  const prop1 = {
-    dealer: 'NORTH',
-    vulnerability: 'NONE',
-    bidSeq: [],
-  };
-  shallow(<BidSequenceDisplay {...prop1} />);
+  const bidSequenceDisplay1 = shallow(<BidSequenceDisplay
+    dealer="NORTH"
+    vulnerability="EW"
+    bidSeq={[]}
+  />);
+  expect(toJson(bidSequenceDisplay1)).toMatchSnapshot();
 });

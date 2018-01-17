@@ -40,7 +40,7 @@ function BidSequenceBlock(props) {
     }
   }
 
-  bidSequenceRows.push(<div key="last" className="bid-sequence-row"> {bidSequenceRow} </div>);
+  bidSequenceRows.push(<div key={bidSequenceRowIndex} className="bid-sequence-row"> {bidSequenceRow} </div>);
 
   return (
     <div className="bid-sequence-block">

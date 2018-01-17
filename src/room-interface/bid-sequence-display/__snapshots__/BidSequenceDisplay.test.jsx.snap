@@ -1,0 +1,331 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BidSequenceBlock render 1`] = `
+<div
+  className="bid-sequence-block"
+>
+  <div
+    className="bid-sequence-row"
+    key="0"
+  >
+     
+    <Segment
+      className="bid-sequence-cell empty-cell"
+      key="WEST"
+    >
+       Empty 
+    </Segment>
+    <Segment
+      className="bid-sequence-cell empty-cell"
+      key="NORTH"
+    >
+       Empty 
+    </Segment>
+    <Segment
+      className="bid-sequence-cell empty-cell"
+      key="EAST"
+    >
+       Empty 
+    </Segment>
+     
+  </div>
+</div>
+`;
+
+exports[`BidSequenceBlock render 2`] = `
+<div
+  className="bid-sequence-block"
+>
+  <div
+    className="bid-sequence-row"
+    key="0"
+  >
+     
+    <Segment
+      className="bid-sequence-cell empty-cell"
+      key="WEST"
+    >
+       Empty 
+    </Segment>
+    <Segment
+      className="bid-sequence-cell empty-cell"
+      key="NORTH"
+    >
+       Empty 
+    </Segment>
+    <Segment
+      className="bid-sequence-cell"
+      color="green"
+      inverted={true}
+      key="0"
+    >
+       
+      1 ♣
+       
+    </Segment>
+    <Segment
+      className="bid-sequence-cell"
+      color="orange"
+      inverted={true}
+      key="1"
+    >
+       
+      2 ♦
+       
+    </Segment>
+     
+  </div>
+  <div
+    className="bid-sequence-row"
+    key="1"
+  >
+     
+    <Segment
+      className="bid-sequence-cell"
+      color="red"
+      inverted={true}
+      key="2"
+    >
+       
+      3 ♥
+       
+    </Segment>
+    <Segment
+      className="bid-sequence-cell"
+      color="blue"
+      inverted={true}
+      key="3"
+    >
+       
+      4 ♠
+       
+    </Segment>
+    <Segment
+      className="bid-sequence-cell"
+      color="black"
+      inverted={true}
+      key="4"
+    >
+       
+      5 N
+       
+    </Segment>
+     
+  </div>
+</div>
+`;
+
+exports[`BidSequenceBlock render 3`] = `
+<div
+  className="bid-sequence-block"
+>
+  <div
+    className="bid-sequence-row"
+    key="0"
+  >
+     
+    <Segment
+      className="bid-sequence-cell"
+      color="green"
+      inverted={true}
+      key="0"
+    >
+       
+      6 ♣
+       
+    </Segment>
+    <Segment
+      className="bid-sequence-cell DOUBLE-cell"
+      key="1"
+    >
+       
+      X
+       
+    </Segment>
+    <Segment
+      className="bid-sequence-cell REDOUBLE-cell"
+      key="2"
+    >
+       
+      XX
+       
+    </Segment>
+    <Segment
+      className="bid-sequence-cell PASS-cell"
+      key="3"
+    >
+       
+      Pass
+       
+    </Segment>
+     
+  </div>
+  <div
+    className="bid-sequence-row"
+    key="1"
+  >
+     
+    <Segment
+      className="bid-sequence-cell PASS-cell"
+      key="4"
+    >
+       
+      Pass
+       
+    </Segment>
+    <Segment
+      className="bid-sequence-cell PASS-cell"
+      key="5"
+    >
+       
+      Pass
+       
+    </Segment>
+     
+  </div>
+</div>
+`;
+
+exports[`BidSequenceDisplay render 1`] = `
+<div
+  className="bid-sequence-display"
+>
+  <SeatRow
+    vulnerability="EW"
+  />
+  <Divider />
+  <BidSequenceBlock
+    bidSeq={Array []}
+    dealer="NORTH"
+  />
+</div>
+`;
+
+exports[`SeatRow render 1`] = `
+<div
+  className="seat-row"
+>
+  <Segment
+    className="seat-cell"
+    key="WEST"
+  >
+     
+    WEST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    key="NORTH"
+  >
+     
+    NORTH
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    key="EAST"
+  >
+     
+    EAST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    key="SOUTH"
+  >
+     
+    SOUTH
+     
+  </Segment>
+</div>
+`;
+
+exports[`SeatRow render 2`] = `
+<div
+  className="seat-row"
+>
+  <Segment
+    className="seat-cell"
+    key="WEST"
+  >
+     
+    WEST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="NORTH"
+  >
+     
+    NORTH
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    key="EAST"
+  >
+     
+    EAST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="SOUTH"
+  >
+     
+    SOUTH
+     
+  </Segment>
+</div>
+`;
+
+exports[`SeatRow render 3`] = `
+<div
+  className="seat-row"
+>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="WEST"
+  >
+     
+    WEST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="NORTH"
+  >
+     
+    NORTH
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="EAST"
+  >
+     
+    EAST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="SOUTH"
+  >
+     
+    SOUTH
+     
+  </Segment>
+</div>
+`;
