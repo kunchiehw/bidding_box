@@ -7,7 +7,6 @@ const websocket = require('ws');
 const jwt = require('jsonwebtoken');
 const aws = require('aws-sdk');
 
-
 const secret = process.env.SHARE_SECRET;
 const db = {
   users: {
@@ -17,11 +16,23 @@ const db = {
 };
 
 
+// Server Config
 const docClient = new aws.DynamoDB.DocumentClient();
 const app = express();
 const server = http.createServer(app);
 const wss = new websocket.Server({
   server,
+});
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
+
+server.listen(8080, () => {
+  console.log('Listening on %d', server.address().port);
 });
 
 
@@ -54,15 +65,7 @@ function authenticateJwtMiddleware(req, res, next) {
 }
 
 
-// API
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  next();
-});
-
-
+// API define
 app.post(
   '/token',
   bodyParser.json(),
@@ -167,7 +170,7 @@ app.put(
 );
 
 
-// WebSocket
+// WebSocket define
 wss.on('connection', (ws, req) => {
   // Check url
   const location = url.parse(req.url, true);
@@ -203,9 +206,4 @@ wss.on('connection', (ws, req) => {
         ws.close();
       });
   });
-});
-
-
-server.listen(8080, () => {
-  console.log('Listening on %d', server.address().port);
 });
