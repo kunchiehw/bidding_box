@@ -14,7 +14,6 @@ const db = {
     wkc: 'password',
     jarron: 'password',
   },
-  rooms: {},
 };
 
 
@@ -23,29 +22,31 @@ const app = express();
 const server = http.createServer(app);
 const wss = new websocket.Server({
   server,
-  verifyClient(info, cb) {
-    const location = url.parse(info.req.url, true);
-    const jwtToken = location.query.jwt;
-    if (!jwtToken) { cb(false, 401, 'Unauthorized'); }
+});
 
-    jwt.verify(jwtToken, secret, (err, decoded) => {
+
+// Utils
+function authenticateRequest(token) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, secret, (err, decoded) => {
       if (err || !decoded) {
-        return cb(false, 401, 'Unauthorized');
+        reject();
       }
 
       if (!('username' in decoded) || !(decoded.username in db.users)) {
-        return cb(false, 401, 'Unauthorized');
+        reject();
       }
-      info.req.user = decoded;
-      cb(true);
+
+      resolve(token);
     });
-  },
-});
+  });
+}
 
 
 // API
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
@@ -93,6 +94,40 @@ app.get(
 app.post(
   '/room/:roomId',
   // TODO: check jwt
+  (req, res, next) => {
+    const { roomId } = req.params;
+    docClient.get({
+      TableName: 'Room',
+      Key: {
+        id: roomId,
+      },
+    }).promise()
+      .then((data) => {
+        if (data.Item) {
+          throw new Error('');
+        }
+
+        const defaultItem = {
+          id: roomId,
+          bidSeq: '[]',
+          ttl: Math.floor(Date.now() / 1000) + (4 * 60 * 60), // ttl for 4 hour
+          roomInfo: {},
+        };
+
+        return docClient.put({
+          TableName: 'Room',
+          Item: defaultItem,
+        }).promise();
+      })
+      .then(() => res.sendStatus(200))
+      .catch(err => next(err));
+  },
+);
+
+
+app.put(
+  '/room/:roomId',
+  // TODO: check jwt
   bodyParser.json(),
   (req, res, next) => {
     const { roomId } = req.params;
@@ -110,11 +145,10 @@ app.post(
     }).promise()
       .then(() => {
         wss.clients.forEach((client) => {
-          if (client.roomId === roomId) {
+          if (client.roomId === roomId && client.token) {
             client.send(JSON.stringify({ bidSeq }));
           }
         });
-
         res.sendStatus(200);
       })
       .catch(err => next(err));
@@ -124,42 +158,40 @@ app.post(
 
 // WebSocket
 wss.on('connection', (ws, req) => {
-  // Check room
+  // Check url
   const location = url.parse(req.url, true);
   if (!location.path.startsWith('/room/')) {
     return ws.close();
   }
-  const room = location.pathname.substring(6);
-  ws.roomId = room;
-  console.log(`${req.user.username} get in the room: ${room}`);
 
-  docClient.get({
-    TableName: 'Room',
-    Key: {
-      id: room,
-    },
-  }).promise()
-    .then((data) => {
-      if (data.Item) {
-        return data;
-      }
+  // Check roomId
+  const roomId = location.pathname.substring(6);
+  ws.roomId = roomId;
 
-      const defaultItem = {
-        id: room,
-        bidSeq: '[]',
-        ttl: Math.floor(Date.now() / 1000) + (4 * 60 * 60), // ttl for 4 hour
-        roomInfo: {},
-      };
-
-      return docClient.put({
-        TableName: 'Room',
-        Item: defaultItem,
-      }).promise()
-        .then(() => ({ Item: defaultItem }));
-    })
-    .then((data) => {
-      ws.send(JSON.stringify(data.Item));
-    });
+  // Check auth
+  ws.on('message', (token) => {
+    authenticateRequest(token)
+      .then(() => {
+        if (ws.roomId) {
+          ws.token = token;
+          docClient.get({
+            TableName: 'Room',
+            Key: {
+              id: roomId,
+            },
+          }).promise()
+            .then((data) => {
+              if (!data.Item) {
+                throw new Error();
+              }
+              ws.send(JSON.stringify(data.Item));
+            });
+        }
+      })
+      .catch(() => {
+        ws.close();
+      });
+  });
 });
 
 
