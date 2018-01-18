@@ -65,6 +65,10 @@ function authenticateJwtMiddleware(req, res, next) {
 }
 
 
+function getTtl() {
+  return Math.floor(Date.now() / 1000) + (4 * 60 * 60); // ttl for 4 hour
+}
+
 // API define
 app.post(
   '/token',
@@ -124,7 +128,7 @@ app.post(
         const defaultItem = {
           id: roomId,
           bidSeq: '[]',
-          ttl: Math.floor(Date.now() / 1000) + (4 * 60 * 60), // ttl for 4 hour
+          cacheTtl: getTtl(),
           roomInfo: {},
         };
 
@@ -151,9 +155,10 @@ app.put(
       Key: {
         id: roomId,
       },
-      UpdateExpression: 'set bidSeq = :b',
+      UpdateExpression: 'set bidSeq = :b, cacheTtl = :t',
       ExpressionAttributeValues: {
         ':b': bidSeq,
+        ':t': getTtl(),
       },
       ReturnValues: 'ALL_NEW',
     }).promise()
