@@ -26,7 +26,7 @@ const wss = new websocket.Server({
 
 
 // Utils
-function authenticateRequest(token) {
+function authenticateJwt(token) {
   return new Promise((resolve, reject) => {
     jwt.verify(token, secret, (err, decoded) => {
       if (err || !decoded) {
@@ -42,12 +42,23 @@ function authenticateRequest(token) {
   });
 }
 
+function authenticateJwtMiddleware(req, res, next) {
+  if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+    const token = req.headers.authorization.split(' ')[1];
+    authenticateJwt(token)
+      .then(() => next())
+      .catch(() => next(new Error('Unauthorized')));
+  } else {
+    next(new Error('Unauthorized'));
+  }
+}
+
 
 // API
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   next();
 });
 
@@ -93,7 +104,7 @@ app.get(
 
 app.post(
   '/room/:roomId',
-  // TODO: check jwt
+  authenticateJwtMiddleware,
   (req, res, next) => {
     const { roomId } = req.params;
     docClient.get({
@@ -127,7 +138,7 @@ app.post(
 
 app.put(
   '/room/:roomId',
-  // TODO: check jwt
+  authenticateJwtMiddleware,
   bodyParser.json(),
   (req, res, next) => {
     const { roomId } = req.params;
@@ -170,7 +181,7 @@ wss.on('connection', (ws, req) => {
 
   // Check auth
   ws.on('message', (token) => {
-    authenticateRequest(token)
+    authenticateJwt(token)
       .then(() => {
         if (ws.roomId) {
           ws.token = token;

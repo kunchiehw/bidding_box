@@ -118,6 +118,7 @@ class RoomInterface extends Component {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.props.jwtToken}`,
       },
       body: JSON.stringify({ bidSeq }),
     });
