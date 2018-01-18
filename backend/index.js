@@ -106,7 +106,7 @@ app.post(
       ExpressionAttributeValues: {
         ':b': bidSeq,
       },
-      ReturnValues: 'UPDATED_NEW',
+      ReturnValues: 'ALL_NEW',
     }).promise()
       .then(() => {
         wss.clients.forEach((client) => {
@@ -124,8 +124,7 @@ app.post(
 
 // WebSocket
 wss.on('connection', (ws, req) => {
-  // TODO: You might use location.query.access_token to authenticate or share sessions
-  // or req.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
+  // Check room
   const location = url.parse(req.url, true);
   if (!location.path.startsWith('/room/')) {
     return ws.close();
@@ -142,20 +141,24 @@ wss.on('connection', (ws, req) => {
   }).promise()
     .then((data) => {
       if (data.Item) {
-        ws.send(JSON.stringify(data.Item));
-      } else {
-        docClient.put({
-          TableName: 'Room',
-          Item: {
-            id: room,
-            bidSeq: '[]',
-            ttl: Math.floor(Date.now() / 1000) + (4 * 60 * 60), // ttl for 4 hour
-            roomInfo: {},
-          },
-        }, () => {
-          ws.send('{"bidSeq": "[]"}');
-        });
+        return data;
       }
+
+      const defaultItem = {
+        id: room,
+        bidSeq: '[]',
+        ttl: Math.floor(Date.now() / 1000) + (4 * 60 * 60), // ttl for 4 hour
+        roomInfo: {},
+      };
+
+      return docClient.put({
+        TableName: 'Room',
+        Item: defaultItem,
+      }).promise()
+        .then(() => ({ Item: defaultItem }));
+    })
+    .then((data) => {
+      ws.send(JSON.stringify(data.Item));
     });
 });
 
