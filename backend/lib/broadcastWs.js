@@ -12,7 +12,7 @@ module.exports.onConnect = (ws, req) => {
     return ws.close();
   }
 
-  // Check roomId
+  // Check roomId: '/room/:roomId'
   const roomId = location.pathname.substring(6);
   ws.roomId = roomId;
 

@@ -41,6 +41,7 @@ module.exports.validateJwt = validateJwt;
 
 
 module.exports.validateJwtMiddleware = (req, res, next) => {
+  // Bearer token usage: https://tools.ietf.org/html/rfc6750
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
     const token = req.headers.authorization.split(' ')[1];
     validateJwt(token)
