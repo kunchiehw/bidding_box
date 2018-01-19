@@ -62,6 +62,12 @@ class LobbyInterface extends Component {
   handleCreateTable(role) {
     console.log(role);
     // TODO: Inform server
+    fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.username}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${this.props.jwtToken}`,
+      },
+    });
     this.props.history.push(`/room/${this.username}`);
   }
 

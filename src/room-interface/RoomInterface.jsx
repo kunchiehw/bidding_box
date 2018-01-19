@@ -102,7 +102,10 @@ class RoomInterface extends Component {
 
   updateWebSocket(jwtToken) {
     if (jwtToken) {
-      this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}?jwt=${jwtToken}`);
+      this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`);
+      this.socket.onopen = () => {
+        this.socket.send(jwtToken);
+      };
       this.socket.addEventListener('message', (event) => {
         const { bidSeq } = JSON.parse(event.data);
         this.setState({ bidSeq: JSON.parse(bidSeq) });
@@ -112,9 +115,10 @@ class RoomInterface extends Component {
 
   updateRoomBidSeq(bidSeq) {
     fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
-      method: 'post',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.props.jwtToken}`,
       },
       body: JSON.stringify({ bidSeq }),
     });

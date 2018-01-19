@@ -7,50 +7,69 @@ const websocket = require('ws');
 const jwt = require('jsonwebtoken');
 const aws = require('aws-sdk');
 
-
 const secret = process.env.SHARE_SECRET;
 const db = {
   users: {
     wkc: 'password',
     jarron: 'password',
   },
-  rooms: {},
 };
 
 
+// Server Config
 const docClient = new aws.DynamoDB.DocumentClient();
 const app = express();
 const server = http.createServer(app);
 const wss = new websocket.Server({
   server,
-  verifyClient(info, cb) {
-    const location = url.parse(info.req.url, true);
-    const jwtToken = location.query.jwt;
-    if (!jwtToken) { cb(false, 401, 'Unauthorized'); }
-
-    jwt.verify(jwtToken, secret, (err, decoded) => {
-      if (err || !decoded) {
-        return cb(false, 401, 'Unauthorized');
-      }
-
-      if (!('username' in decoded) || !(decoded.username in db.users)) {
-        return cb(false, 401, 'Unauthorized');
-      }
-      info.req.user = decoded;
-      cb(true);
-    });
-  },
 });
 
-
-// API
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   next();
 });
 
+server.listen(8080, () => {
+  console.log('Listening on %d', server.address().port);
+});
 
+
+// Utils
+function authenticateJwt(token) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, secret, (err, decoded) => {
+      if (err || !decoded) {
+        reject();
+      }
+
+      if (!('username' in decoded) || !(decoded.username in db.users)) {
+        reject();
+      }
+
+      resolve(token);
+    });
+  });
+}
+
+function authenticateJwtMiddleware(req, res, next) {
+  if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+    const token = req.headers.authorization.split(' ')[1];
+    authenticateJwt(token)
+      .then(() => next())
+      .catch(() => next(new Error('Unauthorized')));
+  } else {
+    next(new Error('Unauthorized'));
+  }
+}
+
+
+function getTtl() {
+  return Math.floor(Date.now() / 1000) + (4 * 60 * 60); // ttl for 4 hour
+}
+
+// API define
 app.post(
   '/token',
   bodyParser.json(),
@@ -92,7 +111,41 @@ app.get(
 
 app.post(
   '/room/:roomId',
-  // TODO: check jwt
+  authenticateJwtMiddleware,
+  (req, res, next) => {
+    const { roomId } = req.params;
+    docClient.get({
+      TableName: 'Room',
+      Key: {
+        id: roomId,
+      },
+    }).promise()
+      .then((data) => {
+        if (data.Item) {
+          throw new Error('');
+        }
+
+        const defaultItem = {
+          id: roomId,
+          bidSeq: '[]',
+          cacheTtl: getTtl(),
+          roomInfo: {},
+        };
+
+        return docClient.put({
+          TableName: 'Room',
+          Item: defaultItem,
+        }).promise();
+      })
+      .then(() => res.sendStatus(200))
+      .catch(err => next(err));
+  },
+);
+
+
+app.put(
+  '/room/:roomId',
+  authenticateJwtMiddleware,
   bodyParser.json(),
   (req, res, next) => {
     const { roomId } = req.params;
@@ -102,19 +155,19 @@ app.post(
       Key: {
         id: roomId,
       },
-      UpdateExpression: 'set bidSeq = :b',
+      UpdateExpression: 'set bidSeq = :b, cacheTtl = :t',
       ExpressionAttributeValues: {
         ':b': bidSeq,
+        ':t': getTtl(),
       },
-      ReturnValues: 'UPDATED_NEW',
+      ReturnValues: 'ALL_NEW',
     }).promise()
       .then(() => {
         wss.clients.forEach((client) => {
-          if (client.roomId === roomId) {
+          if (client.roomId === roomId && client.token) {
             client.send(JSON.stringify({ bidSeq }));
           }
         });
-
         res.sendStatus(200);
       })
       .catch(err => next(err));
@@ -122,44 +175,40 @@ app.post(
 );
 
 
-// WebSocket
+// WebSocket define
 wss.on('connection', (ws, req) => {
-  // TODO: You might use location.query.access_token to authenticate or share sessions
-  // or req.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
+  // Check url
   const location = url.parse(req.url, true);
   if (!location.path.startsWith('/room/')) {
     return ws.close();
   }
-  const room = location.pathname.substring(6);
-  ws.roomId = room;
-  console.log(`${req.user.username} get in the room: ${room}`);
 
-  docClient.get({
-    TableName: 'Room',
-    Key: {
-      id: room,
-    },
-  }).promise()
-    .then((data) => {
-      if (data.Item) {
-        ws.send(JSON.stringify(data.Item));
-      } else {
-        docClient.put({
-          TableName: 'Room',
-          Item: {
-            id: room,
-            bidSeq: '[]',
-            ttl: Math.floor(Date.now() / 1000) + (4 * 60 * 60), // ttl for 4 hour
-            roomInfo: {},
-          },
-        }, () => {
-          ws.send('{"bidSeq": "[]"}');
-        });
-      }
-    });
-});
+  // Check roomId
+  const roomId = location.pathname.substring(6);
+  ws.roomId = roomId;
 
-
-server.listen(8080, () => {
-  console.log('Listening on %d', server.address().port);
+  // Check auth
+  ws.on('message', (token) => {
+    authenticateJwt(token)
+      .then(() => {
+        if (ws.roomId) {
+          ws.token = token;
+          docClient.get({
+            TableName: 'Room',
+            Key: {
+              id: roomId,
+            },
+          }).promise()
+            .then((data) => {
+              if (!data.Item) {
+                throw new Error();
+              }
+              ws.send(JSON.stringify(data.Item));
+            });
+        }
+      })
+      .catch(() => {
+        ws.close();
+      });
+  });
 });
