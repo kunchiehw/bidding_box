@@ -40,6 +40,24 @@ function validateJwt(token) {
 module.exports.validateJwt = validateJwt;
 
 
+module.exports.authenticateUserMiddleware = (req, res) => {
+  if (!req.body) {
+    return res.sendStatus(400);
+  }
+
+  const { username, password } = req.body;
+
+  authenticateUser(username, password)
+    .then((token) => {
+      console.log(`${username} get jwt`);
+      res.send(token);
+    })
+    .catch(() => {
+      res.sendStatus(400);
+    });
+};
+
+
 module.exports.validateJwtMiddleware = (req, res, next) => {
   // Bearer token usage: https://tools.ietf.org/html/rfc6750
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -53,5 +71,4 @@ module.exports.validateJwtMiddleware = (req, res, next) => {
 };
 
 
-module.exports.getTtl = () =>
-  Math.floor(Date.now() / 1000) + (4 * 60 * 60); // ttl for 4 hour
+module.exports.getTtl = () => Math.floor(Date.now() / 1000) + (4 * 60 * 60); // ttl for 4 hour

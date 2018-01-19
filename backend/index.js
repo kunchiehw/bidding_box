@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const http = require('http');
 const websocket = require('ws');
 const aws = require('aws-sdk');
-const { authenticateUser, validateJwtMiddleware, getTtl } = require('./lib/utils');
+const { authenticateUserMiddleware, validateJwtMiddleware, getTtl } = require('./lib/utils');
 const broadcastWs = require('./lib/broadcastWs');
 
 
@@ -36,22 +36,7 @@ wss.on('connection', broadcastWs.onConnect);
 // API define
 app.post(
   '/token',
-  (req, res) => {
-    if (!req.body) {
-      return res.sendStatus(400);
-    }
-
-    const { username, password } = req.body;
-
-    authenticateUser(username, password)
-      .then((token) => {
-        console.log(`${username} get jwt`);
-        res.send(token);
-      })
-      .catch(() => {
-        res.sendStatus(400);
-      });
-  },
+  authenticateUserMiddleware,
 );
 
 
