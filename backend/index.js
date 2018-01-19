@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const http = require('http');
 const websocket = require('ws');
 const aws = require('aws-sdk');
+const morgan = require('morgan');
 const { authenticateUserMiddleware, validateJwtMiddleware, getTtl } = require('./lib/utils');
 const broadcastWs = require('./lib/broadcastWs');
 
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(bodyParser.json());
+app.use(morgan('dev'));
 
 server.listen(8080, () => {
   console.log('Listening on %d', server.address().port);

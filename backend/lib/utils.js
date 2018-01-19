@@ -49,7 +49,6 @@ module.exports.authenticateUserMiddleware = (req, res) => {
 
   authenticateUser(username, password)
     .then((token) => {
-      console.log(`${username} get jwt`);
       res.send(token);
     })
     .catch(() => {
