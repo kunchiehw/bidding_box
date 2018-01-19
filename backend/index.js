@@ -2,12 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
-const url = require('url');
 const websocket = require('ws');
 const aws = require('aws-sdk');
-const {
-  authenticateUser, validateJwt, validateJwtMiddleware, getTtl,
-} = require('./lib/utils');
+const { authenticateUser, validateJwtMiddleware, getTtl } = require('./lib/utils');
+const broadcastWs = require('./lib/broadcastWs');
 
 
 // Server Config
@@ -28,6 +26,10 @@ app.use((req, res, next) => {
 server.listen(8080, () => {
   console.log('Listening on %d', server.address().port);
 });
+
+
+// WebSocket define
+wss.on('connection', broadcastWs.onConnect);
 
 
 // API define
@@ -136,44 +138,3 @@ app.put(
       .catch(err => next(err));
   },
 );
-
-
-// WebSocket define
-wss.on('connection', (ws, req) => {
-  // Check url
-  const location = url.parse(req.url, true);
-  if (!location.path.startsWith('/room/')) {
-    return ws.close();
-  }
-
-  // Check roomId
-  const roomId = location.pathname.substring(6);
-  ws.roomId = roomId;
-
-  // Check auth
-  ws.on('message', (token) => {
-    validateJwt(token)
-      .then(() => {
-        if (ws.roomId) {
-          ws.token = token;
-          return docClient.get({
-            TableName: 'Room',
-            Key: {
-              id: roomId,
-            },
-          }).promise();
-        }
-        return Promise.resolve(null);
-      })
-      .then((data) => {
-        if (!(data && data.Item)) {
-          throw new Error();
-        }
-        ws.send(JSON.stringify(data.Item));
-      })
-      .catch((err) => {
-        console.log(`websocket close: ${err}`);
-        ws.close();
-      });
-  });
-});
