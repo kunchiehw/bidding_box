@@ -36,41 +36,8 @@ class RoomInterface extends Component {
     super(props);
     this.state = {
       bidSeq: [],
-      roomInfo: {
-        eastID: 'jarron',
-        westID: 'wkc',
-      },
-      boardInfo: {
-        vulnerability: 'NS',
-        dealer: 'WEST',
-        eastHand: {
-          SPADES: 'AKQJT98765432',
-          HEARTS: '',
-          DIAMONDS: '',
-          CLUBS: '',
-        },
-        westHand: {
-          SPADES: '',
-          HEARTS: 'KQJT9',
-          DIAMONDS: 'KQJT',
-          CLUBS: 'KQJT',
-        },
-        scoreList: [{
-          bid: {
-            level: 7,
-            suit: 'SPADES',
-          },
-          declarer: 'EW',
-          score: 100,
-        }, {
-          bid: {
-            level: 7,
-            suit: 'NOTRUMPS',
-          },
-          declarer: 'EAST',
-          score: 0,
-        }],
-      },
+      roomInfo: {},
+      boardInfo: {},
     };
 
     this.socket = null;
@@ -106,10 +73,21 @@ class RoomInterface extends Component {
       this.socket.onopen = () => {
         this.socket.send(jwtToken);
       };
-      this.socket.addEventListener('message', (event) => {
-        const { bidSeq } = JSON.parse(event.data);
-        this.setState({ bidSeq: JSON.parse(bidSeq) });
-      });
+      this.socket.onmessage = (event) => {
+        const { bidSeq, roomInfo, boardInfo } = JSON.parse(event.data);
+        if (bidSeq) {
+          this.setState({ bidSeq: JSON.parse(bidSeq) });
+        }
+        if (roomInfo) {
+          this.setState({ roomInfo });
+        }
+        if (boardInfo) {
+          this.setState({ boardInfo: JSON.parse(boardInfo) });
+        }
+      };
+      this.socket.onclose = () => {
+        this.props.history.push('/lobby');
+      };
     }
   }
 
