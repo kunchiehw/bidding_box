@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
+import { Container } from 'semantic-ui-react';
 import { decode } from 'jsonwebtoken';
 import LobbyInterface from './lobby-interface/LobbyInterface';
 import LoginInterface from './login-interface/LoginInterface';
 import RoomInterface from './room-interface/RoomInterface';
-import './App.css';
+
 
 class App extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <Container textAlign="center">
         <BrowserRouter>
           <Switch>
             <Route
@@ -70,7 +71,7 @@ class App extends Component {
             />
           </Switch>
         </BrowserRouter>
-      </div>
+      </Container>
     );
   }
 }
