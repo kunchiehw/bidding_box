@@ -7,11 +7,10 @@ const websocket = require('ws');
 const morgan = require('morgan');
 const broadcastWs = require('./lib/broadcastWs');
 const { authenticateUserMiddleware, validateJwtMiddleware } = require('./lib/utils');
-const { getRoomList, createRoom, updateRoom } = require('./lib/room');
+const roomLib = require('./lib/room');
 
 
 // Server Config
-
 const app = express();
 const server = http.createServer(app);
 const wss = new websocket.Server({
@@ -45,14 +44,14 @@ app.post(
 
 app.get(
   '/room',
-  getRoomList,
+  roomLib.getRoomList,
 );
 
 
 app.post(
   '/room/:roomId',
   validateJwtMiddleware,
-  createRoom,
+  roomLib.createRoom,
 );
 
 
@@ -60,5 +59,5 @@ app.put(
   '/room/:roomId',
   validateJwtMiddleware,
   bodyParser.json(),
-  updateRoom(wss),
+  roomLib.updateRoom(wss),
 );
