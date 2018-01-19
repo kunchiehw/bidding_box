@@ -6,7 +6,7 @@ const url = require('url');
 const websocket = require('ws');
 const aws = require('aws-sdk');
 const {
-  authenticateUser, authenticateJwt, authenticateJwtMiddleware, getTtl,
+  authenticateUser, validateJwt, validateJwtMiddleware, getTtl,
 } = require('./lib/utils');
 
 
@@ -74,7 +74,7 @@ app.get(
 
 app.post(
   '/room/:roomId',
-  authenticateJwtMiddleware,
+  validateJwtMiddleware,
   (req, res, next) => {
     const { roomId } = req.params;
     docClient.get({
@@ -108,7 +108,7 @@ app.post(
 
 app.put(
   '/room/:roomId',
-  authenticateJwtMiddleware,
+  validateJwtMiddleware,
   bodyParser.json(),
   (req, res, next) => {
     const { roomId } = req.params;
@@ -152,7 +152,7 @@ wss.on('connection', (ws, req) => {
 
   // Check auth
   ws.on('message', (token) => {
-    authenticateJwt(token)
+    validateJwt(token)
       .then(() => {
         if (ws.roomId) {
           ws.token = token;

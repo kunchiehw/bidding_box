@@ -22,7 +22,7 @@ function authenticateUser(username, password) {
 module.exports.authenticateUser = authenticateUser;
 
 
-function authenticateJwt(token) {
+function validateJwt(token) {
   return new Promise((resolve, reject) => {
     jwt.verify(token, secret, (err, decoded) => {
       if (err || !decoded) {
@@ -37,13 +37,13 @@ function authenticateJwt(token) {
     });
   });
 }
-module.exports.authenticateJwt = authenticateJwt;
+module.exports.validateJwt = validateJwt;
 
 
-module.exports.authenticateJwtMiddleware = (req, res, next) => {
+module.exports.validateJwtMiddleware = (req, res, next) => {
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
     const token = req.headers.authorization.split(' ')[1];
-    authenticateJwt(token)
+    validateJwt(token)
       .then(() => next())
       .catch(() => next(new Error('Unauthorized')));
   } else {
