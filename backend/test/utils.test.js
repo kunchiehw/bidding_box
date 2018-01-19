@@ -16,5 +16,14 @@ describe('utils.js', () => {
           });
       });
     });
+
+    describe('bad cases', () => {
+      it('login fail', (done) => {
+        utils.authenticateUser(username, null)
+          .catch(() => {
+            done();
+          });
+      });
+    });
   });
 });

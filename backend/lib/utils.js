@@ -70,4 +70,5 @@ module.exports.validateJwtMiddleware = (req, res, next) => {
 };
 
 
+/* istanbul ignore next */
 module.exports.getTtl = () => Math.floor(Date.now() / 1000) + (4 * 60 * 60); // ttl for 4 hour
