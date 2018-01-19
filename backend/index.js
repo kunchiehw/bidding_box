@@ -156,21 +156,23 @@ wss.on('connection', (ws, req) => {
       .then(() => {
         if (ws.roomId) {
           ws.token = token;
-          docClient.get({
+          return docClient.get({
             TableName: 'Room',
             Key: {
               id: roomId,
             },
-          }).promise()
-            .then((data) => {
-              if (!data.Item) {
-                throw new Error();
-              }
-              ws.send(JSON.stringify(data.Item));
-            });
+          }).promise();
         }
+        return Promise.resolve(null);
       })
-      .catch(() => {
+      .then((data) => {
+        if (!(data && data.Item)) {
+          throw new Error();
+        }
+        ws.send(JSON.stringify(data.Item));
+      })
+      .catch((err) => {
+        console.log(`websocket close: ${err}`);
         ws.close();
       });
   });
