@@ -4,16 +4,10 @@ const bodyParser = require('body-parser');
 const http = require('http');
 const url = require('url');
 const websocket = require('ws');
-const jwt = require('jsonwebtoken');
 const aws = require('aws-sdk');
-
-const secret = process.env.SHARE_SECRET;
-const db = {
-  users: {
-    wkc: 'password',
-    jarron: 'password',
-  },
-};
+const {
+  authenticateUser, authenticateJwt, authenticateJwtMiddleware, getTtl,
+} = require('./lib/utils');
 
 
 // Server Config
@@ -36,39 +30,6 @@ server.listen(8080, () => {
 });
 
 
-// Utils
-function authenticateJwt(token) {
-  return new Promise((resolve, reject) => {
-    jwt.verify(token, secret, (err, decoded) => {
-      if (err || !decoded) {
-        reject();
-      }
-
-      if (!('username' in decoded) || !(decoded.username in db.users)) {
-        reject();
-      }
-
-      resolve(token);
-    });
-  });
-}
-
-function authenticateJwtMiddleware(req, res, next) {
-  if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-    const token = req.headers.authorization.split(' ')[1];
-    authenticateJwt(token)
-      .then(() => next())
-      .catch(() => next(new Error('Unauthorized')));
-  } else {
-    next(new Error('Unauthorized'));
-  }
-}
-
-
-function getTtl() {
-  return Math.floor(Date.now() / 1000) + (4 * 60 * 60); // ttl for 4 hour
-}
-
 // API define
 app.post(
   '/token',
@@ -77,15 +38,17 @@ app.post(
     if (!req.body) {
       return res.sendStatus(400);
     }
+
     const { username, password } = req.body;
-    if (!username || !password || !(username in db.users) || db.users[username] !== password) {
-      return res.sendStatus(403);
-    }
 
-    const token = jwt.sign({ username }, secret, { expiresIn: '30d' });
-
-    console.log(`${username} get jwt`);
-    res.send(token);
+    authenticateUser(username, password)
+      .then((token) => {
+        console.log(`${username} get jwt`);
+        res.send(token);
+      })
+      .catch(() => {
+        res.sendStatus(400);
+      });
   },
 );
 
