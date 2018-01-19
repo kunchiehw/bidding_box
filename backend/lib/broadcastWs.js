@@ -43,3 +43,12 @@ module.exports.onConnect = (ws, req) => {
       });
   });
 };
+
+
+module.exports.broadcastRoom = (wss, roomId, msg) => {
+  wss.clients.forEach((client) => {
+    if (client.roomId === roomId && client.token) {
+      client.send(msg);
+    }
+  });
+};

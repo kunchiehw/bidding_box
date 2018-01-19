@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
@@ -127,11 +128,7 @@ app.put(
       ReturnValues: 'ALL_NEW',
     }).promise()
       .then(() => {
-        wss.clients.forEach((client) => {
-          if (client.roomId === roomId && client.token) {
-            client.send(JSON.stringify({ bidSeq }));
-          }
-        });
+        broadcastWs.broadcastRoom(wss, roomId, JSON.stringify({ bidSeq }));
         res.sendStatus(200);
       })
       .catch(err => next(err));
