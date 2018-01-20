@@ -1,8 +1,9 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
-import { Container, Button, Modal, Header, Icon } from 'semantic-ui-react';
+import { Container, Search, Button, Modal, Header, Icon } from 'semantic-ui-react';
 import './LobbyInterface.css';
 import LobbyRoomList from './LobbyRoomList';
 
@@ -24,7 +25,8 @@ class LobbyInterface extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomList: [],
+      roomListFull: [],
+      roomListShow: [],
       loading: false,
     };
     this.username = decode(this.props.jwtToken).username;
@@ -32,6 +34,7 @@ class LobbyInterface extends Component {
     this.handleRoomListClick = this.handleRoomListClick.bind(this);
     this.handleSignoutSubmit = this.handleSignoutSubmit.bind(this);
     this.handleRefreshRoomList = this.handleRefreshRoomList.bind(this);
+    this.handleSearchChange = this.handleSearchChange.bind(this);
   }
 
   componentDidMount() {
@@ -51,7 +54,9 @@ class LobbyInterface extends Component {
         return res.text();
       })
       .then((data) => {
-        this.setState({ roomList: JSON.parse(data) });
+        const roomList = JSON.parse(data);
+        this.setState({ roomListFull: roomList });
+        this.setState({ roomListShow: roomList });
         this.setState({ loading: false });
       })
       .catch(() => {
@@ -83,6 +88,14 @@ class LobbyInterface extends Component {
     this.props.handleUpdateJWTToken(null);
     this.props.history.push('/');
     this.setState({ loading: false });
+  }
+
+  handleSearchChange(e, data) {
+    const re = new RegExp(_.escapeRegExp(data.value), 'i');
+    const isMatch = result => re.test(result.id);
+    this.setState({
+      roomListShow: _.filter(this.state.roomListFull, isMatch),
+    });
   }
 
   render() {
@@ -132,7 +145,7 @@ class LobbyInterface extends Component {
     );
 
     const roomListTestProps = {
-      roomList: this.state.roomList,
+      roomList: this.state.roomListShow,
       handleClick: this.handleRoomListClick,
     };
 
@@ -140,6 +153,7 @@ class LobbyInterface extends Component {
       <Container textAlign="center">
         <div className="lobby-interface">
           {lobbyHeaderDiv}
+          <Search onSearchChange={this.handleSearchChange} open={false} />
           <LobbyRoomList {...roomListTestProps} />
         </div>
       </Container>
