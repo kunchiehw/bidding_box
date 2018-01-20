@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Grid, Container, Header, Button, Form, Icon } from 'semantic-ui-react';
+import { Grid, Segment, Header, Button, Form, Icon } from 'semantic-ui-react';
 import './LoginInterface.css';
 
 const propTypes = {
@@ -71,23 +71,25 @@ class LoginInterface extends Component {
       <Grid centered verticalAlign="middle" style={{ height: '100%' }}>
         <Grid.Column textAlign="center" className="login-interface" style={{ width: '400px' }}>
           <Header as="h2">Login to account</Header>
-          <Form onSubmit={this.handleSigninSubmit}>
-            <Form.Input
-              placeholder="Username"
-              required
-              type="text"
-              onChange={this.changeUsername}
-            />
-            <Form.Input
-              placeholder="Password"
-              required
-              type="password"
-              onChange={this.changePassword}
-            />
-            <Button type="submit" disabled={this.state.loading} color="green" fluid>
-              <Icon name="sign in" />Submit
-            </Button>
-          </Form>
+          <Segment padded>
+            <Form onSubmit={this.handleSigninSubmit}>
+              <Form.Input
+                placeholder="Username"
+                required
+                type="text"
+                onChange={this.changeUsername}
+              />
+              <Form.Input
+                placeholder="Password"
+                required
+                type="password"
+                onChange={this.changePassword}
+              />
+              <Button type="submit" disabled={this.state.loading} color="green" fluid size="large">
+                <Icon name="sign in" />Login
+              </Button>
+            </Form>
+          </Segment>
         </Grid.Column>
       </Grid>
     );
