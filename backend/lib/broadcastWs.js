@@ -42,7 +42,27 @@ module.exports.onConnect = (ws, req) => {
         ws.close();
       });
   });
+
+  // Check ping/pong
+  ws.isAlive = true;
+  ws.on('pong', () => {
+    this.isAlive = true;
+  });
 };
+
+
+module.exports.healthCheckPing = wss => (
+  () => {
+    wss.clients.forEach((ws) => {
+      if (ws.isAlive === false) {
+        return ws.terminate();
+      }
+      ws.isAlive = false;
+      ws.ping(() => {
+      });
+    });
+  }
+);
 
 
 module.exports.broadcastRoom = (wss, roomId, msg) => {

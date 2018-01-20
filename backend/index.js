@@ -33,6 +33,7 @@ server.listen(8080, () => {
 
 // WebSocket define
 wss.on('connection', broadcastWs.onConnect);
+setInterval(broadcastWs.healthCheckPing(wss), 30000);
 
 
 // API define
