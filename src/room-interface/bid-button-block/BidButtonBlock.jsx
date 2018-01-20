@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import './BidButtonBlock.css';
 import BidButton from './BidButton';
 import { shouldStandardBidButtonDisabled } from './helper-BidButtonBlock';
-import { STANDARD_SUITS } from '../../util/util';
-
-const POSSIBLE_LEVELS = [1, 2, 3, 4, 5, 6, 7];
+import { POSSIBLE_LEVELS, STANDARD_SUITS } from '../../util/util';
 
 const propTypes = {
   currentLevel: PropTypes.number.isRequired,

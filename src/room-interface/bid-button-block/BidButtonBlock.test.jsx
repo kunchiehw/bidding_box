@@ -4,106 +4,92 @@ import toJson from 'enzyme-to-json';
 import BidButton from './BidButton';
 import BidButtonBlock from './BidButtonBlock';
 import { shouldStandardBidButtonDisabled } from './helper-BidButtonBlock';
+import { POSSIBLE_LEVELS, STANDARD_SUITS, SPECIAL_SUITS, BOOLEAN_CHOICES } from '../../util/util';
 
-it('helper shouldStandardBidButtonDisabled', () => {
-  expect(shouldStandardBidButtonDisabled(0, 'PASS', 1, 'CLUBS')).toEqual(false);
-  expect(shouldStandardBidButtonDisabled(2, 'SPADES', 2, 'NOTRUMPS')).toEqual(false);
-  expect(shouldStandardBidButtonDisabled(2, 'NOTRUMPS', 3, 'SPADES')).toEqual(false);
-  expect(shouldStandardBidButtonDisabled(4, 'HEARTS', 4, 'DIAMONDS')).toEqual(true);
-  expect(shouldStandardBidButtonDisabled(5, 'DIAMONDS', 4, 'HEARTS')).toEqual(true);
+describe('helper shouldStandardBidButtonDisabled', () => {
+  const tests = [
+    {
+      currentLevel: 0, currentSuit: 'PASS', level: 1, suit: 'CLUBS', result: false,
+    },
+    {
+      currentLevel: 2, currentSuit: 'SPADES', level: 2, suit: 'NOTRUMPS', result: false,
+    },
+    {
+      currentLevel: 2, currentSuit: 'NOTRUMPS', level: 3, suit: 'SPADES', result: false,
+    },
+    {
+      currentLevel: 4, currentSuit: 'HEARTS', level: 4, suit: 'DIAMONDS', result: true,
+    },
+    {
+      currentLevel: 5, currentSuit: 'DIAMONDS', level: 4, suit: 'HEARTS', result: true,
+    },
+  ];
+
+  tests.forEach((test) => {
+    it(`currentLevel: ${test.currentLevel}, currentSuit: ${test.currentSuit}, level: ${test.level}, suit: ${test.suit}`, () => {
+      expect(shouldStandardBidButtonDisabled(test.currentLevel, test.currentSuit, test.level, test.suit)).toEqual(test.result);
+    });
+  });
 });
 
-it('BidButton render', () => {
-  const bidButton1 = shallow(<BidButton
-    level={0}
-    suit="PASS"
-    isDisabled={false}
-    handleBidButtonClick={() => null}
-  />);
-  expect(toJson(bidButton1)).toMatchSnapshot();
+describe('BidButton render', () => {
+  POSSIBLE_LEVELS.forEach((level) => {
+    STANDARD_SUITS.forEach((suit) => {
+      BOOLEAN_CHOICES.forEach((isDisabled) => {
+        it(`level: ${level}; suit: ${suit}, isDisabled: ${isDisabled}`, () => {
+          const bidButton = shallow(<BidButton
+            level={level}
+            suit={suit}
+            isDisabled={isDisabled}
+            handleBidButtonClick={() => null}
+          />);
+          expect(toJson(bidButton)).toMatchSnapshot();
+        });
+      });
+    });
+  });
 
-  const bidButton2 = shallow(<BidButton
-    level={0}
-    suit="DOUBLE"
-    isDisabled
-    handleBidButtonClick={() => null}
-  />);
-  expect(toJson(bidButton2)).toMatchSnapshot();
-
-  const bidButton3 = shallow(<BidButton
-    level={0}
-    suit="REDOUBLE"
-    isDisabled={false}
-    handleBidButtonClick={() => null}
-  />);
-  expect(toJson(bidButton3)).toMatchSnapshot();
-
-  const bidButton4 = shallow(<BidButton
-    level={1}
-    suit="CLUBS"
-    isDisabled
-    handleBidButtonClick={() => null}
-  />);
-  expect(toJson(bidButton4)).toMatchSnapshot();
-
-  const bidButton5 = shallow(<BidButton
-    level={2}
-    suit="DIAMONDS"
-    isDisabled={false}
-    handleBidButtonClick={() => null}
-  />);
-  expect(toJson(bidButton5)).toMatchSnapshot();
-
-  const bidButton6 = shallow(<BidButton
-    level={3}
-    suit="HEARTS"
-    isDisabled
-    handleBidButtonClick={() => null}
-  />);
-  expect(toJson(bidButton6)).toMatchSnapshot();
-
-  const bidButton7 = shallow(<BidButton
-    level={5}
-    suit="SPADES"
-    isDisabled={false}
-    handleBidButtonClick={() => null}
-  />);
-  expect(toJson(bidButton7)).toMatchSnapshot();
-
-  const bidButton8 = shallow(<BidButton
-    level={7}
-    suit="NOTRUMPS"
-    isDisabled
-    handleBidButtonClick={() => null}
-  />);
-  expect(toJson(bidButton8)).toMatchSnapshot();
+  SPECIAL_SUITS.forEach((suit) => {
+    BOOLEAN_CHOICES.forEach((isDisabled) => {
+      it(`suit: ${suit}, isDisabled: ${isDisabled}`, () => {
+        const bidButton = shallow(<BidButton
+          level={0}
+          suit={suit}
+          isDisabled={isDisabled}
+          handleBidButtonClick={() => null}
+        />);
+        expect(toJson(bidButton)).toMatchSnapshot();
+      });
+    });
+  });
 });
 
-it('BidButtonBlock render', () => {
-  const bidButtonBlock1 = shallow(<BidButtonBlock
-    currentLevel={0}
-    currentSuit="PASS"
-    shouldDoubleButtonDisabled
-    shouldRedoubleButtonDisabled
-    handleBidButtonClick={() => null}
-  />);
-  expect(toJson(bidButtonBlock1)).toMatchSnapshot();
+describe('BidButtonBlock render', () => {
+  POSSIBLE_LEVELS.forEach((level) => {
+    STANDARD_SUITS.forEach((suit) => {
+      BOOLEAN_CHOICES.forEach((isDisabled) => {
+        it(`currentLevel: ${level}, currentSuit: ${suit}, shouldDoubleButtonDisabled: ${isDisabled}`, () => {
+          const bidButtonBlock = shallow(<BidButtonBlock
+            currentLevel={level}
+            currentSuit={suit}
+            shouldDoubleButtonDisabled={isDisabled}
+            shouldRedoubleButtonDisabled={!isDisabled}
+            handleBidButtonClick={() => null}
+          />);
+          expect(toJson(bidButtonBlock)).toMatchSnapshot();
+        });
+      });
+    });
+  });
 
-  const bidButtonBlock2 = shallow(<BidButtonBlock
-    currentLevel={3}
-    currentSuit="NOTRUMPS"
-    shouldDoubleButtonDisabled={false}
-    shouldRedoubleButtonDisabled
-    handleBidButtonClick={() => null}
-  />);
-  expect(toJson(bidButtonBlock2)).toMatchSnapshot();
-
-  const bidButtonBlock3 = shallow(<BidButtonBlock
-    currentLevel={7}
-    currentSuit="HEARTS"
-    shouldDoubleButtonDisabled
-    shouldRedoubleButtonDisabled={false}
-    handleBidButtonClick={() => null}
-  />);
-  expect(toJson(bidButtonBlock3)).toMatchSnapshot();
+  it('currentSuit: "PASS', () => {
+    const bidButtonBlock = shallow(<BidButtonBlock
+      currentLevel={0}
+      currentSuit="PASS"
+      shouldDoubleButtonDisabled={false}
+      shouldRedoubleButtonDisabled={false}
+      handleBidButtonClick={() => null}
+    />);
+    expect(toJson(bidButtonBlock)).toMatchSnapshot();
+  });
 });
