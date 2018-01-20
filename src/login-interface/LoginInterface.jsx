@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Container, Button, Form, Icon } from 'semantic-ui-react';
+import { Grid, Segment, Header, Button, Form, Icon, Divider } from 'semantic-ui-react';
 import './LoginInterface.css';
 
 const propTypes = {
@@ -68,29 +68,35 @@ class LoginInterface extends Component {
 
   render() {
     return (
-      <Container textAlign="center">
-        <div className="login-interface">
-          <Form onSubmit={this.handleSigninSubmit}>
-            <Form.Input
-              label="Username"
-              placeholder="Please enter your username"
-              width="3"
-              type="text"
-              onChange={this.changeUsername}
-            />
-            <Form.Input
-              label="Password"
-              placeholder="Please enter your password"
-              width="3"
-              type="password"
-              onChange={this.changePassword}
-            />
-            <Button type="submit" disabled={this.state.loading} color="green">
-              <Icon name="sign in" />Submit
-            </Button>
-          </Form>
-        </div>
-      </Container>
+      <Grid centered verticalAlign="middle" style={{ height: '100%' }}>
+        <Grid.Column textAlign="center" className="login-interface" style={{ width: '400px' }}>
+          <Header as="h2">Login to account</Header>
+          <Segment padded>
+            <Form onSubmit={this.handleSigninSubmit}>
+              <Form.Input
+                placeholder="Username"
+                required
+                icon="user"
+                iconPosition="left"
+                type="text"
+                onChange={this.changeUsername}
+              />
+              <Form.Input
+                placeholder="Password"
+                required
+                icon="lock"
+                iconPosition="left"
+                type="password"
+                onChange={this.changePassword}
+              />
+              <Button type="submit" disabled={this.state.loading} color="green" fluid size="large">
+                <Icon name="sign in" />Login
+              </Button>
+            </Form>
+          </Segment>
+          <Divider hidden />
+        </Grid.Column>
+      </Grid>
     );
   }
 }
