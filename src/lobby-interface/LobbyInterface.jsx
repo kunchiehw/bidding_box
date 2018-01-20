@@ -55,9 +55,11 @@ class LobbyInterface extends Component {
       })
       .then((data) => {
         const roomList = JSON.parse(data);
-        this.setState({ roomListFull: roomList });
-        this.setState({ roomListShow: roomList });
-        this.setState({ loading: false });
+        this.setState({
+          roomListFull: roomList,
+          roomListShow: roomList,
+          loading: false,
+        });
       })
       .catch(() => {
         this.setState({ loading: false });
