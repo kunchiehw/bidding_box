@@ -52,7 +52,7 @@ module.exports.authenticateUserMiddleware = (req, res) => {
       res.send(token);
     })
     .catch(() => {
-      res.sendStatus(400);
+      res.status(401).send('Unauthenticated');
     });
 };
 
