@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Button, Form, Icon } from 'semantic-ui-react';
+import { Container, Button, Form, Icon } from 'semantic-ui-react';
 import './LoginInterface.css';
 
 const propTypes = {
@@ -68,27 +68,29 @@ class LoginInterface extends Component {
 
   render() {
     return (
-      <div className="login-interface">
-        <Form onSubmit={this.handleSigninSubmit}>
-          <Form.Input
-            label="Username"
-            placeholder="Please enter your username"
-            width="3"
-            type="text"
-            onChange={this.changeUsername}
-          />
-          <Form.Input
-            label="Password"
-            placeholder="Please enter your password"
-            width="3"
-            type="password"
-            onChange={this.changePassword}
-          />
-          <Button type="submit" disabled={this.state.loading} color="green">
-            <Icon name="sign in" />Submit
-          </Button>
-        </Form>
-      </div>
+      <Container textAlign="center">
+        <div className="login-interface">
+          <Form onSubmit={this.handleSigninSubmit}>
+            <Form.Input
+              label="Username"
+              placeholder="Please enter your username"
+              width="3"
+              type="text"
+              onChange={this.changeUsername}
+            />
+            <Form.Input
+              label="Password"
+              placeholder="Please enter your password"
+              width="3"
+              type="password"
+              onChange={this.changePassword}
+            />
+            <Button type="submit" disabled={this.state.loading} color="green">
+              <Icon name="sign in" />Submit
+            </Button>
+          </Form>
+        </div>
+      </Container>
     );
   }
 }

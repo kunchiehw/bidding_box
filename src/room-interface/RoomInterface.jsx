@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
-import { Button, Divider } from 'semantic-ui-react';
+import { Container, Button, Divider } from 'semantic-ui-react';
 import './RoomInterface.css';
 import BidButtonBlock from './bid-button-block/BidButtonBlock';
 import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
@@ -198,14 +198,16 @@ class RoomInterface extends Component {
     );
 
     return (
-      <div className="room-interface">
-        <div className="room-main-block">
-          {mainUpperBlock}
-          {mainLowerBlock}
+      <Container textAlign="center">
+        <div className="room-interface">
+          <div className="room-main-block">
+            {mainUpperBlock}
+            {mainLowerBlock}
+          </div>
+          <Divider />
+          {roomToolsBlock}
         </div>
-        <Divider />
-        {roomToolsBlock}
-      </div>
+      </Container>
     );
   }
 }

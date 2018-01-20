@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
-import { Button, Modal, Header, Icon } from 'semantic-ui-react';
+import { Container, Button, Modal, Header, Icon } from 'semantic-ui-react';
 import './LobbyInterface.css';
 import LobbyRoomList from './LobbyRoomList';
 
@@ -137,10 +137,12 @@ class LobbyInterface extends Component {
     };
 
     return (
-      <div className="lobby-interface">
-        {lobbyHeaderDiv}
-        <LobbyRoomList {...roomListTestProps} />
-      </div>
+      <Container textAlign="center">
+        <div className="lobby-interface">
+          {lobbyHeaderDiv}
+          <LobbyRoomList {...roomListTestProps} />
+        </div>
+      </Container>
     );
   }
 }

@@ -5,7 +5,7 @@ import { decode } from 'jsonwebtoken';
 import LobbyInterface from './lobby-interface/LobbyInterface';
 import LoginInterface from './login-interface/LoginInterface';
 import RoomInterface from './room-interface/RoomInterface';
-import './App.css';
+
 
 class App extends Component {
   constructor(props) {
@@ -40,37 +40,35 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <BrowserRouter>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
                 this.state.jwtToken ? (<Redirect to="/lobby" />) : (<Redirect to="/login" />)
               )}
-            />
-            <Route
-              path="/login"
-              render={() => (
-                <LoginInterface handleUpdateJWTToken={this.handleUpdateJWTToken} />
+          />
+          <Route
+            path="/login"
+            render={() => (
+              <LoginInterface handleUpdateJWTToken={this.handleUpdateJWTToken} />
                 )}
-            />
-            <Route
-              path="/lobby"
-              render={props => ((this.state.jwtToken === null) ?
-                <Redirect to={{ pathname: '/login', state: { from: props.location } }} /> :
-                <LobbyInterface jwtToken={this.state.jwtToken} handleUpdateJWTToken={this.handleUpdateJWTToken} />)}
-            />
-            <Route
-              path="/room/:roomName"
-              render={props => ((this.state.jwtToken === null) ?
-                <Redirect to={{ pathname: '/login', state: { from: props.location } }} /> :
-                <RoomInterface jwtToken={this.state.jwtToken} />)}
-            />
-          </Switch>
-        </BrowserRouter>
-      </div>
+          />
+          <Route
+            path="/lobby"
+            render={props => ((this.state.jwtToken === null) ?
+              <Redirect to={{ pathname: '/login', state: { from: props.location } }} /> :
+              <LobbyInterface jwtToken={this.state.jwtToken} handleUpdateJWTToken={this.handleUpdateJWTToken} />)}
+          />
+          <Route
+            path="/room/:roomName"
+            render={props => ((this.state.jwtToken === null) ?
+              <Redirect to={{ pathname: '/login', state: { from: props.location } }} /> :
+              <RoomInterface jwtToken={this.state.jwtToken} />)}
+          />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
