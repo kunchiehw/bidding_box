@@ -46,6 +46,7 @@ function generateTableCell(id, eastID, westID, handleClick) {
 
 function LobbyRoomList(props) {
   const roomCells = [];
+  const noResultTemplate = <p>No result</p>;
 
   for (let roomIndex = 0; roomIndex < props.roomList.length; roomIndex += 1) {
     roomCells.push(generateTableCell(
@@ -58,7 +59,7 @@ function LobbyRoomList(props) {
 
   return (
     <div className="lobby-room-list">
-      {roomCells}
+      { roomCells.length > 0 ? roomCells : noResultTemplate}
     </div>
   );
 }
