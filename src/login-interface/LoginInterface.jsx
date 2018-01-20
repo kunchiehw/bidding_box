@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Grid, Segment, Header, Button, Form, Icon } from 'semantic-ui-react';
+import { Grid, Segment, Header, Button, Form, Icon, Divider } from 'semantic-ui-react';
 import './LoginInterface.css';
 
 const propTypes = {
@@ -76,12 +76,16 @@ class LoginInterface extends Component {
               <Form.Input
                 placeholder="Username"
                 required
+                icon="user"
+                iconPosition="left"
                 type="text"
                 onChange={this.changeUsername}
               />
               <Form.Input
                 placeholder="Password"
                 required
+                icon="lock"
+                iconPosition="left"
                 type="password"
                 onChange={this.changePassword}
               />
@@ -90,6 +94,7 @@ class LoginInterface extends Component {
               </Button>
             </Form>
           </Segment>
+          <Divider hidden />
         </Grid.Column>
       </Grid>
     );
