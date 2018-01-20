@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BidSequenceBlock render seat: EAST, bidSeq index: 0 1`] = `
+exports[`BidSequenceBlock render seat: EAST, bidSeq:  1`] = `
 <div
   className="bid-sequence-block"
 >
@@ -26,7 +26,7 @@ exports[`BidSequenceBlock render seat: EAST, bidSeq index: 0 1`] = `
 </div>
 `;
 
-exports[`BidSequenceBlock render seat: EAST, bidSeq index: 1 1`] = `
+exports[`BidSequenceBlock render seat: EAST, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
 <div
   className="bid-sequence-block"
 >
@@ -109,7 +109,7 @@ exports[`BidSequenceBlock render seat: EAST, bidSeq index: 1 1`] = `
 </div>
 `;
 
-exports[`BidSequenceBlock render seat: EAST, bidSeq index: 2 1`] = `
+exports[`BidSequenceBlock render seat: EAST, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
 <div
   className="bid-sequence-block"
 >
@@ -199,7 +199,7 @@ exports[`BidSequenceBlock render seat: EAST, bidSeq index: 2 1`] = `
 </div>
 `;
 
-exports[`BidSequenceBlock render seat: NORTH, bidSeq index: 0 1`] = `
+exports[`BidSequenceBlock render seat: NORTH, bidSeq:  1`] = `
 <div
   className="bid-sequence-block"
 >
@@ -219,7 +219,7 @@ exports[`BidSequenceBlock render seat: NORTH, bidSeq index: 0 1`] = `
 </div>
 `;
 
-exports[`BidSequenceBlock render seat: NORTH, bidSeq index: 1 1`] = `
+exports[`BidSequenceBlock render seat: NORTH, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
 <div
   className="bid-sequence-block"
 >
@@ -296,7 +296,7 @@ exports[`BidSequenceBlock render seat: NORTH, bidSeq index: 1 1`] = `
 </div>
 `;
 
-exports[`BidSequenceBlock render seat: NORTH, bidSeq index: 2 1`] = `
+exports[`BidSequenceBlock render seat: NORTH, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
 <div
   className="bid-sequence-block"
 >
@@ -373,7 +373,7 @@ exports[`BidSequenceBlock render seat: NORTH, bidSeq index: 2 1`] = `
 </div>
 `;
 
-exports[`BidSequenceBlock render seat: SOUTH, bidSeq index: 0 1`] = `
+exports[`BidSequenceBlock render seat: SOUTH, bidSeq:  1`] = `
 <div
   className="bid-sequence-block"
 >
@@ -405,7 +405,7 @@ exports[`BidSequenceBlock render seat: SOUTH, bidSeq index: 0 1`] = `
 </div>
 `;
 
-exports[`BidSequenceBlock render seat: SOUTH, bidSeq index: 1 1`] = `
+exports[`BidSequenceBlock render seat: SOUTH, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
 <div
   className="bid-sequence-block"
 >
@@ -501,7 +501,7 @@ exports[`BidSequenceBlock render seat: SOUTH, bidSeq index: 1 1`] = `
 </div>
 `;
 
-exports[`BidSequenceBlock render seat: SOUTH, bidSeq index: 2 1`] = `
+exports[`BidSequenceBlock render seat: SOUTH, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
 <div
   className="bid-sequence-block"
 >
@@ -597,7 +597,7 @@ exports[`BidSequenceBlock render seat: SOUTH, bidSeq index: 2 1`] = `
 </div>
 `;
 
-exports[`BidSequenceBlock render seat: WEST, bidSeq index: 0 1`] = `
+exports[`BidSequenceBlock render seat: WEST, bidSeq:  1`] = `
 <div
   className="bid-sequence-block"
 >
@@ -611,7 +611,7 @@ exports[`BidSequenceBlock render seat: WEST, bidSeq index: 0 1`] = `
 </div>
 `;
 
-exports[`BidSequenceBlock render seat: WEST, bidSeq index: 1 1`] = `
+exports[`BidSequenceBlock render seat: WEST, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
 <div
   className="bid-sequence-block"
 >
@@ -682,7 +682,7 @@ exports[`BidSequenceBlock render seat: WEST, bidSeq index: 1 1`] = `
 </div>
 `;
 
-exports[`BidSequenceBlock render seat: WEST, bidSeq index: 2 1`] = `
+exports[`BidSequenceBlock render seat: WEST, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
 <div
   className="bid-sequence-block"
 >

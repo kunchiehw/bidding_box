@@ -26,7 +26,7 @@ describe('helper shouldStandardBidButtonDisabled', () => {
   ];
 
   tests.forEach((test) => {
-    it(`currentLevel: ${test.currentLevel}, currentSuit: ${test.currentSuit}, level: ${test.level}, suit: ${test.suit}`, () => {
+    it(`After ${test.currentLevel} ${test.currentSuit}, should ${test.level} ${test.suit} disabled? Expect ${test.result}`, () => {
       expect(shouldStandardBidButtonDisabled(test.currentLevel, test.currentSuit, test.level, test.suit)).toEqual(test.result);
     });
   });

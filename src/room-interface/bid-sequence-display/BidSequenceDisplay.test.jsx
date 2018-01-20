@@ -19,9 +19,7 @@ describe('SeatRow render', () => {
 
 describe('BidSequenceBlock render', () => {
   const bidSeqs = [
-    // index 0
     [],
-    // index 1
     [
       { level: 1, suit: 'CLUBS' },
       { level: 2, suit: 'DIAMONDS' },
@@ -29,7 +27,6 @@ describe('BidSequenceBlock render', () => {
       { level: 4, suit: 'SPADES' },
       { level: 5, suit: 'NOTRUMPS' },
     ],
-    // index 2
     [
       { level: 6, suit: 'CLUBS' },
       { level: 0, suit: 'DOUBLE' },
@@ -41,8 +38,8 @@ describe('BidSequenceBlock render', () => {
   ];
 
   SEATS.forEach((seat) => {
-    bidSeqs.forEach((bidSeq, index) => {
-      it(`seat: ${seat}, bidSeq index: ${index}`, () => {
+    bidSeqs.forEach((bidSeq) => {
+      it(`seat: ${seat}, bidSeq: ${bidSeq}`, () => {
         const bidSequenceBlock = shallow(<BidSequenceBlock
           dealer={seat}
           bidSeq={bidSeq}
