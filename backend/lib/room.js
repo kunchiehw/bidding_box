@@ -92,17 +92,27 @@ module.exports.createRoom = (req, res, next) => {
 
 module.exports.updateRoom = (req, res, next) => {
   const { roomId } = req.params;
-  const bidSeq = JSON.stringify(req.body.bidSeq);
+  let bidSeq = null;
+  const AttributeUpdates = {
+    cacheTtl: {
+      Action: 'PUT',
+      Value: getTtl(),
+    },
+  };
+  if (req.body.bidSeq) {
+    bidSeq = JSON.stringify(req.body.bidSeq);
+    AttributeUpdates.bidSeq = {
+      Action: 'PUT',
+      Value: bidSeq,
+    };
+  }
+
   docClient.update({
     TableName: 'Room',
     Key: {
       id: roomId,
     },
-    UpdateExpression: 'set bidSeq = :b, cacheTtl = :t',
-    ExpressionAttributeValues: {
-      ':b': bidSeq,
-      ':t': getTtl(),
-    },
+    AttributeUpdates,
     ReturnValues: 'ALL_NEW',
   }).promise()
     .then(() => {
