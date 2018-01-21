@@ -67,6 +67,12 @@ class RoomInterface extends Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.socket) {
+      this.socket.close();
+    }
+  }
+
   updateWebSocket(jwtToken) {
     if (jwtToken) {
       this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`);

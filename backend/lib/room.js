@@ -1,4 +1,5 @@
 const aws = require('aws-sdk');
+const _ = require('lodash');
 const { getTtl } = require('./utils');
 const { broadcastRoom } = require('./broadcastWs');
 
@@ -6,15 +7,21 @@ const docClient = new aws.DynamoDB.DocumentClient();
 
 
 module.exports.getRoomList = (req, res, next) => {
-  docClient.scan({
-    TableName: 'Room',
-    ProjectionExpression: 'id, roomInfo',
-  }).promise()
-    .then((data) => {
-      if (data.Count > 0) {
-        res.send(data.Items);
-      } else {
+  Promise.all([
+    docClient.scan({
+      TableName: 'Room',
+      ProjectionExpression: 'id, roomInfo',
+    }).promise(),
+    _.countBy(Array.from(req.wss.clients), ws => ws.roomId),
+  ])
+    .then(([data, roomCounter]) => {
+      if (data.Count <= 0) {
         res.send([]);
+      } else {
+        res.send(_.map(data.Items, (room) => {
+          room.count = roomCounter[room.id] || 0;
+          return room;
+        }));
       }
     })
     .catch(err => next(err));
@@ -86,26 +93,24 @@ module.exports.createRoom = (req, res, next) => {
 };
 
 
-module.exports.updateRoom = wss => (
-  (req, res, next) => {
-    const { roomId } = req.params;
-    const bidSeq = JSON.stringify(req.body.bidSeq);
-    docClient.update({
-      TableName: 'Room',
-      Key: {
-        id: roomId,
-      },
-      UpdateExpression: 'set bidSeq = :b, cacheTtl = :t',
-      ExpressionAttributeValues: {
-        ':b': bidSeq,
-        ':t': getTtl(),
-      },
-      ReturnValues: 'ALL_NEW',
-    }).promise()
-      .then(() => {
-        broadcastRoom(wss, roomId, JSON.stringify({ bidSeq }));
-        res.sendStatus(200);
-      })
-      .catch(err => next(err));
-  }
-);
+module.exports.updateRoom = (req, res, next) => {
+  const { roomId } = req.params;
+  const bidSeq = JSON.stringify(req.body.bidSeq);
+  docClient.update({
+    TableName: 'Room',
+    Key: {
+      id: roomId,
+    },
+    UpdateExpression: 'set bidSeq = :b, cacheTtl = :t',
+    ExpressionAttributeValues: {
+      ':b': bidSeq,
+      ':t': getTtl(),
+    },
+    ReturnValues: 'ALL_NEW',
+  }).promise()
+    .then(() => {
+      broadcastRoom(req.wss, roomId, JSON.stringify({ bidSeq }));
+      res.sendStatus(200);
+    })
+    .catch(err => next(err));
+};

@@ -5,6 +5,7 @@ import { Button, Segment, Icon } from 'semantic-ui-react';
 const propTypes = {
   roomList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
     roomInfo: PropTypes.shape({
       eastID: PropTypes.string,
       westID: PropTypes.string,
@@ -13,7 +14,7 @@ const propTypes = {
   handleClick: PropTypes.func.isRequired,
 };
 
-function generateTableCell(id, eastID, westID, handleClick) {
+function generateTableCell(id, eastID, westID, count, handleClick) {
   const handleClickEast = () => { handleClick(id, 'EAST'); };
   const handleClickWest = () => { handleClick(id, 'WEST'); };
   const handleClickObserver = () => { handleClick(id, 'OBSERVER'); };
@@ -40,6 +41,7 @@ function generateTableCell(id, eastID, westID, handleClick) {
       <Button className="watch-button" onClick={handleClickObserver} size="small" color="blue">
         <Icon name="plus" /> Watch
       </Button>
+      <p>{count} viewer</p>
     </Segment>
   );
 }
@@ -53,6 +55,7 @@ function LobbyRoomList(props) {
       props.roomList[roomIndex].id,
       (props.roomList[roomIndex].roomInfo) ? props.roomList[roomIndex].roomInfo.eastID : null,
       (props.roomList[roomIndex].roomInfo) ? props.roomList[roomIndex].roomInfo.westID : null,
+      props.roomList[roomIndex].count,
       props.handleClick,
     ));
   }
