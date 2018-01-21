@@ -14,7 +14,6 @@ const propTypes = {
     DIAMONDS: PropTypes.string.isRequired,
     CLUBS: PropTypes.string.isRequired,
   }),
-  playerTurn: PropTypes.bool.isRequired,
   bidSeqIsEnded: PropTypes.bool.isRequired,
 };
 
@@ -24,19 +23,15 @@ const defaultProps = {
 
 class HandCardsCell extends PureComponent {
   render() {
-    let lowerCellContent;
+    const idCell = (
+      <div className="id-cell">
+        {this.props.playerID}
+      </div>
+    );
 
-    if (!this.props.playerID) {
-      lowerCellContent = null;
-    } else if (!this.props.playerHand) {
-      lowerCellContent = (
-        <div className="card-cell-content">
-          Table host is chooing boards.
-        </div>);
-    } else if (this.props.bidSeqIsEnded
-      || this.props.playerRole === 'OBSERVER'
-      || this.props.playerRole === this.props.seat) {
-      lowerCellContent = (
+    const cardCell = ((this.props.playerHand) &&
+    (this.props.bidSeqIsEnded || this.props.playerRole === 'OBSERVER' || this.props.playerRole === this.props.seat)) ? (
+      <div className="card-cell">
         <div className="card-cell-content">
           <div>
             <span style={{ color: suitColor('SPADES') }}> {suitCharacter('SPADES')} </span>
@@ -55,28 +50,16 @@ class HandCardsCell extends PureComponent {
             <span> {this.props.playerHand.CLUBS} </span>
           </div>
         </div>
+      </div>
+      ) : (
+        <div className="card-cell" />
       );
-    } else if (this.props.playerTurn) {
-      lowerCellContent = (
-        <div className="card-cell-content">
-          It is your turn.
-        </div>);
-    } else {
-      lowerCellContent = (
-        <div className="card-cell-content">
-          Partner is thinking.
-        </div>);
-    }
 
     return (
       <Segment className="hand-cards-display-cell">
-        <div className="id-cell">
-          {(this.props.playerID) ? `${this.props.seat} : ${this.props.playerID}` : 'Waiting for your partner'}
-        </div>
+        {idCell}
         <Divider />
-        <div className="card-cell">
-          {lowerCellContent}
-        </div>
+        {cardCell}
       </Segment>
     );
   }

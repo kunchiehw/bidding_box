@@ -36,8 +36,8 @@ class RoomInterface extends Component {
     super(props);
     this.state = {
       bidSeq: [],
-      roomInfo: {},
-      boardInfo: {},
+      roomInfo: null,
+      boardInfo: null,
     };
 
     this.socket = null;
@@ -177,10 +177,8 @@ class RoomInterface extends Component {
         <div className="main-lower-block">
           <BidSequenceDisplay {...bidSequenceDisplayProp} />
           {(bidSeqIsEnded) && <ScoreBlock scoreList={this.state.boardInfo.scoreList} />}
-          {(!bidSeqIsEnded && whoseTurn === playerRole) &&
+          {(!bidSeqIsEnded) &&
             <BidButtonBlock {...bidButtonBlockProp} />}
-          {(!bidSeqIsEnded && whoseTurn !== playerRole) &&
-            <div className="empty-div" > Something Here </div>}
         </div>
       );
     }
