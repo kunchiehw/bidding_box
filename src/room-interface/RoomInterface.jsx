@@ -48,6 +48,7 @@ class RoomInterface extends Component {
     this.updateRoomBidSeq = this.updateRoomBidSeq.bind(this);
 
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
+    this.handleClickToSit = this.handleClickToSit.bind(this);
     this.handleUndoButton = this.handleUndoButton.bind(this);
     this.handleResetButton = this.handleResetButton.bind(this);
     this.handleLeaveSeat = this.handleLeaveSeat.bind(this);
@@ -115,6 +116,19 @@ class RoomInterface extends Component {
     this.updateRoomBidSeq(bidSeq);
   }
 
+  handleClickToSit(seat) {
+    this.handleLeaveSeat();
+    const updatedInfo = (seat === 'EAST') ? { eastID: this.username } : { westID: this.username };
+    fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.props.jwtToken}`,
+      },
+      body: JSON.stringify(updatedInfo),
+    });
+  }
+
   handleUndoButton() {
     const userRole = getPlayerRole(this.state.roomInfo, this.username);
     const bidSeq = this.state.bidSeq.slice();
@@ -173,6 +187,7 @@ class RoomInterface extends Component {
       eastID: (this.state.roomInfo && this.state.roomInfo.eastID) ? this.state.roomInfo.eastID : '',
       westID: (this.state.roomInfo && this.state.roomInfo.westID) ? this.state.roomInfo.westID : '',
       bidSeqIsEnded,
+      handleClickToSit: this.handleClickToSit,
     };
 
     const upperBlock = (
