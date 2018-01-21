@@ -1,4 +1,5 @@
 const aws = require('aws-sdk');
+const _ = require('lodash');
 const { getTtl } = require('./utils');
 const { broadcastRoom } = require('./broadcastWs');
 
@@ -11,12 +12,16 @@ module.exports.getRoomList = (req, res, next) => {
       TableName: 'Room',
       ProjectionExpression: 'id, roomInfo',
     }).promise(),
+    _.countBy(Array.from(req.wss.clients), ws => ws.roomId),
   ])
-    .then(([data]) => {
-      if (data.Count > 0) {
-        res.send(data.Items);
-      } else {
+    .then(([data, roomCounter]) => {
+      if (data.Count <= 0) {
         res.send([]);
+      } else {
+        res.send(_.map(data.Items, (room) => {
+          room.count = roomCounter[room.id] || 0;
+          return room;
+        }));
       }
     })
     .catch(err => next(err));
