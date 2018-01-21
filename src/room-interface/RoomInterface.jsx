@@ -50,6 +50,7 @@ class RoomInterface extends Component {
     this.handleBidButtonClick = this.handleBidButtonClick.bind(this);
     this.handleUndoButton = this.handleUndoButton.bind(this);
     this.handleResetButton = this.handleResetButton.bind(this);
+    this.handleLeaveSeat = this.handleLeaveSeat.bind(this);
     this.handleBackToLobbyButton = this.handleBackToLobbyButton.bind(this);
   }
 
@@ -135,8 +136,27 @@ class RoomInterface extends Component {
     this.updateRoomBidSeq([]);
   }
 
+  handleLeaveSeat() {
+    const playerRole = getPlayerRole(this.state.roomInfo, this.username);
+    let updatedInfo = null;
+    if (playerRole === 'WEST') updatedInfo = 'westID';
+    else if (playerRole === 'EAST') updatedInfo = 'eastID';
+    if (updatedInfo) {
+      const roomInfo = {};
+      roomInfo[updatedInfo] = '';
+      fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.props.jwtToken}`,
+        },
+        body: JSON.stringify({ roomInfo }),
+      });
+    }
+  }
+
   handleBackToLobbyButton() {
-    // TODO: inform server
+    this.handleLeaveSeat();
     this.props.history.push('/lobby');
   }
 
@@ -204,6 +224,7 @@ class RoomInterface extends Component {
           <Button onClick={this.handleResetButton} size="small" color="grey">Reset</Button>}
         {(this.roomName === this.username) &&
           <Button size="small" color="grey">Host Setting</Button>}
+        {<Button onClick={this.handleLeaveSeat} size="small" color="grey">Leave seat</Button>}
         {<Button onClick={this.handleBackToLobbyButton} size="small" color="grey">Back to Lobby</Button>}
       </div>
     );

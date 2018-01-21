@@ -68,7 +68,6 @@ class LobbyInterface extends Component {
 
   handleCreateTable(role) {
     console.log(role);
-    // TODO: Inform server
     fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.username}`, {
       method: 'POST',
       headers: {
@@ -78,9 +77,19 @@ class LobbyInterface extends Component {
     this.props.history.push(`/room/${this.username}`);
   }
 
-  handleRoomListClick(roomName, role) {
-    console.log(role);
-    // TODO: Inform server
+  handleRoomListClick(roomName, updatedInfo) {
+    if (updatedInfo) {
+      const roomInfo = {};
+      roomInfo[updatedInfo] = decode(this.props.jwtToken).username;
+      fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${roomName}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.props.jwtToken}`,
+        },
+        body: JSON.stringify({ roomInfo }),
+      });
+    }
     this.props.history.push(`/room/${roomName}`);
   }
 
