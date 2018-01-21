@@ -23,6 +23,7 @@ const propTypes = {
   eastID: PropTypes.string.isRequired,
   westID: PropTypes.string.isRequired,
   bidSeqIsEnded: PropTypes.bool.isRequired,
+  handleClickToSit: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -41,6 +42,7 @@ class HandCardsDisplay extends PureComponent {
             playerID={this.props.westID}
             playerHand={this.props.westHand}
             bidSeqIsEnded={this.props.bidSeqIsEnded}
+            handleClickToSit={this.props.handleClickToSit}
           />
         </Grid.Column>
         <Grid.Column>
@@ -50,6 +52,7 @@ class HandCardsDisplay extends PureComponent {
             playerID={this.props.eastID}
             playerHand={this.props.eastHand}
             bidSeqIsEnded={this.props.bidSeqIsEnded}
+            handleClickToSit={this.props.handleClickToSit}
           />
         </Grid.Column>
       </Grid>
