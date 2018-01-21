@@ -117,16 +117,14 @@ class RoomInterface extends Component {
   }
 
   handleClickToSit(seat) {
-    const updatedInfo = (seat === 'EAST') ? 'eastID' : 'westID';
-    const roomInfo = {};
-    roomInfo[updatedInfo] = this.username;
+    const updatedInfo = (seat === 'EAST') ? { eastID: this.username } : { westID: this.username };
     fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.props.jwtToken}`,
       },
-      body: JSON.stringify({ roomInfo }),
+      body: JSON.stringify(updatedInfo),
     });
   }
 
