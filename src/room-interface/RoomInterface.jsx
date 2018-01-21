@@ -157,9 +157,6 @@ class RoomInterface extends Component {
 
   handleBackToLobbyButton() {
     this.handleLeaveSeat();
-    if (this.socket) {
-      this.socket.close();
-    }
     this.props.history.push('/lobby');
   }
 
