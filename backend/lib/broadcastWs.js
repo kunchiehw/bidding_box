@@ -4,6 +4,10 @@ const aws = require('aws-sdk');
 
 const docClient = new aws.DynamoDB.DocumentClient();
 
+function noop() {}
+function heartbeat() {
+  this.isAlive = true;
+}
 
 module.exports.onConnect = (ws, req) => {
   // Check url
@@ -45,9 +49,7 @@ module.exports.onConnect = (ws, req) => {
 
   // Check ping/pong
   ws.isAlive = true;
-  ws.on('pong', () => {
-    this.isAlive = true;
-  });
+  ws.on('pong', heartbeat);
 };
 
 
@@ -58,8 +60,7 @@ module.exports.healthCheckPing = wss => (
         return ws.terminate();
       }
       ws.isAlive = false;
-      ws.ping(() => {
-      });
+      ws.ping(noop);
     });
   }
 );
