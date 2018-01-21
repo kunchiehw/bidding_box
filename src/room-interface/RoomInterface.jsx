@@ -156,7 +156,6 @@ class RoomInterface extends Component {
   }
 
   handleBackToLobbyButton() {
-    // TODO: inform server
     this.handleLeaveSeat();
     if (this.socket) {
       this.socket.close();

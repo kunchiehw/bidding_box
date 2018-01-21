@@ -68,7 +68,6 @@ class LobbyInterface extends Component {
 
   handleCreateTable(role) {
     console.log(role);
-    // TODO: Inform server
     fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.username}`, {
       method: 'POST',
       headers: {
@@ -82,7 +81,6 @@ class LobbyInterface extends Component {
     if (updatedInfo) {
       const roomInfo = {};
       roomInfo[updatedInfo] = decode(this.props.jwtToken).username;
-      // TODO: Inform server
       fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${roomName}`, {
         method: 'PUT',
         headers: {
