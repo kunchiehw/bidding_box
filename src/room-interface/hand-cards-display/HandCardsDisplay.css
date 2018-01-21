@@ -27,10 +27,3 @@
   width: fit-content;
   margin: auto;
 }
-
-.hand-cards-display-block .hand-cards-display-cell .card-cell .waiting-cell-content {
-  font-size: 1.2rem;
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  height: fit-content;
-  margin: auto;
-}

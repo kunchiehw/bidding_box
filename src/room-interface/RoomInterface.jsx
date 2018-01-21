@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
-import { Container, Button, Divider } from 'semantic-ui-react';
+import { Container, Button, Divider, Dimmer, Loader } from 'semantic-ui-react';
 import './RoomInterface.css';
 import BidButtonBlock from './bid-button-block/BidButtonBlock';
 import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
@@ -36,8 +36,8 @@ class RoomInterface extends Component {
     super(props);
     this.state = {
       bidSeq: [],
-      roomInfo: {},
-      boardInfo: {},
+      roomInfo: null,
+      boardInfo: null,
     };
 
     this.socket = null;
@@ -146,19 +146,19 @@ class RoomInterface extends Component {
       westHand: (this.state.boardInfo) ? this.state.boardInfo.westHand : null,
       eastID: (this.state.roomInfo && this.state.roomInfo.eastID) ? this.state.roomInfo.eastID : '',
       westID: (this.state.roomInfo && this.state.roomInfo.westID) ? this.state.roomInfo.westID : '',
-      whoseTurn,
       bidSeqIsEnded,
     };
 
-    const mainUpperBlock = (
-      <div className="main-upper-block">
+    const upperBlock = (
+      <Container className="upper-block">
         <HandCardsDisplay {...handCardsDisplayProp} />
-      </div>
+      </Container>
     );
 
-    let mainLowerBlock = null;
+    let middleBlock = null;
 
     if (this.state.boardInfo) {
+      const activeDimmer = (whoseTurn !== playerRole);
       const currentBid = getCurrentBid(this.state.bidSeq);
       const bidButtonBlockProp = {
         currentLevel: currentBid.level,
@@ -173,15 +173,20 @@ class RoomInterface extends Component {
         bidSeq: this.state.bidSeq,
       };
 
-      mainLowerBlock = (
-        <div className="main-lower-block">
+      middleBlock = (
+        <Container className="middle-block">
           <BidSequenceDisplay {...bidSequenceDisplayProp} />
           {(bidSeqIsEnded) && <ScoreBlock scoreList={this.state.boardInfo.scoreList} />}
-          {(!bidSeqIsEnded && whoseTurn === playerRole) &&
-            <BidButtonBlock {...bidButtonBlockProp} />}
-          {(!bidSeqIsEnded && whoseTurn !== playerRole) &&
-            <div className="empty-div" > Something Here </div>}
-        </div>
+          {(!bidSeqIsEnded) &&
+            <Dimmer.Dimmable className="bid-button-block-dimmer" as={Container} dimmed={activeDimmer} >
+              <Dimmer active={activeDimmer} inverted>
+                <Loader active={activeDimmer} inverted indeterminate>
+                  SHOW SOME MESSAGE
+                </Loader>
+              </Dimmer>
+              <BidButtonBlock {...bidButtonBlockProp} />
+            </Dimmer.Dimmable>}
+        </Container>
       );
     }
 
@@ -198,15 +203,11 @@ class RoomInterface extends Component {
     );
 
     return (
-      <Container textAlign="center">
-        <div className="room-interface">
-          <div className="room-main-block">
-            {mainUpperBlock}
-            {mainLowerBlock}
-          </div>
-          <Divider />
-          {roomToolsBlock}
-        </div>
+      <Container className="room-interface" textAlign="center">
+        {upperBlock}
+        {middleBlock}
+        <Divider />
+        {roomToolsBlock}
       </Container>
     );
   }

@@ -22,14 +22,12 @@ const propTypes = {
   }),
   eastID: PropTypes.string.isRequired,
   westID: PropTypes.string.isRequired,
-  whoseTurn: PropTypes.oneOf(PARTICIPANTS_ROLE),
   bidSeqIsEnded: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
   eastHand: null,
   westHand: null,
-  whoseTurn: null,
 };
 
 class HandCardsDisplay extends PureComponent {
@@ -42,7 +40,6 @@ class HandCardsDisplay extends PureComponent {
             playerRole={this.props.playerRole}
             playerID={this.props.westID}
             playerHand={this.props.westHand}
-            playerTurn={this.props.whoseTurn === 'WEST'}
             bidSeqIsEnded={this.props.bidSeqIsEnded}
           />
         </Grid.Column>
@@ -52,7 +49,6 @@ class HandCardsDisplay extends PureComponent {
             playerRole={this.props.playerRole}
             playerID={this.props.eastID}
             playerHand={this.props.eastHand}
-            playerTurn={this.props.whoseTurn === 'EAST'}
             bidSeqIsEnded={this.props.bidSeqIsEnded}
           />
         </Grid.Column>
