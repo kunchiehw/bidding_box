@@ -6,11 +6,13 @@ const docClient = new aws.DynamoDB.DocumentClient();
 
 
 module.exports.getRoomList = (req, res, next) => {
-  docClient.scan({
-    TableName: 'Room',
-    ProjectionExpression: 'id, roomInfo',
-  }).promise()
-    .then((data) => {
+  Promise.all([
+    docClient.scan({
+      TableName: 'Room',
+      ProjectionExpression: 'id, roomInfo',
+    }).promise(),
+  ])
+    .then(([data]) => {
       if (data.Count > 0) {
         res.send(data.Items);
       } else {
