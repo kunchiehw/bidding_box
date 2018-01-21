@@ -86,26 +86,24 @@ module.exports.createRoom = (req, res, next) => {
 };
 
 
-module.exports.updateRoom = wss => (
-  (req, res, next) => {
-    const { roomId } = req.params;
-    const bidSeq = JSON.stringify(req.body.bidSeq);
-    docClient.update({
-      TableName: 'Room',
-      Key: {
-        id: roomId,
-      },
-      UpdateExpression: 'set bidSeq = :b, cacheTtl = :t',
-      ExpressionAttributeValues: {
-        ':b': bidSeq,
-        ':t': getTtl(),
-      },
-      ReturnValues: 'ALL_NEW',
-    }).promise()
-      .then(() => {
-        broadcastRoom(wss, roomId, JSON.stringify({ bidSeq }));
-        res.sendStatus(200);
-      })
-      .catch(err => next(err));
-  }
-);
+module.exports.updateRoom = (req, res, next) => {
+  const { roomId } = req.params;
+  const bidSeq = JSON.stringify(req.body.bidSeq);
+  docClient.update({
+    TableName: 'Room',
+    Key: {
+      id: roomId,
+    },
+    UpdateExpression: 'set bidSeq = :b, cacheTtl = :t',
+    ExpressionAttributeValues: {
+      ':b': bidSeq,
+      ':t': getTtl(),
+    },
+    ReturnValues: 'ALL_NEW',
+  }).promise()
+    .then(() => {
+      broadcastRoom(req.wss, roomId, JSON.stringify({ bidSeq }));
+      res.sendStatus(200);
+    })
+    .catch(err => next(err));
+};

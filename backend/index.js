@@ -18,6 +18,7 @@ const wss = new websocket.Server({
 });
 
 app.use((req, res, next) => {
+  req.wss = wss;
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -60,5 +61,5 @@ app.put(
   '/room/:roomId',
   validateJwtMiddleware,
   bodyParser.json(),
-  roomLib.updateRoom(wss),
+  roomLib.updateRoom,
 );
