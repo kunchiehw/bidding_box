@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Grid, Segment, Header, Button, Form, Icon, Divider } from 'semantic-ui-react';
+import { Grid, Segment, Header, Message, Button, Form, Icon, Divider } from 'semantic-ui-react';
 import './LoginInterface.css';
 
 const propTypes = {
@@ -25,6 +25,7 @@ class LoginInterface extends Component {
       username: '',
       password: '',
       loading: false,
+      errorMessage: null,
     };
   }
 
@@ -57,20 +58,26 @@ class LoginInterface extends Component {
       })
       .then((data) => {
         this.props.handleUpdateJWTToken(data);
-        this.setState({ loading: false });
+        this.setState({ loading: false, errorMessage: null });
         this.props.history.push('/lobby');
       })
-      .catch(() => {
+      .catch((err) => {
         this.props.handleUpdateJWTToken(null);
-        this.setState({ loading: false });
+        this.setState({ loading: false, errorMessage: err.message });
       });
   }
 
   render() {
     return (
       <Grid centered verticalAlign="middle" style={{ height: '100%' }}>
-        <Grid.Column textAlign="center" className="login-interface" style={{ width: '400px' }}>
-          <Header as="h2">Login to account</Header>
+        <Grid.Column className="login-interface" style={{ width: '400px' }}>
+          <Header as="h2" textAlign="center">Login to account</Header>
+          <Message
+            header={this.state.errorMessage}
+            hidden={!this.state.errorMessage}
+            error
+            icon="warning circle"
+          />
           <Segment padded>
             <Form onSubmit={this.handleSigninSubmit}>
               <Form.Input
