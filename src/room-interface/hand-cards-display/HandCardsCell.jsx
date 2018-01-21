@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Segment, Divider } from 'semantic-ui-react';
+import { Segment, Divider, Button } from 'semantic-ui-react';
 import { suitCharacter, suitColor } from '../helper-RoomInterface';
 import { SEATS_EW, PARTICIPANTS_ROLE } from '../../util/util';
 
@@ -15,6 +15,7 @@ const propTypes = {
     CLUBS: PropTypes.string.isRequired,
   }),
   bidSeqIsEnded: PropTypes.bool.isRequired,
+  handleClickToSit: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -23,10 +24,14 @@ const defaultProps = {
 
 class HandCardsCell extends PureComponent {
   render() {
-    const idCell = (
+    const idCell = (this.props.playerID) ? (
       <div className="id-cell">
         {this.props.playerID}
       </div>
+    ) : (
+      <Button onClick={() => this.props.handleClickToSit(this.props.seat)}>
+        {`Click to sit ${this.props.seat}`}
+      </Button>
     );
 
     const cardCell = ((this.props.playerHand) &&
