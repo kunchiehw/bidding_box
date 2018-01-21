@@ -1,23 +1,13 @@
-.room-interface .display-none {
-  visibility: hidden;
-}
-
-.room-interface .room-main-block {
-
-}
-
-.room-interface .room-main-block .main-upper-block {
+.room-interface .upper-block {
   max-width: 900px;
   min-width: 450px;
   margin: auto;
 }
 
-.room-interface .room-main-block .main-lower-block {
-
-}
-
-.room-interface .room-main-block .main-lower-block .empty-div {
+.room-interface .middle-block .bid-button-block-dimmer {
   display: inline-block;
+  /* TODO: responsive design */
   width: 350px;
   margin: 0px 15px;
+  vertical-align: top;
 }
