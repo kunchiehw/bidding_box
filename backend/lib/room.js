@@ -41,7 +41,6 @@ module.exports.createRoom = (req, res, next) => {
         throw new Error('');
       }
 
-
       const defaultItem = {
         id: roomId,
         cacheTtl: getTtl(),
@@ -99,10 +98,23 @@ module.exports.updateRoom = (req, res, next) => {
       Value: getTtl(),
     },
   };
+
   if (req.body.bidSeq) {
     AttributeUpdates.bidSeq = {
       Action: 'PUT',
       Value: JSON.stringify(req.body.bidSeq),
+    };
+  }
+  if (req.body.eastId !== undefined) {
+    AttributeUpdates.eastId = {
+      Action: 'PUT',
+      Value: req.body.eastId,
+    };
+  }
+  if (req.body.westId !== undefined) {
+    AttributeUpdates.westId = {
+      Action: 'PUT',
+      Value: req.body.westId,
     };
   }
 
