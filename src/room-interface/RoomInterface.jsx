@@ -117,6 +117,7 @@ class RoomInterface extends Component {
   }
 
   handleClickToSit(seat) {
+    this.handleLeaveSeat();
     const updatedInfo = (seat === 'EAST') ? { eastID: this.username } : { westID: this.username };
     fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
       method: 'PUT',
