@@ -92,7 +92,6 @@ module.exports.createRoom = (req, res, next) => {
 
 module.exports.updateRoom = (req, res, next) => {
   const { roomId } = req.params;
-  let bidSeq = null;
   const AttributeUpdates = {
     cacheTtl: {
       Action: 'PUT',
@@ -100,10 +99,9 @@ module.exports.updateRoom = (req, res, next) => {
     },
   };
   if (req.body.bidSeq) {
-    bidSeq = JSON.stringify(req.body.bidSeq);
     AttributeUpdates.bidSeq = {
       Action: 'PUT',
-      Value: bidSeq,
+      Value: JSON.stringify(req.body.bidSeq),
     };
   }
 
@@ -115,8 +113,8 @@ module.exports.updateRoom = (req, res, next) => {
     AttributeUpdates,
     ReturnValues: 'ALL_NEW',
   }).promise()
-    .then(() => {
-      broadcastRoom(req.wss, roomId, JSON.stringify({ bidSeq }));
+    .then((data) => {
+      broadcastRoom(req.wss, roomId, JSON.stringify(data.Attributes));
       res.sendStatus(200);
     })
     .catch(err => next(err));
