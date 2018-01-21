@@ -46,10 +46,7 @@ module.exports.createRoom = (req, res, next) => {
         id: roomId,
         cacheTtl: getTtl(),
         bidSeq: '[]',
-        roomInfo: {
-          eastID: 'jarron',
-          westID: 'wkc',
-        },
+        roomInfo: {},
         boardInfo: JSON.stringify({
           vulnerability: 'NS',
           dealer: 'WEST',
