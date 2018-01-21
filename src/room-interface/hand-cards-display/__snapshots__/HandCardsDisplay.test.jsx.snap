@@ -1,0 +1,3105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HandCardsCell render seat: EAST, playerRole: EAST, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: EAST, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: EAST, playerID: ,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: EAST, playerID: ,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: EAST, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: EAST, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: EAST, playerID: testID,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: EAST, playerID: testID,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: OBSERVER, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: OBSERVER, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: OBSERVER, playerID: ,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: OBSERVER, playerID: ,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: OBSERVER, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: OBSERVER, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: OBSERVER, playerID: testID,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: OBSERVER, playerID: testID,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: WEST, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: WEST, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: WEST, playerID: ,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: WEST, playerID: ,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: WEST, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: WEST, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: WEST, playerID: testID,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: EAST, playerRole: WEST, playerID: testID,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: EAST, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: EAST, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: EAST, playerID: ,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: EAST, playerID: ,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: EAST, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: EAST, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: EAST, playerID: testID,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: EAST, playerID: testID,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: OBSERVER, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: OBSERVER, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: OBSERVER, playerID: ,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: OBSERVER, playerID: ,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: OBSERVER, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: OBSERVER, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: OBSERVER, playerID: testID,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: OBSERVER, playerID: testID,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: WEST, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: WEST, playerID: ,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: WEST, playerID: ,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: WEST, playerID: ,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  />
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: WEST, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: WEST, playerID: testID,
+              playerHand: [object Object], bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  >
+    <div
+      className="card-cell-content"
+    >
+      <div>
+        <span
+          style={
+            Object {
+              "color": "blue",
+            }
+          }
+        >
+           
+          ♠
+           
+        </span>
+        <span>
+           
+          AKQ
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        >
+           
+          ♥
+           
+        </span>
+        <span>
+           
+          AKQJT98
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "orange",
+            }
+          }
+        >
+           
+          ♦
+           
+        </span>
+        <span>
+           
+          432
+           
+        </span>
+      </div>
+      <div>
+        <span
+          style={
+            Object {
+              "color": "green",
+            }
+          }
+        >
+           
+          ♣
+           
+        </span>
+        <span>
+           
+           
+        </span>
+      </div>
+    </div>
+  </div>
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: WEST, playerID: testID,
+              playerHand: null, bidSeqIsEnded: false 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsCell render seat: WEST, playerRole: WEST, playerID: testID,
+              playerHand: null, bidSeqIsEnded: true 1`] = `
+<Segment
+  className="hand-cards-display-cell"
+>
+  <div
+    className="id-cell"
+  >
+    testID
+  </div>
+  <Divider />
+  <div
+    className="card-cell"
+  />
+</Segment>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID="wkc"
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID="jarron"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID="wkc"
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="jarron"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID=""
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID="lonely"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID=""
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="lonely"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID="wkc"
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID="jarron"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID="wkc"
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="jarron"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID=""
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID="lonely"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID=""
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="lonely"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: OBSERVER, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID="wkc"
+      playerRole="OBSERVER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID="jarron"
+      playerRole="OBSERVER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: OBSERVER, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID="wkc"
+      playerRole="OBSERVER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="jarron"
+      playerRole="OBSERVER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: OBSERVER, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID=""
+      playerRole="OBSERVER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID="lonely"
+      playerRole="OBSERVER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: OBSERVER, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID=""
+      playerRole="OBSERVER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="lonely"
+      playerRole="OBSERVER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: OBSERVER, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID="wkc"
+      playerRole="OBSERVER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID="jarron"
+      playerRole="OBSERVER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: OBSERVER, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID="wkc"
+      playerRole="OBSERVER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="jarron"
+      playerRole="OBSERVER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: OBSERVER, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID=""
+      playerRole="OBSERVER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID="lonely"
+      playerRole="OBSERVER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: OBSERVER, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID=""
+      playerRole="OBSERVER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="lonely"
+      playerRole="OBSERVER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID="wkc"
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID="jarron"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID="wkc"
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="jarron"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID=""
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={null}
+      playerID="lonely"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID=""
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="lonely"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID="wkc"
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID="jarron"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID="wkc"
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="jarron"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID=""
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={null}
+      playerID="lonely"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIDs: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerID=""
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerID="lonely"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
