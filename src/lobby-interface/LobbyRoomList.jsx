@@ -17,7 +17,7 @@ const propTypes = {
 function generateTableCell(id, eastID, westID, count, handleClick) {
   const handleClickEast = () => { handleClick(id, 'eastID'); };
   const handleClickWest = () => { handleClick(id, 'westID'); };
-  const handleClickObserver = () => { handleClick(id, ''); };
+  const handleClickObserver = () => { handleClick(id, null); };
 
   const westCell = ((westID && westID.length !== 0) ?
     <Segment size="small"> {westID} </Segment> : (
