@@ -10,7 +10,7 @@ module.exports.getRoomList = (req, res, next) => {
   Promise.all([
     docClient.scan({
       TableName: 'Room',
-      ProjectionExpression: 'id, roomInfo',
+      ProjectionExpression: 'id, eastId, westId',
     }).promise(),
     _.countBy(Array.from(req.wss.clients), ws => ws.roomId),
   ])
@@ -46,7 +46,8 @@ module.exports.createRoom = (req, res, next) => {
         id: roomId,
         cacheTtl: getTtl(),
         bidSeq: '[]',
-        roomInfo: {},
+        eastId: null,
+        westId: null,
         boardInfo: JSON.stringify({
           vulnerability: 'NS',
           dealer: 'WEST',
