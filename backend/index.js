@@ -3,8 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
 const websocket = require('ws');
-
+const compression = require('compression');
 const morgan = require('morgan');
+
 const broadcastWs = require('./lib/broadcastWs');
 const { authenticateUserMiddleware, validateJwtMiddleware } = require('./lib/utils');
 const roomLib = require('./lib/room');
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   next();
 });
+app.use(compression());
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
