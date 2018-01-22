@@ -10,7 +10,7 @@ module.exports.getRoomList = (req, res, next) => {
   Promise.all([
     docClient.scan({
       TableName: 'Room',
-      ProjectionExpression: 'id, roomInfo',
+      ProjectionExpression: 'id, eastId, westId',
     }).promise(),
     _.countBy(Array.from(req.wss.clients), ws => ws.roomId),
   ])
@@ -41,15 +41,12 @@ module.exports.createRoom = (req, res, next) => {
         throw new Error('');
       }
 
-
       const defaultItem = {
         id: roomId,
         cacheTtl: getTtl(),
         bidSeq: '[]',
-        roomInfo: {
-          eastID: 'jarron',
-          westID: 'wkc',
-        },
+        eastId: null,
+        westId: null,
         boardInfo: JSON.stringify({
           vulnerability: 'NS',
           dealer: 'WEST',
@@ -95,21 +92,42 @@ module.exports.createRoom = (req, res, next) => {
 
 module.exports.updateRoom = (req, res, next) => {
   const { roomId } = req.params;
-  const bidSeq = JSON.stringify(req.body.bidSeq);
+  const AttributeUpdates = {
+    cacheTtl: {
+      Action: 'PUT',
+      Value: getTtl(),
+    },
+  };
+
+  if (req.body.bidSeq) {
+    AttributeUpdates.bidSeq = {
+      Action: 'PUT',
+      Value: JSON.stringify(req.body.bidSeq),
+    };
+  }
+  if (req.body.eastId !== undefined) {
+    AttributeUpdates.eastId = {
+      Action: 'PUT',
+      Value: req.body.eastId,
+    };
+  }
+  if (req.body.westId !== undefined) {
+    AttributeUpdates.westId = {
+      Action: 'PUT',
+      Value: req.body.westId,
+    };
+  }
+
   docClient.update({
     TableName: 'Room',
     Key: {
       id: roomId,
     },
-    UpdateExpression: 'set bidSeq = :b, cacheTtl = :t',
-    ExpressionAttributeValues: {
-      ':b': bidSeq,
-      ':t': getTtl(),
-    },
+    AttributeUpdates,
     ReturnValues: 'ALL_NEW',
   }).promise()
-    .then(() => {
-      broadcastRoom(req.wss, roomId, JSON.stringify({ bidSeq }));
+    .then((data) => {
+      broadcastRoom(req.wss, roomId, JSON.stringify(data.Attributes));
       res.sendStatus(200);
     })
     .catch(err => next(err));
