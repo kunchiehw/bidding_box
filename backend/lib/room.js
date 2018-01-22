@@ -24,7 +24,7 @@ module.exports.getRoomList = (req, res, next) => {
         }));
       }
     })
-    .catch(err => next(err));
+    .catch(next);
 };
 
 
@@ -86,7 +86,7 @@ module.exports.createRoom = (req, res, next) => {
       }).promise();
     })
     .then(() => res.sendStatus(200))
-    .catch(err => next(err));
+    .catch(next);
 };
 
 
@@ -130,5 +130,5 @@ module.exports.updateRoom = (req, res, next) => {
       broadcastRoom(req.wss, roomId, JSON.stringify(data.Attributes));
       res.sendStatus(200);
     })
-    .catch(err => next(err));
+    .catch(next);
 };
