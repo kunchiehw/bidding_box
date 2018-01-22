@@ -6,27 +6,25 @@ const propTypes = {
   roomList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     count: PropTypes.number.isRequired,
-    roomInfo: PropTypes.shape({
-      eastID: PropTypes.string,
-      westID: PropTypes.string,
-    }),
+    eastId: PropTypes.string,
+    westId: PropTypes.string,
   })).isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 
-function generateTableCell(id, eastID, westID, count, handleClick) {
-  const handleClickEast = () => { handleClick(id, 'eastID'); };
-  const handleClickWest = () => { handleClick(id, 'westID'); };
+function generateTableCell(id, eastId, westId, count, handleClick) {
+  const handleClickEast = () => { handleClick(id, 'EAST'); };
+  const handleClickWest = () => { handleClick(id, 'WEST'); };
   const handleClickObserver = () => { handleClick(id, null); };
 
-  const westCell = ((westID && westID.length !== 0) ?
-    <Segment size="small"> {westID} </Segment> : (
+  const westCell = ((westId) ?
+    <Segment size="small"> {westId} </Segment> : (
       <Button onClick={handleClickWest} size="small" color="teal">
         <Icon name="plus" /> Sit West
       </Button>));
 
-  const eastCell = ((eastID && eastID.length !== 0) ?
-    <Segment size="small"> {eastID} </Segment> : (
+  const eastCell = ((eastId) ?
+    <Segment size="small"> {eastId} </Segment> : (
       <Button onClick={handleClickEast} size="small" color="teal">
         <Icon name="plus" /> Sit East
       </Button>));
@@ -53,8 +51,8 @@ function LobbyRoomList(props) {
   for (let roomIndex = 0; roomIndex < props.roomList.length; roomIndex += 1) {
     roomCells.push(generateTableCell(
       props.roomList[roomIndex].id,
-      (props.roomList[roomIndex].roomInfo) ? props.roomList[roomIndex].roomInfo.eastID : null,
-      (props.roomList[roomIndex].roomInfo) ? props.roomList[roomIndex].roomInfo.westID : null,
+      props.roomList[roomIndex].eastId,
+      props.roomList[roomIndex].westId,
       props.roomList[roomIndex].count,
       props.handleClick,
     ));

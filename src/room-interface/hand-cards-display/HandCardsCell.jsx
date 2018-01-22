@@ -7,7 +7,7 @@ import { SEATS_EW, PARTICIPANTS_ROLE } from '../../util/util';
 const propTypes = {
   seat: PropTypes.oneOf(SEATS_EW).isRequired,
   playerRole: PropTypes.oneOf(PARTICIPANTS_ROLE).isRequired,
-  playerID: PropTypes.string.isRequired,
+  playerId: PropTypes.string,
   playerHand: PropTypes.shape({
     SPADES: PropTypes.string.isRequired,
     HEARTS: PropTypes.string.isRequired,
@@ -20,13 +20,14 @@ const propTypes = {
 
 const defaultProps = {
   playerHand: null,
+  playerId: null,
 };
 
 class HandCardsCell extends PureComponent {
   render() {
-    const idCell = (this.props.playerID) ? (
+    const idCell = (this.props.playerId) ? (
       <div className="id-cell">
-        {this.props.playerID}
+        {this.props.playerId}
       </div>
     ) : (
       <Button onClick={() => this.props.handleClickToSit(this.props.seat)}>
