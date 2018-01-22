@@ -41,8 +41,7 @@ module.exports.onConnect = (ws, req) => {
         }
         ws.send(JSON.stringify(data.Item));
       })
-      .catch((err) => {
-        console.log(`websocket close: ${err}`);
+      .catch(() => {
         ws.close();
       });
   });
