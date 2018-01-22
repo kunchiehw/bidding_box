@@ -10,6 +10,7 @@ export function suitToNumber(suit) {
       return 2;
     case 'CLUBS':
       return 1;
+    /* istanbul ignore next */
     default:
       return 0;
   }
