@@ -89,10 +89,10 @@ class RoomInterface extends Component {
         if (bidSeq) {
           this.setState({ bidSeq: JSON.parse(bidSeq) });
         }
-        if (eastId) {
+        if (eastId !== undefined) {
           this.setState({ eastId });
         }
-        if (westId) {
+        if (westId !== undefined) {
           this.setState({ westId });
         }
         if (boardInfo) {
