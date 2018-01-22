@@ -27,6 +27,7 @@ describe('HandCardsCell render', () => {
                 playerId={playerId}
                 playerHand={playerHand}
                 bidSeqIsEnded={bidSeqIsEnded}
+                handleClickToSit={() => {}}
               />);
               expect(toJson(handCardsCell)).toMatchSnapshot();
             });
@@ -76,6 +77,7 @@ describe('HandCardsDisplay render', () => {
               eastId={playerIds.eastId}
               westId={playerIds.westId}
               bidSeqIsEnded={bidSeqIsEnded}
+              handleClickToSit={() => {}}
             />);
             expect(toJson(handCardsDisplay)).toMatchSnapshot();
           });
