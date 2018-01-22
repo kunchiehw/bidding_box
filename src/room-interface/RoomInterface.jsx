@@ -123,8 +123,10 @@ class RoomInterface extends Component {
   }
 
   handleClickToSit(seat) {
-    this.handleLeaveSeat();
     const updatedInfo = (seat === 'EAST') ? { eastId: this.username } : { westId: this.username };
+    const playerRole = getPlayerRole(this.state.eastId, this.state.westId, this.username);
+    if (playerRole === 'EAST') updatedInfo.eastId = null;
+    if (playerRole === 'WEST') updatedInfo.westId = null;
     fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
       method: 'PUT',
       headers: {
