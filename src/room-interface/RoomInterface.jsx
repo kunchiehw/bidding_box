@@ -36,7 +36,8 @@ class RoomInterface extends Component {
     super(props);
     this.state = {
       bidSeq: [],
-      roomInfo: null,
+      eastId: null,
+      westId: null,
       boardInfo: null,
     };
 
@@ -82,12 +83,17 @@ class RoomInterface extends Component {
         this.socket.send(jwtToken);
       };
       this.socket.onmessage = (event) => {
-        const { bidSeq, roomInfo, boardInfo } = JSON.parse(event.data);
+        const {
+          bidSeq, eastId, westId, boardInfo,
+        } = JSON.parse(event.data);
         if (bidSeq) {
           this.setState({ bidSeq: JSON.parse(bidSeq) });
         }
-        if (roomInfo) {
-          this.setState({ roomInfo });
+        if (eastId) {
+          this.setState({ eastId });
+        }
+        if (westId) {
+          this.setState({ westId });
         }
         if (boardInfo) {
           this.setState({ boardInfo: JSON.parse(boardInfo) });
@@ -118,7 +124,7 @@ class RoomInterface extends Component {
 
   handleClickToSit(seat) {
     this.handleLeaveSeat();
-    const updatedInfo = (seat === 'EAST') ? { eastID: this.username } : { westID: this.username };
+    const updatedInfo = (seat === 'EAST') ? { eastId: this.username } : { westId: this.username };
     fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
       method: 'PUT',
       headers: {
@@ -130,7 +136,7 @@ class RoomInterface extends Component {
   }
 
   handleUndoButton() {
-    const userRole = getPlayerRole(this.state.roomInfo, this.username);
+    const userRole = getPlayerRole(this.state.eastId, this.state.westId, this.username);
     const bidSeq = this.state.bidSeq.slice();
     const roleIndex = SEATS.indexOf(userRole);
     const dealerIndex = SEATS.indexOf(this.state.boardInfo.dealer);
@@ -151,20 +157,17 @@ class RoomInterface extends Component {
   }
 
   handleLeaveSeat() {
-    const playerRole = getPlayerRole(this.state.roomInfo, this.username);
-    let updatedInfo = null;
-    if (playerRole === 'WEST') updatedInfo = 'westID';
-    else if (playerRole === 'EAST') updatedInfo = 'eastID';
-    if (updatedInfo) {
-      const roomInfo = {};
-      roomInfo[updatedInfo] = '';
+    const playerRole = getPlayerRole(this.state.eastId, this.state.westId, this.username);
+    if (playerRole === 'EAST' || playerRole === 'WEST') {
+      const updatedInfo = (playerRole === 'EAST') ? { eastId: null } : { westId: null };
+      console.log(updatedInfo);
       fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.props.jwtToken}`,
         },
-        body: JSON.stringify({ roomInfo }),
+        body: JSON.stringify(updatedInfo),
       });
     }
   }
@@ -175,7 +178,7 @@ class RoomInterface extends Component {
   }
 
   render() {
-    const playerRole = getPlayerRole(this.state.roomInfo, this.username);
+    const playerRole = getPlayerRole(this.state.eastId, this.state.westId, this.username);
     const whoseTurn = (this.state.boardInfo) ?
       getWhoseTurn(playerRole, this.state.boardInfo.dealer, this.state.bidSeq) : null;
     const bidSeqIsEnded = getBidSeqIsEnded(this.state.bidSeq);
@@ -184,8 +187,8 @@ class RoomInterface extends Component {
       playerRole,
       eastHand: (this.state.boardInfo) ? this.state.boardInfo.eastHand : null,
       westHand: (this.state.boardInfo) ? this.state.boardInfo.westHand : null,
-      eastID: (this.state.roomInfo && this.state.roomInfo.eastID) ? this.state.roomInfo.eastID : '',
-      westID: (this.state.roomInfo && this.state.roomInfo.westID) ? this.state.roomInfo.westID : '',
+      eastId: this.state.eastId,
+      westId: this.state.westId,
       bidSeqIsEnded,
       handleClickToSit: this.handleClickToSit,
     };

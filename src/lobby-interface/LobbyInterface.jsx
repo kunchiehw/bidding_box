@@ -77,17 +77,17 @@ class LobbyInterface extends Component {
     this.props.history.push(`/room/${this.username}`);
   }
 
-  handleRoomListClick(roomName, updatedInfo) {
-    if (updatedInfo) {
-      const roomInfo = {};
-      roomInfo[updatedInfo] = decode(this.props.jwtToken).username;
+  handleRoomListClick(roomName, seat) {
+    if (seat) {
+      const updatedInfo = (seat === 'EAST') ?
+        { eastId: decode(this.props.jwtToken).username } : { westId: decode(this.props.jwtToken).username };
       fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${roomName}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.props.jwtToken}`,
         },
-        body: JSON.stringify({ roomInfo }),
+        body: JSON.stringify(updatedInfo),
       });
     }
     this.props.history.push(`/room/${roomName}`);

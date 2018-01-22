@@ -20,8 +20,8 @@ const propTypes = {
     DIAMONDS: PropTypes.string.isRequired,
     CLUBS: PropTypes.string.isRequired,
   }),
-  eastID: PropTypes.string.isRequired,
-  westID: PropTypes.string.isRequired,
+  eastId: PropTypes.string,
+  westId: PropTypes.string,
   bidSeqIsEnded: PropTypes.bool.isRequired,
   handleClickToSit: PropTypes.func.isRequired,
 };
@@ -29,6 +29,8 @@ const propTypes = {
 const defaultProps = {
   eastHand: null,
   westHand: null,
+  eastId: null,
+  westId: null,
 };
 
 class HandCardsDisplay extends PureComponent {
@@ -39,7 +41,7 @@ class HandCardsDisplay extends PureComponent {
           <HandCardsCell
             seat="WEST"
             playerRole={this.props.playerRole}
-            playerID={this.props.westID}
+            playerId={this.props.westId}
             playerHand={this.props.westHand}
             bidSeqIsEnded={this.props.bidSeqIsEnded}
             handleClickToSit={this.props.handleClickToSit}
@@ -49,7 +51,7 @@ class HandCardsDisplay extends PureComponent {
           <HandCardsCell
             seat="EAST"
             playerRole={this.props.playerRole}
-            playerID={this.props.eastID}
+            playerId={this.props.eastId}
             playerHand={this.props.eastHand}
             bidSeqIsEnded={this.props.bidSeqIsEnded}
             handleClickToSit={this.props.handleClickToSit}

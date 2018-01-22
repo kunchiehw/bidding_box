@@ -6,7 +6,7 @@ import HandCardsDisplay from './HandCardsDisplay';
 import { SEATS_EW, PARTICIPANTS_ROLE, BOOLEAN_CHOICES } from '../../util/util';
 
 describe('HandCardsCell render', () => {
-  const ids = ['', 'testID'];
+  const ids = ['', 'testId'];
   const hands = [
     null,
     {
@@ -16,15 +16,15 @@ describe('HandCardsCell render', () => {
 
   SEATS_EW.forEach((seat) => {
     PARTICIPANTS_ROLE.forEach((playerRole) => {
-      ids.forEach((playerID) => {
+      ids.forEach((playerId) => {
         hands.forEach((playerHand) => {
           BOOLEAN_CHOICES.forEach((bidSeqIsEnded) => {
-            it(`seat: ${seat}, playerRole: ${playerRole}, playerID: ${playerID},
+            it(`seat: ${seat}, playerRole: ${playerRole}, playerId: ${playerId},
               playerHand: ${playerHand}, bidSeqIsEnded: ${bidSeqIsEnded}`, () => {
               const handCardsCell = shallow(<HandCardsCell
                 seat={seat}
                 playerRole={playerRole}
-                playerID={playerID}
+                playerId={playerId}
                 playerHand={playerHand}
                 bidSeqIsEnded={bidSeqIsEnded}
               />);
@@ -54,27 +54,27 @@ describe('HandCardsDisplay render', () => {
   ];
   const ids = [
     {
-      eastID: 'jarron',
-      westID: 'wkc',
+      eastId: 'jarron',
+      westId: 'wkc',
     },
     {
-      eastID: 'lonely',
-      westID: '',
+      eastId: 'lonely',
+      westId: '',
     },
   ];
 
   PARTICIPANTS_ROLE.forEach((playerRole) => {
-    ids.forEach((playerIDs) => {
+    ids.forEach((playerIds) => {
       hands.forEach((playerHands) => {
         BOOLEAN_CHOICES.forEach((bidSeqIsEnded) => {
-          it(`playerRole: ${playerRole}, playerIDs: ${playerIDs},
+          it(`playerRole: ${playerRole}, playerIds: ${playerIds},
               playerHands: ${playerHands}, bidSeqIsEnded: ${bidSeqIsEnded}`, () => {
             const handCardsDisplay = shallow(<HandCardsDisplay
               playerRole={playerRole}
               eastHand={playerHands.eastHand}
               westHand={playerHands.westHand}
-              eastID={playerIDs.eastID}
-              westID={playerIDs.westID}
+              eastId={playerIds.eastId}
+              westId={playerIds.westId}
               bidSeqIsEnded={bidSeqIsEnded}
             />);
             expect(toJson(handCardsDisplay)).toMatchSnapshot();
