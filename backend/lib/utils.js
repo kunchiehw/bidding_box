@@ -5,6 +5,7 @@ const db = {
   users: {
     wkc: 'password',
     jarron: 'password',
+    unittest: 'password',
   },
 };
 
