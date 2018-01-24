@@ -1,7 +1,9 @@
 require('dotenv').config();
 const request = require('supertest');
-const { server } = require('../index');
+const should = require('should');
 const WebSocket = require('ws');
+const { server } = require('../index');
+
 
 const auth = { username: 'unittest', password: 'password' };
 
@@ -58,7 +60,7 @@ describe('loading express', () => {
         });
     });
 
-    it('/room/:roomId', (done) => {
+    it('Connect /room/:roomId', (done) => {
       const ws = new WebSocket(`${wsUrl}/room/test`);
 
       ws.on('open', () => {
@@ -66,6 +68,11 @@ describe('loading express', () => {
       });
 
       ws.on('message', (data) => {
+        should.exist(data);
+        ws.close();
+      });
+
+      ws.on('close', () => {
         done();
       });
     });
