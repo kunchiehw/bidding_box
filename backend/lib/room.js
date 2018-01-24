@@ -38,7 +38,8 @@ module.exports.createRoom = (req, res, next) => {
   }).promise()
     .then((data) => {
       if (data.Item) {
-        throw new Error('');
+        res.sendStatus(200);
+        return Promise.reject();
       }
 
       const defaultItem = {
@@ -85,7 +86,7 @@ module.exports.createRoom = (req, res, next) => {
         Item: defaultItem,
       }).promise();
     })
-    .then(() => res.sendStatus(200))
+    .then(() => res.sendStatus(202))
     .catch(next);
 };
 
