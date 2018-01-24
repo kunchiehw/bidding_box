@@ -26,23 +26,34 @@ describe('loading express', () => {
         .expect(404, done);
     });
 
-    it('POST /token', (done) => {
-      request(server)
-        .post('/token')
-        .send(auth)
-        .expect(200, done);
-    });
+    describe('POST /token', () => {
+      it('200', (done) => {
+        request(server)
+          .post('/token')
+          .send(auth)
+          .expect(200, done);
+      });
 
-    it('POST /token', (done) => {
-      request(server)
-        .post('/token')
-        .send(auth)
-        .expect(200, done);
+      // it('400', (done) => {
+      //   request(server)
+      //     .post('/token')
+      //     .set('Content-Type', 'text/plain')
+      //     .send('abc')
+      //     .expect(400, done);
+      // });
+
+      it('401', (done) => {
+        request(server)
+          .post('/token')
+          .send({ username: 'a' })
+          .expect(401, done);
+      });
     });
   });
 
   describe('websocket', () => {
     let token = null;
+    let ws = null;
     const wsUrl = `ws://localhost:${process.env.PORT || 8080}`;
 
     before((done) => {
@@ -60,8 +71,24 @@ describe('loading express', () => {
         });
     });
 
+    afterEach(() => {
+      ws.close();
+    });
+
+    it('Close /', (done) => {
+      ws = new WebSocket(`${wsUrl}/`);
+
+      ws.on('open', () => {
+        ws.send(token);
+      });
+
+      ws.on('close', () => {
+        done();
+      });
+    });
+
     it('Connect /room/:roomId', (done) => {
-      const ws = new WebSocket(`${wsUrl}/room/test`);
+      ws = new WebSocket(`${wsUrl}/room/test`);
 
       ws.on('open', () => {
         ws.send(token);
@@ -69,12 +96,33 @@ describe('loading express', () => {
 
       ws.on('message', (data) => {
         should.exist(data);
-        ws.close();
+        done();
+      });
+    });
+
+    it('Close /room/undefined', (done) => {
+      ws = new WebSocket(`${wsUrl}/room/undefined`);
+
+      ws.on('open', () => {
+        ws.send(token);
       });
 
       ws.on('close', () => {
         done();
       });
     });
+
+    // it('Connect /lobby', (done) => {
+    //   ws = new WebSocket(`${wsUrl}/lobby`);
+    //
+    //   ws.on('open', () => {
+    //     ws.send(token);
+    //   });
+    //
+    //   ws.on('message', (data) => {
+    //     should.exist(data);
+    //     done();
+    //   });
+    // });
   });
 });
