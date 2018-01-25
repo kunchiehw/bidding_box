@@ -4,6 +4,37 @@ const { getTtl } = require('./utils');
 const { broadcastRoom } = require('./broadcastWs');
 
 const docClient = new aws.DynamoDB.DocumentClient();
+const boardInfoTemplate = JSON.stringify({
+  vulnerability: 'NS',
+  dealer: 'WEST',
+  eastHand: {
+    SPADES: 'AKQJT98765432',
+    HEARTS: '',
+    DIAMONDS: '',
+    CLUBS: '',
+  },
+  westHand: {
+    SPADES: '',
+    HEARTS: 'KQJT9',
+    DIAMONDS: 'KQJT',
+    CLUBS: 'KQJT',
+  },
+  scoreList: [{
+    bid: {
+      level: 7,
+      suit: 'SPADES',
+    },
+    declarer: 'EW',
+    score: 100,
+  }, {
+    bid: {
+      level: 7,
+      suit: 'NOTRUMPS',
+    },
+    declarer: 'EAST',
+    score: 0,
+  }],
+});
 
 
 module.exports.getRoomList = (req, res, next) => {
@@ -48,37 +79,7 @@ module.exports.createRoom = (req, res, next) => {
         bidSeq: '[]',
         eastId: null,
         westId: null,
-        boardInfo: JSON.stringify({
-          vulnerability: 'NS',
-          dealer: 'WEST',
-          eastHand: {
-            SPADES: 'AKQJT98765432',
-            HEARTS: '',
-            DIAMONDS: '',
-            CLUBS: '',
-          },
-          westHand: {
-            SPADES: '',
-            HEARTS: 'KQJT9',
-            DIAMONDS: 'KQJT',
-            CLUBS: 'KQJT',
-          },
-          scoreList: [{
-            bid: {
-              level: 7,
-              suit: 'SPADES',
-            },
-            declarer: 'EW',
-            score: 100,
-          }, {
-            bid: {
-              level: 7,
-              suit: 'NOTRUMPS',
-            },
-            declarer: 'EAST',
-            score: 0,
-          }],
-        }),
+        boardInfo: boardInfoTemplate,
       };
 
       return docClient.put({
@@ -103,7 +104,7 @@ module.exports.updateRoom = (req, res, next) => {
   if (req.body.bidSeq) {
     AttributeUpdates.bidSeq = {
       Action: 'PUT',
-      Value: JSON.stringify(req.body.bidSeq),
+      Value: req.body.bidSeq,
     };
   }
   if (req.body.eastId !== undefined) {
@@ -116,6 +117,12 @@ module.exports.updateRoom = (req, res, next) => {
     AttributeUpdates.westId = {
       Action: 'PUT',
       Value: req.body.westId,
+    };
+  }
+  if (req.body.boardInfo !== undefined) {
+    AttributeUpdates.boardInfo = {
+      Action: 'PUT',
+      Value: req.body.boardInfo,
     };
   }
 
