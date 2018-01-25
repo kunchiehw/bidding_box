@@ -1,8 +1,8 @@
 require('dotenv').config();
 const should = require('should');
-const utils = require('../lib/utils');
+const utils = require('../../lib/utils');
 
-const username = 'jarron';
+const username = 'unittest';
 const password = 'password';
 
 describe('utils.js', () => {

@@ -29,7 +29,7 @@ app.use(compression());
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
-server.listen(8080, () => {
+server.listen(process.env.PORT || 8080, () => {
   console.log('Listening on %d', server.address().port);
 });
 
@@ -40,6 +40,14 @@ setInterval(broadcastWs.healthCheckPing(wss), 30000);
 
 
 // API define
+app.get(
+  '/',
+  (req, res) => {
+    res.sendStatus(200);
+  },
+);
+
+
 app.post(
   '/token',
   authenticateUserMiddleware,
@@ -65,3 +73,6 @@ app.put(
   bodyParser.json(),
   roomLib.updateRoom,
 );
+
+
+module.exports.server = server;
