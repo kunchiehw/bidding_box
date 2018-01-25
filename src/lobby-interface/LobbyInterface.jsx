@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
-import { Container, Search, Button, Modal, Header, Icon, List } from 'semantic-ui-react';
+import { Container, Header, Search, Button, Modal, Icon, List } from 'semantic-ui-react';
 import './LobbyInterface.css';
 import LobbyRoomList from './LobbyRoomList';
 
@@ -111,20 +111,21 @@ class LobbyInterface extends Component {
 
   render() {
     const lobbyHeaderDiv = (
-      <div className="lobby-header">
+      <div>
         <div>
-          <div className="lobby-welcome-banner">
+          <p>
             { `Welcome to the lobby, ${this.username}! ` }
-          </div>
-          <Button
-            className="sign-out-button"
-            onClick={this.handleSignoutSubmit}
-            disabled={this.state.loading}
-            size="tiny"
-            color="red"
-          >
-            <Icon name="sign out" /> Sign out
-          </Button>
+
+            <Button
+              className="sign-out-button"
+              onClick={this.handleSignoutSubmit}
+              disabled={this.state.loading}
+              size="tiny"
+              color="red"
+            >
+              <Icon name="sign out" /> Sign out
+            </Button>
+          </p>
         </div>
 
         <List horizontal>
@@ -159,7 +160,7 @@ class LobbyInterface extends Component {
             <Search open={false} onSearchChange={this.handleSearchChange} />
           </List.Item>
         </List>
-        <div />
+
       </div>
     );
 
