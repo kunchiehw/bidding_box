@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
-import { Container, Search, Button, Modal, Header, Icon } from 'semantic-ui-react';
+import { Container, Search, Button, Modal, Header, Icon, List } from 'semantic-ui-react';
 import './LobbyInterface.css';
 import LobbyRoomList from './LobbyRoomList';
 
@@ -126,32 +126,40 @@ class LobbyInterface extends Component {
             <Icon name="sign out" /> Sign out
           </Button>
         </div>
-        <div>
-          <Modal trigger={
-            <Button className="create-table-button" size="medium" color="green">
-              <Icon name="heart" /> Create My Table
-            </Button>}
-          >
-            <Header icon="heart" content="Create My Table" />
-            <Modal.Content>
-            Please select your role.
-            </Modal.Content>
-            <Modal.Actions>
-              <Button onClick={() => this.handleCreateTable('WEST')} color="teal">
-                <Icon name="plus" /> Sit West
-              </Button>
-              <Button onClick={() => this.handleCreateTable('EAST')} color="teal">
-                <Icon name="plus" /> Sit East
-              </Button>
-              <Button onClick={() => this.handleCreateTable('OBSERVER')} color="blue">
-                <Icon name="plus" /> Watch
-              </Button>
-            </Modal.Actions>
-          </Modal>
-          <Button className="refresh-room-list-button" onClick={this.handleRefreshRoomList} size="medium" color="blue">
-            <Icon name="refresh" /> Refresh
-          </Button>
-        </div>
+
+        <List horizontal>
+          <List.Item>
+            <Modal trigger={
+              <Button icon labelPosition="left" color="green">
+                <Icon name="plus" />
+                Create My Table
+              </Button>}
+            >
+              <Header icon="plus" content="Create My Table" />
+              <Modal.Content>
+                Please select your role.
+              </Modal.Content>
+              <Modal.Actions>
+                <Button onClick={() => this.handleCreateTable('WEST')} color="teal">
+                  <Icon name="plus" /> Sit West
+                </Button>
+                <Button onClick={() => this.handleCreateTable('EAST')} color="teal">
+                  <Icon name="plus" /> Sit East
+                </Button>
+                <Button onClick={() => this.handleCreateTable('OBSERVER')} color="blue">
+                  <Icon name="plus" /> Watch
+                </Button>
+              </Modal.Actions>
+            </Modal>
+          </List.Item>
+          <List.Item>
+            <Button icon="refresh" onClick={this.handleRefreshRoomList} />
+          </List.Item>
+          <List.Item>
+            <Search open={false} onSearchChange={this.handleSearchChange} />
+          </List.Item>
+        </List>
+        <div />
       </div>
     );
 
@@ -161,12 +169,9 @@ class LobbyInterface extends Component {
     };
 
     return (
-      <Container textAlign="center">
-        <div className="lobby-interface">
-          {lobbyHeaderDiv}
-          <Search onSearchChange={this.handleSearchChange} open={false} />
-          <LobbyRoomList {...roomListTestProps} />
-        </div>
+      <Container className="lobby-interface" textAlign="center">
+        {lobbyHeaderDiv}
+        <LobbyRoomList {...roomListTestProps} />
       </Container>
     );
   }
