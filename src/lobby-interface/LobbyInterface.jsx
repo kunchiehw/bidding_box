@@ -103,7 +103,7 @@ class LobbyInterface extends Component {
 
   handleSearchChange(e, data) {
     const re = new RegExp(_.escapeRegExp(data.value), 'i');
-    const isMatch = result => re.test(result.id);
+    const isMatch = result => re.test(result.id) || re.test(result.eastId) || re.test(result.westId);
     this.setState({
       roomListShow: _.filter(this.state.roomListFull, isMatch),
     });
