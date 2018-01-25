@@ -112,7 +112,7 @@ class RoomInterface extends Component {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.props.jwtToken}`,
       },
-      body: JSON.stringify({ bidSeq }),
+      body: JSON.stringify({ bidSeq: JSON.stringify(bidSeq) }),
     });
   }
 
