@@ -102,9 +102,17 @@ module.exports.updateRoom = (req, res, next) => {
   };
 
   if (req.body.bidSeq) {
+    // TODO:
+    const bidSeqObj = JSON.parse(req.body.bidSeq);
+    if (bidSeqObj.length % 2 === 1) {
+      bidSeqObj.push({
+        level: 0,
+        suit: 'PASS',
+      });
+    }
     AttributeUpdates.bidSeq = {
       Action: 'PUT',
-      Value: req.body.bidSeq,
+      Value: JSON.stringify(bidSeqObj),
     };
   }
   if (req.body.eastId !== undefined) {
