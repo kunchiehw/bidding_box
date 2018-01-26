@@ -4,24 +4,6 @@
   font-weight: 700;
 }
 
-.lobby-interface .lobby-header {
-  display: inline-block;
-  margin: 0.5em 0;
-}
-
-.lobby-interface .lobby-header .lobby-welcome-banner {
-  display: inline-block;
-  margin: 0 1em;
-}
-
-.lobby-interface .lobby-header .create-table-button {
-  margin: 0.5em 0.5em;
-}
-
-.lobby-interface .lobby-header .refresh-room-list-button {
-  margin: 0.5em 0.5em;
-}
-
 .lobby-interface .lobby-room-list {
   max-width: 900px;
   margin: auto;
