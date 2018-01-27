@@ -29,6 +29,7 @@ frontend/
   i18n/
     messages.js
   utils/
+    constants.js
     helpers.js
     validator.js
     __test__/
