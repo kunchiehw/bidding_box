@@ -18,26 +18,28 @@ The folder structure in `frontend` should like the following:
 ```
 frontend/
   README.md
+  components/
+    FirstComponent.jsx
+    __test__/
+      FirstComponent.test.jsx
+  interfaces/
+    FirstInterfaces.jsx
+    __test__/
+      FirstInterface.test.jsx
   i18n/
     messages.js
-    (TBA)
-  first-ineterface/
-    components/
-      FirstComponent.jsx
-    component-test
-      FirstComponent.test.jsx
-    FirstInterface.jsx
-    FirstInterface.test.jsx
-    helper-FirstInterface.js
-    helper-FirstInterface.test.jsx
-  helper-frontend.js
+  utils/
+    helpers.js
+    validator.js
+    __test__/
+      helpers.test.jsx
+      validator.test.jsx
 ```
 
+* All the folder should have a `__test__` folder which stores all the unit test of the elements in this folder.
+* Any stateless React component should be stored in the folder `component`, and any React component that using state should be stored in `interfaces`.
 * The `i18n` folder controls all the messages presented in the interface. Any messages that show in the interface should be called via `getMessages` function in `messages.js`.
-* Every interface should have a unique, independent folder which stores all the compoenents, functions and tests that used.
-* Any stateless component should be stored in the folder `components` and its unit test should be stored in the folder `components-test`.
-* The main interface file and its unit test should be stored directly under the interface folder.
-* All helper functions, used either in the components or in the main interface, should be stored in the file `helper-${NAME}Interface.js`, which should be directly under the interface folder. The unit test for the functions should be implemented in `helper-${NAME}Interface.test.jsx`.
+* All helper functions should be stored in the file `utils/helper.js`, and all the custom PropTypes validator should be stored in `utils/validator`.
 
 ### Folders and Files Naming
 
