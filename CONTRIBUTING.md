@@ -30,7 +30,7 @@ frontend/
     FirstInterface.test.jsx
     helper-FirstInterface.js
     helper-FirstInterface.test.jsx
-  utils/
+  helper-frontend.js
 ```
 
 * The `i18n` folder controls all the messages presented in the interface. Any messages that show in the interface should be called via `getMessages` function in `messages.js`.
