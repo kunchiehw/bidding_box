@@ -40,7 +40,7 @@ frontend/
 * All the folder should have a `__test__` folder which stores all the unit test of the elements in this folder.
 * Any stateless React component should be stored in the folder `component`, and any React component that using state should be stored in `interfaces`.
 * The `i18n` folder controls all the messages presented in the interface. Any messages that show in the interface should be called via `getMessages` function in `messages.js`.
-* All helper functions should be stored in the file `utils/helper.js`, and all the custom PropTypes validator should be stored in `utils/validator`.
+* All shared constants should be stored in the file `utils/constants.js`; All helper functions should be stored in the file `utils/helper.js`; And all the custom PropTypes validator should be stored in `utils/validator`.
 
 ### Folders and Files Naming
 
