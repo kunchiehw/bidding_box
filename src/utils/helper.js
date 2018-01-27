@@ -1,5 +1,5 @@
 import { STANDARD_SUITS } from './constants';
-import { getMessage } from '../i18n/messages';
+import getMessage from '../i18n/messages';
 
 export function bidToString(level, suit) {
   if (STANDARD_SUITS.includes(suit)) {

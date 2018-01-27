@@ -9,8 +9,6 @@ const US_MESSAGE = {
   REDOUBLE: 'XX',
 };
 
-export function getMessage(indicator) {
+export default function getMessage(indicator) {
   return US_MESSAGE[indicator];
 }
-
-export function foo() {}

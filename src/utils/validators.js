@@ -40,4 +40,4 @@ export const levelValidator = createChainableTypeChecker((props, propName, compo
   return null;
 });
 
-export function foo() {}
+export const nextValidator = () => {}; // Next Validator will be added soon.
