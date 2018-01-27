@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react';
-import { bidToString, suitColor } from '../helper-RoomInterface';
-import { ALL_SUITS } from '../../util/util';
+import { bidToString, suitColor } from '../utils/helper';
+import { levelValidator } from '../utils/validators';
+import { ALL_SUITS } from '../utils/constants';
 
 const propTypes = {
-  // TODO: Might need a specific validator
-  level: PropTypes.number.isRequired,
+  level: levelValidator.isRequired,
   suit: PropTypes.oneOf(ALL_SUITS).isRequired,
   isDisabled: PropTypes.bool.isRequired,
   handleBidButtonClick: PropTypes.func.isRequired,

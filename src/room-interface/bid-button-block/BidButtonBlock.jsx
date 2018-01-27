@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './BidButtonBlock.css';
-import BidButton from './BidButton';
+import BidButton from '../../components/BidButton';
 import { shouldStandardBidButtonDisabled } from './helper-BidButtonBlock';
 import { POSSIBLE_LEVELS, STANDARD_SUITS } from '../../util/util';
 
