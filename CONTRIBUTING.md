@@ -1,6 +1,7 @@
 ## Table of Contents
 
 - [Front End UI](#front-end-ui)
+  - [Folder Structure](#folder-structure)
   - [Folders and Files Naming](#folders-and-files-naming)
   - [React](#react)
   - [HTML Elements](#html-elements)
@@ -8,14 +9,45 @@
 
 ## Front End UI
 
-This section describes the rule of all front-end UI files. That is, all the files in the folder `src`.
+This section describes the rule of all front-end UI files. All the files that related to the folder `frontend`, except those constants and functions that shared by both frontend side and backend side.
+
+### Folder Structure
+
+The folder structure in `frontend` should like the following:
+
+```
+frontend/
+  README.md
+  components/
+    FirstComponent.jsx
+    __test__/
+      FirstComponent.test.jsx
+  interfaces/
+    FirstInterfaces.jsx
+    __test__/
+      FirstInterface.test.jsx
+  i18n/
+    messages.js
+  utils/
+    constants.js
+    helpers.js
+    validator.js
+    __test__/
+      helpers.test.jsx
+      validator.test.jsx
+```
+
+* All the folder should have a `__test__` folder which stores all the unit test of the elements in this folder.
+* Any stateless React component should be stored in the folder `component`, and any React component that using state should be stored in `interfaces`.
+* The `i18n` folder controls all the messages presented in the interface. Any messages that show in the interface should be called via `getMessages` function in `messages.js`.
+* All shared constants should be stored in the file `utils/constants.js`; All helper functions should be stored in the file `utils/helper.js`; And all the custom PropTypes validator should be stored in `utils/validator`.
 
 ### Folders and Files Naming
 
 * For the folders, use lisp-case (connected-with-hyphen).
 * For the JavaScript file that uses React, use PascalCase with .jsx file extension.
 * For the JavaScript file that doesn't use React, use lisp-case with .js file extension.
-* For the helper file, name it as `helper-NameOfMainFile.js`.
+* For the helper file, name it like `helper-${NAME}Interface.jsx`.
 
 ### React
 
