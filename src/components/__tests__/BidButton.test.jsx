@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import BidButton from '../BidButton';
-import { POSSIBLE_LEVELS, STANDARD_SUITS, SPECIAL_SUITS, BOOLEAN_CHOICES } from '../../util/util';
+import { POSSIBLE_LEVELS, STANDARD_SUITS, SPECIAL_SUITS, BOOLEAN_CHOICES } from '../../utils/constants';
 
 describe('BidButton render', () => {
   POSSIBLE_LEVELS.forEach((level) => {
