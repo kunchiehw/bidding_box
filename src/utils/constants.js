@@ -13,3 +13,6 @@ export const PARTICIPANTS = ['WEST', 'EAST', 'WATCHER'];
 export const VULNERABILITIES = ['NONE', 'NS', 'EW', 'BOTH'];
 
 export const BOOLEANS = [true, false];
+
+export const SERVER_API_HOST = `${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}`;
+export const SERVER_WS_HOST = `ws://${process.env.REACT_APP_BACKEND_URL}`;

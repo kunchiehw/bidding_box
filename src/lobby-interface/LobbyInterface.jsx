@@ -6,6 +6,7 @@ import { decode } from 'jsonwebtoken';
 import { Container, Header, Search, Button, Modal, Icon, List } from 'semantic-ui-react';
 import './LobbyInterface.css';
 import LobbyRoomList from './LobbyRoomList';
+import { SERVER_API_HOST } from '../utils/constants';
 
 const propTypes = {
   jwtToken: PropTypes.string,
@@ -44,7 +45,7 @@ class LobbyInterface extends Component {
   handleRefreshRoomList(e) {
     if (e) e.preventDefault();
     this.setState({ loading: true });
-    fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room`, {
+    fetch(`${SERVER_API_HOST}/room`, {
       method: 'GET',
     })
       .then((res) => {
@@ -68,7 +69,7 @@ class LobbyInterface extends Component {
 
   handleCreateTable(role) {
     console.log(role);
-    fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.username}`, {
+    fetch(`${SERVER_API_HOST}/room/${this.username}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${this.props.jwtToken}`,
@@ -81,7 +82,7 @@ class LobbyInterface extends Component {
     if (seat) {
       const updatedInfo = (seat === 'EAST') ?
         { eastId: decode(this.props.jwtToken).username } : { westId: decode(this.props.jwtToken).username };
-      fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${roomName}`, {
+      fetch(`${SERVER_API_HOST}/room/${roomName}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
