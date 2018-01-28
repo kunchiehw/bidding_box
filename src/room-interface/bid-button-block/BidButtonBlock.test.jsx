@@ -1,9 +1,4 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
-import BidButtonBlock from './BidButtonBlock';
 import { shouldStandardBidButtonDisabled } from './helper-BidButtonBlock';
-import { POSSIBLE_LEVELS, STANDARD_SUITS, BOOLEAN_CHOICES } from '../../util/util';
 
 describe('helper shouldStandardBidButtonDisabled', () => {
   const tests = [
@@ -28,35 +23,5 @@ describe('helper shouldStandardBidButtonDisabled', () => {
     it(`After ${test.currentLevel} ${test.currentSuit}, should ${test.level} ${test.suit} disabled? Expect ${test.result}`, () => {
       expect(shouldStandardBidButtonDisabled(test.currentLevel, test.currentSuit, test.level, test.suit)).toEqual(test.result);
     });
-  });
-});
-
-describe('BidButtonBlock render', () => {
-  POSSIBLE_LEVELS.forEach((level) => {
-    STANDARD_SUITS.forEach((suit) => {
-      BOOLEAN_CHOICES.forEach((isDisabled) => {
-        it(`currentLevel: ${level}, currentSuit: ${suit}, shouldDoubleButtonDisabled: ${isDisabled}`, () => {
-          const bidButtonBlock = shallow(<BidButtonBlock
-            currentLevel={level}
-            currentSuit={suit}
-            shouldDoubleButtonDisabled={isDisabled}
-            shouldRedoubleButtonDisabled={!isDisabled}
-            handleBidButtonClick={() => null}
-          />);
-          expect(toJson(bidButtonBlock)).toMatchSnapshot();
-        });
-      });
-    });
-  });
-
-  it('currentSuit: "PASS', () => {
-    const bidButtonBlock = shallow(<BidButtonBlock
-      currentLevel={0}
-      currentSuit="PASS"
-      shouldDoubleButtonDisabled={false}
-      shouldRedoubleButtonDisabled={false}
-      handleBidButtonClick={() => null}
-    />);
-    expect(toJson(bidButtonBlock)).toMatchSnapshot();
   });
 });

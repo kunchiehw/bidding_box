@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 import { Container, Button, Divider, Dimmer, Loader } from 'semantic-ui-react';
 import './RoomInterface.css';
-import BidButtonBlock from './bid-button-block/BidButtonBlock';
+import BidButtonBlock from '../components/BidButtonBlock';
 import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
 import HandCardsDisplay from './hand-cards-display/HandCardsDisplay';
 import ScoreBlock from './score-block/ScoreBlock';
@@ -207,8 +207,8 @@ class RoomInterface extends Component {
       const activeDimmer = (whoseTurn !== playerRole);
       const currentBid = getCurrentBid(this.state.bidSeq);
       const bidButtonBlockProp = {
-        currentLevel: currentBid.level,
-        currentSuit: currentBid.suit,
+        level: currentBid.level,
+        suit: currentBid.suit,
         shouldDoubleButtonDisabled: shouldDoubleButtonDisabled(this.state.bidSeq),
         shouldRedoubleButtonDisabled: shouldRedoubleButtonDisabled(this.state.bidSeq),
         handleBidButtonClick: this.handleBidButtonClick,

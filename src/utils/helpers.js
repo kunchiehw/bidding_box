@@ -27,3 +27,10 @@ export function suitColor(suit) {
       return '';
   }
 }
+
+export function shouldStandardBidButtonDisabled(currentLevel, currentSuit, buttonLevel, buttonSuit) {
+  if (currentLevel !== buttonLevel) {
+    return (currentLevel > buttonLevel);
+  }
+  return (STANDARD_SUITS.indexOf(currentSuit) >= STANDARD_SUITS.indexOf(buttonSuit));
+}
