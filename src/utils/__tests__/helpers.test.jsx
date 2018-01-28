@@ -1,4 +1,4 @@
-import { shouldStandardBidButtonDisabled } from './helper-BidButtonBlock';
+import { shouldStandardBidButtonDisabled } from '../helpers';
 
 describe('helper shouldStandardBidButtonDisabled', () => {
   const tests = [
