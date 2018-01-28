@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Grid, Segment, Header, Message, Button, Form, Icon, Divider } from 'semantic-ui-react';
+import { SERVER_API_HOST } from '../utils/constants';
 import './LoginInterface.css';
 
 const propTypes = {
@@ -40,7 +41,7 @@ class LoginInterface extends Component {
   handleSigninSubmit(e) {
     e.preventDefault();
     this.setState({ loading: true });
-    fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/token`, {
+    fetch(`${SERVER_API_HOST}/token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

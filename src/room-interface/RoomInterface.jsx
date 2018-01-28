@@ -11,6 +11,8 @@ import ScoreBlock from './score-block/ScoreBlock';
 import { SEATS } from '../util/util';
 import { getPlayerRole, getBidSeqIsEnded, getWhoseTurn, getCurrentBid,
   shouldDoubleButtonDisabled, shouldRedoubleButtonDisabled } from './helper-RoomInterface';
+import { SERVER_API_HOST, SERVER_WS_HOST } from '../utils/constants';
+
 
 const propTypes = {
   jwtToken: PropTypes.string,
@@ -78,7 +80,7 @@ class RoomInterface extends Component {
 
   updateWebSocket(jwtToken) {
     if (jwtToken) {
-      this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`);
+      this.socket = new WebSocket(`${SERVER_WS_HOST}/room/${this.roomName}`);
       this.socket.onopen = () => {
         this.socket.send(jwtToken);
       };
@@ -106,7 +108,7 @@ class RoomInterface extends Component {
   }
 
   updateRoomBidSeq(bidSeq) {
-    fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
+    fetch(`${SERVER_API_HOST}/room/${this.roomName}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -127,7 +129,7 @@ class RoomInterface extends Component {
     const playerRole = getPlayerRole(this.state.eastId, this.state.westId, this.username);
     if (playerRole === 'EAST') updatedInfo.eastId = null;
     if (playerRole === 'WEST') updatedInfo.westId = null;
-    fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
+    fetch(`${SERVER_API_HOST}/room/${this.roomName}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -163,7 +165,7 @@ class RoomInterface extends Component {
     if (playerRole === 'EAST' || playerRole === 'WEST') {
       const updatedInfo = (playerRole === 'EAST') ? { eastId: null } : { westId: null };
       console.log(updatedInfo);
-      fetch(`${process.env.REACT_APP_BACKEND_SCHEMA}://${process.env.REACT_APP_BACKEND_URL}/room/${this.roomName}`, {
+      fetch(`${SERVER_API_HOST}/room/${this.roomName}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
