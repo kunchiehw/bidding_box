@@ -15,8 +15,8 @@ export default function generateNSNextBid(dealer, bidSeq, nsActions) {
   }
 
   // if NS attempt to bid something, check if it's allowed.
-  if (nsActions && nsActions[bidSeq / 2]) {
-    const nsAttempBid = nsActions[bidSeq / 2];
+  if (nsActions && nsActions[bidSeqLen / 2]) {
+    const nsAttempBid = nsActions[bidSeqLen / 2];
 
     if (nsAttempBid.suit === 'DOUBLE' && isDoubleAllowed(bidSeq)) { // check 'DOUBLE'
       return nsAttempBid;
