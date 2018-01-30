@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Container } from 'semantic-ui-react';
 import BidButton from './BidButton';
 import { POSSIBLE_LEVELS, STANDARD_SUITS } from '../utils/constants';
-import { shouldStandardBidButtonDisabled } from '../utils/helpers';
+import { isStandardBidAllowed } from '../utils/bidHelpers';
 import { levelValidator } from '../utils/validators';
 
 const propTypes = {
@@ -22,7 +22,7 @@ class BidButtonBlock extends PureComponent {
           key={buttonSuit}
           level={buttonLevel}
           suit={buttonSuit}
-          isDisabled={shouldStandardBidButtonDisabled(this.props.level, this.props.suit, buttonLevel, buttonSuit)}
+          isDisabled={isStandardBidAllowed(this.props.level, this.props.suit, buttonLevel, buttonSuit)}
           handleBidButtonClick={this.props.handleBidButtonClick}
         />
       ));
