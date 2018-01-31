@@ -1,17 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Segment } from 'semantic-ui-react';
-import { SEATS, SEATS_NS, SEATS_EW, VULS } from '../../util/util';
-
-function isVulnerable(seat, vulnerability) {
-  if (vulnerability === 'BOTH') return true;
-  if (vulnerability === 'NS' && SEATS_NS.includes(seat)) return true;
-  if (vulnerability === 'EW' && SEATS_EW.includes(seat)) return true;
-  return false;
-}
+import { SEATS, VULNERABILITIES } from '../utils/constants';
+import { isVulnerable } from '../utils/helpers';
 
 const propTypes = {
-  vulnerability: PropTypes.oneOf(VULS).isRequired,
+  vulnerability: PropTypes.oneOf(VULNERABILITIES).isRequired,
 };
 
 class SeatRow extends PureComponent {

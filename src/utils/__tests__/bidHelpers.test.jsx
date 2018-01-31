@@ -1,6 +1,6 @@
 import { isStandardBidAllowed } from '../bidHelpers';
 
-describe('helper shouldStandardBidButtonDisabled', () => {
+describe('helper isStandardBidAllowed', () => {
   const tests = [
     {
       currentLevel: 0, currentSuit: 'PASS', level: 1, suit: 'CLUBS', result: false,
@@ -20,7 +20,7 @@ describe('helper shouldStandardBidButtonDisabled', () => {
   ];
 
   tests.forEach((test) => {
-    it(`After ${test.currentLevel} ${test.currentSuit}, should ${test.level} ${test.suit} disabled? Expect ${test.result}`, () => {
+    it(`After ${test.currentLevel} ${test.currentSuit}, is ${test.level} ${test.suit} allowed? Expect ${test.result}`, () => {
       expect(isStandardBidAllowed(test.currentLevel, test.currentSuit, test.level, test.suit)).toEqual(test.result);
     });
   });

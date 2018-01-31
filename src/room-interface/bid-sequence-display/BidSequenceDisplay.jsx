@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from 'semantic-ui-react';
 import './BidSequenceDisplay.css';
-import SeatRow from './SeatRow';
+import SeatRow from '../../components/SeatRow';
 import BidSequenceBlock from './BidSequenceBlock';
 import { SEATS, VULS, ALL_SUITS } from '../../util/util';
 
