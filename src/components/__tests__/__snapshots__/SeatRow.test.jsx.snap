@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SeatRow render vulnerability: BOTH 1`] = `
+<div
+  className="seat-row"
+>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="WEST"
+  >
+     
+    WEST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="NORTH"
+  >
+     
+    NORTH
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="EAST"
+  >
+     
+    EAST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="SOUTH"
+  >
+     
+    SOUTH
+     
+  </Segment>
+</div>
+`;
+
+exports[`SeatRow render vulnerability: EW 1`] = `
+<div
+  className="seat-row"
+>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="WEST"
+  >
+     
+    WEST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    key="NORTH"
+  >
+     
+    NORTH
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="EAST"
+  >
+     
+    EAST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    key="SOUTH"
+  >
+     
+    SOUTH
+     
+  </Segment>
+</div>
+`;
+
+exports[`SeatRow render vulnerability: NONE 1`] = `
+<div
+  className="seat-row"
+>
+  <Segment
+    className="seat-cell"
+    key="WEST"
+  >
+     
+    WEST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    key="NORTH"
+  >
+     
+    NORTH
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    key="EAST"
+  >
+     
+    EAST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    key="SOUTH"
+  >
+     
+    SOUTH
+     
+  </Segment>
+</div>
+`;
+
+exports[`SeatRow render vulnerability: NS 1`] = `
+<div
+  className="seat-row"
+>
+  <Segment
+    className="seat-cell"
+    key="WEST"
+  >
+     
+    WEST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="NORTH"
+  >
+     
+    NORTH
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    key="EAST"
+  >
+     
+    EAST
+     
+  </Segment>
+  <Segment
+    className="seat-cell"
+    color="red"
+    inverted={true}
+    key="SOUTH"
+  >
+     
+    SOUTH
+     
+  </Segment>
+</div>
+`;

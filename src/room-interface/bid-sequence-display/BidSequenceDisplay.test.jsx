@@ -1,21 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import SeatRow from './SeatRow';
 import BidSequenceBlock from './BidSequenceBlock';
 import BidSequenceDisplay from './BidSequenceDisplay';
-import { SEATS, VULS } from '../../util/util';
-
-describe('SeatRow render', () => {
-  VULS.forEach((vul) => {
-    it(`vulnerability: ${vul}`, () => {
-      const seatRow = shallow(<SeatRow
-        vulnerability={vul}
-      />);
-      expect(toJson(seatRow)).toMatchSnapshot();
-    });
-  });
-});
+import { SEATS } from '../../util/util';
 
 describe('BidSequenceBlock render', () => {
   const bidSeqs = [
