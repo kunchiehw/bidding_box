@@ -44,9 +44,10 @@ const boardInfo1 = {
     declarer: 'EW',
     score: 2,
   }],
+  nsActions: {
+    0: { level: 1, suit: 'HEARTS' },
+  },
 };
-
-const nsActions1 = [{ level: 1, suit: 'HEARTS' }];
 
 const boardInfo6 = {
   vulnerability: 'EW',
@@ -88,9 +89,11 @@ const boardInfo6 = {
     declarer: 'EW',
     score: 1,
   }],
+  nsActions: {
+    0: { level: 1, suit: 'HEARTS' },
+    1: { level: 2, suit: 'HEARTS' },
+  },
 };
-
-const nsActions6 = [{ level: 1, suit: 'HEARTS' }, { level: 2, suit: 'HEARTS' }];
 
 const boardInfo7 = {
   vulnerability: 'BOTH',
