@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Container } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import BidButton from './BidButton';
 import { POSSIBLE_LEVELS, STANDARD_SUITS } from '../utils/constants';
 import { isStandardBidAllowed } from '../utils/bidHelpers';
@@ -18,52 +18,66 @@ class BidButtonBlock extends PureComponent {
   render() {
     const standardSuitsRows = POSSIBLE_LEVELS.map((buttonLevel) => {
       const standardSuitsButtons = STANDARD_SUITS.map(buttonSuit => (
-        <BidButton
-          key={buttonSuit}
-          level={buttonLevel}
-          suit={buttonSuit}
-          isDisabled={isStandardBidAllowed(this.props.level, this.props.suit, buttonLevel, buttonSuit)}
-          handleBidButtonClick={this.props.handleBidButtonClick}
-        />
+        <Grid.Column key={buttonSuit} width={3} streched>
+          <BidButton
+            level={buttonLevel}
+            suit={buttonSuit}
+            isDisabled={isStandardBidAllowed(this.props.level, this.props.suit, buttonLevel, buttonSuit)}
+            handleBidButtonClick={this.props.handleBidButtonClick}
+          />
+        </Grid.Column>
       ));
       return (
-        <Container
+        <Grid.Row
           key={buttonLevel}
           className="bid-button-row standard-suit-bid-button-row"
+          column={5}
+          streched
         >
           {standardSuitsButtons}
-        </Container>
+        </Grid.Row>
       );
     });
 
     const specialSuitsRow = (
-      <Container className="bid-button-row special-bid-button-row">
-        <BidButton
-          level={0}
-          suit="PASS"
-          isDisabled={false}
-          handleBidButtonClick={this.props.handleBidButtonClick}
-        />
-        <BidButton
-          level={0}
-          suit="DOUBLE"
-          isDisabled={this.props.shouldDoubleButtonDisabled}
-          handleBidButtonClick={this.props.handleBidButtonClick}
-        />
-        <BidButton
-          level={0}
-          suit="REDOUBLE"
-          isDisabled={this.props.shouldRedoubleButtonDisabled}
-          handleBidButtonClick={this.props.handleBidButtonClick}
-        />
-      </Container>
+      <Grid.Row
+        key={0}
+        className="bid-button-row special-bid-button-row"
+        column={3}
+        streched
+      >
+        <Grid.Column key="PASS" width={5} streched>
+          <BidButton
+            level={0}
+            suit="PASS"
+            isDisabled={false}
+            handleBidButtonClick={this.props.handleBidButtonClick}
+          />
+        </Grid.Column>
+        <Grid.Column key="DOUBLE" width={5} streched>
+          <BidButton
+            level={0}
+            suit="DOUBLE"
+            isDisabled={this.props.shouldDoubleButtonDisabled}
+            handleBidButtonClick={this.props.handleBidButtonClick}
+          />
+        </Grid.Column>
+        <Grid.Column key="REDOUBLE" width={5} streched>
+          <BidButton
+            level={0}
+            suit="REDOUBLE"
+            isDisabled={this.props.shouldRedoubleButtonDisabled}
+            handleBidButtonClick={this.props.handleBidButtonClick}
+          />
+        </Grid.Column>
+      </Grid.Row>
     );
 
     return (
-      <Container className="bid-button-block">
+      <Grid className="bid-button-block">
         {standardSuitsRows}
         {specialSuitsRow}
-      </Container>
+      </Grid>
     );
   }
 }
