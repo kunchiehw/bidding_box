@@ -93,9 +93,12 @@ module.exports.generateNSNextBid = (dealer, bidSeq, nsActions) => {
 
     if (nsAttempBid.suit === 'DOUBLE' && isDoubleAllowed(bidSeq)) { // check 'DOUBLE'
       return nsAttempBid;
-    } else if (nsAttempBid.suit === 'REDOUBLE' && isRedoubleAllowed(bidSeq)) { // check 'REDOUBLE'
+    }
+    if (nsAttempBid.suit === 'REDOUBLE' && isRedoubleAllowed(bidSeq)) { // check 'REDOUBLE'
       return nsAttempBid;
-    } else if (STANDARD_SUITS.includes(nsAttempBid.suit)) { // check standard bid
+    }
+
+    if (STANDARD_SUITS.includes(nsAttempBid.suit)) { // check standard bid
       const currentBid = getCurrentBid(bidSeq);
       if (isStandardBidAllowed(currentBid.level, currentBid.suit, nsAttempBid.level, nsAttempBid.suit)) {
         return nsAttempBid;
