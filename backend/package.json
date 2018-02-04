@@ -13,6 +13,8 @@
   },
   "description": "",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "mocha": "^5.0.0",
     "nodemon": "^1.14.8",
     "nyc": "^11.4.1",
@@ -23,7 +25,9 @@
   "main": "index.js",
   "name": "backend",
   "scripts": {
-    "start": "nodemon index.js",
+    "start:dev": "nodemon index.js --exec babel-node --presets es2015",
+    "start:prod": "ENV=deployment node index.js",
+    "start": "npm run start:dev",
     "test": "nyc --reporter=text-summary --reporter=text --reporter=lcov mocha test --recursive --exit"
   },
   "version": "1.0.0"
