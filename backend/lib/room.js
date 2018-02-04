@@ -1,40 +1,11 @@
 const aws = require('aws-sdk');
 const _ = require('lodash');
+
 const { getTtl } = require('./utils');
 const { broadcastRoom } = require('./broadcastWs');
+const { getBoard } = require('./boardInfoExamples');
 
 const docClient = new aws.DynamoDB.DocumentClient();
-const boardInfoTemplate = JSON.stringify({
-  vulnerability: 'NS',
-  dealer: 'WEST',
-  eastHand: {
-    SPADES: 'AKQJT98765432',
-    HEARTS: '',
-    DIAMONDS: '',
-    CLUBS: '',
-  },
-  westHand: {
-    SPADES: '',
-    HEARTS: 'KQJT9',
-    DIAMONDS: 'KQJT',
-    CLUBS: 'KQJT',
-  },
-  scoreList: [{
-    bid: {
-      level: 7,
-      suit: 'SPADES',
-    },
-    declarer: 'EW',
-    score: 100,
-  }, {
-    bid: {
-      level: 7,
-      suit: 'NOTRUMPS',
-    },
-    declarer: 'EAST',
-    score: 0,
-  }],
-});
 
 
 module.exports.getRoomList = (req, res, next) => {
@@ -79,7 +50,7 @@ module.exports.createRoom = (req, res, next) => {
         bidSeq: '[]',
         eastId: null,
         westId: null,
-        boardInfo: boardInfoTemplate,
+        boardInfo: getBoard(),
       };
 
       return docClient.put({

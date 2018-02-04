@@ -130,8 +130,7 @@ const boardInfo7 = {
 };
 
 
-module.exports = {
-  boardInfo1,
-  boardInfo6,
-  boardInfo7,
+module.exports.getBoard = () => {
+  const items = [boardInfo1, boardInfo6];
+  return JSON.stringify(items[Math.floor(Math.random() * items.length)]);
 };
