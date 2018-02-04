@@ -128,3 +128,10 @@ const boardInfo7 = {
     score: 3,
   }],
 };
+
+
+module.exports = {
+  boardInfo1,
+  boardInfo6,
+  boardInfo7,
+};
