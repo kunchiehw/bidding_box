@@ -1,4 +1,8 @@
 const jwt = require('jsonwebtoken');
+const {
+  isDoubleAllowed, isRedoubleAllowed, getCurrentBid, isStandardBidAllowed,
+} = require('./constants');
+const { SEATS, STANDARD_SUITS } = require('./bidHelpers');
 
 const secret = process.env.SHARE_SECRET;
 const db = {
@@ -73,3 +77,32 @@ module.exports.validateJwtMiddleware = (req, res, next) => {
 
 /* istanbul ignore next */
 module.exports.getTtl = () => Math.floor(Date.now() / 1000) + (4 * 60 * 60); // ttl for 4 hour
+
+
+module.exports.generateNSNextBid = (dealer, bidSeq, nsActions) => {
+  const bidSeqLen = bidSeq.length;
+
+  // if EW turn, return null
+  if ((SEATS.indexOf(dealer) + bidSeqLen) % 2 === 0) {
+    return null;
+  }
+
+  // if NS attempt to bid something, check if it's allowed.
+  if (nsActions && nsActions[bidSeqLen / 2]) {
+    const nsAttempBid = nsActions[bidSeqLen / 2];
+
+    if (nsAttempBid.suit === 'DOUBLE' && isDoubleAllowed(bidSeq)) { // check 'DOUBLE'
+      return nsAttempBid;
+    } else if (nsAttempBid.suit === 'REDOUBLE' && isRedoubleAllowed(bidSeq)) { // check 'REDOUBLE'
+      return nsAttempBid;
+    } else if (STANDARD_SUITS.includes(nsAttempBid.suit)) { // check standard bid
+      const currentBid = getCurrentBid(bidSeq);
+      if (isStandardBidAllowed(currentBid.level, currentBid.suit, nsAttempBid.level, nsAttempBid.suit)) {
+        return nsAttempBid;
+      }
+    }
+  }
+
+  // After all checks, return 'PASS'
+  return { level: 0, suit: 'PASS' };
+};
