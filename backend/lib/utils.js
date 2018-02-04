@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
+const { SEATS, STANDARD_SUITS } = require('./constants');
 const {
   isDoubleAllowed, isRedoubleAllowed, getCurrentBid, isStandardBidAllowed,
-} = require('./constants');
-const { SEATS, STANDARD_SUITS } = require('./bidHelpers');
+} = require('./bidHelpers');
 
 const secret = process.env.SHARE_SECRET;
 const db = {
