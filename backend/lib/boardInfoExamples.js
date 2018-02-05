@@ -90,8 +90,8 @@ const boardInfo6 = {
     score: 1,
   }],
   nsActions: {
-    0: { level: 1, suit: 'HEARTS' },
-    1: { level: 2, suit: 'HEARTS' },
+    1: { level: 1, suit: 'HEARTS' },
+    3: { level: 2, suit: 'HEARTS' },
   },
 };
 
@@ -127,4 +127,10 @@ const boardInfo7 = {
     declarer: 'EW',
     score: 3,
   }],
+};
+
+
+module.exports.getBoard = () => {
+  const items = [boardInfo1, boardInfo6];
+  return JSON.stringify(items[Math.floor(Math.random() * items.length)]);
 };
