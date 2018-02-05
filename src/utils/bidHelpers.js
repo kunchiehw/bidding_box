@@ -61,7 +61,7 @@ function isStandardBidAllowed(newLevel, newSuit, level, suit) {
   if (newLevel !== level) {
     return (newLevel > level);
   }
-  return (STANDARD_SUITS.indexOf(newSuit) >= STANDARD_SUITS.indexOf(suit));
+  return (STANDARD_SUITS.indexOf(newSuit) > STANDARD_SUITS.indexOf(suit));
 }
 
 

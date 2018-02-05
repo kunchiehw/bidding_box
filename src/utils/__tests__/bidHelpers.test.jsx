@@ -3,25 +3,28 @@ import { isStandardBidAllowed } from '../bidHelpers';
 describe('helper isStandardBidAllowed', () => {
   const tests = [
     {
-      currentLevel: 0, currentSuit: 'PASS', level: 1, suit: 'CLUBS', result: false,
+      newLevel: 1, newSuit: 'CLUBS', level: 0, suit: 'PASS', result: true,
     },
     {
-      currentLevel: 2, currentSuit: 'SPADES', level: 2, suit: 'NOTRUMPS', result: false,
+      newLevel: 1, newSuit: 'CLUBS', level: 1, suit: 'CLUBS', result: false,
     },
     {
-      currentLevel: 2, currentSuit: 'NOTRUMPS', level: 3, suit: 'SPADES', result: false,
+      newLevel: 2, newSuit: 'SPADES', level: 2, suit: 'NOTRUMPS', result: false,
     },
     {
-      currentLevel: 4, currentSuit: 'HEARTS', level: 4, suit: 'DIAMONDS', result: true,
+      newLevel: 2, newSuit: 'NOTRUMPS', level: 3, suit: 'SPADES', result: false,
     },
     {
-      currentLevel: 5, currentSuit: 'DIAMONDS', level: 4, suit: 'HEARTS', result: true,
+      newLevel: 4, newSuit: 'HEARTS', level: 4, suit: 'DIAMONDS', result: true,
+    },
+    {
+      newLevel: 5, newSuit: 'DIAMONDS', level: 4, suit: 'HEARTS', result: true,
     },
   ];
 
   tests.forEach((test) => {
-    it(`After ${test.currentLevel} ${test.currentSuit}, is ${test.level} ${test.suit} allowed? Expect ${test.result}`, () => {
-      expect(isStandardBidAllowed(test.currentLevel, test.currentSuit, test.level, test.suit)).toEqual(test.result);
+    it(`After ${test.level} ${test.suit}, is ${test.newLevel} ${test.newSuit} allowed? Expect ${test.result}`, () => {
+      expect(isStandardBidAllowed(test.newLevel, test.newSuit, test.level, test.suit)).toEqual(test.result);
     });
   });
 });

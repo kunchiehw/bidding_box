@@ -22,7 +22,7 @@ class BidButtonBlock extends PureComponent {
           <BidButton
             level={buttonLevel}
             suit={buttonSuit}
-            isDisabled={isStandardBidAllowed(this.props.level, this.props.suit, buttonLevel, buttonSuit)}
+            isDisabled={!isStandardBidAllowed(buttonLevel, buttonSuit, this.props.level, this.props.suit)}
             handleBidButtonClick={this.props.handleBidButtonClick}
           />
         </Grid.Column>
