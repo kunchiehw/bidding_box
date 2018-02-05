@@ -57,11 +57,11 @@ function getCurrentBid(bidSeq) {
   return { level: 0, suit: 'PASS' };
 }
 
-function isStandardBidAllowed(currentLevel, currentSuit, level, suit) {
-  if (currentLevel !== level) {
-    return (currentLevel > level);
+function isStandardBidAllowed(newLevel, newSuit, level, suit) {
+  if (newLevel !== level) {
+    return (newLevel > level);
   }
-  return (STANDARD_SUITS.indexOf(currentSuit) >= STANDARD_SUITS.indexOf(suit));
+  return (STANDARD_SUITS.indexOf(newSuit) >= STANDARD_SUITS.indexOf(suit));
 }
 
 
