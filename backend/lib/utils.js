@@ -88,8 +88,8 @@ module.exports.generateNSNextBid = (dealer, bidSeq, nsActions) => {
   }
 
   // if NS attempt to bid something, check if it's allowed.
-  if (nsActions && nsActions[bidSeqLen / 2]) {
-    const nsAttempBid = nsActions[bidSeqLen / 2];
+  if (nsActions && nsActions[bidSeqLen]) {
+    const nsAttempBid = nsActions[bidSeqLen];
 
     if (nsAttempBid.suit === 'DOUBLE' && isDoubleAllowed(bidSeq)) { // check 'DOUBLE'
       return nsAttempBid;
@@ -98,9 +98,13 @@ module.exports.generateNSNextBid = (dealer, bidSeq, nsActions) => {
       return nsAttempBid;
     }
 
+    if (bidSeqLen === 0) {
+      return nsAttempBid;
+    }
+
     if (STANDARD_SUITS.includes(nsAttempBid.suit)) { // check standard bid
       const currentBid = getCurrentBid(bidSeq);
-      if (isStandardBidAllowed(currentBid.level, currentBid.suit, nsAttempBid.level, nsAttempBid.suit)) {
+      if (isStandardBidAllowed(nsAttempBid.level, nsAttempBid.suit, currentBid.level, currentBid.suit)) {
         return nsAttempBid;
       }
     }

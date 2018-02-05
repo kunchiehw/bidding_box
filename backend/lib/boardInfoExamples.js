@@ -90,8 +90,8 @@ const boardInfo6 = {
     score: 1,
   }],
   nsActions: {
-    0: { level: 1, suit: 'HEARTS' },
-    1: { level: 2, suit: 'HEARTS' },
+    1: { level: 1, suit: 'HEARTS' },
+    3: { level: 2, suit: 'HEARTS' },
   },
 };
 

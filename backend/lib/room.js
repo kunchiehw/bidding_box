@@ -43,14 +43,21 @@ module.exports.createRoom = (req, res, next) => {
         res.sendStatus(200);
         return Promise.reject();
       }
+      const boardInfo = getBoard();
+      const boardInfoObj = JSON.parse(boardInfo);
+      const bidSeqObj = [];
+      const nsNextBid = generateNSNextBid(boardInfoObj.dealer, bidSeqObj, boardInfoObj.nsActions);
+      if (nsNextBid) {
+        bidSeqObj.push(nsNextBid);
+      }
 
       const defaultItem = {
         id: roomId,
         cacheTtl: getTtl(),
-        bidSeq: '[]',
+        bidSeq: JSON.stringify(bidSeqObj),
         eastId: null,
         westId: null,
-        boardInfo: getBoard(),
+        boardInfo,
       };
 
       return docClient.put({
@@ -88,8 +95,8 @@ module.exports.updateRoom = (req, res, next) => {
 
       if (req.body.bidSeq !== undefined) {
         const bidSeqObj = JSON.parse(req.body.bidSeq);
-        console.log(boardInfo.dealer, bidSeqObj, boardInfo.nsActions);
         const nsNextBid = generateNSNextBid(boardInfo.dealer, bidSeqObj, boardInfo.nsActions);
+
         if (nsNextBid) {
           bidSeqObj.push(nsNextBid);
         }
