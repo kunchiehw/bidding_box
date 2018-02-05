@@ -17,7 +17,7 @@ exports[`BidButtonBlock render currentLevel: 1, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={1}
         suit="CLUBS"
       />
@@ -536,7 +536,7 @@ exports[`BidButtonBlock render currentLevel: 1, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={1}
         suit="CLUBS"
       />
@@ -1067,7 +1067,7 @@ exports[`BidButtonBlock render currentLevel: 1, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={1}
         suit="DIAMONDS"
       />
@@ -1586,7 +1586,7 @@ exports[`BidButtonBlock render currentLevel: 1, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={1}
         suit="DIAMONDS"
       />
@@ -2117,7 +2117,7 @@ exports[`BidButtonBlock render currentLevel: 1, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={1}
         suit="HEARTS"
       />
@@ -2636,7 +2636,7 @@ exports[`BidButtonBlock render currentLevel: 1, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={1}
         suit="HEARTS"
       />
@@ -3179,7 +3179,7 @@ exports[`BidButtonBlock render currentLevel: 1, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={1}
         suit="NOTRUMPS"
       />
@@ -3698,7 +3698,7 @@ exports[`BidButtonBlock render currentLevel: 1, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={1}
         suit="NOTRUMPS"
       />
@@ -4205,7 +4205,7 @@ exports[`BidButtonBlock render currentLevel: 1, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={1}
         suit="SPADES"
       />
@@ -4724,7 +4724,7 @@ exports[`BidButtonBlock render currentLevel: 1, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={1}
         suit="SPADES"
       />
@@ -5274,7 +5274,7 @@ exports[`BidButtonBlock render currentLevel: 2, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={2}
         suit="CLUBS"
       />
@@ -5793,7 +5793,7 @@ exports[`BidButtonBlock render currentLevel: 2, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={2}
         suit="CLUBS"
       />
@@ -6324,7 +6324,7 @@ exports[`BidButtonBlock render currentLevel: 2, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={2}
         suit="DIAMONDS"
       />
@@ -6843,7 +6843,7 @@ exports[`BidButtonBlock render currentLevel: 2, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={2}
         suit="DIAMONDS"
       />
@@ -7374,7 +7374,7 @@ exports[`BidButtonBlock render currentLevel: 2, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={2}
         suit="HEARTS"
       />
@@ -7893,7 +7893,7 @@ exports[`BidButtonBlock render currentLevel: 2, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={2}
         suit="HEARTS"
       />
@@ -8436,7 +8436,7 @@ exports[`BidButtonBlock render currentLevel: 2, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={2}
         suit="NOTRUMPS"
       />
@@ -8955,7 +8955,7 @@ exports[`BidButtonBlock render currentLevel: 2, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={2}
         suit="NOTRUMPS"
       />
@@ -9462,7 +9462,7 @@ exports[`BidButtonBlock render currentLevel: 2, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={2}
         suit="SPADES"
       />
@@ -9981,7 +9981,7 @@ exports[`BidButtonBlock render currentLevel: 2, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={2}
         suit="SPADES"
       />
@@ -10531,7 +10531,7 @@ exports[`BidButtonBlock render currentLevel: 3, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={3}
         suit="CLUBS"
       />
@@ -11050,7 +11050,7 @@ exports[`BidButtonBlock render currentLevel: 3, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={3}
         suit="CLUBS"
       />
@@ -11581,7 +11581,7 @@ exports[`BidButtonBlock render currentLevel: 3, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={3}
         suit="DIAMONDS"
       />
@@ -12100,7 +12100,7 @@ exports[`BidButtonBlock render currentLevel: 3, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={3}
         suit="DIAMONDS"
       />
@@ -12631,7 +12631,7 @@ exports[`BidButtonBlock render currentLevel: 3, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={3}
         suit="HEARTS"
       />
@@ -13150,7 +13150,7 @@ exports[`BidButtonBlock render currentLevel: 3, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={3}
         suit="HEARTS"
       />
@@ -13693,7 +13693,7 @@ exports[`BidButtonBlock render currentLevel: 3, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={3}
         suit="NOTRUMPS"
       />
@@ -14212,7 +14212,7 @@ exports[`BidButtonBlock render currentLevel: 3, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={3}
         suit="NOTRUMPS"
       />
@@ -14719,7 +14719,7 @@ exports[`BidButtonBlock render currentLevel: 3, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={3}
         suit="SPADES"
       />
@@ -15238,7 +15238,7 @@ exports[`BidButtonBlock render currentLevel: 3, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={3}
         suit="SPADES"
       />
@@ -15788,7 +15788,7 @@ exports[`BidButtonBlock render currentLevel: 4, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={4}
         suit="CLUBS"
       />
@@ -16307,7 +16307,7 @@ exports[`BidButtonBlock render currentLevel: 4, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={4}
         suit="CLUBS"
       />
@@ -16838,7 +16838,7 @@ exports[`BidButtonBlock render currentLevel: 4, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={4}
         suit="DIAMONDS"
       />
@@ -17357,7 +17357,7 @@ exports[`BidButtonBlock render currentLevel: 4, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={4}
         suit="DIAMONDS"
       />
@@ -17888,7 +17888,7 @@ exports[`BidButtonBlock render currentLevel: 4, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={4}
         suit="HEARTS"
       />
@@ -18407,7 +18407,7 @@ exports[`BidButtonBlock render currentLevel: 4, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={4}
         suit="HEARTS"
       />
@@ -18950,7 +18950,7 @@ exports[`BidButtonBlock render currentLevel: 4, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={4}
         suit="NOTRUMPS"
       />
@@ -19469,7 +19469,7 @@ exports[`BidButtonBlock render currentLevel: 4, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={4}
         suit="NOTRUMPS"
       />
@@ -19976,7 +19976,7 @@ exports[`BidButtonBlock render currentLevel: 4, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={4}
         suit="SPADES"
       />
@@ -20495,7 +20495,7 @@ exports[`BidButtonBlock render currentLevel: 4, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={4}
         suit="SPADES"
       />
@@ -21045,7 +21045,7 @@ exports[`BidButtonBlock render currentLevel: 5, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={5}
         suit="CLUBS"
       />
@@ -21564,7 +21564,7 @@ exports[`BidButtonBlock render currentLevel: 5, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={5}
         suit="CLUBS"
       />
@@ -22095,7 +22095,7 @@ exports[`BidButtonBlock render currentLevel: 5, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={5}
         suit="DIAMONDS"
       />
@@ -22614,7 +22614,7 @@ exports[`BidButtonBlock render currentLevel: 5, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={5}
         suit="DIAMONDS"
       />
@@ -23145,7 +23145,7 @@ exports[`BidButtonBlock render currentLevel: 5, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={5}
         suit="HEARTS"
       />
@@ -23664,7 +23664,7 @@ exports[`BidButtonBlock render currentLevel: 5, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={5}
         suit="HEARTS"
       />
@@ -24207,7 +24207,7 @@ exports[`BidButtonBlock render currentLevel: 5, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={5}
         suit="NOTRUMPS"
       />
@@ -24726,7 +24726,7 @@ exports[`BidButtonBlock render currentLevel: 5, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={5}
         suit="NOTRUMPS"
       />
@@ -25233,7 +25233,7 @@ exports[`BidButtonBlock render currentLevel: 5, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={5}
         suit="SPADES"
       />
@@ -25752,7 +25752,7 @@ exports[`BidButtonBlock render currentLevel: 5, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={5}
         suit="SPADES"
       />
@@ -26302,7 +26302,7 @@ exports[`BidButtonBlock render currentLevel: 6, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={6}
         suit="CLUBS"
       />
@@ -26821,7 +26821,7 @@ exports[`BidButtonBlock render currentLevel: 6, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={6}
         suit="CLUBS"
       />
@@ -27352,7 +27352,7 @@ exports[`BidButtonBlock render currentLevel: 6, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={6}
         suit="DIAMONDS"
       />
@@ -27871,7 +27871,7 @@ exports[`BidButtonBlock render currentLevel: 6, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={6}
         suit="DIAMONDS"
       />
@@ -28402,7 +28402,7 @@ exports[`BidButtonBlock render currentLevel: 6, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={6}
         suit="HEARTS"
       />
@@ -28921,7 +28921,7 @@ exports[`BidButtonBlock render currentLevel: 6, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={6}
         suit="HEARTS"
       />
@@ -29464,7 +29464,7 @@ exports[`BidButtonBlock render currentLevel: 6, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={6}
         suit="NOTRUMPS"
       />
@@ -29983,7 +29983,7 @@ exports[`BidButtonBlock render currentLevel: 6, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={6}
         suit="NOTRUMPS"
       />
@@ -30490,7 +30490,7 @@ exports[`BidButtonBlock render currentLevel: 6, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={6}
         suit="SPADES"
       />
@@ -31009,7 +31009,7 @@ exports[`BidButtonBlock render currentLevel: 6, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={6}
         suit="SPADES"
       />
@@ -31559,7 +31559,7 @@ exports[`BidButtonBlock render currentLevel: 7, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={7}
         suit="CLUBS"
       />
@@ -32078,7 +32078,7 @@ exports[`BidButtonBlock render currentLevel: 7, currentSuit: CLUBS, shouldDouble
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={7}
         suit="CLUBS"
       />
@@ -32609,7 +32609,7 @@ exports[`BidButtonBlock render currentLevel: 7, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={7}
         suit="DIAMONDS"
       />
@@ -33128,7 +33128,7 @@ exports[`BidButtonBlock render currentLevel: 7, currentSuit: DIAMONDS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={7}
         suit="DIAMONDS"
       />
@@ -33659,7 +33659,7 @@ exports[`BidButtonBlock render currentLevel: 7, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={7}
         suit="HEARTS"
       />
@@ -34178,7 +34178,7 @@ exports[`BidButtonBlock render currentLevel: 7, currentSuit: HEARTS, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={7}
         suit="HEARTS"
       />
@@ -34721,7 +34721,7 @@ exports[`BidButtonBlock render currentLevel: 7, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={7}
         suit="NOTRUMPS"
       />
@@ -35240,7 +35240,7 @@ exports[`BidButtonBlock render currentLevel: 7, currentSuit: NOTRUMPS, shouldDou
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={7}
         suit="NOTRUMPS"
       />
@@ -35747,7 +35747,7 @@ exports[`BidButtonBlock render currentLevel: 7, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={7}
         suit="SPADES"
       />
@@ -36266,7 +36266,7 @@ exports[`BidButtonBlock render currentLevel: 7, currentSuit: SPADES, shouldDoubl
     >
       <BidButton
         handleBidButtonClick={[Function]}
-        isDisabled={false}
+        isDisabled={true}
         level={7}
         suit="SPADES"
       />
