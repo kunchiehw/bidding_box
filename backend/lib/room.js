@@ -1,7 +1,7 @@
 const aws = require('aws-sdk');
 const _ = require('lodash');
 
-const { getTtl } = require('./utils');
+const { getTtl, generateNSNextBid } = require('./utils');
 const { broadcastRoom } = require('./broadcastWs');
 const { getBoard } = require('./boardInfoExamples');
 
@@ -65,54 +65,63 @@ module.exports.createRoom = (req, res, next) => {
 
 module.exports.updateRoom = (req, res, next) => {
   const { roomId } = req.params;
-  const AttributeUpdates = {
-    cacheTtl: {
-      Action: 'PUT',
-      Value: getTtl(),
-    },
-  };
 
-  if (req.body.bidSeq) {
-    // TODO:
-    const bidSeqObj = JSON.parse(req.body.bidSeq);
-    if (bidSeqObj.length % 2 === 1) {
-      bidSeqObj.push({
-        level: 0,
-        suit: 'PASS',
-      });
-    }
-    AttributeUpdates.bidSeq = {
-      Action: 'PUT',
-      Value: JSON.stringify(bidSeqObj),
-    };
-  }
-  if (req.body.eastId !== undefined) {
-    AttributeUpdates.eastId = {
-      Action: 'PUT',
-      Value: req.body.eastId,
-    };
-  }
-  if (req.body.westId !== undefined) {
-    AttributeUpdates.westId = {
-      Action: 'PUT',
-      Value: req.body.westId,
-    };
-  }
-  if (req.body.boardInfo !== undefined) {
-    AttributeUpdates.boardInfo = {
-      Action: 'PUT',
-      Value: req.body.boardInfo,
-    };
-  }
-
-  docClient.update({
+  docClient.get({
     TableName: 'Room',
     Key: {
       id: roomId,
     },
-    AttributeUpdates,
-    ReturnValues: 'ALL_NEW',
   }).promise()
+    .then((data) => {
+      const boardInfo = JSON.parse(data.Item.boardInfo);
+      if (!boardInfo) {
+        res.sendStatus(400);
+        return Promise.reject();
+      }
+
+      const AttributeUpdates = {
+        cacheTtl: {
+          Action: 'PUT',
+          Value: getTtl(),
+        },
+      };
+
+      if (req.body.bidSeq !== undefined) {
+        const bidSeqObj = JSON.parse(req.body.bidSeq);
+        console.log(boardInfo.dealer, bidSeqObj, boardInfo.nsActions);
+        const nsNextBid = generateNSNextBid(boardInfo.dealer, bidSeqObj, boardInfo.nsActions);
+        if (nsNextBid) {
+          bidSeqObj.push(nsNextBid);
+        }
+        AttributeUpdates.bidSeq = {
+          Action: 'PUT',
+          Value: JSON.stringify(bidSeqObj),
+        };
+      }
+
+      if (req.body.eastId !== undefined) {
+        AttributeUpdates.eastId = {
+          Action: 'PUT',
+          Value: req.body.eastId,
+        };
+      }
+
+      if (req.body.westId !== undefined) {
+        AttributeUpdates.westId = {
+          Action: 'PUT',
+          Value: req.body.westId,
+        };
+      }
+
+      return docClient.update({
+        TableName: 'Room',
+        Key: {
+          id: roomId,
+        },
+        AttributeUpdates,
+        ReturnValues: 'ALL_NEW',
+      }).promise();
+    })
     .then((data) => {
       broadcastRoom(req.wss, roomId, JSON.stringify(data.Attributes));
       res.sendStatus(200);
