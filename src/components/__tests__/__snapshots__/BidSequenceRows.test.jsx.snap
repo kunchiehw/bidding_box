@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BidSequenceRows render seat: EAST, bidSeq:  1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+]
+`;
+
+exports[`BidSequenceRows render seat: EAST, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="1"
+/>,
+]
+`;
+
+exports[`BidSequenceRows render seat: EAST, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="1"
+/>,
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="2"
+/>,
+]
+`;
+
+exports[`BidSequenceRows render seat: NORTH, bidSeq:  1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+]
+`;
+
+exports[`BidSequenceRows render seat: NORTH, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="1"
+/>,
+]
+`;
+
+exports[`BidSequenceRows render seat: NORTH, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="1"
+/>,
+]
+`;
+
+exports[`BidSequenceRows render seat: SOUTH, bidSeq:  1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+]
+`;
+
+exports[`BidSequenceRows render seat: SOUTH, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="1"
+/>,
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="2"
+/>,
+]
+`;
+
+exports[`BidSequenceRows render seat: SOUTH, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="1"
+/>,
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="2"
+/>,
+]
+`;
+
+exports[`BidSequenceRows render seat: WEST, bidSeq:  1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+]
+`;
+
+exports[`BidSequenceRows render seat: WEST, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="1"
+/>,
+]
+`;
+
+exports[`BidSequenceRows render seat: WEST, bidSeq: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object] 1`] = `
+Array [
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="0"
+/>,
+  <GridRow
+    className="bid-sequence-row"
+    column={4}
+    key="1"
+/>,
+]
+`;
