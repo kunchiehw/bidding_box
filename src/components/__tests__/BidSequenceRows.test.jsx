@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import BidSequenceRows from '../BidSequenceRows';
-import { SEATS } from '../../util/util';
+import { SEATS } from '../../utils/constants';
 
 describe('BidSequenceRows render', () => {
   const bidSeqs = [
