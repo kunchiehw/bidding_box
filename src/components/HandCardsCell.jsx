@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Segment, Divider, Button } from 'semantic-ui-react';
-import { suitCharacter, suitColor } from '../helper-RoomInterface';
-import { SEATS_EW, PARTICIPANTS_ROLE } from '../../util/util';
+import getMessage from '../i18n/messages';
+import { EW_SEATS, PARTICIPANTS } from '../utils/constants';
+import { suitColor } from '../utils/helpers';
+
 
 const propTypes = {
-  seat: PropTypes.oneOf(SEATS_EW).isRequired,
-  playerRole: PropTypes.oneOf(PARTICIPANTS_ROLE).isRequired,
+  seat: PropTypes.oneOf(EW_SEATS).isRequired,
+  playerRole: PropTypes.oneOf(PARTICIPANTS).isRequired,
   playerId: PropTypes.string,
   playerHand: PropTypes.shape({
     SPADES: PropTypes.string.isRequired,
@@ -40,19 +42,19 @@ class HandCardsCell extends PureComponent {
       <div className="card-cell">
         <div className="card-cell-content">
           <div>
-            <span style={{ color: suitColor('SPADES') }}> {suitCharacter('SPADES')} </span>
+            <span style={{ color: suitColor('SPADES') }}> {getMessage('SPADES')} </span>
             <span> {this.props.playerHand.SPADES} </span>
           </div>
           <div>
-            <span style={{ color: suitColor('HEARTS') }}> {suitCharacter('HEARTS')} </span>
+            <span style={{ color: suitColor('HEARTS') }}> {getMessage('HEARTS')} </span>
             <span> {this.props.playerHand.HEARTS} </span>
           </div>
           <div>
-            <span style={{ color: suitColor('DIAMONDS') }}> {suitCharacter('DIAMONDS')} </span>
+            <span style={{ color: suitColor('DIAMONDS') }}> {getMessage('DIAMONDS')} </span>
             <span> {this.props.playerHand.DIAMONDS} </span>
           </div>
           <div>
-            <span style={{ color: suitColor('CLUBS') }}> {suitCharacter('CLUBS')} </span>
+            <span style={{ color: suitColor('CLUBS') }}> {getMessage('CLUBS')} </span>
             <span> {this.props.playerHand.CLUBS} </span>
           </div>
         </div>

@@ -1,0 +1,865 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="wkc"
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="jarron"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId="wkc"
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="jarron"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId=""
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="lonely"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId=""
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="lonely"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="wkc"
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="jarron"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId="wkc"
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="jarron"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId=""
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="lonely"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: EAST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId=""
+      playerRole="EAST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="lonely"
+      playerRole="EAST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WATCHER, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="wkc"
+      playerRole="WATCHER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="jarron"
+      playerRole="WATCHER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WATCHER, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId="wkc"
+      playerRole="WATCHER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="jarron"
+      playerRole="WATCHER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WATCHER, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId=""
+      playerRole="WATCHER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="lonely"
+      playerRole="WATCHER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WATCHER, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId=""
+      playerRole="WATCHER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="lonely"
+      playerRole="WATCHER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WATCHER, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="wkc"
+      playerRole="WATCHER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="jarron"
+      playerRole="WATCHER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WATCHER, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId="wkc"
+      playerRole="WATCHER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="jarron"
+      playerRole="WATCHER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WATCHER, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId=""
+      playerRole="WATCHER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="lonely"
+      playerRole="WATCHER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WATCHER, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId=""
+      playerRole="WATCHER"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="lonely"
+      playerRole="WATCHER"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="wkc"
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="jarron"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId="wkc"
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="jarron"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId=""
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="lonely"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: false 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId=""
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={false}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="lonely"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 1`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="wkc"
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="jarron"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 2`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId="wkc"
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="jarron"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 3`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId=""
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={null}
+      playerId="lonely"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
+
+exports[`HandCardsDisplay render playerRole: WEST, playerIds: [object Object],
+              playerHands: [object Object], bidSeqIsEnded: true 4`] = `
+<Grid
+  className="hand-cards-display-block"
+  columns="equal"
+>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "2",
+          "DIAMONDS": "K9",
+          "HEARTS": "AT653",
+          "SPADES": "QJ632",
+        }
+      }
+      playerId=""
+      playerRole="WEST"
+      seat="WEST"
+    />
+  </GridColumn>
+  <GridColumn>
+    <HandCardsCell
+      bidSeqIsEnded={true}
+      handleClickToSit={[Function]}
+      playerHand={
+        Object {
+          "CLUBS": "KJT",
+          "DIAMONDS": "Q875",
+          "HEARTS": "K97",
+          "SPADES": "AT4",
+        }
+      }
+      playerId="lonely"
+      playerRole="WEST"
+      seat="EAST"
+    />
+  </GridColumn>
+</Grid>
+`;
