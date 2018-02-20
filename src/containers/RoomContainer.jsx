@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 import { Container, Button, Divider, Dimmer, Loader } from 'semantic-ui-react';
-import './RoomInterface.css';
 import BidButtonBlock from '../components/BidButtonBlock';
 import BidSequenceBlock from '../components/BidSequenceBlock';
 import HandCardsBlock from '../components/HandCardsBlock';
-import ScoreBlock from './score-block/ScoreBlock';
-import { SEATS } from '../util/util';
-import { getPlayerRole, getBidSeqIsEnded, getWhoseTurn, getCurrentBid,
-  shouldDoubleButtonDisabled, shouldRedoubleButtonDisabled } from './helper-RoomInterface';
-import { SERVER_API_HOST, SERVER_WS_HOST } from '../utils/constants';
-
+// import ScoreBlock from './score-block/ScoreBlock';
+import { isBidSeqEnded, getCurrentBid, isDoubleAllowed, isRedoubleAllowed } from '../utils/bidHelpers';
+import { SEATS, SERVER_API_HOST, SERVER_WS_HOST } from '../utils/constants';
+import { getPlayerRole, getWhoseTurn } from '../utils/helpers';
 
 const propTypes = {
   jwtToken: PropTypes.string,
@@ -33,7 +30,7 @@ const defaultProps = {
 };
 
 
-class RoomInterface extends Component {
+class RoomContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -185,7 +182,7 @@ class RoomInterface extends Component {
     const playerRole = getPlayerRole(this.state.eastId, this.state.westId, this.username);
     const whoseTurn = (this.state.boardInfo) ?
       getWhoseTurn(playerRole, this.state.boardInfo.dealer, this.state.bidSeq) : null;
-    const bidSeqIsEnded = getBidSeqIsEnded(this.state.bidSeq);
+    const bidSeqIsEnded = isBidSeqEnded(this.state.bidSeq);
 
     const handCardsDisplayProp = {
       playerRole,
@@ -211,8 +208,8 @@ class RoomInterface extends Component {
       const bidButtonBlockProp = {
         level: currentBid.level,
         suit: currentBid.suit,
-        shouldDoubleButtonDisabled: shouldDoubleButtonDisabled(this.state.bidSeq),
-        shouldRedoubleButtonDisabled: shouldRedoubleButtonDisabled(this.state.bidSeq),
+        shouldDoubleButtonDisabled: isDoubleAllowed(this.state.bidSeq),
+        shouldRedoubleButtonDisabled: isRedoubleAllowed(this.state.bidSeq),
         handleBidButtonClick: this.handleBidButtonClick,
       };
       const bidSequenceDisplayProp = {
@@ -221,10 +218,12 @@ class RoomInterface extends Component {
         bidSeq: this.state.bidSeq,
       };
 
+      // TODO(kunchiehw) : Add {(bidSeqIsEnded) && <ScoreBlock scoreList={this.state.boardInfo.scoreList} />} to
+      // middleBlock once ScoreBlock is implemented.
+
       middleBlock = (
         <Container className="middle-block">
           <BidSequenceBlock {...bidSequenceDisplayProp} />
-          {(bidSeqIsEnded) && <ScoreBlock scoreList={this.state.boardInfo.scoreList} />}
           {(!bidSeqIsEnded) &&
             <Dimmer.Dimmable className="bid-button-block-dimmer" as={Container} dimmed={activeDimmer} >
               <Dimmer active={activeDimmer} inverted>
@@ -263,7 +262,7 @@ class RoomInterface extends Component {
 }
 
 
-RoomInterface.propTypes = propTypes;
-RoomInterface.defaultProps = defaultProps;
+RoomContainer.propTypes = propTypes;
+RoomContainer.defaultProps = defaultProps;
 
-export default withRouter(RoomInterface);
+export default withRouter(RoomContainer);

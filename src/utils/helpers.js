@@ -1,4 +1,4 @@
-import { STANDARD_SUITS, NS_SEATS, EW_SEATS } from './constants';
+import { STANDARD_SUITS, NS_SEATS, EW_SEATS, SEATS } from './constants';
 import getMessage from '../i18n/messages';
 
 export function bidToString(level, suit) {
@@ -33,4 +33,22 @@ export function isVulnerable(seat, vulnerability) {
   if (vulnerability === 'NS' && NS_SEATS.includes(seat)) return true;
   if (vulnerability === 'EW' && EW_SEATS.includes(seat)) return true;
   return false;
+}
+
+export function getPlayerRole(eastId, westId, username) {
+  if (westId === username) return 'WEST';
+  if (eastId === username) return 'EAST';
+  return 'OBSERVER';
+}
+
+export function getWhoseTurn(playerRole, dealer, bidSeq) {
+  if (playerRole === 'WEST') {
+    return ((SEATS.indexOf(dealer) + bidSeq.length) % 4 === SEATS.indexOf('WEST')) ? 'WEST' : 'EAST';
+  }
+
+  if (playerRole === 'EAST') {
+    return ((SEATS.indexOf(dealer) + bidSeq.length) % 4 === SEATS.indexOf('EAST')) ? 'EAST' : 'WEST';
+  }
+
+  return null;
 }

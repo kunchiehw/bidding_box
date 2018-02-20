@@ -4,7 +4,7 @@ import { Cookies } from 'react-cookie';
 import { decode } from 'jsonwebtoken';
 import LobbyInterface from './lobby-interface/LobbyInterface';
 import LoginInterface from './login-interface/LoginInterface';
-import RoomInterface from './room-interface/RoomInterface';
+import RoomContainer from './containers/RoomContainer';
 
 
 class App extends Component {
@@ -65,7 +65,7 @@ class App extends Component {
             path="/room/:roomName"
             render={props => ((this.state.jwtToken === null) ?
               <Redirect to={{ pathname: '/login', state: { from: props.location } }} /> :
-              <RoomInterface jwtToken={this.state.jwtToken} />)}
+              <RoomContainer jwtToken={this.state.jwtToken} />)}
           />
         </Switch>
       </BrowserRouter>
