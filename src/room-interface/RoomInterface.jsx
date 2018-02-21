@@ -5,7 +5,7 @@ import { decode } from 'jsonwebtoken';
 import { Container, Button, Divider, Dimmer, Loader } from 'semantic-ui-react';
 import './RoomInterface.css';
 import BidButtonBlock from '../components/BidButtonBlock';
-import BidSequenceDisplay from './bid-sequence-display/BidSequenceDisplay';
+import BidSequenceBlock from '../components/BidSequenceBlock';
 import HandCardsDisplay from './hand-cards-display/HandCardsDisplay';
 import ScoreBlock from './score-block/ScoreBlock';
 import { SEATS } from '../util/util';
@@ -223,7 +223,7 @@ class RoomInterface extends Component {
 
       middleBlock = (
         <Container className="middle-block">
-          <BidSequenceDisplay {...bidSequenceDisplayProp} />
+          <BidSequenceBlock {...bidSequenceDisplayProp} />
           {(bidSeqIsEnded) && <ScoreBlock scoreList={this.state.boardInfo.scoreList} />}
           {(!bidSeqIsEnded) &&
             <Dimmer.Dimmable className="bid-button-block-dimmer" as={Container} dimmed={activeDimmer} >

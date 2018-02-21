@@ -1,11 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import BidSequenceBlock from './BidSequenceBlock';
-import BidSequenceDisplay from './BidSequenceDisplay';
-import { SEATS } from '../../util/util';
+import BidSequenceRows from '../BidSequenceRows';
+import { SEATS } from '../../utils/constants';
 
-describe('BidSequenceBlock render', () => {
+describe('BidSequenceRows render', () => {
   const bidSeqs = [
     [],
     [
@@ -28,23 +27,12 @@ describe('BidSequenceBlock render', () => {
   SEATS.forEach((seat) => {
     bidSeqs.forEach((bidSeq) => {
       it(`seat: ${seat}, bidSeq: ${bidSeq}`, () => {
-        const bidSequenceBlock = shallow(<BidSequenceBlock
+        const bidSequenceRows = shallow(<BidSequenceRows
           dealer={seat}
           bidSeq={bidSeq}
         />);
-        expect(toJson(bidSequenceBlock)).toMatchSnapshot();
+        expect(toJson(bidSequenceRows)).toMatchSnapshot();
       });
     });
-  });
-});
-
-describe('BidSequenceDisplay render', () => {
-  it('basic case', () => {
-    const bidSequenceDisplay1 = shallow(<BidSequenceDisplay
-      dealer="NORTH"
-      vulnerability="EW"
-      bidSeq={[]}
-    />);
-    expect(toJson(bidSequenceDisplay1)).toMatchSnapshot();
   });
 });

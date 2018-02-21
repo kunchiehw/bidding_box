@@ -18,7 +18,7 @@ class BidButtonBlock extends PureComponent {
   render() {
     const standardSuitsRows = POSSIBLE_LEVELS.map((buttonLevel) => {
       const standardSuitsButtons = STANDARD_SUITS.map(buttonSuit => (
-        <Grid.Column key={buttonSuit} width={3} streched>
+        <Grid.Column key={buttonSuit}>
           <BidButton
             level={buttonLevel}
             suit={buttonSuit}
@@ -32,7 +32,6 @@ class BidButtonBlock extends PureComponent {
           key={buttonLevel}
           className="bid-button-row standard-suit-bid-button-row"
           column={5}
-          streched
         >
           {standardSuitsButtons}
         </Grid.Row>
@@ -44,9 +43,8 @@ class BidButtonBlock extends PureComponent {
         key={0}
         className="bid-button-row special-bid-button-row"
         column={3}
-        streched
       >
-        <Grid.Column key="PASS" width={5} streched>
+        <Grid.Column key="PASS">
           <BidButton
             level={0}
             suit="PASS"
@@ -54,7 +52,7 @@ class BidButtonBlock extends PureComponent {
             handleBidButtonClick={this.props.handleBidButtonClick}
           />
         </Grid.Column>
-        <Grid.Column key="DOUBLE" width={5} streched>
+        <Grid.Column key="DOUBLE">
           <BidButton
             level={0}
             suit="DOUBLE"
@@ -62,7 +60,7 @@ class BidButtonBlock extends PureComponent {
             handleBidButtonClick={this.props.handleBidButtonClick}
           />
         </Grid.Column>
-        <Grid.Column key="REDOUBLE" width={5} streched>
+        <Grid.Column key="REDOUBLE">
           <BidButton
             level={0}
             suit="REDOUBLE"

@@ -1,173 +1,229 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SeatRow render vulnerability: BOTH 1`] = `
-<div
+<GridRow
   className="seat-row"
+  column={4}
+  key="seat"
 >
-  <Segment
-    className="seat-cell"
-    color="red"
-    inverted={true}
+  <GridColumn
     key="WEST"
   >
-     
-    WEST
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
-    color="red"
-    inverted={true}
+    <Segment
+      className="seat-cell"
+      color="red"
+      inverted={true}
+    >
+       
+      WEST
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="NORTH"
   >
-     
-    NORTH
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
-    color="red"
-    inverted={true}
+    <Segment
+      className="seat-cell"
+      color="red"
+      inverted={true}
+    >
+       
+      NORTH
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="EAST"
   >
-     
-    EAST
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
-    color="red"
-    inverted={true}
+    <Segment
+      className="seat-cell"
+      color="red"
+      inverted={true}
+    >
+       
+      EAST
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="SOUTH"
   >
-     
-    SOUTH
-     
-  </Segment>
-</div>
+    <Segment
+      className="seat-cell"
+      color="red"
+      inverted={true}
+    >
+       
+      SOUTH
+       
+    </Segment>
+  </GridColumn>
+</GridRow>
 `;
 
 exports[`SeatRow render vulnerability: EW 1`] = `
-<div
+<GridRow
   className="seat-row"
+  column={4}
+  key="seat"
 >
-  <Segment
-    className="seat-cell"
-    color="red"
-    inverted={true}
+  <GridColumn
     key="WEST"
   >
-     
-    WEST
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
+    <Segment
+      className="seat-cell"
+      color="red"
+      inverted={true}
+    >
+       
+      WEST
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="NORTH"
   >
-     
-    NORTH
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
-    color="red"
-    inverted={true}
+    <Segment
+      className="seat-cell"
+    >
+       
+      NORTH
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="EAST"
   >
-     
-    EAST
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
+    <Segment
+      className="seat-cell"
+      color="red"
+      inverted={true}
+    >
+       
+      EAST
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="SOUTH"
   >
-     
-    SOUTH
-     
-  </Segment>
-</div>
+    <Segment
+      className="seat-cell"
+    >
+       
+      SOUTH
+       
+    </Segment>
+  </GridColumn>
+</GridRow>
 `;
 
 exports[`SeatRow render vulnerability: NONE 1`] = `
-<div
+<GridRow
   className="seat-row"
+  column={4}
+  key="seat"
 >
-  <Segment
-    className="seat-cell"
+  <GridColumn
     key="WEST"
   >
-     
-    WEST
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
+    <Segment
+      className="seat-cell"
+    >
+       
+      WEST
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="NORTH"
   >
-     
-    NORTH
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
+    <Segment
+      className="seat-cell"
+    >
+       
+      NORTH
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="EAST"
   >
-     
-    EAST
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
+    <Segment
+      className="seat-cell"
+    >
+       
+      EAST
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="SOUTH"
   >
-     
-    SOUTH
-     
-  </Segment>
-</div>
+    <Segment
+      className="seat-cell"
+    >
+       
+      SOUTH
+       
+    </Segment>
+  </GridColumn>
+</GridRow>
 `;
 
 exports[`SeatRow render vulnerability: NS 1`] = `
-<div
+<GridRow
   className="seat-row"
+  column={4}
+  key="seat"
 >
-  <Segment
-    className="seat-cell"
+  <GridColumn
     key="WEST"
   >
-     
-    WEST
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
-    color="red"
-    inverted={true}
+    <Segment
+      className="seat-cell"
+    >
+       
+      WEST
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="NORTH"
   >
-     
-    NORTH
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
+    <Segment
+      className="seat-cell"
+      color="red"
+      inverted={true}
+    >
+       
+      NORTH
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="EAST"
   >
-     
-    EAST
-     
-  </Segment>
-  <Segment
-    className="seat-cell"
-    color="red"
-    inverted={true}
+    <Segment
+      className="seat-cell"
+    >
+       
+      EAST
+       
+    </Segment>
+  </GridColumn>
+  <GridColumn
     key="SOUTH"
   >
-     
-    SOUTH
-     
-  </Segment>
-</div>
+    <Segment
+      className="seat-cell"
+      color="red"
+      inverted={true}
+    >
+       
+      SOUTH
+       
+    </Segment>
+  </GridColumn>
+</GridRow>
 `;
