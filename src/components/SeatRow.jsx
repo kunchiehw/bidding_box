@@ -14,13 +14,15 @@ class SeatRow extends PureComponent {
       <Grid.Row key="seat" className="seat-row" column={4}>
         {SEATS.map((seat) => {
           const seatIsVulnerable = isVulnerable(seat, this.props.vulnerability);
-          return ((seatIsVulnerable) ? (
+          return ((
             <Grid.Column key={seat}>
-              <Segment className="seat-cell" color="red" inverted> {seat} </Segment>
-            </Grid.Column>
-          ) : (
-            <Grid.Column key={seat}>
-              <Segment className="seat-cell"> {seat} </Segment>
+              <Segment
+                className="seat-cell"
+                color={(seatIsVulnerable) ? 'red' : ''}
+                inverted={seatIsVulnerable}
+              >
+                {seat}
+              </Segment>
             </Grid.Column>
           ));
         })}

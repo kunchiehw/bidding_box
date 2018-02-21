@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Segment } from 'semantic-ui-react';
-import { SEATS, STANDARD_SUITS, ALL_SUITS } from '..//utils/constants';
+import { SEATS, STANDARD_SUITS, ALL_SUITS } from '../utils/constants';
 import { bidToString, suitColor } from '../utils/helpers';
 import { levelValidator } from '../utils/validators';
 
