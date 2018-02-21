@@ -18,7 +18,7 @@ class SeatRow extends PureComponent {
             <Grid.Column key={seat}>
               <Segment
                 className="seat-cell"
-                color={(seatIsVulnerable) ? 'red' : ''}
+                color={(seatIsVulnerable) ? 'red' : null}
                 inverted={seatIsVulnerable}
               >
                 {seat}

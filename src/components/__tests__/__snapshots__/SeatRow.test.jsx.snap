@@ -14,9 +14,7 @@ exports[`SeatRow render vulnerability: BOTH 1`] = `
       color="red"
       inverted={true}
     >
-       
       WEST
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -27,9 +25,7 @@ exports[`SeatRow render vulnerability: BOTH 1`] = `
       color="red"
       inverted={true}
     >
-       
       NORTH
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -40,9 +36,7 @@ exports[`SeatRow render vulnerability: BOTH 1`] = `
       color="red"
       inverted={true}
     >
-       
       EAST
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -53,9 +47,7 @@ exports[`SeatRow render vulnerability: BOTH 1`] = `
       color="red"
       inverted={true}
     >
-       
       SOUTH
-       
     </Segment>
   </GridColumn>
 </GridRow>
@@ -75,9 +67,7 @@ exports[`SeatRow render vulnerability: EW 1`] = `
       color="red"
       inverted={true}
     >
-       
       WEST
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -85,10 +75,10 @@ exports[`SeatRow render vulnerability: EW 1`] = `
   >
     <Segment
       className="seat-cell"
+      color={null}
+      inverted={false}
     >
-       
       NORTH
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -99,9 +89,7 @@ exports[`SeatRow render vulnerability: EW 1`] = `
       color="red"
       inverted={true}
     >
-       
       EAST
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -109,10 +97,10 @@ exports[`SeatRow render vulnerability: EW 1`] = `
   >
     <Segment
       className="seat-cell"
+      color={null}
+      inverted={false}
     >
-       
       SOUTH
-       
     </Segment>
   </GridColumn>
 </GridRow>
@@ -129,10 +117,10 @@ exports[`SeatRow render vulnerability: NONE 1`] = `
   >
     <Segment
       className="seat-cell"
+      color={null}
+      inverted={false}
     >
-       
       WEST
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -140,10 +128,10 @@ exports[`SeatRow render vulnerability: NONE 1`] = `
   >
     <Segment
       className="seat-cell"
+      color={null}
+      inverted={false}
     >
-       
       NORTH
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -151,10 +139,10 @@ exports[`SeatRow render vulnerability: NONE 1`] = `
   >
     <Segment
       className="seat-cell"
+      color={null}
+      inverted={false}
     >
-       
       EAST
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -162,10 +150,10 @@ exports[`SeatRow render vulnerability: NONE 1`] = `
   >
     <Segment
       className="seat-cell"
+      color={null}
+      inverted={false}
     >
-       
       SOUTH
-       
     </Segment>
   </GridColumn>
 </GridRow>
@@ -182,10 +170,10 @@ exports[`SeatRow render vulnerability: NS 1`] = `
   >
     <Segment
       className="seat-cell"
+      color={null}
+      inverted={false}
     >
-       
       WEST
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -196,9 +184,7 @@ exports[`SeatRow render vulnerability: NS 1`] = `
       color="red"
       inverted={true}
     >
-       
       NORTH
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -206,10 +192,10 @@ exports[`SeatRow render vulnerability: NS 1`] = `
   >
     <Segment
       className="seat-cell"
+      color={null}
+      inverted={false}
     >
-       
       EAST
-       
     </Segment>
   </GridColumn>
   <GridColumn
@@ -220,9 +206,7 @@ exports[`SeatRow render vulnerability: NS 1`] = `
       color="red"
       inverted={true}
     >
-       
       SOUTH
-       
     </Segment>
   </GridColumn>
 </GridRow>
