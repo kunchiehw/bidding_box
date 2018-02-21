@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react';
-import './HandCardsDisplay.css';
 import HandCardsCell from './HandCardsCell';
-import { PARTICIPANTS_ROLE } from '../../util/util';
+import { PARTICIPANTS } from '../utils/constants';
 
 const propTypes = {
-  playerRole: PropTypes.oneOf(PARTICIPANTS_ROLE).isRequired,
+  playerRole: PropTypes.oneOf(PARTICIPANTS).isRequired,
   // TODO: Make more specific validator
   eastHand: PropTypes.shape({
     SPADES: PropTypes.string.isRequired,
@@ -33,7 +32,7 @@ const defaultProps = {
   westId: null,
 };
 
-class HandCardsDisplay extends PureComponent {
+class HandCardsBlock extends PureComponent {
   render() {
     return (
       <Grid className="hand-cards-display-block" columns="equal">
@@ -62,7 +61,7 @@ class HandCardsDisplay extends PureComponent {
   }
 }
 
-HandCardsDisplay.propTypes = propTypes;
-HandCardsDisplay.defaultProps = defaultProps;
+HandCardsBlock.propTypes = propTypes;
+HandCardsBlock.defaultProps = defaultProps;
 
-export default HandCardsDisplay;
+export default HandCardsBlock;

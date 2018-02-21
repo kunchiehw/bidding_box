@@ -6,7 +6,7 @@ import { Container, Button, Divider, Dimmer, Loader } from 'semantic-ui-react';
 import './RoomInterface.css';
 import BidButtonBlock from '../components/BidButtonBlock';
 import BidSequenceBlock from '../components/BidSequenceBlock';
-import HandCardsDisplay from './hand-cards-display/HandCardsDisplay';
+import HandCardsBlock from '../components/HandCardsBlock';
 import ScoreBlock from './score-block/ScoreBlock';
 import { SEATS } from '../util/util';
 import { getPlayerRole, getBidSeqIsEnded, getWhoseTurn, getCurrentBid,
@@ -199,7 +199,7 @@ class RoomInterface extends Component {
 
     const upperBlock = (
       <Container className="upper-block">
-        <HandCardsDisplay {...handCardsDisplayProp} />
+        <HandCardsBlock {...handCardsDisplayProp} />
       </Container>
     );
 
